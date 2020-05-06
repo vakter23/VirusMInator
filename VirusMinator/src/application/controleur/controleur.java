@@ -13,10 +13,12 @@ public class controleur {
 
 		
 		for (int i = 0; i <32; i++) {
-			for (int j = 0; i < 32; j++) {
+			for (int j = 0; j < 32; j++) {
+
 				
 				if(listeMap.get(i)==184) {
-					tabMap[i][j]=0;
+					tabMap[i][j]= 's';
+
 				}			
 			}
 		}
