@@ -19,7 +19,7 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 	}
-	//test
+	//test du V et DU M
 	public static void main(String[] args) {
 		launch(args);
 	}
