@@ -19,12 +19,12 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 	}
-	//test du V et DU M
-	//z'est mwa
+	
+	
 	public static void main(String[] args) {
 		launch(args);
 		
-		//C Fé Begai
+		
 		
 	}
 }
