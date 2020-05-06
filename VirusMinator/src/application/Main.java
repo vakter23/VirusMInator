@@ -22,5 +22,8 @@ public class Main extends Application {
 	//test du V et DU M
 	public static void main(String[] args) {
 		launch(args);
+		
+		//C Fé Begai
+		
 	}
 }
