@@ -3,7 +3,6 @@ package application.controleur;
 import java.util.Arrays;
 import java.util.List;
 
-import com.sun.javafx.fxml.expression.LiteralExpression;
 
 public class controleur {
 
@@ -27,7 +26,7 @@ public class controleur {
 		int x=0;
 		
 		for (int i = 0; i <tabMap.length; i++) {
-			x++;
+			
 			for (int j = 0; j <tabMap[i].length; j++) {
 				
 			 
@@ -43,53 +42,53 @@ public class controleur {
 
 				}
 				
-				else if(listeMap.get(i)==Sable) {
+				else if(listeMap.get(x)==Sable) {
 					tabMap[i][j]= "Sable";
 
 				}
 				
-				else if(listeMap.get(i)==BlocVioletSpawnMobSurement) {
+				else if(listeMap.get(x)==BlocVioletSpawnMobSurement) {
 					tabMap[i][j]= "BlocVioletSpawnMobSurement";
 
 				}
 				
 				
-				else if(listeMap.get(i)==BlocVertSpawnMob) {
+				else if(listeMap.get(x)==BlocVertSpawnMob) {
 					tabMap[i][j]= "BlocVertSpawnMob";
 
 				}
 				
-				else if(listeMap.get(i)==Chemin) {
+				else if(listeMap.get(x)==Chemin) {
 					tabMap[i][j]= "Chemin";
 
 				}
 				
-				else if(listeMap.get(i)==BlocBlancHopital) {
+				else if(listeMap.get(x)==BlocBlancHopital) {
 					tabMap[i][j]= "BlocBlancHopital";
 
 				}
 				
-				else if(listeMap.get(i)==PlacementTourelles) {
+				else if(listeMap.get(x)==PlacementTourelles) {
 					tabMap[i][j]= "PlacementTourelles";
 
 				}
 				
-				else if(listeMap.get(i)==BlocRougeHopital) {
+				else if(listeMap.get(x)==BlocRougeHopital) {
 					tabMap[i][j]= "BlocRougeHopital";
 
 				}
 				
-				else if(listeMap.get(i)==BLocBasDroiteArriveMob) {
+				else if(listeMap.get(x)==BLocBasDroiteArriveMob) {
 					tabMap[i][j]= "BLocBasDroiteArriveMob";
 
 				}
 				
-				else if(listeMap.get(i)==BlocSpawnMob) {
+				else if(listeMap.get(x)==BlocSpawnMob) {
 					tabMap[i][j]= "BlocSpawnMob";
 
 				}
 				
-				
+				x++;
 			}
 		}
 		
@@ -97,8 +96,12 @@ public class controleur {
 		for (int i = 0; i < tabMap.length; i++) {
 			for (int j = 0; j < tabMap[i].length; j++) {
 
-			System.out.println(tabMap[i][j]);
+			System.out.print(tabMap[i][j]);
+			System.out.print("\t");
+
 		}
+			System.out.println("\t");
+
 		}
 		System.out.println("test");
 	
