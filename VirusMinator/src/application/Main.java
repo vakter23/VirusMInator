@@ -20,6 +20,7 @@ public class Main extends Application {
 		}
 	}
 	//test du V et DU M
+	//z'est mwa
 	public static void main(String[] args) {
 		launch(args);
 		
