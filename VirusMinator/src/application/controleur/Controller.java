@@ -1,4 +1,4 @@
-package controlleur;
+package application.controleur;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

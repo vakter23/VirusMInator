@@ -1,4 +1,4 @@
-package modele;
+package application.modele;
 
 import com.sun.javafx.geom.Vec2d;
 

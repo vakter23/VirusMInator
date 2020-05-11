@@ -1,4 +1,4 @@
-package modele;
+package application.modele;
 
 public class Timer extends Thread {
     Thread thread;

@@ -1,4 +1,4 @@
-package controlleur;
+package application.controleur;
 
 import java.util.Arrays;
 import java.util.List;
