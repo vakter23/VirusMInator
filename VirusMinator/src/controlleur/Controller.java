@@ -38,14 +38,13 @@ public class Controller implements Initializable {
 		/*
 		 * Dans cette methode, il faudra coder l'affichage lors du clic des differentes
 		 * tourelles dispo on peut aussi (peut-etre) y coder les pdv mais probablement
-		 * pas optimald 
+		 * pas optimal
 		 */
 	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
-		getImg(paths);
+		ImageView carte = getImg("/src/ressources/tilemapTest.png");
 		map.getChildren().add(carte);
 		
 	}
@@ -56,3 +55,4 @@ public class Controller implements Initializable {
 
 
 }
+
