@@ -11,7 +11,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        BorderPane root = FXMLLoader.load(getClass().getResource("vue1/tilemap.fxml"));
+        BorderPane root = FXMLLoader.load(getClass().getResource("application.vue/tilemap.fxml"));
         Scene scene = new Scene(root,900,800);
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(scene);
