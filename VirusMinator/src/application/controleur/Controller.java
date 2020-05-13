@@ -3,6 +3,7 @@ package application.controleur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.Pane;
@@ -111,12 +112,16 @@ public class Controller implements Initializable {
 	*/
 	@FXML
 	void seDeplacer(ActionEvent event) {
-		for(int i = 0; i<panneauEnnemis.getChildren().size(); i++)
-		panneauEnnemis.getChildren().get(i);
+		for(int i = 0; i<panneauEnnemis.getChildren().size(); i++) {
+			panneauEnnemis.getChildren().get(i).setTranslateX(Math.random()*650);
+			panneauEnnemis.getChildren().get(i).setTranslateY(Math.random()*650);
+		}
 	}
 	@FXML
 	void reinit(ActionEvent event) {
-		
+		for(int i = 0; i<panneauEnnemis.getChildren().size(); i++) {
+			panneauEnnemis.getChildren().remove(i);
+		}
 	}
 	public void dessinEnnemi() {
 		Circle r = new Circle(10);
