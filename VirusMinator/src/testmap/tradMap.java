@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class tradMap {
-/*TEST*/
+
 	private static final int BLOCROUGEHOPITAL = 445;
 	private static final int BlocSpawnMob = 477;
 	private static final int BLocBasDroiteArriveMob = 400;
@@ -186,7 +186,6 @@ public class tradMap {
 			System.out.println("\t");
 
 		}
-		System.out.println("test");
 
 	}
 }
