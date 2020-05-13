@@ -15,6 +15,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import application.Config;
+import application.modele.Environnement;
+
 public class Controller implements Initializable {
 
 	@FXML
@@ -248,6 +251,14 @@ public class Controller implements Initializable {
 
 	public void creerTerrainVue() {
 		
+		ImageView herbe = getImg("/src/ressources/tiles/herbe.png");
+		ImageView bordTerrain = getImg("/src/ressources/tiles/BordTerrain.png");
+		
+		for(int i = 0; i < Config.listeMap.size(); i++){
+			Config.imageDe(Config.listeMap.get(i));
+			
+		}
+
 	}
 
 	@FXML
@@ -261,11 +272,8 @@ public class Controller implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		ImageView herbe = getImg("/src/ressources/tiles/herbe.png");
-		ImageView bordTerrain = getImg("/src/ressources/tiles/BordTerrain.png");
-		map.getChildren().add(herbe);
-		map.getChildren().add(bordTerrain);
-		System.out.println(map.getChildren());
+		
+		
 
 	}
 
