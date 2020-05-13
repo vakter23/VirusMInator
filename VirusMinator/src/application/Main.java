@@ -20,7 +20,7 @@ public class Main extends Application {
             BorderPane root = new BorderPane();
             root = loader.load();
             Scene scene = new Scene(root, 900, 900);
-            primaryStage.setResizable(false);
+            primaryStage.setResizable(true);
             primaryStage.setTitle("VirusMinator");
             primaryStage.setScene(scene);
             primaryStage.show();

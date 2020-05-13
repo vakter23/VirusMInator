@@ -7,5 +7,19 @@
 .boss{
 	-fx-background-repeat : no-repeat;
 	-fx-background-image : url('tete.jpg');
-	
+}
+.background {
+    -fx-background-color: #1d1d1d;
+}
+.encadre {
+    -fx-border-color: #e2e2e2;
+    -fx-border-width: 2;
+    -fx-background-radius: 10px;
+    -fx-border-radius:20px;
+	-fx-padding: 0 5 5 5;
+   /*  -fx-background-color: #1d1d1d;*/
+}
+
+.button:hover {
+    -fx-background-color: #3a3a3a;
 }
