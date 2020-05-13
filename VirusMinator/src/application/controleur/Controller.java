@@ -38,6 +38,7 @@ public class Controller implements Initializable {
 	@FXML
 	private Pane panneauEnnemis;
 
+	private Environnement e1;
 	void placerEnnemis() {
 
 	}
@@ -98,7 +99,7 @@ public class Controller implements Initializable {
 
 	}
 	void seDeplace (ActionEvent event) {
-		
+		e1.
 	}
 
 	void placerEnnemis(ActionEvent event) {
