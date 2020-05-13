@@ -5,7 +5,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -23,20 +26,25 @@ public class Controller implements Initializable {
 	@FXML
 	private TilePane map;
 
+	@FXML
+	private Button seDeplace;
 
-    @FXML
-    private Button seDeplace;
+	@FXML
+	private Button Reinit;
 
-    @FXML
-    private Button Reinit;
+	@FXML
+	private Button placerEnnemis;
 
-    @FXML
-    private Button placerEnnemis;
-	
+	@FXML
+	private Pane panneauEnnemis;
+
+	void placerEnnemis() {
+
+	}
 
 	public void creerTerrainVue() {
-		
-		for(int i = 0; i < Config.listeMap.size(); i++){
+
+		for (int i = 0; i < Config.listeMap.size(); i++) {
 			ImageView blancHopital = getImg("/src/ressources/tiles/blancHopital");
 			ImageView herbe = getImg("/src/ressources/tiles/herbe.png");
 			ImageView BordTerrain = getImg("/src/ressources/tiles/BordTerrain.png");
@@ -69,7 +77,7 @@ public class Controller implements Initializable {
 			case "sableChemin":
 				map.getChildren().add(sableChemin);
 				break;
-			case "sable" :
+			case "sable":
 				map.getChildren().add(sableTerrain);
 				break;
 			case "spawnMob":
@@ -85,51 +93,22 @@ public class Controller implements Initializable {
 				map.getChildren().add(violetEnnemi);
 				break;
 			}
-			
-			
+
 		}
 
 	}
 
-	@FXML
-	void turrets(ActionEvent event) {
-		/*
-		 * Dans cette methode, il faudra coder l'affichage lors du clic des differentes
-		 * tourelles dispo on peut aussi (peut-etre) y coder les pdv mais probablement
-		 * pas optimal
-		 * test zebi
-		 */
+	void placerEnnemis(ActionEvent event) {
+		Circle r = new Circle(3);
+		r.setFill(Color.RED);
+		r.setTranslateX(0);
+		r.setTranslateY(0);
+		map.getChildren().add(r);
 	}
-	@FXML
-	public  void seDeplace(ActionEvent event) {
-		double nbRandom=Math.random() * (1 );
-		double nbRandom2=Math.random() * (1 );
-		//nbRandom=Math.round(nbRandom);
-	
-		
-		if(this.getX()+(nbRandom)>1024 || this.getX()+(nbRandom)<0 || (this.getY()+(nbRandom2)>1024 || (this.getY()+(nbRandom2)<0))) {
-			
-			 nbRandom=Math.random() * (1 );
-			 nbRandom2=Math.random() * (1 );
-			
-		}
-		
-	 
-		 int nposX=(int) (this.getX()+(nbRandom));
-		 int nposY=(int) (this.getY()+(nbRandom2));
-		
-		
-	}
-	
-	
-	
-}
-
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		creerTerrainVue();
-		
 
 	}
 
