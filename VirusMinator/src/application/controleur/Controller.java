@@ -267,6 +267,7 @@ public class Controller implements Initializable {
 		 * Dans cette methode, il faudra coder l'affichage lors du clic des differentes
 		 * tourelles dispo on peut aussi (peut-etre) y coder les pdv mais probablement
 		 * pas optimal
+		 * test
 		 */
 	}
 
