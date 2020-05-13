@@ -186,7 +186,6 @@ public class tradMap {
 			System.out.println("\t");
 
 		}
-		System.out.println("test");
 
 	}
 }
