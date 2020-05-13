@@ -73,10 +73,10 @@ public class Controller implements Initializable {
 				map.getChildren().add(rougeHopital);
 				break;
 			case "sableChemin":
-				map.getChildren().add(sableTerrain);
-				break;
-			case "sableTerrain" :
 				map.getChildren().add(sableChemin);
+				break;
+			case "sable" :
+				map.getChildren().add(sableTerrain);
 				break;
 			case "spawnMob":
 				map.getChildren().add(spawnMob);
