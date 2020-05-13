@@ -7,22 +7,22 @@
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="711.0" prefWidth="1000.0" stylesheets="@tilemap.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleur.Controller">
+<BorderPane maxHeight="880.0" maxWidth="1091.0" minHeight="880.0" minWidth="1080.0" prefHeight="1000.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleur.Controller">
    <center>
-      <TilePane fx:id="map" prefHeight="494.0" prefWidth="1000.0" BorderPane.alignment="CENTER" />
+      <TilePane fx:id="map" maxHeight="768.0" maxWidth="768.0" BorderPane.alignment="CENTER" />
    </center>
-   <bottom>
-      <HBox prefHeight="115.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label prefHeight="54.0" prefWidth="669.0" text="ceci est le bas de la page" />
-         </children>
-      </HBox>
-   </bottom>
    <right>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="826.0" prefWidth="139.0" BorderPane.alignment="CENTER">
          <children>
             <Button mnemonicParsing="false" text="Button" />
          </children>
       </VBox>
    </right>
+   <bottom>
+      <HBox BorderPane.alignment="CENTER">
+         <children>
+            <Label prefHeight="54.0" prefWidth="669.0" text="ceci est le bas de la page" />
+         </children>
+      </HBox>
+   </bottom>
 </BorderPane>

@@ -63,7 +63,7 @@ public class Environnement {
 
 				}
 
-				else if (listeMap.get(x) == Config.BlocRougeHopital) {
+				else if (listeMap.get(x) == Config.BLOCROUGEHOPITAL) {
 					this.terrain[i][j] = "1";
 
 				}
