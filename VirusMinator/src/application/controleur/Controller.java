@@ -97,12 +97,17 @@ public class Controller implements Initializable {
 		}
 
 	}
+	void seDeplace (ActionEvent event) {
+		
+	}
 
 	void placerEnnemis(ActionEvent event) {
 		Circle r = new Circle(3);
 		r.setFill(Color.RED);
+		r.setId("rond");
 		r.setTranslateX(0);
 		r.setTranslateY(0);
+		r.setOnMouseClicked(e-> System.out.println("clic sur acteur"+e.getSource()));
 		map.getChildren().add(r);
 	}
 
