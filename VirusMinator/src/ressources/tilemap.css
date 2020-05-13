@@ -9,7 +9,7 @@
 	-fx-background-image : url('tete.jpg');
 }
 .background {
-    -fx-background-color: #1d1d1d;
+    -fx-background-color: black;
 }
 .encadre {
     -fx-border-color: #e2e2e2;
