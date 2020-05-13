@@ -23,21 +23,15 @@ public class Controller implements Initializable {
 	@FXML
 	private TilePane map;
 
-	@FXML
-	private Button TourGBas;
 
-	@FXML
-	private Button TourDBas;
+    @FXML
+    private Button seDeplace;
 
-	@FXML
-	private Button TourDHaut;
+    @FXML
+    private Button Reinit;
 
-	@FXML
-	private Button TourDMid;
-
-	@FXML
-	private Button TourGHaut;
-
+    @FXML
+    private Button placerEnnemis;
 	
 
 	public void creerTerrainVue() {
@@ -106,6 +100,31 @@ public class Controller implements Initializable {
 		 * test zebi
 		 */
 	}
+	@FXML
+	public  void seDeplace(ActionEvent event) {
+		double nbRandom=Math.random() * (1 );
+		double nbRandom2=Math.random() * (1 );
+		//nbRandom=Math.round(nbRandom);
+	
+		
+		if(this.getX()+(nbRandom)>1024 || this.getX()+(nbRandom)<0 || (this.getY()+(nbRandom2)>1024 || (this.getY()+(nbRandom2)<0))) {
+			
+			 nbRandom=Math.random() * (1 );
+			 nbRandom2=Math.random() * (1 );
+			
+		}
+		
+	 
+		 int nposX=(int) (this.getX()+(nbRandom));
+		 int nposY=(int) (this.getY()+(nbRandom2));
+		
+		
+	}
+	
+	
+	
+}
+
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
