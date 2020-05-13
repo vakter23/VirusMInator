@@ -12,9 +12,9 @@
    <right>
       <VBox prefHeight="826.0" prefWidth="139.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="seDeplace" mnemonicParsing="false" text="Mouvement" />
-            <Button fx:id="Reinit" mnemonicParsing="false" text="Reinit" />
-            <Button fx:id="placerEnnemis" mnemonicParsing="false" text="PlacerEnenmis" />
+            <Button fx:id="seDeplace" mnemonicParsing="false" onAction="#seDeplacer" text="Mouvement" />
+            <Button fx:id="Reinit" mnemonicParsing="false" onAction="#reinit" text="Reinit" />
+            <Button fx:id="placerEnnemis" mnemonicParsing="false" onAction="#placerEnnemis" text="PlacerEnenmis" />
          </children>
       </VBox>
    </right>

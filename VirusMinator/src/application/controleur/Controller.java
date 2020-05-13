@@ -39,9 +39,7 @@ public class Controller implements Initializable {
 	private Pane panneauEnnemis;
 
 	private Environnement e1;
-	void placerEnnemis() {
-
-	}
+	
 
 	public void creerTerrainVue() {
 
@@ -98,23 +96,54 @@ public class Controller implements Initializable {
 		}
 
 	}
-	void seDeplace (ActionEvent event) {
-		e1.
-	}
-
-	void placerEnnemis(ActionEvent event) {
-		Circle r = new Circle(3);
+//	void seDeplace (ActionEvent event) {
+//		e1.
+//	}
+	/*
+	@FXML 
+	void creerSprite(ActionEvent event) {
+		Circle r = new Circle(10);
 		r.setFill(Color.RED);
-		r.setId("rond");
-		r.setTranslateX(0);
-		r.setTranslateY(0);
-		r.setOnMouseClicked(e-> System.out.println("clic sur acteur"+e.getSource()));
-		map.getChildren().add(r);
+		r.setTranslateX(10);
+		r.setTranslateY(10);
+		panneauEnnemis.getChildren().add(r);
 	}
+	*/
+	@FXML
+	void seDeplacer(ActionEvent event) {
+		for(int i = 0; i<panneauEnnemis.getChildren().size(); i++)
+		panneauEnnemis.getChildren().get(i);
+	}
+	@FXML
+	void reinit(ActionEvent event) {
+		
+	}
+	public void dessinEnnemi() {
+		Circle r = new Circle(10);
+		r.setFill(Color.RED);
+		r.setTranslateX(Math.random()*650);
+		r.setTranslateY(Math.random()*650);
+		panneauEnnemis.getChildren().add(r);
+	}
+	@FXML
+	void placerEnnemis(ActionEvent event) {
+		System.out.println("lancement");
+		dessinEnnemi();
+	}
+//	void placerEnnemis(ActionEvent event) {
+//		Circle r = new Circle(3);
+//		r.setFill(Color.RED);
+//		r.setId("rond");
+//		r.setTranslateX(0);
+//		r.setTranslateY(0);
+//		r.setOnMouseClicked(e-> System.out.println("clic sur acteur"+e.getSource()));
+//		map.getChildren().add(r);
+//	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		creerTerrainVue();
+		dessinEnnemi();
 
 	}
 
