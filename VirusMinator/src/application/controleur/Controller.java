@@ -114,8 +114,8 @@ public class Controller implements Initializable {
 	@FXML
 	void seDeplacer(ActionEvent event) {
 		for(int i = 0; i<panneauEnnemis.getChildren().size(); i++) {
-			panneauEnnemis.getChildren().get(i).setTranslateX(Math.random()*650);
-			panneauEnnemis.getChildren().get(i).setTranslateY(Math.random()*650);
+			panneauEnnemis.getChildren().get(i).setTranslateX(Math.random()*1024);
+			panneauEnnemis.getChildren().get(i).setTranslateY(Math.random()*1024);
 			
 		}
 	}
