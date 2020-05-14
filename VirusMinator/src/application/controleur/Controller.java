@@ -59,7 +59,7 @@ public class Controller implements Initializable {
 			ImageView violetEnnemi = Config.getImg("/src/ressources/tiles/violetEnnemi.png");
 			String retour;
 			retour = Config.imageDe(Config.listeMap.get(i));
-			switch (retour) {
+			switch(retour) {
 			case "blancHopital":
 				map.getChildren().add(blancHopital);
 				break;
