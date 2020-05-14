@@ -24,20 +24,21 @@ import application.modele.Environnement;
 
 public class Controller implements Initializable {
 
-	@FXML
-	private TilePane map;
+	 
+	 @FXML
+	    private Button seDeplace;
 
-	@FXML
-	private Button seDeplace;
+	    @FXML
+	    private Button Reinit;
 
-	@FXML
-	private Button Reinit;
+	    @FXML
+	    private Button placerEnnemis;
 
-	@FXML
-	private Button placerEnnemis;
+	    @FXML
+	    private TilePane map;
 
-	@FXML
-	private Pane panneauEnnemis;
+	    @FXML
+	    private Pane panneauEnnemis;
 
 	private Environnement e1;
 	
@@ -115,14 +116,15 @@ public class Controller implements Initializable {
 		for(int i = 0; i<panneauEnnemis.getChildren().size(); i++) {
 			panneauEnnemis.getChildren().get(i).setTranslateX(Math.random()*650);
 			panneauEnnemis.getChildren().get(i).setTranslateY(Math.random()*650);
+			
 		}
 	}
 	@FXML
 	void reinit(ActionEvent event) {
-		for(int i = 0; i<panneauEnnemis.getChildren().size(); i++) {
-			panneauEnnemis.getChildren().remove(i);
+			panneauEnnemis.getChildren().clear();
+			creerTerrainVue();
 		}
-	}
+	
 	public void dessinEnnemi() {
 		Circle r = new Circle(10);
 		r.setFill(Color.RED);
