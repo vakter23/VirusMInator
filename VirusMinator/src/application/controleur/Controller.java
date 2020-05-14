@@ -128,8 +128,8 @@ public class Controller implements Initializable {
 	public void dessinEnnemi() {
 		Circle r = new Circle(10);
 		r.setFill(Color.RED);
-		r.setTranslateX(Math.random()*650);
-		r.setTranslateY(Math.random()*650);
+		r.setTranslateX(Math.random()*1024);
+		r.setTranslateY(Math.random()*1024);
 		panneauEnnemis.getChildren().add(r);
 	}
 	@FXML
