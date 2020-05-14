@@ -122,8 +122,7 @@ public class Controller implements Initializable {
 	@FXML
 	void reinit(ActionEvent event) {
 			panneauEnnemis.getChildren().clear();
-			creerTerrainVue();
-		}
+			}
 	
 	public void dessinEnnemi() {
 		Circle r = new Circle(10);
