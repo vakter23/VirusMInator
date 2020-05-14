@@ -25,6 +25,7 @@ public class Main extends Application {
             primaryStage.setScene(scene);
             primaryStage.show();
             root.requestFocus();
+            System.out.println("Let' GO");
         } catch (Exception e) {
             e.printStackTrace();
         }
