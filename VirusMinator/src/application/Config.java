@@ -1,7 +1,10 @@
 package application;
 
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
+
+import javafx.scene.image.ImageView;
 
 public class Config {
 	public static final int BLOCROUGEHOPITAL = 445;
@@ -42,6 +45,11 @@ public class Config {
 			return "vertEnnemi";
 		else
 			return null;
+	}
+	public static ImageView getImg(String... paths) {
+		return new ImageView(Paths.get(System.getProperty("user.dir"), paths).toUri().toString());
+		// ImageView(Paths.get(Paths.get(System.getProperty("user.dir"),
+		// "ressources").toString(), paths).toUri().toString());
 	}
 
 }

@@ -46,17 +46,17 @@ public class Controller implements Initializable {
 	public void creerTerrainVue() {
 
 		for (int i = 0; i < Config.listeMap.size(); i++) {
-			ImageView blancHopital = getImg("/src/ressources/tiles/blancHopital");
-			ImageView herbe = getImg("/src/ressources/tiles/herbe.png");
-			ImageView BordTerrain = getImg("/src/ressources/tiles/BordTerrain.png");
-			ImageView hitBoxHosto = getImg("/src/ressources/tiles/hitBoxHosto.png");
-			ImageView rougeHopital = getImg("/src/ressources/tiles/rougeHopital.png");
-			ImageView sableChemin = getImg("/src/ressources/tiles/sableChemin.png");
-			ImageView sableTerrain = getImg("/src/ressources/tiles/sableTerrain.png");
-			ImageView spawnMob = getImg("/src/ressources/tiles/spawnMob.png");
-			ImageView spawnTourelles = getImg("/src/ressources/tiles/spawnTourelles.png");
-			ImageView vertEnnemi = getImg("/src/ressources/tiles/vertEnnemi.png");
-			ImageView violetEnnemi = getImg("/src/ressources/tiles/violetEnnemi.png");
+			ImageView blancHopital = Config.getImg("/src/ressources/tiles/blancHopital");
+			ImageView herbe = Config.getImg("/src/ressources/tiles/herbe.png");
+			ImageView BordTerrain = Config.getImg("/src/ressources/tiles/BordTerrain.png");
+			ImageView hitBoxHosto = Config.getImg("/src/ressources/tiles/hitBoxHosto.png");
+			ImageView rougeHopital = Config.getImg("/src/ressources/tiles/rougeHopital.png");
+			ImageView sableChemin = Config.getImg("/src/ressources/tiles/sableChemin.png");
+			ImageView sableTerrain = Config.getImg("/src/ressources/tiles/sableTerrain.png");
+			ImageView spawnMob = Config.getImg("/src/ressources/tiles/spawnMob.png");
+			ImageView spawnTourelles = Config.getImg("/src/ressources/tiles/spawnTourelles.png");
+			ImageView vertEnnemi = Config.getImg("/src/ressources/tiles/vertEnnemi.png");
+			ImageView violetEnnemi = Config.getImg("/src/ressources/tiles/violetEnnemi.png");
 			String retour;
 			retour = Config.imageDe(Config.listeMap.get(i));
 			switch (retour) {
@@ -126,11 +126,10 @@ public class Controller implements Initializable {
 		}
 	
 	public void dessinEnnemi() {
-		Circle r = new Circle(10);
-		r.setFill(Color.RED);
-		r.setTranslateX(Math.random()*1024);
-		r.setTranslateY(Math.random()*1024);
-		panneauEnnemis.getChildren().add(r);
+		ImageView Virus = Config.getImg("/src/ressources/Virus/base_Virus.png");
+		Virus.setTranslateX(Math.random()*512);
+		Virus.setTranslateY(Math.random()*512);
+		panneauEnnemis.getChildren().add(Virus);
 	}
 	@FXML
 	void placerEnnemis(ActionEvent event) {
@@ -154,10 +153,6 @@ public class Controller implements Initializable {
 
 	}
 
-	private static ImageView getImg(String... paths) {
-		return new ImageView(Paths.get(System.getProperty("user.dir"), paths).toUri().toString());
-		// ImageView(Paths.get(Paths.get(System.getProperty("user.dir"),
-		// "ressources").toString(), paths).toUri().toString());
-	}
+	
 
 }

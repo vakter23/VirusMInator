@@ -1,11 +1,13 @@
 package application.modele;
 
+import javafx.scene.image.ImageView;
+
 public class Virus extends Acteurs {
 
 	
 
-	public Virus(int vie, double vitesse, String nom, int x, int y) {
-		super(vie, vitesse, nom, x, y);
+	public Virus(ImageView spr,int vie, double vitesse, String nom, int x, int y) {
+		super(spr,vie, vitesse, nom, x, y);
 		
 	}
 
