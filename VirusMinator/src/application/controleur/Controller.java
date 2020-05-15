@@ -24,27 +24,25 @@ import application.modele.Environnement;
 
 public class Controller implements Initializable {
 
-	 
-	 @FXML
-	    private Button seDeplace;
+	@FXML
+	private Button seDeplace;
 
-	    @FXML
-	    private Button Reinit;
+	@FXML
+	private Button Reinit;
 
-	    @FXML
-	    private Button placerEnnemis;
+	@FXML
+	private Button placerEnnemis;
 
-	    @FXML
-	    private TilePane map;
+	@FXML
+	private TilePane map;
 
-	    @FXML
-	    private Pane panneauEnnemis;
+	@FXML
+	private Pane panneauEnnemis;
 
 	private Environnement e1;
-	
 
 	public void creerTerrainVue() {
-		System.out.println( Config.listeMap.size());
+		System.out.println(Config.listeMap.size());
 		for (int i = 0; i < Config.listeMap.size(); i++) {
 			ImageView blancHopital = Config.getImg("/src/ressources/tiles/blancHopital");
 			ImageView herbe = Config.getImg("/src/ressources/tiles/herbe.png");
@@ -58,7 +56,7 @@ public class Controller implements Initializable {
 			ImageView vertEnnemi = Config.getImg("/src/ressources/tiles/vertEnnemi.png");
 			ImageView violetEnnemi = Config.getImg("/src/ressources/tiles/violetEnnemi.png");
 			String retour = Config.imageDe(Config.listeMap.get(i));
-			switch(retour) {
+			switch (retour) {
 			case "blancHopital":
 				map.getChildren().add(blancHopital);
 				break;
@@ -97,39 +95,37 @@ public class Controller implements Initializable {
 		}
 
 	}
+
 //	void seDeplace (ActionEvent event) {
 //		e1.
 //	}
 	/*
-	@FXML 
-	void creerSprite(ActionEvent event) {
-		Circle r = new Circle(10);
-		r.setFill(Color.RED);
-		r.setTranslateX(10);
-		r.setTranslateY(10);
-		panneauEnnemis.getChildren().add(r);
-	}
-	*/
+	 * @FXML void creerSprite(ActionEvent event) { Circle r = new Circle(10);
+	 * r.setFill(Color.RED); r.setTranslateX(10); r.setTranslateY(10);
+	 * panneauEnnemis.getChildren().add(r); }
+	 */
 	@FXML
 	void seDeplacer(ActionEvent event) {
-		for(int i = 0; i<panneauEnnemis.getChildren().size(); i++) {
-			panneauEnnemis.getChildren().get(i).setTranslateX(Math.random()*900);
-			panneauEnnemis.getChildren().get(i).setTranslateY(Math.random()*900);
-			
+		for (int i = 0; i < panneauEnnemis.getChildren().size(); i++) {
+			panneauEnnemis.getChildren().get(i).setTranslateX(Math.random() * 900);
+			panneauEnnemis.getChildren().get(i).setTranslateY(Math.random() * 900);
+
 		}
 	}
+
 	@FXML
 	void reinit(ActionEvent event) {
-			panneauEnnemis.getChildren().clear();
-			
-		}
-	
+		panneauEnnemis.getChildren().clear();
+
+	}
+
 	public void dessinEnnemi() {
 		ImageView Virus = Config.getImg("/src/ressources/Virus/base_Virus.png");
-		Virus.setTranslateX(Math.random()*900);
-		Virus.setTranslateY(Math.random()*900);
+		Virus.setTranslateX(Math.random() * 900);
+		Virus.setTranslateY(Math.random() * 900);
 		panneauEnnemis.getChildren().add(Virus);
 	}
+
 	@FXML
 	void placerEnnemis(ActionEvent event) {
 		System.out.println("lancement");
@@ -151,7 +147,4 @@ public class Controller implements Initializable {
 		dessinEnnemi();
 
 	}
-
-	
-
 }
