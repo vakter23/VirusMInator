@@ -6,8 +6,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.image.Image;
@@ -38,6 +40,14 @@ public class Controller implements Initializable {
 
 	@FXML
 	private Pane panneauEnnemis;
+	@FXML
+	private VBox teteHero;
+
+	@FXML
+	private VBox teteVilain;
+
+	@FXML
+	private HBox shopTFT;
 
 	private Environnement e1;
 
@@ -93,6 +103,8 @@ public class Controller implements Initializable {
 			}
 
 		}
+		teteHero.getChildren().add(Config.getImg("/src/ressources/tete.png"));
+		teteVilain.getChildren().add(Config.getImg("/src/ressources/tete.png"));
 
 	}
 
@@ -143,8 +155,20 @@ public class Controller implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		/*
+		 * Appeler lvl1 qui appelera la methode de création de map, et après utiliser un
+		 * switch pour afficher Victoire ou défaite, et niveau suivant.
+		 */
 		creerTerrainVue();
 		dessinEnnemi();
 
+	}
+
+	public String lvl1() {
+		return null;
+		/*
+		 * faire retourner "Victoire" si on survit, "Defaite" sinon. Faire pareil pour
+		 * tout les niveaux
+		 */
 	}
 }
