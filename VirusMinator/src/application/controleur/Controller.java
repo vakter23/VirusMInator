@@ -113,21 +113,21 @@ public class Controller implements Initializable {
 	@FXML
 	void seDeplacer(ActionEvent event) {
 		for(int i = 0; i<panneauEnnemis.getChildren().size(); i++) {
-			panneauEnnemis.getChildren().get(i).setTranslateX(Math.random()*1024);
-			panneauEnnemis.getChildren().get(i).setTranslateY(Math.random()*1024);
+			panneauEnnemis.getChildren().get(i).setTranslateX(Math.random()*900);
+			panneauEnnemis.getChildren().get(i).setTranslateY(Math.random()*900);
 			
 		}
 	}
 	@FXML
 	void reinit(ActionEvent event) {
 			panneauEnnemis.getChildren().clear();
-			creerTerrainVue();
+			
 		}
 	
 	public void dessinEnnemi() {
 		ImageView Virus = Config.getImg("/src/ressources/Virus/base_Virus.png");
-		Virus.setTranslateX(Math.random()*512);
-		Virus.setTranslateY(Math.random()*512);
+		Virus.setTranslateX(Math.random()*900);
+		Virus.setTranslateY(Math.random()*900);
 		panneauEnnemis.getChildren().add(Virus);
 	}
 	@FXML

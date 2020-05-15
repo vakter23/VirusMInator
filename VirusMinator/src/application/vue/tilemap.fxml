@@ -25,12 +25,12 @@
          </children>
       </HBox>
    </bottom>
-   <center>
+   <left>
       <Pane maxHeight="900.0" maxWidth="900.0" minHeight="900.0" minWidth="900.0" prefHeight="900.0" prefWidth="900.0" BorderPane.alignment="CENTER">
          <children>
             <TilePane fx:id="map" maxHeight="900.0" maxWidth="900.0" minHeight="900.0" minWidth="900.0" prefHeight="900.0" prefWidth="900.0" />
             <Pane fx:id="panneauEnnemis" maxHeight="900.0" maxWidth="900.0" minHeight="900.0" minWidth="900.0" prefHeight="900.0" prefWidth="900.0" />
          </children>
       </Pane>
-   </center>
+   </left>
 </BorderPane>
