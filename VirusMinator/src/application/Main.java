@@ -19,9 +19,9 @@ public class Main extends Application {
             loader.setLocation(url);
             BorderPane root = new BorderPane();
             root = loader.load();
-            Scene scene = new Scene(root, 1024, 1024);
+            Scene scene = new Scene(root, 920, 920);
             primaryStage.setResizable(true);
-            primaryStage.setMaximized(true);
+            primaryStage.setMaximized(false);
             primaryStage.setTitle("VirusMinator");
             primaryStage.setScene(scene);
             primaryStage.show();

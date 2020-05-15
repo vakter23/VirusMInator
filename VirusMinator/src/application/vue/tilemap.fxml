@@ -26,10 +26,10 @@
       </HBox>
    </bottom>
    <center>
-      <Pane maxHeight="1024.0" maxWidth="1024.0" prefHeight="1024.0" prefWidth="1024.0" BorderPane.alignment="CENTER">
+      <Pane maxHeight="900.0" maxWidth="900.0" minHeight="900.0" minWidth="900.0" prefHeight="900.0" prefWidth="900.0" BorderPane.alignment="CENTER">
          <children>
-            <TilePane fx:id="map" maxHeight="1024.0" maxWidth="1024.0" minHeight="1024.0" minWidth="1024.0" prefHeight="1024.0" prefWidth="1024.0" />
-            <Pane fx:id="panneauEnnemis" maxHeight="1024.0" maxWidth="1024.0" prefHeight="1024.0" prefWidth="1024.0" />
+            <TilePane fx:id="map" maxHeight="900.0" maxWidth="900.0" minHeight="900.0" minWidth="900.0" prefHeight="900.0" prefWidth="900.0" />
+            <Pane fx:id="panneauEnnemis" maxHeight="900.0" maxWidth="900.0" minHeight="900.0" minWidth="900.0" prefHeight="900.0" prefWidth="900.0" />
          </children>
       </Pane>
    </center>

@@ -44,7 +44,7 @@ public class Controller implements Initializable {
 	
 
 	public void creerTerrainVue() {
-
+		System.out.println( Config.listeMap.size());
 		for (int i = 0; i < Config.listeMap.size(); i++) {
 			ImageView blancHopital = Config.getImg("/src/ressources/tiles/blancHopital");
 			ImageView herbe = Config.getImg("/src/ressources/tiles/herbe.png");
