@@ -57,8 +57,7 @@ public class Controller implements Initializable {
 			ImageView spawnTourelles = Config.getImg("/src/ressources/tiles/spawnTourelles.png");
 			ImageView vertEnnemi = Config.getImg("/src/ressources/tiles/vertEnnemi.png");
 			ImageView violetEnnemi = Config.getImg("/src/ressources/tiles/violetEnnemi.png");
-			String retour;
-			retour = Config.imageDe(Config.listeMap.get(i));
+			String retour = Config.imageDe(Config.listeMap.get(i));
 			switch(retour) {
 			case "blancHopital":
 				map.getChildren().add(blancHopital);
