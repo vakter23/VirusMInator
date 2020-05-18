@@ -49,16 +49,16 @@
          </children>
       </HBox>
    </bottom>
-   <left>
+   <center>
       <Pane maxHeight="600.0" maxWidth="1300.0" minHeight="595.0" minWidth="900.0" prefHeight="600.0" prefWidth="900.0" BorderPane.alignment="CENTER">
          <children>
             <TilePane fx:id="map" layoutY="15.0" maxHeight="900.0" maxWidth="900.0" minHeight="900.0" minWidth="900.0" prefHeight="900.0" prefTileHeight="32.0" prefTileWidth="32.0" prefWidth="900.0">
                <padding>
-                  <Insets top="-75.0" />
+                  <Insets top="-50.0" />
                </padding>
             </TilePane>
-            <Pane fx:id="panneauEnnemis" maxHeight="900.0" maxWidth="900.0" minHeight="600.0" minWidth="900.0" prefHeight="600.0" prefWidth="900.0" />
+            <Pane fx:id="panneauEnnemis" maxHeight="900.0" maxWidth="900.0" minHeight="900.0" minWidth="900.0" prefHeight="600.0" prefWidth="900.0" />
          </children>
       </Pane>
-   </left>
+   </center>
 </BorderPane>
