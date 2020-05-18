@@ -233,7 +233,9 @@ public class Controller implements Initializable {
 		 *
 		 */
 		
-	//	this.e1.getViruses().addListener(new ObservateurViruses(this.panneauEnnemis, this. ));;
+		//this.e1.getViruses().addListener(){
+			
+		
 		ImageView Virus = Config.getImg("/src/ressources/Virus/base_Virus.png");
 		Virus.setTranslateX(0);
 		Virus.setTranslateY(352); /* (0;352 est le bloc ou les ennemis spawnent) */
