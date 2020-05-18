@@ -33,23 +33,30 @@
       </VBox>
    </right>
    <bottom>
-      <HBox prefHeight="150.0" prefWidth="1600.0" BorderPane.alignment="CENTER">
+      <HBox fx:id="shopTFT" prefHeight="150.0" prefWidth="1600.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox fx:id="teteVilain" prefHeight="200.0" prefWidth="150.0">
+            <VBox fx:id="teteVilain" prefHeight="150.0" prefWidth="200.0">
                <children>
                   <Label text="Tete méshon" />
                </children>
             </VBox>
-            <HBox fx:id="shopTFT" prefHeight="0.0" prefWidth="1183.0" />
-            <HBox prefHeight="100.0" prefWidth="200.0" />
-            <VBox fx:id="teteHero" maxHeight="250.0" maxWidth="266.0" prefHeight="150.0" prefWidth="266.0" />
+            <HBox fx:id="shopSavon" prefHeight="0.0" prefWidth="235.0" />
+            <HBox fx:id="shopGelHydro" prefHeight="0.0" prefWidth="235.0" />
+            <HBox fx:id="shopSlow" prefHeight="0.0" prefWidth="235.0" />
+            <HBox fx:id="shopMask" prefHeight="0.0" prefWidth="235.0" />
+            <HBox fx:id="shopPingoLimbo" prefHeight="100.0" prefWidth="200.0" />
+            <VBox fx:id="teteHero" maxHeight="250.0" maxWidth="266.0" prefHeight="150.0" prefWidth="200.0" />
          </children>
       </HBox>
    </bottom>
    <left>
       <Pane maxHeight="600.0" maxWidth="1300.0" minHeight="595.0" minWidth="900.0" prefHeight="600.0" prefWidth="900.0" BorderPane.alignment="CENTER">
          <children>
-            <TilePane fx:id="map" layoutY="15.0" maxHeight="900.0" maxWidth="900.0" minHeight="900.0" minWidth="900.0" prefHeight="900.0" prefWidth="900.0" />
+            <TilePane fx:id="map" layoutY="15.0" maxHeight="900.0" maxWidth="900.0" minHeight="900.0" minWidth="900.0" prefHeight="900.0" prefTileHeight="32.0" prefTileWidth="32.0" prefWidth="900.0">
+               <padding>
+                  <Insets top="-75.0" />
+               </padding>
+            </TilePane>
             <Pane fx:id="panneauEnnemis" maxHeight="900.0" maxWidth="900.0" minHeight="600.0" minWidth="900.0" prefHeight="600.0" prefWidth="900.0" />
          </children>
       </Pane>

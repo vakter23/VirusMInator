@@ -26,33 +26,52 @@ import application.modele.Environnement;
 
 public class Controller implements Initializable {
 
-	@FXML
-	private Button seDeplace;
+	  @FXML
+	    private Button seDeplace;
 
-	@FXML
-	private Button Reinit;
+	    @FXML
+	    private Button Reinit;
 
-	@FXML
-	private Button placerEnnemis;
+	    @FXML
+	    private Button placerEnnemis;
 
-	@FXML
-	private TilePane map;
+	    @FXML
+	    private HBox shopTFT;
 
-	@FXML
-	private Pane panneauEnnemis;
-	@FXML
-	private VBox teteHero;
+	    @FXML
+	    private VBox teteVilain;
 
-	@FXML
-	private VBox teteVilain;
+	    @FXML
+	    private HBox shopSavon;
 
-	@FXML
-	private HBox shopTFT;
+	    @FXML
+	    private HBox shopGelHydro;
 
+	    @FXML
+	    private HBox shopSlow;
+
+	    @FXML
+	    private HBox shopMask;
+
+	    @FXML
+	    private HBox shopPingoLimbo;
+
+	    @FXML
+	    private VBox teteHero;
+
+	    @FXML
+	    private TilePane map;
+
+	    @FXML
+	    private Pane panneauEnnemis;
 	private Environnement e1;
 
 	public void creerTerrainVue() {
 		System.out.println(Config.listeMap.size());
+		ImageView shopSavonSolid = Config.getImg("/src/ressources/tourelles/solidSavon.png");
+		shopSavon.getChildren().add(shopSavonSolid);
+		ImageView shopHydroGel = Config.getImg("/src/ressources/tourelles/gelHydro.png");
+		
 		for (int i = 0; i < Config.listeMap.size(); i++) {
 			ImageView blancHopital = Config.getImg("/src/ressources/tiles/blancHopital");
 			ImageView herbe = Config.getImg("/src/ressources/tiles/herbe.png");

@@ -65,8 +65,8 @@ public class Environnement {
 				else if (listeMap.get(x) == Config.Sable) {
 					this.terrain[i][j] = "1";
 
-				} else if (listeMap.get(x) == Config.BLOCROUGEHOPITAL) {
-					this.terrain[i][j] = "1";
+//				} else if (listeMap.get(x) == Config.BLOCROUGEHOPITAL) {
+//					this.terrain[i][j] = "1";
 
 				}
 
@@ -85,20 +85,20 @@ public class Environnement {
 
 				}
 
-				else if (listeMap.get(x) == Config.BlocBlancHopital) {
-					this.terrain[i][j] = "1";
-
-				}
+//				else if (listeMap.get(x) == Config.BlocBlancHopital) {
+//					this.terrain[i][j] = "1";
+//
+//				}
 
 				else if (listeMap.get(x) == Config.PlacementTourelles) {
 					this.terrain[i][j] = "1";
 
 				}
 
-				else if (listeMap.get(x) == Config.BLOCROUGEHOPITAL) {
-					this.terrain[i][j] = "1";
-
-				}
+//				else if (listeMap.get(x) == Config.BLOCROUGEHOPITAL) {
+//					this.terrain[i][j] = "1";
+//
+//				}
 
 				else if (listeMap.get(x) == Config.BLocBasDroiteArriveMob) {
 					this.terrain[i][j] = "1";

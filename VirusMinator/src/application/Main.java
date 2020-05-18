@@ -21,7 +21,7 @@ public class Main extends Application {
             root = loader.load();
             Scene scene = new Scene(root, 920, 920);
             primaryStage.setResizable(true);
-            primaryStage.setMaximized(false);
+            primaryStage.setMaximized(true);
             primaryStage.setTitle("VirusMinator");
             primaryStage.setScene(scene);
             primaryStage.show();
