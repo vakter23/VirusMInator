@@ -20,7 +20,7 @@
                   <Label prefHeight="42.0" prefWidth="134.0" text="Revente tourelle" />
                   <Button fx:id="seDeplace" mnemonicParsing="false" onAction="#seDeplacer" text="Mouvement" />
                   <Button fx:id="Reinit" mnemonicParsing="false" onAction="#reinit" text="Reinit" />
-                  <Button fx:id="placerEnnemis" mnemonicParsing="false" onAction="#placerEnnemis" text="PlacerEnenmis" />
+                  <Button fx:id="Start" mnemonicParsing="false" onAction="#Start" text="Start" />
                </children>
                <VBox.margin>
                   <Insets bottom="25.0" top="25.0" />

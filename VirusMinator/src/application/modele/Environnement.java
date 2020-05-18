@@ -2,13 +2,16 @@ package application.modele;
 
 import java.util.List;
 
-import application.Config;
+import application.tourelles.Tourelles;
+import application.virus.Virus;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Environnement {
 	private int width, height;
-	private ObservableList<Acteurs> acteurs = FXCollections.observableArrayList();
+	private ObservableList<Virus> viruses = FXCollections.observableArrayList();
+	private ObservableList<Tourelles> tourelles = FXCollections.observableArrayList();
+
 	private String[][] terrain;
 
 	public Environnement() {
@@ -27,23 +30,51 @@ public class Environnement {
 		return height;
 	}
 
-	public ObservableList<Acteurs> getActeurs() {
-		return acteurs;
+	public ObservableList<Virus> getViruses() {
+		return viruses;
 	}
-	public Acteurs getActeur(String id) {
-		for(Acteurs a:this.acteurs){
-			if(a.getId().equals(id)){
-				return a;
+	
+	
+	public ObservableList<Tourelles> getTourelles() {
+		return tourelles;
+	}
+	
+	
+	public Virus getVirus(String id) {
+		for(Virus v:this.viruses){
+			if(v.getId().equals(id)){
+				return v;
 			}
 		}
 		return null;
 	}
-	public void ajouter(Acteurs a){
-		acteurs.add(a);
+	
+	public Tourelles getTourelles(String id) {
+		for(Tourelles t:this.tourelles){
+			if(t.getId().equals(id)){
+				return t;
+			}
+		}
+		return null;
 	}
+	
+	
+	
+	
+	public void ajouterVirus(Virus a){
+		viruses.add(a);
+	}
+	
+	public void ajouterTourelles(Tourelles a){
+		tourelles.add(a);
+	}
+	
+	
+	
 	public boolean dansTerrain(int x, int y){
 		return (0 <= x && x<this.width && 0<=y && y< this.height);
 	}
+	
 	public void initTerrain() {
 		List<Integer> listeMap = Config.listeMap;
 		int x = 0;
@@ -83,22 +114,22 @@ public class Environnement {
 				else if (listeMap.get(x) == Config.Chemin) {
 					this.terrain[i][j] = "0";
 
-				}
-
+//				}
+//
 //				else if (listeMap.get(x) == Config.BlocBlancHopital) {
 //					this.terrain[i][j] = "1";
-//
-//				}
+
+				}
 
 				else if (listeMap.get(x) == Config.PlacementTourelles) {
 					this.terrain[i][j] = "1";
 
-				}
-
+//				}
+//
 //				else if (listeMap.get(x) == Config.BLOCROUGEHOPITAL) {
 //					this.terrain[i][j] = "1";
-//
-//				}
+
+				}
 
 				else if (listeMap.get(x) == Config.BLocBasDroiteArriveMob) {
 					this.terrain[i][j] = "1";
@@ -127,4 +158,6 @@ public class Environnement {
 		System.out.println("test");
 
 	}
+	
+	
 }

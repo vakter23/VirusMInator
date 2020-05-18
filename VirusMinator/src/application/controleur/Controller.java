@@ -1,30 +1,28 @@
 package application.controleur;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import org.omg.CORBA.Current;
+
+import com.sun.javafx.iio.common.SmoothMinifier;
+
+import application.modele.Config;
+import application.modele.Environnement;
+import application.virus.Virus;
+import application.virus.VirusBasirus;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.TableView;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-
-import java.net.URL;
-import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.List;
-import java.util.ResourceBundle;
-
-import application.Config;
-import application.modele.Action;
-import application.modele.Environnement;
-import application.modele.Timer;
+import javafx.util.Duration;
 
 public class Controller implements Initializable {
 
@@ -35,7 +33,7 @@ public class Controller implements Initializable {
 	private Button Reinit;
 
 	@FXML
-	private Button placerEnnemis;
+	private Button Start;
 
 	@FXML
 	private HBox shopTFT;
@@ -66,7 +64,80 @@ public class Controller implements Initializable {
 
 	@FXML
 	private Pane panneauEnnemis;
+
 	private Environnement e1;
+
+	private Timeline gameLoop;
+
+	private int temps;
+
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		/*
+		 * Appeler lvl1 qui appelera la methode de création de map, et après utiliser un
+		 * switch pour afficher Victoire ou défaite, et niveau suivant.
+		 */		
+		 creerTerrainVue(); 
+		 creerSprite(); 
+		 System.out.println("fait");
+		 initAnimation();
+		// demarre l'animation
+		gameLoop.play();
+	}
+
+	private void initAnimation(/*Virus v*/) {
+		gameLoop = new Timeline();
+		temps = 0;
+		gameLoop.setCycleCount(Timeline.INDEFINITE);
+		double vitesse;
+		if (true) {
+			vitesse = 0.015;
+		}else {
+			vitesse = 0.055;
+		}
+		KeyFrame kf = new KeyFrame(
+				// on définit le FPS (nbre de frame par seconde)
+				Duration.seconds(vitesse),
+				
+				// on définit ce qui se passe à chaque frame
+				// c'est un eventHandler d'ou le lambda
+				(ev -> {
+					if (temps == 1000) {
+						System.out.println("fini");
+						gameLoop.stop();
+					} else if (temps % 5 == 0) {
+						System.out.println("un tour");
+						for (int i = 0; i < getPanneauEnnemis().getChildren().size(); i++) {
+							panneauEnnemis.getChildren().get(i)
+									.setTranslateX(panneauEnnemis.getChildren().get(i).getTranslateX() + 1);
+							panneauEnnemis.getChildren().get(i)
+									.setTranslateY(panneauEnnemis.getChildren().get(i).getTranslateY());
+						}
+					}
+					temps++;
+				})
+				);
+		gameLoop.getKeyFrames().add(kf);
+//		KeyFrame kf = new KeyFrame(
+//				// on définit le FPS (nbre de frame par seconde)
+//				Duration.seconds(0.017), 
+//				// on définit ce qui se passe à chaque frame 
+//				// c'est un eventHandler d'ou le lambda
+//				(ev ->{
+//					if(temps==100){
+//					System.out.println("fini");
+//					gameLoop.stop();
+//					}
+//					else if (temps%5==0){
+//						System.out.println("un tour");
+//						leCercle.setLayoutX(leCercle.getLayoutX()+5);
+//						leCercle.setLayoutY(leCercle.getLayoutY()+5);
+//        		
+//					}
+//					temps++;
+//				})
+//				);
+//		gameLoop.getKeyFrames().add(kf);
+	}
 
 	public void creerTerrainVue() {
 		System.out.println(Config.listeMap.size());
@@ -140,8 +211,8 @@ public class Controller implements Initializable {
 	@FXML
 	void seDeplacer() {
 		for (int i = 0; i < getPanneauEnnemis().getChildren().size(); i++) {
-			getPanneauEnnemis().getChildren().get(i).setTranslateX(Math.random() * 900);
-			getPanneauEnnemis().getChildren().get(i).setTranslateY(Math.random() * 900);
+			panneauEnnemis.getChildren().get(i).setTranslateX(panneauEnnemis.getChildren().get(i).getTranslateX() + 1);
+			panneauEnnemis.getChildren().get(i).setTranslateY(panneauEnnemis.getChildren().get(i).getTranslateY());
 
 		}
 	}
@@ -150,19 +221,37 @@ public class Controller implements Initializable {
 	void reinit(ActionEvent event) {
 		getPanneauEnnemis().getChildren().clear();
 
+		creerSprite();
+
 	}
 
-	public void dessinEnnemi() {
+	public void creerSprite() {
+		/*
+		 * { Demander à la prof pour la gameloop, et pour la facon d'afficher un ennemi
+		 * en fonction de sa sous classe
+		 * 
+		 *
+		 */
+		
+	//	this.e1.getViruses().addListener(new ObservateurViruses(this.panneauEnnemis, this. ));;
 		ImageView Virus = Config.getImg("/src/ressources/Virus/base_Virus.png");
-		Virus.setTranslateX(Math.random() * 900);
-		Virus.setTranslateY(Math.random() * 900);
+		Virus.setTranslateX(0);
+		Virus.setTranslateY(352); /* (0;352 est le bloc ou les ennemis spawnent) */
 		getPanneauEnnemis().getChildren().add(Virus);
 	}
 
 	@FXML
-	void placerEnnemis(ActionEvent event) {
-		System.out.println("lancement");
-		dessinEnnemi();
+	void Start(ActionEvent event) {
+		for (int i = 0; i < 20; i++) {
+
+			seDeplacer();
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+
 	}
 //	void placerEnnemis(ActionEvent event) {
 //		Circle r = new Circle(3);
@@ -174,23 +263,10 @@ public class Controller implements Initializable {
 //		map.getChildren().add(r);
 //	}
 
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		/*
-		 * Appeler lvl1 qui appelera la methode de création de map, et après utiliser un
-		 * switch pour afficher Victoire ou défaite, et niveau suivant.
-		 */
-		creerTerrainVue();
-		dessinEnnemi();
-		System.out.println("fait");
 
-	}
-	void faireDesTours() {
-		while(!Reinit.isPressed()) {
-			seDeplacer();
-		}
-		
-	}
+
+	
+
 	public String lvl1() {
 		return null;
 		/*

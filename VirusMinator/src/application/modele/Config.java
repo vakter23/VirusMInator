@@ -1,4 +1,5 @@
-package application;
+package application.modele;
+
 
 import java.nio.file.Paths;
 import java.util.Arrays;
