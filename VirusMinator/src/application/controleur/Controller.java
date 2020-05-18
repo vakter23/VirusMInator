@@ -22,48 +22,50 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import application.Config;
+import application.modele.Action;
 import application.modele.Environnement;
+import application.modele.Timer;
 
 public class Controller implements Initializable {
 
-	  @FXML
-	    private Button seDeplace;
+	@FXML
+	private Button seDeplace;
 
-	    @FXML
-	    private Button Reinit;
+	@FXML
+	private Button Reinit;
 
-	    @FXML
-	    private Button placerEnnemis;
+	@FXML
+	private Button placerEnnemis;
 
-	    @FXML
-	    private HBox shopTFT;
+	@FXML
+	private HBox shopTFT;
 
-	    @FXML
-	    private VBox teteVilain;
+	@FXML
+	private VBox teteVilain;
 
-	    @FXML
-	    private HBox shopSavon;
+	@FXML
+	private HBox shopSavon;
 
-	    @FXML
-	    private HBox shopGelHydro;
+	@FXML
+	private HBox shopGelHydro;
 
-	    @FXML
-	    private HBox shopSlow;
+	@FXML
+	private HBox shopSlow;
 
-	    @FXML
-	    private HBox shopMask;
+	@FXML
+	private HBox shopMask;
 
-	    @FXML
-	    private HBox shopPingoLimbo;
+	@FXML
+	private HBox shopPingoLimbo;
 
-	    @FXML
-	    private VBox teteHero;
+	@FXML
+	private VBox teteHero;
 
-	    @FXML
-	    private TilePane map;
+	@FXML
+	private TilePane map;
 
-	    @FXML
-	    private Pane panneauEnnemis;
+	@FXML
+	private Pane panneauEnnemis;
 	private Environnement e1;
 
 	public void creerTerrainVue() {
@@ -71,7 +73,7 @@ public class Controller implements Initializable {
 		ImageView shopSavonSolid = Config.getImg("/src/ressources/tourelles/solidSavon.png");
 		shopSavon.getChildren().add(shopSavonSolid);
 		ImageView shopHydroGel = Config.getImg("/src/ressources/tourelles/gelHydro.png");
-		
+
 		for (int i = 0; i < Config.listeMap.size(); i++) {
 			ImageView blancHopital = Config.getImg("/src/ressources/tiles/blancHopital");
 			ImageView herbe = Config.getImg("/src/ressources/tiles/herbe.png");
@@ -136,17 +138,17 @@ public class Controller implements Initializable {
 	 * panneauEnnemis.getChildren().add(r); }
 	 */
 	@FXML
-	void seDeplacer(ActionEvent event) {
-		for (int i = 0; i < panneauEnnemis.getChildren().size(); i++) {
-			panneauEnnemis.getChildren().get(i).setTranslateX(Math.random() * 900);
-			panneauEnnemis.getChildren().get(i).setTranslateY(Math.random() * 900);
+	void seDeplacer() {
+		for (int i = 0; i < getPanneauEnnemis().getChildren().size(); i++) {
+			getPanneauEnnemis().getChildren().get(i).setTranslateX(Math.random() * 900);
+			getPanneauEnnemis().getChildren().get(i).setTranslateY(Math.random() * 900);
 
 		}
 	}
 
 	@FXML
 	void reinit(ActionEvent event) {
-		panneauEnnemis.getChildren().clear();
+		getPanneauEnnemis().getChildren().clear();
 
 	}
 
@@ -154,7 +156,7 @@ public class Controller implements Initializable {
 		ImageView Virus = Config.getImg("/src/ressources/Virus/base_Virus.png");
 		Virus.setTranslateX(Math.random() * 900);
 		Virus.setTranslateY(Math.random() * 900);
-		panneauEnnemis.getChildren().add(Virus);
+		getPanneauEnnemis().getChildren().add(Virus);
 	}
 
 	@FXML
@@ -180,14 +182,28 @@ public class Controller implements Initializable {
 		 */
 		creerTerrainVue();
 		dessinEnnemi();
+		System.out.println("fait");
 
 	}
-
+	void faireDesTours() {
+		while(!Reinit.isPressed()) {
+			seDeplacer();
+		}
+		
+	}
 	public String lvl1() {
 		return null;
 		/*
 		 * faire retourner "Victoire" si on survit, "Defaite" sinon. Faire pareil pour
 		 * tout les niveaux
 		 */
+	}
+
+	public Pane getPanneauEnnemis() {
+		return panneauEnnemis;
+	}
+
+	public void setPanneauEnnemis(Pane panneauEnnemis) {
+		this.panneauEnnemis = panneauEnnemis;
 	}
 }
