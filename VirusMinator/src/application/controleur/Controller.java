@@ -75,7 +75,8 @@ public class Controller implements Initializable {
 		/*
 		 * Appeler lvl1 qui appelera la methode de création de map, et après utiliser un
 		 * switch pour afficher Victoire ou défaite, et niveau suivant.
-		 */		
+		 */
+		
 		 creerTerrainVue(); 
 		 creerSprite(); 
 		 System.out.println("fait");
@@ -220,9 +221,9 @@ public class Controller implements Initializable {
 	@FXML
 	void reinit(ActionEvent event) {
 		getPanneauEnnemis().getChildren().clear();
-
 		creerSprite();
-
+		initAnimation();
+		gameLoop.play();
 	}
 
 	public void creerSprite() {
@@ -233,7 +234,7 @@ public class Controller implements Initializable {
 		 *
 		 */
 		
-		//this.e1.getViruses().addListener(){
+	//	this.e1.getViruses().addListener()
 			
 		
 		ImageView Virus = Config.getImg("/src/ressources/Virus/base_Virus.png");
