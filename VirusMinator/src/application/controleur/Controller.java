@@ -80,12 +80,22 @@ public class Controller implements Initializable {
 		 creerTerrainVue(); 
 		 creerSprite(); 
 		 System.out.println("fait");
-		 initAnimation();
-		// demarre l'animation
-		gameLoop.play();
+		 
+		 for (int i = 0; i < e1.getViruses().size(); i++) {
+			// demarre l'animation
+				gameLoop.play();
+				initAnimation(e1.getVirus(i));
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+		}
+		
 	}
 
-	private void initAnimation(/*Virus v*/) {
+	private void initAnimation(Virus v) {
+		
 		gameLoop = new Timeline();
 		temps = 0;
 		gameLoop.setCycleCount(Timeline.INDEFINITE);
@@ -94,6 +104,15 @@ public class Controller implements Initializable {
 			vitesse = 0.015;
 		}else {
 			vitesse = 0.055;
+		}
+		switch (v.getNom()) {
+		case "VirusBasirus":
+			ImageView VirusBasirus = Config.getImg("/src/ressources/virus/base_Virus.png");
+			break;
+
+		case "VirusDivirus":
+			ImageView VIrusDivirus = Config.getImg("/src/ressources/virus/divisible_Virus.png");
+			break;
 		}
 		KeyFrame kf = new KeyFrame(
 				// on définit le FPS (nbre de frame par seconde)
@@ -118,26 +137,7 @@ public class Controller implements Initializable {
 				})
 				);
 		gameLoop.getKeyFrames().add(kf);
-//		KeyFrame kf = new KeyFrame(
-//				// on définit le FPS (nbre de frame par seconde)
-//				Duration.seconds(0.017), 
-//				// on définit ce qui se passe à chaque frame 
-//				// c'est un eventHandler d'ou le lambda
-//				(ev ->{
-//					if(temps==100){
-//					System.out.println("fini");
-//					gameLoop.stop();
-//					}
-//					else if (temps%5==0){
-//						System.out.println("un tour");
-//						leCercle.setLayoutX(leCercle.getLayoutX()+5);
-//						leCercle.setLayoutY(leCercle.getLayoutY()+5);
-//        		
-//					}
-//					temps++;
-//				})
-//				);
-//		gameLoop.getKeyFrames().add(kf);
+//		
 	}
 
 	public void creerTerrainVue() {
