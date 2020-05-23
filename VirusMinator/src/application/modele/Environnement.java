@@ -2,6 +2,7 @@ package application.modele;
 
 import java.util.List;
 
+import application.Config;
 import application.tourelles.Tourelles;
 import application.virus.Virus;
 import application.virus.VirusVhealrus;
@@ -80,12 +81,12 @@ public class Environnement {
 
 			for (int j = 0; j < this.terrain[i].length; j++) {
 
-				if (listeMap.get(x) == Config.BordTerrain) {
-					this.terrain[i][j] = "1";
+//				if (listeMap.get(x) == Config.BordTerrain) {
+//					this.terrain[i][j] = "1";
+//
+//				}
 
-				}
-
-				else if (listeMap.get(x) == Config.Herbe) {
+				/*else */if (listeMap.get(x) == Config.Herbe) {
 					this.terrain[i][j] = "1";
 
 				}
@@ -98,17 +99,17 @@ public class Environnement {
 
 				}
 
-				else if (listeMap.get(x) == Config.BlocVioletSpawnMobSurement) {
+				else if (listeMap.get(x) == Config.SpawnViolet) {
 					this.terrain[i][j] = "1";
 
 				}
 
-				else if (listeMap.get(x) == Config.BlocVertSpawnMob) {
+				else if (listeMap.get(x) == Config.Vert) {
 					this.terrain[i][j] = "1";
 
 				}
 
-				else if (listeMap.get(x) == Config.Chemin) {
+				else if (listeMap.get(x) == Config.sableChemin) {
 					this.terrain[i][j] = "0";
 
 //				}
@@ -118,7 +119,7 @@ public class Environnement {
 
 				}
 
-				else if (listeMap.get(x) == Config.PlacementTourelles) {
+				else if (listeMap.get(x) == Config.SPAWNTOURELLES) {
 					this.terrain[i][j] = "1";
 
 //				}
@@ -128,15 +129,12 @@ public class Environnement {
 
 				}
 
-				else if (listeMap.get(x) == Config.BLocBasDroiteArriveMob) {
+				else if (listeMap.get(x) == Config.Hosto) {
 					this.terrain[i][j] = "1";
 
 				}
 
-				else if (listeMap.get(x) == Config.BlocSpawnMob) {
-					this.terrain[i][j] = "1";
-
-				}
+				
 
 				x++;
 			}

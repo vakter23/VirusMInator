@@ -7,7 +7,7 @@ import org.omg.CORBA.Current;
 
 import com.sun.javafx.iio.common.SmoothMinifier;
 
-import application.modele.Config;
+import application.Config;
 import application.modele.Environnement;
 import application.virus.Virus;
 import application.virus.VirusBasirus;
