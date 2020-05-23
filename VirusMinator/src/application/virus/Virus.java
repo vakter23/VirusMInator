@@ -3,8 +3,10 @@ package application.virus;
 import java.util.Arrays;
 import java.util.List;
 
+import application.modele.Environnement;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.scene.control.ListView;
 
 public abstract class Virus {
 	public static int compteur = 0;
@@ -14,7 +16,7 @@ public abstract class Virus {
 	private int atq, vie; // ok le V
 	private double vitesse; // vitesse= vitesse de deplacement
 	private String nom, ID;
-
+	protected Environnement env;
 	static public VirusBasirus bas = new VirusBasirus(100, 30, 10, "bas", 200, 400);
 	static public VirusDivirus div = new VirusDivirus(100, 30, 10, "divirus", 100, 200);
 	static public VirusVhealrus vhe = new VirusVhealrus(100, 30, 10, "vhealrus", 500, 500);
@@ -44,7 +46,7 @@ public abstract class Virus {
 		this.vitesse = vitesse;
 		this.nom = nom;
 		this.setX(0);
-		this.setY(352);
+		this.setY(288);
 		this.ID = "V" + compteur;
 		compteur++;
 
@@ -97,21 +99,21 @@ public abstract class Virus {
 	}
 
 	public void seDeplace() {
-		double nbRandom = Math.random() * (1);
-		double nbRandom2 = Math.random() * (1);
-		// nbRandom=Math.round(nbRandom);
-
-		if (this.getX() + (nbRandom) > 1024 || this.getX() + (nbRandom) < 0
-				|| (this.getY() + (nbRandom2) > 1024 || (this.getY() + (nbRandom2) < 0))) {
-
-			nbRandom = Math.random() * (1);
-			nbRandom2 = Math.random() * (1);
-
-		}
-
-		int nposX = (int) (this.getX() + (nbRandom));
-		int nposY = (int) (this.getY() + (nbRandom2));
-
+		/*
+		 * int posX = 0; for (int i = 0; i < listeVirusAttente.size(); i++) { if
+		 * (this.getTerrain(i) == 0) { listeVirusAttente.get(i)
+		 * .setX(listeVirusAttente.get(i).getX()+ 32);
+		 * panneauEnnemis.getChildren().get(i).setTranslateY(panneauEnnemis.getChildren(
+		 * ).get(i).getTranslateY()); } else if (1 == 1) {
+		 * panneauEnnemis.getChildren().get(i).setTranslateX(panneauEnnemis.getChildren(
+		 * ).get(i).getTranslateX()); panneauEnnemis.getChildren().get(i)
+		 * .setTranslateY(panneauEnnemis.getChildren().get(i).getTranslateY() + 32); }
+		 * posX += 32; }
+		 */
+		int nposX = (int) (this.getX() + (32));
+		int nposY = (int) (this.getY() + (0));		
+		this.xProperty.setValue(nposX);
+		this.yProperty.setValue(nposY);
 	}
 
 }

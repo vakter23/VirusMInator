@@ -15,6 +15,7 @@ public class Environnement {
 	private ObservableList<Virus> viruses = FXCollections.observableArrayList();
 	private ObservableList<Tourelles> tourelles = FXCollections.observableArrayList();
 	private ObservableList<Virus> nextViruses = FXCollections.observableArrayList();
+	
 	private String[][] terrain;
 
 	public Environnement(int width, int height) {
@@ -23,8 +24,8 @@ public class Environnement {
 		this.height = height;
 		this.terrain = new String[18][40];
 		initTerrain();
-		this.nextViruses.add(new VirusVhealrus(50, 10, 0.0015, "VirusVhealrus", 0, 352));
-		this.nextViruses.add(new VirusViboomrus(50, 10, 0.0035, "VirusBoomrus", 0, 352));
+		this.nextViruses.add(new VirusVhealrus(50, 10, 0.0015, "VirusVhealrus", 0, 288));
+		this.nextViruses.add(new VirusViboomrus(50, 10, 0.0035, "VirusBoomrus", 0, 288));
 	}
 
 	public int getWidth() {
@@ -72,6 +73,25 @@ public class Environnement {
 	public boolean dansTerrain(int x, int y) {
 		return (0 <= x && x < this.width && 0 <= y && y < this.height);
 	}
+	public void unTour() {
+		for (int i = 0 ; i<viruses.size(); i++) {
+			Virus v = viruses.get(i);
+			v.seDeplace();
+		}
+	}
+
+	public int getTerrain(int valeurI){
+		for (int i = 0; i < this.terrain.length; i++) {
+			for (int j = 0; j < this.terrain[i].length; j++) {
+				if(this.terrain[valeurI][j] == "0") {
+					return 1;
+				}
+			}
+				
+			}
+		return 0;
+
+	}
 
 	public void initTerrain() {
 		List<Integer> listeMap = Config.listeMap;
@@ -86,7 +106,7 @@ public class Environnement {
 //
 //				}
 
-				/*else */if (listeMap.get(x) == Config.Herbe) {
+				/* else */if (listeMap.get(x) == Config.Herbe) {
 					this.terrain[i][j] = "1";
 
 				}
@@ -133,8 +153,6 @@ public class Environnement {
 					this.terrain[i][j] = "1";
 
 				}
-
-				
 
 				x++;
 			}
