@@ -4,6 +4,8 @@ import java.util.List;
 
 import application.tourelles.Tourelles;
 import application.virus.Virus;
+import application.virus.VirusVhealrus;
+import application.virus.VirusViboomrus;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -11,15 +13,17 @@ public class Environnement {
 	private int width, height;
 	private ObservableList<Virus> viruses = FXCollections.observableArrayList();
 	private ObservableList<Tourelles> tourelles = FXCollections.observableArrayList();
-
+	private ObservableList<Virus> nextViruses = FXCollections.observableArrayList();
 	private String[][] terrain;
 
-	public Environnement() {
+	public Environnement(int width, int height) {
 		super();
 		this.width = width;
 		this.height = height;
-		this.terrain = new String[32][32];
+		this.terrain = new String[28][28];
 		initTerrain();
+		this.nextViruses.add(new VirusVhealrus(50, 10, 0.0015, "VirusVhealrus", 0, 352));
+		this.nextViruses.add(new VirusViboomrus(50, 10, 0.0035, "VirusBoomrus", 0, 352));
 	}
 
 	public int getWidth() {
@@ -31,50 +35,43 @@ public class Environnement {
 	}
 
 	public ObservableList<Virus> getViruses() {
-		return viruses;
+		return nextViruses;
 	}
-	
-	
+
 	public ObservableList<Tourelles> getTourelles() {
 		return tourelles;
 	}
-	
-	
+
 	public Virus getVirus(String id) {
-		for(Virus v:this.viruses){
-			if(v.getId().equals(id)){
+		for (Virus v : this.viruses) {
+			if (v.getId().equals(id)) {
 				return v;
 			}
 		}
 		return null;
 	}
-	
+
 	public Tourelles getTourelles(String id) {
-		for(Tourelles t:this.tourelles){
-			if(t.getId().equals(id)){
+		for (Tourelles t : this.tourelles) {
+			if (t.getId().equals(id)) {
 				return t;
 			}
 		}
 		return null;
 	}
-	
-	
-	
-	
-	public void ajouterVirus(Virus a){
+
+	public void ajouterVirus(Virus a) {
 		viruses.add(a);
 	}
-	
-	public void ajouterTourelles(Tourelles a){
+
+	public void ajouterTourelles(Tourelles a) {
 		tourelles.add(a);
 	}
-	
-	
-	
-	public boolean dansTerrain(int x, int y){
-		return (0 <= x && x<this.width && 0<=y && y< this.height);
+
+	public boolean dansTerrain(int x, int y) {
+		return (0 <= x && x < this.width && 0 <= y && y < this.height);
 	}
-	
+
 	public void initTerrain() {
 		List<Integer> listeMap = Config.listeMap;
 		int x = 0;
@@ -158,6 +155,5 @@ public class Environnement {
 		System.out.println("test");
 
 	}
-	
-	
+
 }

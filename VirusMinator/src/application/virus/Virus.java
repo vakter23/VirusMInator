@@ -7,6 +7,7 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 public abstract class Virus {
+	public static int compteur = 0;
 	private IntegerProperty xProperty = new SimpleIntegerProperty();
 	private IntegerProperty yProperty = new SimpleIntegerProperty();
 	private int dx, dy; // direction
@@ -31,8 +32,11 @@ public abstract class Virus {
 		this.nom = nom;
 		this.setX(x);
 		this.setY(y);
+		this.ID = "V" + compteur;
+		compteur++;
 
 	}
+
 	public Virus(int vie, int atq, double vitesse, String nom) { /* Constructeur Virus */
 
 		this.vie = vie;
@@ -41,6 +45,8 @@ public abstract class Virus {
 		this.nom = nom;
 		this.setX(0);
 		this.setY(352);
+		this.ID = "V" + compteur;
+		compteur++;
 
 	}
 
@@ -80,6 +86,10 @@ public abstract class Virus {
 	public final void setY(int n) {
 		this.yProperty.setValue(n);
 		;
+	}
+
+	public final double getVitesse() {
+		return this.vitesse;
 	}
 
 	public boolean estVivant() {

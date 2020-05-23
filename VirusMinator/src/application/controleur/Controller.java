@@ -11,6 +11,10 @@ import application.modele.Config;
 import application.modele.Environnement;
 import application.virus.Virus;
 import application.virus.VirusBasirus;
+import application.virus.VirusDivirus;
+import application.virus.VirusVhealrus;
+import application.virus.VirusViboomrus;
+import application.virus.VirusViterus;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -76,66 +80,73 @@ public class Controller implements Initializable {
 		 * Appeler lvl1 qui appelera la methode de création de map, et après utiliser un
 		 * switch pour afficher Victoire ou défaite, et niveau suivant.
 		 */
-		
-		 creerTerrainVue(); 
-		 creerSprite(); 
-		 System.out.println("fait");
-		 
-		 for (int i = 0; i < e1.getViruses().size(); i++) {
+		this.e1 = new Environnement(920, 920);
+		this.panneauEnnemis.setMaxWidth(952);
+		this.panneauEnnemis.setMaxHeight(952);
+		creerTerrainVue();
+		System.out.println("fait");
+		int compteur = 0;
+		for (int i = 0; i < e1.getViruses().size(); i++) {
 			// demarre l'animation
-				gameLoop.play();
-				initAnimation(e1.getVirus(i));
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+			creerSpriteVirus(e1.getViruses().get(i));
+			switch (e1.getViruses().get(i).getNom()) {
+			case "VirusBasirus":
+				ImageView VirusBasirus = Config.getImg("/src/ressources/virus/base_Virus.png");
+				initAnimation(e1.getViruses().get(i));
+				break;
+
+			case "VirusDivirus":
+				ImageView VirusDivirus = Config.getImg("/src/ressources/virus/divisible_Virus.png");
+				initAnimation(e1.getViruses().get(i));
+				break;
+			case "VirusVhealrus":
+				ImageView VirusVhealrus = Config.getImg("/src/resspirces/virus/healing_Virus.png");
+				initAnimation(e1.getViruses().get(i));
+				break;
+
+			}
+			gameLoop.play();
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
-		
+		creerSpriteNull();
 	}
 
 	private void initAnimation(Virus v) {
-		
 		gameLoop = new Timeline();
 		temps = 0;
 		gameLoop.setCycleCount(Timeline.INDEFINITE);
 		double vitesse;
 		if (true) {
-			vitesse = 0.015;
-		}else {
-			vitesse = 0.055;
+			vitesse = v.getVitesse();
+		} else {
+			vitesse = v.getVitesse();
 		}
-		switch (v.getNom()) {
-		case "VirusBasirus":
-			ImageView VirusBasirus = Config.getImg("/src/ressources/virus/base_Virus.png");
-			break;
 
-		case "VirusDivirus":
-			ImageView VIrusDivirus = Config.getImg("/src/ressources/virus/divisible_Virus.png");
-			break;
-		}
 		KeyFrame kf = new KeyFrame(
 				// on définit le FPS (nbre de frame par seconde)
 				Duration.seconds(vitesse),
-				
+
 				// on définit ce qui se passe à chaque frame
 				// c'est un eventHandler d'ou le lambda
 				(ev -> {
-					if (temps == 1000) {
+					if (temps == 100) {
 						System.out.println("fini");
 						gameLoop.stop();
-					} else if (temps % 5 == 0) {
+					} else if (temps % 10 == 0) {
 						System.out.println("un tour");
 						for (int i = 0; i < getPanneauEnnemis().getChildren().size(); i++) {
 							panneauEnnemis.getChildren().get(i)
-									.setTranslateX(panneauEnnemis.getChildren().get(i).getTranslateX() + 1);
+									.setTranslateX(panneauEnnemis.getChildren().get(i).getTranslateX() + 5);
 							panneauEnnemis.getChildren().get(i)
 									.setTranslateY(panneauEnnemis.getChildren().get(i).getTranslateY());
 						}
 					}
 					temps++;
-				})
-				);
+				}));
 		gameLoop.getKeyFrames().add(kf);
 //		
 	}
@@ -212,35 +223,72 @@ public class Controller implements Initializable {
 	@FXML
 	void seDeplacer() {
 		for (int i = 0; i < getPanneauEnnemis().getChildren().size(); i++) {
-			panneauEnnemis.getChildren().get(i).setTranslateX(panneauEnnemis.getChildren().get(i).getTranslateX() + 1);
+			panneauEnnemis.getChildren().get(i).setTranslateX(panneauEnnemis.getChildren().get(i).getTranslateX() + 32);
 			panneauEnnemis.getChildren().get(i).setTranslateY(panneauEnnemis.getChildren().get(i).getTranslateY());
-
+			
 		}
 	}
 
 	@FXML
 	void reinit(ActionEvent event) {
 		getPanneauEnnemis().getChildren().clear();
-		creerSprite();
-		initAnimation();
-		gameLoop.play();
+		for (int i = 0; i < e1.getViruses().size(); i++) {
+			creerSpriteVirus(e1.getViruses().get(i));
+			initAnimation(e1.getViruses().get(i));
+			gameLoop.play();
+		}
+
 	}
 
-	public void creerSprite() {
+	public void creerSpriteVirus(Virus v) {
 		/*
 		 * { Demander à la prof pour la gameloop, et pour la facon d'afficher un ennemi
 		 * en fonction de sa sous classe
 		 * 
 		 *
 		 */
-		
-	//	this.e1.getViruses().addListener()
-			
-		
+
+		// this.e1.getViruses().addListener()
+		if (v instanceof VirusBasirus) {
+			ImageView VirusBasirus = Config.getImg("/src/ressources/virus/base_Virus.png");
+			VirusBasirus.setId(v.getId());
+			VirusBasirus.setTranslateX(v.getX());
+			VirusBasirus.setTranslateY(v.getY());
+			panneauEnnemis.getChildren().add(VirusBasirus);
+		} else if (v instanceof VirusDivirus) {
+			ImageView VirusDivirus = Config.getImg("/src/ressources/virus/divisible_Virus.png");
+			VirusDivirus.setId(v.getId());
+			VirusDivirus.setTranslateX(v.getX());
+			VirusDivirus.setTranslateY(v.getY());
+			panneauEnnemis.getChildren().add(VirusDivirus);
+		} else if (v instanceof VirusVhealrus) {
+			ImageView VirusVhealrus = Config.getImg("/src/ressources/virus/healing_Virus.png");
+			VirusVhealrus.setId(v.getId());
+			VirusVhealrus.setTranslateX(v.getX());
+			VirusVhealrus.setTranslateY(v.getY());
+			panneauEnnemis.getChildren().add(VirusVhealrus);
+		} else if (v instanceof VirusViboomrus) {
+			ImageView VirusViboomrus = Config.getImg("/src/ressources/virus/impact_Virus.png");
+			VirusViboomrus.setId(v.getId());
+			VirusViboomrus.setTranslateX(v.getX());
+			VirusViboomrus.setTranslateY(v.getY());
+			panneauEnnemis.getChildren().add(VirusViboomrus);
+		} else if (v instanceof VirusViterus) {
+			ImageView VirusViterus = Config.getImg("/src/ressources/virus/rapid_Virus.png");
+			VirusViterus.setId(v.getId());
+			VirusViterus.setTranslateX(v.getX());
+			VirusViterus.setTranslateY(v.getY());
+			panneauEnnemis.getChildren().add(VirusViterus);
+		}
+
+	}
+
+	public void creerSpriteNull() {
 		ImageView Virus = Config.getImg("/src/ressources/Virus/base_Virus.png");
 		Virus.setTranslateX(0);
 		Virus.setTranslateY(352); /* (0;352 est le bloc ou les ennemis spawnent) */
 		getPanneauEnnemis().getChildren().add(Virus);
+		System.out.println("sout SpriteNull");
 	}
 
 	@FXML
@@ -259,16 +307,12 @@ public class Controller implements Initializable {
 //	void placerEnnemis(ActionEvent event) {
 //		Circle r = new Circle(3);
 //		r.setFill(Color.RED);
-//		r.setId("rond");
+//		r.setId("rond");this.panneauEnnemis.setMaxWidth(952);
 //		r.setTranslateX(0);
 //		r.setTranslateY(0);
 //		r.setOnMouseClicked(e-> System.out.println("clic sur acteur"+e.getSource()));
 //		map.getChildren().add(r);
 //	}
-
-
-
-	
 
 	public String lvl1() {
 		return null;
