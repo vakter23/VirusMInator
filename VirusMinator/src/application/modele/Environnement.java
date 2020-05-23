@@ -21,7 +21,7 @@ public class Environnement {
 		super();
 		this.width = width;
 		this.height = height;
-		this.terrain = new String[28][28];
+		this.terrain = new String[18][40];
 		initTerrain();
 		this.nextViruses.add(new VirusVhealrus(50, 10, 0.0015, "VirusVhealrus", 0, 352));
 		this.nextViruses.add(new VirusViboomrus(50, 10, 0.0035, "VirusBoomrus", 0, 352));
