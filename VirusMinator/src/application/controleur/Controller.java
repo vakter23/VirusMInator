@@ -14,6 +14,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.nio.file.Paths;
@@ -64,15 +65,21 @@ public class Controller implements Initializable {
 	@FXML
 	private TilePane map;
 
+
 	@FXML
 	private Pane panneauEnnemis;
 	private Environnement e1;
 
+	private Image tourelleGel = (Image) (getImgg("/src/ressources/tourelles/gelHydro.png"));
+
 	public void creerTerrainVue() {
 		System.out.println(Config.listeMap.size());
-		ImageView shopSavonSolid = Config.getImg("/src/ressources/tourelles/solidSavon.png");
-		shopSavon.getChildren().add(shopSavonSolid);
-		ImageView shopHydroGel = Config.getImg("/src/ressources/tourelles/gelHydro.png");
+		/*
+		 * ImageView shopSavonSolid =
+		 * Config.getImg("/src/ressources/tourelles/solidSavon.png");
+		 * shopSavon.getChildren().add(shopSavonSolid); ImageView shopHydroGel =
+		 * Config.getImg("/src/ressources/tourelles/gelHydro.png");
+		 */
 
 		for (int i = 0; i < Config.listeMap.size(); i++) {
 			ImageView blancHopital = Config.getImg("/src/ressources/tiles/blancHopital");
@@ -114,6 +121,8 @@ public class Controller implements Initializable {
 				break;
 			case "spawnTourelles":
 				map.getChildren().add(spawnTourelles);
+				System.out.println(spawnTourelles);
+				spawnTourelles.setOnMouseClicked(e -> clicTourelle(e));
 				break;
 			case "vertEnnemi":
 				map.getChildren().add(vertEnnemi);
@@ -124,8 +133,10 @@ public class Controller implements Initializable {
 			}
 
 		}
-		teteHero.getChildren().add(Config.getImg("/src/ressources/tete.png"));
-		teteVilain.getChildren().add(Config.getImg("/src/ressources/tete.png"));
+		/*
+		 * teteHero.getChildren().add(Config.getImg("/src/ressources/tete.png"));
+		 * teteVilain.getChildren().add(Config.getImg("/src/ressources/tete.png"));
+		 */
 
 	}
 
@@ -152,11 +163,46 @@ public class Controller implements Initializable {
 
 	}
 
+
+    @FXML
+    void supprimer(ActionEvent event) {
+		for (int i = 0; i < map.getChildren().size(); i++) {
+			ImageView spawnTourelles = Config.getImg("/src/ressources/tiles/spawnTourelles.png");
+			String retour = Config.imageDe(Config.listeMap.get(i));
+			if(map.getChildren().contains(tourelleGel)) {
+				map.getChildren().remove(i);
+			}
+		}
+//    	for (int i = 0; i < e1.getTourelles().size(); i++) {
+//			
+//		}
+//    	for (int i = 0; i < panneauEnnemis.getChildren().size(); i++) {
+//			if(panneauEnnemis.getChildren().get(i).contains(tourelleGel)) {
+//				
+//			}
+//		}
+    }
 	public void dessinEnnemi() {
 		ImageView Virus = Config.getImg("/src/ressources/Virus/base_Virus.png");
-		Virus.setTranslateX(Math.random() * 900);
-		Virus.setTranslateY(Math.random() * 900);
+		Virus.setTranslateX(720);
+		Virus.setTranslateY(720);
 		getPanneauEnnemis().getChildren().add(Virus);
+	}
+
+	void clicTourelle(MouseEvent event) {
+
+		System.out.println("TOurelle Cliqué");// Coder Placement Tourelle
+
+		ImageView sourc = (ImageView) event.getSource();
+		Image tourelleGel = (Image) (getImgg("/src/ressources/tourelles/gelHydro.png"));
+		sourc.setImage(tourelleGel);
+
+	}
+
+	private static Image getImgg(String... paths) {
+		return new Image(Paths.get(System.getProperty("user.dir"), paths).toUri().toString());
+		// ImageView(Paths.get(Paths.get(System.getProperty("user.dir"),
+		// "ressources").toString(), paths).toUri().toString());
 	}
 
 	@FXML
@@ -185,12 +231,14 @@ public class Controller implements Initializable {
 		System.out.println("fait");
 
 	}
+
 	void faireDesTours() {
-		while(!Reinit.isPressed()) {
+		while (!Reinit.isPressed()) {
 			seDeplacer();
 		}
-		
+
 	}
+
 	public String lvl1() {
 		return null;
 		/*

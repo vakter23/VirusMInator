@@ -3,20 +3,31 @@ package application.modele;
 import java.util.List;
 
 import application.Config;
+import application.modele.tourelles.Tourelles;
+import application.modele.virus.Virus;
+import application.modele.virus.VirusVhealrus;
+import application.modele.virus.VirusViboomrus;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Environnement {
 	private int width, height;
-	private ObservableList<Acteurs> acteurs = FXCollections.observableArrayList();
+	private ObservableList<Virus> viruses;
+	private ObservableList<Tourelles> tourelles;
+	private ObservableList<Virus> nextViruses ;
 	private String[][] terrain;
 
-	public Environnement() {
+	public Environnement(int width, int height) {
 		super();
 		this.width = width;
 		this.height = height;
-		this.terrain = new String[32][32];
+		this.terrain = new String[18][40];
+		this.tourelles = FXCollections.observableArrayList();
+		this.viruses = FXCollections.observableArrayList();
+		this.nextViruses =  FXCollections.observableArrayList();
 		initTerrain();
+		this.nextViruses.add(new VirusVhealrus(50, 10, 0.0015, "VirusVhealrus", 0, 288));
+		this.nextViruses.add(new VirusViboomrus(50, 10, 0.0035, "VirusBoomrus", 0, 288));
 	}
 
 	public int getWidth() {
@@ -27,20 +38,40 @@ public class Environnement {
 		return height;
 	}
 
-	public ObservableList<Acteurs> getActeurs() {
-		return acteurs;
+	public ObservableList<Virus> getViruses() {
+		return nextViruses;
 	}
-	public Acteurs getActeur(String id) {
-		for(Acteurs a:this.acteurs){
-			if(a.getId().equals(id)){
-				return a;
+
+	public ObservableList<Tourelles> getTourelles() {
+		return tourelles;
+	}
+
+	public Virus getVirus(String id) {
+		for (Virus v : this.viruses) {
+			if (v.getId().equals(id)) {
+				return v;
 			}
 		}
 		return null;
 	}
-	public void ajouter(Acteurs a){
-		acteurs.add(a);
+
+	public Tourelles getTourelles(String id) {
+		for (Tourelles t : this.tourelles) {
+			if (t.getId().equals(id)) {
+				return t;
+			}
+		}
+		return null;
 	}
+
+	public void ajouterVirus(Virus a) {
+		viruses.add(a);
+	}
+
+	public void ajouterTourelles(Tourelles a) {
+		tourelles.add(a);
+	}
+
 	public boolean dansTerrain(int x, int y){
 		return (0 <= x && x<this.width && 0<=y && y< this.height);
 	}
@@ -52,12 +83,7 @@ public class Environnement {
 
 			for (int j = 0; j < this.terrain[i].length; j++) {
 
-				if (listeMap.get(x) == Config.BordTerrain) {
-					this.terrain[i][j] = "1";
-
-				}
-
-				else if (listeMap.get(x) == Config.Herbe) {
+				if (listeMap.get(x) == Config.Herbe) {
 					this.terrain[i][j] = "1";
 
 				}
@@ -70,17 +96,17 @@ public class Environnement {
 
 				}
 
-				else if (listeMap.get(x) == Config.BlocVioletSpawnMobSurement) {
+				else if (listeMap.get(x) == Config.SpawnViolet) {
 					this.terrain[i][j] = "1";
 
 				}
 
-				else if (listeMap.get(x) == Config.BlocVertSpawnMob) {
+				else if (listeMap.get(x) == Config.Vert) {
 					this.terrain[i][j] = "1";
 
 				}
 
-				else if (listeMap.get(x) == Config.Chemin) {
+				else if (listeMap.get(x) == Config.sableChemin) {
 					this.terrain[i][j] = "0";
 
 				}
@@ -90,7 +116,7 @@ public class Environnement {
 //
 //				}
 
-				else if (listeMap.get(x) == Config.PlacementTourelles) {
+				else if (listeMap.get(x) == Config.SpawnMob) {
 					this.terrain[i][j] = "1";
 
 				}
@@ -99,16 +125,6 @@ public class Environnement {
 //					this.terrain[i][j] = "1";
 //
 //				}
-
-				else if (listeMap.get(x) == Config.BLocBasDroiteArriveMob) {
-					this.terrain[i][j] = "1";
-
-				}
-
-				else if (listeMap.get(x) == Config.BlocSpawnMob) {
-					this.terrain[i][j] = "1";
-
-				}
 
 				x++;
 			}
@@ -127,4 +143,5 @@ public class Environnement {
 		System.out.println("test");
 
 	}
+
 }
