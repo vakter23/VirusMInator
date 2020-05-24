@@ -178,8 +178,7 @@ public class Controller implements Initializable {
 				}));
 		gameLoop.getKeyFrames().add(kf);
 		/* A MODIFIER*/
-		imagePosX.bind(e1.getViruses().get(1).getXproperty());
-		imagePosY.bind(e1.getViruses().get(1).getYproperty());
+
 //		
 	}
 
