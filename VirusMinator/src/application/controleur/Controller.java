@@ -71,9 +71,14 @@ public class Controller implements Initializable {
 	private Environnement e1;
 
 	private Image tourelleGel = (Image) (getImgg("/src/ressources/tourelles/gelHydro.png"));
+    @FXML
+    private ImageView gelHydro;
+
+
 
 	public void creerTerrainVue() {
 		System.out.println(Config.listeMap.size());
+		gelHydro.setImage(tourelleGel);
 		/*
 		 * ImageView shopSavonSolid =
 		 * Config.getImg("/src/ressources/tourelles/solidSavon.png");
@@ -122,7 +127,7 @@ public class Controller implements Initializable {
 			case "spawnTourelles":
 				map.getChildren().add(spawnTourelles);
 				System.out.println(spawnTourelles);
-				spawnTourelles.setOnMouseClicked(e -> clicTourelle(e));
+				spawnTourelles.setOnMouseClicked(e -> gelHydro.setOnMouseClicked(ee->clicTourelle(e)));
 				break;
 			case "vertEnnemi":
 				map.getChildren().add(vertEnnemi);
@@ -195,6 +200,7 @@ public class Controller implements Initializable {
 
 		ImageView sourc = (ImageView) event.getSource();
 		Image tourelleGel = (Image) (getImgg("/src/ressources/tourelles/gelHydro.png"));
+		
 		sourc.setImage(tourelleGel);
 
 	}
