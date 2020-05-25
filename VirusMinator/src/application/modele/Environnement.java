@@ -15,7 +15,7 @@ public class Environnement {
 	private ObservableList<Virus> viruses = FXCollections.observableArrayList();
 	private ObservableList<Tourelles> tourelles = FXCollections.observableArrayList();
 	private ObservableList<Virus> nextViruses = FXCollections.observableArrayList();
-	
+
 	private String[][] terrain;
 
 	public Environnement(int width, int height) {
@@ -73,22 +73,31 @@ public class Environnement {
 	public boolean dansTerrain(int x, int y) {
 		return (0 <= x && x < this.width && 0 <= y && y < this.height);
 	}
+
 	public void unTour() {
-		for (int i = 0 ; i<viruses.size(); i++) {
+		for (int i = 0; i < viruses.size(); i++) {
 			Virus v = viruses.get(i);
 			v.seDeplace();
 		}
+		for (int i = viruses.size() - 1; i >= 0; i--) {
+			Virus v = viruses.get(i);
+			if(!v.estVivant()) {
+				System.out.println("mort de : "+ v);
+				viruses.remove(i);
+			}
+		}
+		
 	}
 
-	public int getTerrain(int valeurI){
+	public int getTerrain(int valeurI) {
 		for (int i = 0; i < this.terrain.length; i++) {
 			for (int j = 0; j < this.terrain[i].length; j++) {
-				if(this.terrain[valeurI][j] == "0") {
+				if (this.terrain[valeurI][j] == "0") {
 					return 1;
 				}
 			}
-				
-			}
+
+		}
 		return 0;
 
 	}

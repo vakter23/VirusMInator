@@ -10,8 +10,8 @@ import javafx.scene.control.ListView;
 
 public abstract class Virus {
 	public static int compteur = 0;
-	private IntegerProperty xProperty = new SimpleIntegerProperty();
-	private IntegerProperty yProperty = new SimpleIntegerProperty();
+	private IntegerProperty xProperty;
+	private IntegerProperty yProperty;
 	private int dx, dy; // direction
 	private int atq, vie; // ok le V
 	private double vitesse; // vitesse= vitesse de deplacement
@@ -32,8 +32,8 @@ public abstract class Virus {
 		this.atq = atq;
 		this.vitesse = vitesse;
 		this.nom = nom;
-		this.setX(x);
-		this.setY(y);
+		this.xProperty = new SimpleIntegerProperty(x);
+		this.yProperty = new SimpleIntegerProperty(y);
 		this.ID = "V" + compteur;
 		compteur++;
 
@@ -45,8 +45,8 @@ public abstract class Virus {
 		this.atq = atq;
 		this.vitesse = vitesse;
 		this.nom = nom;
-		this.setX(0);
-		this.setY(288);
+		this.xProperty = new SimpleIntegerProperty(0);
+		this.yProperty = new SimpleIntegerProperty(288);
 		this.ID = "V" + compteur;
 		compteur++;
 
@@ -110,10 +110,12 @@ public abstract class Virus {
 		 * .setTranslateY(panneauEnnemis.getChildren().get(i).getTranslateY() + 32); }
 		 * posX += 32; }
 		 */
-		int nposX = (int) (this.getX() + (32));
-		int nposY = (int) (this.getY() + (0));		
-		this.xProperty.setValue(nposX);
-		this.yProperty.setValue(nposY);
+		int nposX = this.getX() + (1);
+		int nposY = this.getY() + (0);
+		this.setX(nposX);
+		this.setY(nposY);
+		System.out.println(this.getX());
+		System.out.println(this.getY());
 	}
 
 }
