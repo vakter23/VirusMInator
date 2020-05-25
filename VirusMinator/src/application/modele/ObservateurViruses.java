@@ -1,4 +1,4 @@
-package application.controleur;
+package application.modele;
 
 import application.virus.Virus;
 import javafx.collections.ListChangeListener;
