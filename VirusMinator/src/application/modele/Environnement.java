@@ -12,9 +12,9 @@ import javafx.collections.ObservableList;
 
 public class Environnement {
 	private int width, height;
-	private ObservableList<Virus> viruses;
-	private ObservableList<Tourelles> tourelles;
-	private ObservableList<Virus> nextViruses = FXCollections;
+	private ObservableList<Virus> viruses = FXCollections.observableArrayList();
+	private ObservableList<Tourelles> tourelles = FXCollections.observableArrayList();
+	private ObservableList<Virus> nextViruses = FXCollections.observableArrayList();
 	private String[][] terrain;
 
 	public Environnement(int width, int height) {
