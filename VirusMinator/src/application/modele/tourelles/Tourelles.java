@@ -54,11 +54,11 @@ public abstract class Tourelles {
 	}
 
 	public final int getY() {
-		return x.getValue();
+		return y.getValue();
 	}
 
 	public final IntegerProperty getYProperty() {
-		return x;
+		return y;
 	}
 
 	public final void setX(int n) {
@@ -66,7 +66,7 @@ public abstract class Tourelles {
 	}
 
 	public final void setY(int n) {
-		x.setValue(n);
+		y.setValue(n);
 	}
 
 	public double getAtq() {
