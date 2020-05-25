@@ -116,12 +116,12 @@ public class Environnement {
 //				}
 
 				/* else */if (listeMap.get(x) == Config.Herbe) {
-					this.terrain[i][j] = "1";
+					this.terrain[i][j] = "He";
 
 				}
 
 				else if (listeMap.get(x) == Config.Sable) {
-					this.terrain[i][j] = "1";
+					this.terrain[i][j] = "Sa";
 
 //				} else if (listeMap.get(x) == Config.BLOCROUGEHOPITAL) {
 //					this.terrain[i][j] = "1";
@@ -129,17 +129,17 @@ public class Environnement {
 				}
 
 				else if (listeMap.get(x) == Config.SpawnViolet) {
-					this.terrain[i][j] = "1";
+					this.terrain[i][j] = "Vi";
 
 				}
 
 				else if (listeMap.get(x) == Config.Vert) {
-					this.terrain[i][j] = "1";
+					this.terrain[i][j] = "Ve";
 
 				}
 
 				else if (listeMap.get(x) == Config.sableChemin) {
-					this.terrain[i][j] = "0";
+					this.terrain[i][j] = "Ch";
 
 //				}
 //
@@ -149,7 +149,7 @@ public class Environnement {
 				}
 
 				else if (listeMap.get(x) == Config.SPAWNTOURELLES) {
-					this.terrain[i][j] = "1";
+					this.terrain[i][j] = "St";
 
 //				}
 //
@@ -159,7 +159,7 @@ public class Environnement {
 				}
 
 				else if (listeMap.get(x) == Config.Hosto) {
-					this.terrain[i][j] = "1";
+					this.terrain[i][j] = "Ho";
 
 				}
 

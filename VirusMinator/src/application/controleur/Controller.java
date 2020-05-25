@@ -2,11 +2,8 @@ package application.controleur;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import org.omg.CORBA.Current;
-
 import com.sun.javafx.iio.common.SmoothMinifier;
-
 import application.Config;
 import application.modele.Environnement;
 import application.virus.Virus;
@@ -74,33 +71,33 @@ public class Controller implements Initializable {
 
 	private int temps;
 
-
 	public void ajouter(Virus v) {
 		this.e1.ajouterVirus(v);
 		creerSpriteVirus(v);
 
 	}
+/*
+//	Plus utilisée depuis l'ajout du Bind
+// 		public void rafraichirPanneauEnnemis(/* Virus v ) {
+//		for (Virus v : this.e1.getViruses()) {
+//			Circle c = (Circle) this.panneauEnnemis.lookup("#" + v.getId());
+//			if (c == null) {
+//				creerSpriteVirus(v);
+//			} else {
+//				c.setTranslateX(v.getX());
+//				c.setTranslateY(v.getY());
+//			}
+//		}
+//		for (int i = this.panneauEnnemis.getChildren().size() - 1; i >= 0; i--) {
+//			Node c = this.panneauEnnemis.getChildren().get(i);
+//			Virus v = this.e1.getVirus(c.getId());
+//			if (v == null) {
+//				this.panneauEnnemis.getChildren().remove(c);
+//			}
+//		}
+//	}
 
-	public void rafraichirPanneauEnnemis(/* Virus v */) {
-		for (Virus v : this.e1.getViruses()) {
-			Circle c = (Circle) this.panneauEnnemis.lookup("#" + v.getId());
-			if (c == null) {
-				creerSpriteVirus(v);
-			} else {
-				c.setTranslateX(v.getX());
-				c.setTranslateY(v.getY());
-			}
-		}
-		for (int i = this.panneauEnnemis.getChildren().size() - 1; i >= 0; i--) {
-			Node c = this.panneauEnnemis.getChildren().get(i);
-			Virus v = this.e1.getVirus(c.getId());
-			if (v == null) {
-				this.panneauEnnemis.getChildren().remove(c);
-			}
-		}
-	}
-
-	/*
+	
 	 * switch (v.getNom()) { case "VirusBasirus": ImageView VirusBasirus=
 	 * Config.getImg("/src/ressources/virus/base_Virus.png");
 	 * VirusBasirus.setTranslateX(v.getX()); VirusBasirus.setTranslateY(v.getY());
@@ -114,6 +111,7 @@ public class Controller implements Initializable {
 	 * VirusVhealrus.setTranslateX(0); VirusVhealrus.setTranslateY(288); //
 	 * initAnimation(v); break; }
 	 */
+	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		/*
 		 * Appeler lvl1 qui appelera la methode de création de map, et après utiliser un
@@ -133,13 +131,11 @@ public class Controller implements Initializable {
 		// demarre l'animation
 
 		gameLoop.play();
-		System.out.println(e1.getViruses().get(1).getX());
-//		try {
+		// try {
 //			Thread.sleep(1000);
 //		} catch (InterruptedException e) {
 //			e.printStackTrace();
 //		}
-		System.out.println(e1.getViruses().get(1).getX());
 
 	}
 
@@ -167,14 +163,11 @@ public class Controller implements Initializable {
 					} else if (temps % 5 == 0) {
 						System.out.println("un tour");
 						unTour();
-						//rafraichirPanneauEnnemis(/* v */);
+						// rafraichirPanneauEnnemis(/* v */);
 					}
 					temps++;
 				}));
 		gameLoop.getKeyFrames().add(kf);
-		/* A MODIFIER */
-
-//		
 	}
 
 	public void creerTerrainVue() {
@@ -254,64 +247,55 @@ public class Controller implements Initializable {
 		System.out.println(e1.getViruses().get(1).getX());
 	}
 
-	@FXML
-	void reinit(ActionEvent event) {
-		getPanneauEnnemis().getChildren().clear();
-		for (int i = 0; i < e1.getViruses().size(); i++) {
-			creerSpriteVirus(e1.getViruses().get(i));
-			initAnimation(e1.getViruses().get(i));
-			gameLoop.play();
-		}
-
-	}
+	
 
 	public void creerSpriteVirus(Virus v) {
 		Circle r;
 		ImageView VirusActuel;
-			/*
-			 * { Demander à la prof pour la gameloop, et pour la facon d'afficher un ennemi
-			 * en fonction de sa sous classe
-			 * 
-			 *
+		/*
+		 * { Demander à la prof pour la gameloop, et pour la facon d'afficher un ennemi
+		 * en fonction de sa sous classe
+		 * 
+		 *
+		 */
+
+		// this.e1.getViruses().addListener()
+		if (v instanceof VirusBasirus) {
+			VirusActuel = Config.getImg("/src/ressources/virus/base_Virus.png");
+			VirusActuel.setId(v.getId());
+			VirusActuel.translateXProperty().bind(v.getXproperty());
+			VirusActuel.translateXProperty().bind(v.getYproperty());
+			panneauEnnemis.getChildren().add(VirusActuel);
+
+			r = new Circle(3);
+			r.setFill(Color.RED);
+			r.setId(v.getId());
+			r.translateXProperty().bind(v.getXproperty());
+			r.translateYProperty().bind(v.getYproperty());
+			panneauEnnemis.getChildren().add(r);
+		} /*
+			 * else if (v instanceof VirusDivirus) { ajouter(v); ImageView VirusDivirus =
+			 * Config.getImg("/src/ressources/virus/divisible_Virus.png");
+			 * VirusDivirus.setId(v.getId()); VirusDivirus.setTranslateX(v.getX());
+			 * VirusDivirus.setTranslateY(v.getY());
+			 * panneauEnnemis.getChildren().add(VirusDivirus); } else if (v instanceof
+			 * VirusVhealrus) { ajouter(v); ImageView VirusVhealrus =
+			 * Config.getImg("/src/ressources/virus/healing_Virus.png");
+			 * VirusVhealrus.setId(v.getId()); VirusVhealrus.setTranslateX(v.getX());
+			 * VirusVhealrus.setTranslateY(v.getY());
+			 * panneauEnnemis.getChildren().add(VirusVhealrus); } else if (v instanceof
+			 * VirusViboomrus) { ajouter(v); ImageView VirusViboomrus =
+			 * Config.getImg("/src/ressources/virus/impact_Virus.png");
+			 * VirusViboomrus.setId(v.getId()); VirusViboomrus.setTranslateX(v.getX());
+			 * VirusViboomrus.setTranslateY(v.getY());
+			 * panneauEnnemis.getChildren().add(VirusViboomrus); } else if (v instanceof
+			 * VirusViterus) { ajouter(v); ImageView VirusViterus =
+			 * Config.getImg("/src/ressources/virus/rapid_Virus.png");
+			 * VirusViterus.setId(v.getId()); VirusViterus.setTranslateX(v.getX());
+			 * VirusViterus.setTranslateY(v.getY());
+			 * panneauEnnemis.getChildren().add(VirusViterus); }
 			 */
 
-			// this.e1.getViruses().addListener()
-			if (v instanceof VirusBasirus) {
-				VirusActuel = Config.getImg("/src/ressources/virus/base_Virus.png");
-				VirusActuel.setId(v.getId());
-				VirusActuel.translateXProperty().bind(v.getXproperty());
-				VirusActuel.translateXProperty().bind(v.getYproperty());
-				panneauEnnemis.getChildren().add(VirusActuel);
-				
-				r = new Circle(3);
-				r.setFill(Color.RED);
-				r.setId(v.getId());
-				r.translateXProperty().bind(v.getXproperty());
-				r.translateYProperty().bind(v.getYproperty());
-				panneauEnnemis.getChildren().add(r);
-			} /*
-				 * else if (v instanceof VirusDivirus) { ajouter(v); ImageView VirusDivirus =
-				 * Config.getImg("/src/ressources/virus/divisible_Virus.png");
-				 * VirusDivirus.setId(v.getId()); VirusDivirus.setTranslateX(v.getX());
-				 * VirusDivirus.setTranslateY(v.getY());
-				 * panneauEnnemis.getChildren().add(VirusDivirus); } else if (v instanceof
-				 * VirusVhealrus) { ajouter(v); ImageView VirusVhealrus =
-				 * Config.getImg("/src/ressources/virus/healing_Virus.png");
-				 * VirusVhealrus.setId(v.getId()); VirusVhealrus.setTranslateX(v.getX());
-				 * VirusVhealrus.setTranslateY(v.getY());
-				 * panneauEnnemis.getChildren().add(VirusVhealrus); } else if (v instanceof
-				 * VirusViboomrus) { ajouter(v); ImageView VirusViboomrus =
-				 * Config.getImg("/src/ressources/virus/impact_Virus.png");
-				 * VirusViboomrus.setId(v.getId()); VirusViboomrus.setTranslateX(v.getX());
-				 * VirusViboomrus.setTranslateY(v.getY());
-				 * panneauEnnemis.getChildren().add(VirusViboomrus); } else if (v instanceof
-				 * VirusViterus) { ajouter(v); ImageView VirusViterus =
-				 * Config.getImg("/src/ressources/virus/rapid_Virus.png");
-				 * VirusViterus.setId(v.getId()); VirusViterus.setTranslateX(v.getX());
-				 * VirusViterus.setTranslateY(v.getY());
-				 * panneauEnnemis.getChildren().add(VirusViterus); }
-				 */
-		
 	}
 
 //	void placerEnnemis(ActionEvent event) {
@@ -324,13 +308,13 @@ public class Controller implements Initializable {
 //		map.getChildren().add(r);
 //	}
 
-	public String lvl1() {
+/*	public String lvl1() {
 		return null;
-		/*
+		*
 		 * faire retourner "Victoire" si on survit, "Defaite" sinon. Faire pareil pour
 		 * tout les niveaux
-		 */
-	}
+		 *
+	}*/
 
 	public Pane getPanneauEnnemis() {
 		return panneauEnnemis;
