@@ -10,8 +10,8 @@ public abstract class Virus {
 	private IntegerProperty xProperty = new SimpleIntegerProperty();
 	private IntegerProperty yProperty = new SimpleIntegerProperty();
 	private int dx, dy; // direction
-	private int atq, vie; 
-	private double vitesse; // vitesse= vitesse de deplacement
+	private int atq; 
+	private double vitesse, vie; // vitesse= vitesse de deplacement
 	private String nom, ID;
 
 	static public VirusBasirus bas = new VirusBasirus(100, 30, 10, "bas", 200, 400);
@@ -24,7 +24,7 @@ public abstract class Virus {
 			div, div, div, div, div, div, div, div, div, vhe, vhe, vhe, vhe, vhe, vhe, vhe, vhe, vhe, vhe, vib, vib,
 			vib, vib, vib, vib, vib, vib, vib, vib, vit, vit, vit, vit, vit, vit, vit, vit, vit, vit);
 
-	public Virus(int vie, int atq, double vitesse, String nom, int x, int y) { /* Constructeur Virus */
+	public Virus(double vie, int atq, double vitesse, String nom, int x, int y) { /* Constructeur Virus */
 
 		this.vie = vie;
 		this.atq = atq;
@@ -73,7 +73,7 @@ public abstract class Virus {
 		;
 	}
 
-	public final int getVie() {
+	public final double  getVie() {
 		return vie;
 
 	}

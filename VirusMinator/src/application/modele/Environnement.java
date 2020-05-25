@@ -16,7 +16,8 @@ public class Environnement {
 	private ObservableList<Tourelles> tourelles = FXCollections.observableArrayList();
 	private ObservableList<Virus> nextViruses = FXCollections.observableArrayList();
 	private String[][] terrain;
-
+	private int temps=0;
+	
 	public Environnement(int width, int height) {
 		super();
 		this.width = width;
@@ -86,7 +87,15 @@ public class Environnement {
 				viruses.remove(i);
 			}
 		}
+		
+		temps++;
 
+	}
+	
+	public int getTemps() { // permet de gerer le temps de tir pour les tourelles (public void agit)
+		
+		return temps;
+		
 	}
 
 	public int getTerrain(int valeurI) {

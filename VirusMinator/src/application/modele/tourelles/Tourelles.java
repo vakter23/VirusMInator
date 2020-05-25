@@ -2,6 +2,7 @@ package application.modele.tourelles;
 
 import application.modele.virus.Virus;
 import application.modele.Environnement;
+import javafx.animation.Timeline;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -15,6 +16,7 @@ public abstract class Tourelles {
 	private double atqSpeed, atq, slow;
 	private String nom, ID;
 	protected Environnement env;
+	private int temps;//Variable pour gerer temps entre le tir des tourelles (1 unité de temps = 1 tour) <- variable crée dans environnement
 
 	public Tourelles(double atq, int portee, double atqSpeed, double slow, String nom, int x,
 			int y) { /* Constructeur tourelles */
@@ -99,16 +101,20 @@ public abstract class Tourelles {
 		this.slow = slow;
 	}
 
-	public void Tir() {
+	public void Tir() {// Methode qui fait que la tourelle tir
 
 		if (VirusAPorteeDeTir() != null) {
-			while (this.VirusAPorteeDeTir().estVivant()) {
-				// (VirusAPorteeDeTir().getVie()-this.atq*this.atqSpeed);
-				// ((VirusAPorteeDeTir().getVie())-this.getAtq()*this.getAtqSpeed());
-			}
+			
+			System.out.println(VirusAPorteeDeTir().getVie());
+
 
 		}
 
+	}
+	
+	public void gestionTir() { //Methode qui gere le missile et réduit les pv du virus quand le missile le touche
+		
+		
 	}
 
 	public Virus VirusAPorteeDeTir() {
@@ -125,6 +131,15 @@ public abstract class Tourelles {
 		}
 		return null;
 
+	}
+	
+	public void agit() {
+		
+		if (temps % this.atqSpeed ==0)
+		{
+			
+			//code pour tirer / apelle de la méthode tir
+		}
 	}
 
 	public boolean placementTourelles() {
