@@ -103,50 +103,56 @@ public class Environnement {
 	}
 
 	public void initTerrain() {
-		List<Integer> listeMap = Config.listeMap;
-		int x = 0;
+        List<Integer> listeMap = Config.listeMap;
+        int x = 0;
 
-		for (int i = 0; i < this.terrain.length; i++) {
+        for (int i = 0; i < this.terrain.length; i++) {
 
-			for (int j = 0; j < this.terrain[i].length; j++) {
+            for (int j = 0; j < this.terrain[i].length; j++) {
 
-				if (listeMap.get(x) == Config.Herbe) {
-					this.terrain[i][j] = "1";
+                if (listeMap.get(x) == Config.Herbe) {
+                    this.terrain[i][j] = "1";
 
-				}
+                }
 
-				else if (listeMap.get(x) == Config.Sable) {
-					this.terrain[i][j] = "1";
+                else if (listeMap.get(x) == Config.Sable) {
+                    this.terrain[i][j] = "1";
 
-				}
+                }
 
-				else if (listeMap.get(x) == Config.SpawnViolet) {
-					this.terrain[i][j] = "1";
+                else if (listeMap.get(x) == Config.SpawnViolet) {
+                    this.terrain[i][j] = "1";
 
-				}
+                }
 
-				else if (listeMap.get(x) == Config.Vert) {
-					this.terrain[i][j] = "1";
+                else if (listeMap.get(x) == Config.Vert) {
+                    this.terrain[i][j] = "1";
 
-				}
+                }
 
-				else if (listeMap.get(x) == Config.sableChemin) {
-					this.terrain[i][j] = "0";
+                else if (listeMap.get(x) == Config.sableChemin) {
+                    this.terrain[i][j] = "0";
 
-				}
+                }
 
-				else if (listeMap.get(x) == Config.SPAWNTOURELLES) {
-					this.terrain[i][j] = "1";
-				}
+                else if (listeMap.get(x) == Config.SPAWNTOURELLES) {
+                    this.terrain[i][j] = "1";
+                }
 
-				else if (listeMap.get(x) == Config.Hosto) {
-					this.terrain[i][j] = "1";
+                else if (listeMap.get(x) == Config.Hosto) {
+                    this.terrain[i][j] = "1";
 
-				}
+                }
+                else if (listeMap.get(x) == Config.RougeHospital) {
+                    this.terrain[i][j] = "1";
 
-				x++;
-			}
-		}
+                }
+
+
+                x++;
+            }
+        }
+
 
 		for (int i = 0; i < this.terrain.length; i++) {
 			for (int j = 0; j < this.terrain[i].length; j++) {
