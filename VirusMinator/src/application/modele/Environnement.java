@@ -3,10 +3,10 @@ package application.modele;
 import java.util.List;
 
 import application.Config;
-import application.tourelles.Tourelles;
-import application.virus.Virus;
-import application.virus.VirusVhealrus;
-import application.virus.VirusViboomrus;
+import application.modele.tourelles.Tourelles;
+import application.modele.virus.Virus;
+import application.modele.virus.VirusVhealrus;
+import application.modele.virus.VirusViboomrus;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -15,7 +15,6 @@ public class Environnement {
 	private ObservableList<Virus> viruses = FXCollections.observableArrayList();
 	private ObservableList<Tourelles> tourelles = FXCollections.observableArrayList();
 	private ObservableList<Virus> nextViruses = FXCollections.observableArrayList();
-
 	private String[][] terrain;
 
 	public Environnement(int width, int height) {
@@ -24,8 +23,8 @@ public class Environnement {
 		this.height = height;
 		this.terrain = new String[18][40];
 		initTerrain();
-		this.nextViruses.add(new VirusVhealrus(50, 10, 0.0015, "VirusVhealrus", 0, 288));
-		this.nextViruses.add(new VirusViboomrus(50, 10, 0.0035, "VirusBoomrus", 0, 288));
+		//this.nextViruses.add(new VirusVhealrus(50, 10, 0.0015, "VirusVhealrus", 0, 288));
+		//this.nextViruses.add(new VirusViboomrus(50, 10, 0.0035, "VirusBoomrus", 0, 288));
 	}
 
 	public int getWidth() {
@@ -37,7 +36,7 @@ public class Environnement {
 	}
 
 	public ObservableList<Virus> getViruses() {
-		return nextViruses;
+		return viruses;
 	}
 
 	public ObservableList<Tourelles> getTourelles() {
@@ -62,8 +61,9 @@ public class Environnement {
 		return null;
 	}
 
-	public void ajouterVirus(Virus a) {
-		viruses.add(a);
+	public void ajouterVirus(Virus v) {
+		viruses.add(v);
+		System.out.println(viruses.get(0).getNom());
 	}
 
 	public void ajouterTourelles(Tourelles a) {
@@ -81,12 +81,12 @@ public class Environnement {
 		}
 		for (int i = viruses.size() - 1; i >= 0; i--) {
 			Virus v = viruses.get(i);
-			if(!v.estVivant()) {
-				System.out.println("mort de : "+ v);
+			if (!v.estVivant()) {
+				System.out.println("mort de : " + v);
 				viruses.remove(i);
 			}
 		}
-		
+
 	}
 
 	public int getTerrain(int valeurI) {
@@ -103,69 +103,56 @@ public class Environnement {
 	}
 
 	public void initTerrain() {
-		List<Integer> listeMap = Config.listeMap;
-		int x = 0;
+        List<Integer> listeMap = Config.listeMap;
+        int x = 0;
+        /*Graph(36);*/
+        for (int i = 0; i < this.terrain.length; i++) {
 
-		for (int i = 0; i < this.terrain.length; i++) {
+            for (int j = 0; j < this.terrain[i].length; j++) {
 
-			for (int j = 0; j < this.terrain[i].length; j++) {
+                if (listeMap.get(x) == Config.Herbe) {
+                    this.terrain[i][j] = "1";
 
-//				if (listeMap.get(x) == Config.BordTerrain) {
-//					this.terrain[i][j] = "1";
-//
-//				}
+                }
 
-				/* else */if (listeMap.get(x) == Config.Herbe) {
-					this.terrain[i][j] = "He";
+                else if (listeMap.get(x) == Config.Sable) {
+                    this.terrain[i][j] = "1";
 
-				}
+                }
 
-				else if (listeMap.get(x) == Config.Sable) {
-					this.terrain[i][j] = "Sa";
+                else if (listeMap.get(x) == Config.SpawnViolet) {
+                    this.terrain[i][j] = "1";
 
-//				} else if (listeMap.get(x) == Config.BLOCROUGEHOPITAL) {
-//					this.terrain[i][j] = "1";
+                }
 
-				}
+                else if (listeMap.get(x) == Config.Vert) {
+                    this.terrain[i][j] = "1";
 
-				else if (listeMap.get(x) == Config.SpawnViolet) {
-					this.terrain[i][j] = "Vi";
+                }
 
-				}
+                else if (listeMap.get(x) == Config.sableChemin) {
+                    this.terrain[i][j] = "0";
 
-				else if (listeMap.get(x) == Config.Vert) {
-					this.terrain[i][j] = "Ve";
+                }
 
-				}
+                else if (listeMap.get(x) == Config.SPAWNTOURELLES) {
+                    this.terrain[i][j] = "1";
+                }
 
-				else if (listeMap.get(x) == Config.sableChemin) {
-					this.terrain[i][j] = "Ch";
+                else if (listeMap.get(x) == Config.Hosto) {
+                    this.terrain[i][j] = "1";
 
-//				}
-//
-//				else if (listeMap.get(x) == Config.BlocBlancHopital) {
-//					this.terrain[i][j] = "1";
+                }
+                else if (listeMap.get(x) == Config.RougeHospital) {
+                    this.terrain[i][j] = "1";
 
-				}
+                }
 
-				else if (listeMap.get(x) == Config.SPAWNTOURELLES) {
-					this.terrain[i][j] = "St";
 
-//				}
-//
-//				else if (listeMap.get(x) == Config.BLOCROUGEHOPITAL) {
-//					this.terrain[i][j] = "1";
+                x++;
+            }
+        }
 
-				}
-
-				else if (listeMap.get(x) == Config.Hosto) {
-					this.terrain[i][j] = "Ho";
-
-				}
-
-				x++;
-			}
-		}
 
 		for (int i = 0; i < this.terrain.length; i++) {
 			for (int j = 0; j < this.terrain[i].length; j++) {

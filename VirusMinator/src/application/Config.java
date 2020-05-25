@@ -72,10 +72,7 @@ public class Config {
 			Herbe, Herbe, Herbe, Herbe, Herbe, Herbe, Herbe, Herbe, Herbe, Herbe, Herbe, Herbe);
 
 	public static String imageDe(int n) {
-
-		if (n == 445)
-			return "rougeHopital";
-		else if (n == Herbe)
+		if (n == Herbe)
 			return "herbe";
 		else if (n == Sable)
 			return "sable";
@@ -91,25 +88,12 @@ public class Config {
 			return "spawnTourelles";
 		else if (n == sableChemin)
 			return "sableChemin";
-
-		/*
-		 * else if (n == 305) return "hitBoxHosto"; else if (n == 269) return
-		 * "spawnTourelles";/* else if (n == BlocBlancHopital) return "blancHopital";
-		 */
-		/*
-		 * else if (n == 376) return "sableChemin"; else if (n == 388) return
-		 * "BordTerrain"; else if (n == 219) return "herbe"; else if (n == 350) return
-		 * "sable"; else if (n == 497) return "violetEnnemi"; else if (n == 289) return
-		 * "vertEnnemi";
-		 */
 		else
 			return null;
 	}
 
 	public static ImageView getImg(String... paths) {
 		return new ImageView(Paths.get(System.getProperty("user.dir"), paths).toUri().toString());
-		// ImageView(Paths.get(Paths.get(System.getProperty("user.dir"),
-		// "ressources").toString(), paths).toUri().toString());
 	}
 
 }
