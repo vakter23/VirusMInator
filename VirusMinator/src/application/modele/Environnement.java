@@ -3,10 +3,10 @@ package application.modele;
 import java.util.List;
 
 import application.Config;
+import application.modele.tourelles.Tourelles;
 import application.modele.virus.Virus;
 import application.modele.virus.VirusVhealrus;
 import application.modele.virus.VirusViboomrus;
-import application.tourelles.Tourelles;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -14,7 +14,7 @@ public class Environnement {
 	private int width, height;
 	private ObservableList<Virus> viruses;
 	private ObservableList<Tourelles> tourelles;
-	private ObservableList<Virus> nextViruses ;
+	private ObservableList<Virus> nextViruses;
 	private String[][] terrain;
 
 	public Environnement(int width, int height) {
@@ -80,12 +80,12 @@ public class Environnement {
 		}
 		for (int i = viruses.size() - 1; i >= 0; i--) {
 			Virus v = viruses.get(i);
-			if(!v.estVivant()) {
-				System.out.println("mort de : "+ v);
+			if (!v.estVivant()) {
+				System.out.println("mort de : " + v);
 				viruses.remove(i);
 			}
 		}
-		
+
 	}
 
 	public int getTerrain(int valeurI) {
@@ -109,21 +109,13 @@ public class Environnement {
 
 			for (int j = 0; j < this.terrain[i].length; j++) {
 
-//				if (listeMap.get(x) == Config.BordTerrain) {
-//					this.terrain[i][j] = "1";
-//
-//				}
-
-				/* else */if (listeMap.get(x) == Config.Herbe) {
+				if (listeMap.get(x) == Config.Herbe) {
 					this.terrain[i][j] = "1";
 
 				}
 
 				else if (listeMap.get(x) == Config.Sable) {
 					this.terrain[i][j] = "1";
-
-//				} else if (listeMap.get(x) == Config.BLOCROUGEHOPITAL) {
-//					this.terrain[i][j] = "1";
 
 				}
 
@@ -140,21 +132,10 @@ public class Environnement {
 				else if (listeMap.get(x) == Config.sableChemin) {
 					this.terrain[i][j] = "0";
 
-//				}
-//
-//				else if (listeMap.get(x) == Config.BlocBlancHopital) {
-//					this.terrain[i][j] = "1";
-
 				}
 
 				else if (listeMap.get(x) == Config.SPAWNTOURELLES) {
 					this.terrain[i][j] = "1";
-
-//				}
-//
-//				else if (listeMap.get(x) == Config.BLOCROUGEHOPITAL) {
-//					this.terrain[i][j] = "1";
-
 				}
 
 				else if (listeMap.get(x) == Config.Hosto) {

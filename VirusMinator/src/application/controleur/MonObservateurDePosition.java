@@ -1,4 +1,4 @@
-package application.modele;
+package application.controleur;
 
 public class MonObservateurDePosition {
 
