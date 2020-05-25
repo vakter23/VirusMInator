@@ -296,7 +296,7 @@ public class Controller implements Initializable {
 
 	void unTour() {
 		this.e1.unTour();
-		System.out.println(e1.getViruses().get(0).getX());
+		
 	}
 
 	@FXML

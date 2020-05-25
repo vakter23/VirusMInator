@@ -84,27 +84,12 @@ public abstract class Virus {
 
 	public void seDeplace() {
 
-		/*
-		 * double nbRandom=Math.random() * (1 ); double nbRandom2=Math.random() * (1 );
-		 * //nbRandom=Math.round(nbRandom);
-		 * 
-		 * 
-		 * if(this.getX()+(nbRandom)>1024 || this.getX()+(nbRandom)<0 ||
-		 * (this.getY()+(nbRandom2)>1024 || (this.getY()+(nbRandom2)<0))) {
-		 * 
-		 * nbRandom=Math.random() * (1 ); nbRandom2=Math.random() * (1 );
-		 * 
-		 * }
-		 * 
-		 * 
-		 * int nposX=(int) (this.getX()+(nbRandom)); int nposY=(int)
-		 * (this.getY()+(nbRandom2));
-		 */
-
-//		if(this.getX()+1 == 1) {
-//			this.setX(+1);
-//			if()
-//		}
+		int nposX = this.getX() + (1);
+		int nposY = this.getY() + (0);
+		this.setX(nposX);
+		this.setY(nposY);
+		System.out.println(this.getX());
+		System.out.println(this.getY());
 
 	}
 
