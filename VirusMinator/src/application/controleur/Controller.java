@@ -296,17 +296,13 @@ public class Controller implements Initializable {
 
 	void unTour() {
 		this.e1.unTour();
-		System.out.println(e1.getViruses().get(1).getX());
+		System.out.println(e1.getViruses().get(0).getX());
 	}
 
 	@FXML
 	void reinit(ActionEvent event) {
-		getPanneauEnnemis().getChildren().clear();
-		for (int i = 0; i < e1.getViruses().size(); i++) {
-			creerSpriteVirus(e1.getViruses().get(i));
-			initAnimation(e1.getViruses().get(i));
-			gameLoop.play();
-		}
+		
+		
 
 	}
 
