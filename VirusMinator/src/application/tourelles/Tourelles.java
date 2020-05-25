@@ -1,6 +1,6 @@
 package application.tourelles;
 
-import application.virus.Virus;
+import application.modele.virus.Virus;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
