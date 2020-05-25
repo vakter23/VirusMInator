@@ -160,14 +160,7 @@ public class Controller implements Initializable {
 	 * r.setFill(Color.RED); r.setTranslateX(10); r.setTranslateY(10);
 	 * panneauEnnemis.getChildren().add(r); }
 	 */
-	@FXML
-	void seDeplacer() {
-		for (int i = 0; i < getPanneauEnnemis().getChildren().size(); i++) {
-			getPanneauEnnemis().getChildren().get(i).setTranslateX(Math.random() * 900);
-			getPanneauEnnemis().getChildren().get(i).setTranslateY(Math.random() * 900);
 
-		}
-	}
 
 	public void ajouter(Virus v) {
 		this.e1.ajouterVirus(v);
@@ -194,16 +187,16 @@ public class Controller implements Initializable {
 	}
 
 //>>>>>>> branch 'develop' of https:github.com/vakter23/VirusMInator.git
-	public void dessinEnnemi() {
+	/*public void dessinEnnemi() {
 		ImageView Virus = Config.getImg("/src/ressources/Virus/base_Virus.png");
 		Virus.setTranslateX(720);
 		Virus.setTranslateY(720);
 		getPanneauEnnemis().getChildren().add(Virus);
 	}
-
+*/
 	void clicTourelle(MouseEvent event) {
 
-		System.out.println("TOurelle Cliqué");// Coder Placement Tourelle
+		System.out.println("Tourelle ajoutée");// Coder Placement Tourelle
 
 		ImageView sourc = (ImageView) event.getSource();
 		Image tourelleGel = (Image) (getImgg("/src/ressources/tourelles/gelHydro.png"));
@@ -218,11 +211,11 @@ public class Controller implements Initializable {
 		// "ressources").toString(), paths).toUri().toString());
 	}
 
-	@FXML
+	/*@FXML
 	void placerEnnemis(ActionEvent event) {
 		System.out.println("lancement");
 		dessinEnnemi();
-	}
+	}*/
 //	void placerEnnemis(ActionEvent event) {
 //		Circle r = new Circle(3);
 //		r.setFill(Color.RED);
@@ -273,12 +266,12 @@ public class Controller implements Initializable {
 
 		KeyFrame kf = new KeyFrame(
 				// on définit le FPS (nbre de frame par seconde)
-				Duration.seconds(0.005),
+				Duration.seconds(0.0009),
 
 				// on définit ce qui se passe à chaque frame
 				// c'est un eventHandler d'ou le lambda
 				(ev -> {
-					if (temps == 1000) {
+					if (temps == 8032) {
 						System.out.println("fini");
 						gameLoop.stop();
 					} else if (temps % 5 == 0) {
@@ -301,9 +294,12 @@ public class Controller implements Initializable {
 
 	@FXML
 	void reinit(ActionEvent event) {
-		
-		
-
+		/*Relance l'animation*/
+		Virus v = this.e1.getViruses().get(0);
+		v.setX(0);
+		v.setY(288);
+		this.temps = 0;
+		gameLoop.play();
 	}
 
 	public void creerSpriteVirus(Virus v) {
@@ -318,11 +314,11 @@ public class Controller implements Initializable {
 
 		// this.e1.getViruses().addListener()
 		if (v instanceof VirusBasirus) {
-			VirusActuel = Config.getImg("/src/ressources/virus/base_Virus.png");
+			/*VirusActuel = Config.getImg("/src/ressources/virus/base_Virus.png");
 			VirusActuel.setId(v.getId());
 			VirusActuel.translateXProperty().bind(v.getXproperty());
 			VirusActuel.translateXProperty().bind(v.getYproperty());
-			panneauEnnemis.getChildren().add(VirusActuel);
+			panneauEnnemis.getChildren().add(VirusActuel);*/
 
 			r = new Circle(3);
 			r.setFill(Color.RED);

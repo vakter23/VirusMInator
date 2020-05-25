@@ -57,7 +57,7 @@ public abstract class Virus {
 
 	public final void setX(int n) {
 		this.xProperty.setValue(n);
-		;
+		
 	}
 
 	public final int getY() {
@@ -83,15 +83,41 @@ public abstract class Virus {
 	}
 
 	public void seDeplace() {
-
+		if(this.getXproperty().getValue()< 520 && this.getYproperty().getValue()<289) {
 		int nposX = this.getX() + (1);
 		int nposY = this.getY() + (0);
 		this.setX(nposX);
 		this.setY(nposY);
-		System.out.println(this.getX());
-		System.out.println(this.getY());
-
-	}
+		}
+		else if(this.getXproperty().getValue()>=520 && this.getXproperty().getValue() < 808 && this.getYproperty().getValue()<449){
+			int nposX = this.getX() + (0);
+			int nposY = this.getY() + (1);
+			this.setX(nposX);
+			this.setY(nposY);
+		}
+		else if (this.getXproperty().getValue() >= 808 && this.getYproperty().getValue()<=449 && this.getYproperty().getValue()>288) {
+			int nposX = this.getX() + (0);
+			int nposY = this.getY() + (-1);
+			this.setX(nposX);
+			this.setY(nposY);
+		}
+		else {
+			int nposX = this.getX() + (1);
+			int nposY = this.getY() + (0);
+			this.setX(nposX);
+			this.setY(nposY);
+		}
+		if (this.getYproperty().getValue() == 1140 && this.getXproperty().getValue() == 280) {
+			this.setX(280);
+			this.setY(1140);
+			
+		}
+		System.out.println("x : " + this.getX());
+		System.out.println("y : " + this.getY());
+		
+			
+		}
+	
 
 	/**
 	 * @return the vitesse
