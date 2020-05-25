@@ -36,12 +36,6 @@ import javafx.util.Duration;
 public class Controller implements Initializable {
 
 	@FXML
-	private Button seDeplace;
-
-	@FXML
-	private Button Reinit;
-
-	@FXML
 	private Button Start;
 
 	@FXML
@@ -162,15 +156,15 @@ public class Controller implements Initializable {
 
 		KeyFrame kf = new KeyFrame(
 				// on définit le FPS (nbre de frame par seconde)
-				Duration.seconds(0.15),
+				Duration.seconds(0.005),
 
 				// on définit ce qui se passe à chaque frame
 				// c'est un eventHandler d'ou le lambda
 				(ev -> {
-					if (temps == 300) {
+					if (temps == 1000) {
 						System.out.println("fini");
 						gameLoop.stop();
-					} else if (temps % 10 == 0) {
+					} else if (temps % 5 == 0) {
 						System.out.println("un tour");
 						unTour();
 						//rafraichirPanneauEnnemis(/* v */);
