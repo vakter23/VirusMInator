@@ -9,15 +9,12 @@ import javafx.scene.image.ImageView;
 public class Config {
 	public static final int sableChemin = 2025;
 	public static final int Vert = 2029;
-	public static final int SpawnMob = 2039;
+	public static final int SPAWNTOURELLES = 2039;
 	public static final int Hosto = 2023;
 	public static final int RougeHospital = 2022;
 	public static final int SpawnViolet = 2026;
 	public static final int Sable = 2020;
 	public static final int Herbe = 2024;
-	public static final int entree = 4124;
-	public static final int sortie = 2031;
-
 	
 	public static List<Integer> listeMap = Arrays.asList(Herbe, Herbe, Herbe, Herbe, Herbe, Herbe, Herbe, Herbe, Sable, Sable,
 			Herbe, Herbe, Herbe, Herbe, Herbe, Herbe, Herbe, Herbe, Herbe, Herbe, Herbe, Herbe, Herbe, Herbe, Herbe, Herbe, Herbe, Herbe,
@@ -38,20 +35,20 @@ public class Config {
 			SpawnViolet, SpawnViolet, SpawnViolet, SpawnViolet, SpawnViolet, SpawnViolet, Sable, Sable, Sable, Sable, Sable, Sable, Sable, Sable, Sable, Sable, Sable, Sable,
 			Sable, Sable, Sable, Sable, Sable, Sable, Sable, Sable, Sable, Herbe, Herbe, Sable, Sable, Sable, Sable, Sable, Sable, Hosto,
 			RougeHospital, Hosto, RougeHospital, Hosto, Vert, SpawnViolet, Vert, Vert, SpawnViolet, SpawnViolet, Sable, Sable, Sable, Sable, Sable, Sable, Sable, Sable,
-			Sable, Sable, SpawnMob, Sable, Sable, Sable, Sable, Sable, Sable, Sable, Sable, SpawnMob, Sable, Sable, Sable, Sable, Sable, Sable,
-			Sable, SpawnMob, Sable, Hosto, RougeHospital, Hosto, RougeHospital, Hosto, SpawnViolet, SpawnViolet, SpawnViolet, SpawnViolet, Vert, SpawnViolet, sableChemin, sableChemin, sableChemin, sableChemin,
-			sableChemin, sableChemin, sableChemin, sableChemin, sableChemin, sableChemin, sableChemin, SpawnMob, Sable, Sable, Sable, Sable, Sable, Sable, SpawnMob, sableChemin, sableChemin, sableChemin,
+			Sable, Sable, SPAWNTOURELLES, Sable, Sable, Sable, Sable, Sable, Sable, Sable, Sable, SPAWNTOURELLES, Sable, Sable, Sable, Sable, Sable, Sable,
+			Sable, SPAWNTOURELLES, Sable, Hosto, RougeHospital, Hosto, RougeHospital, Hosto, SpawnViolet, SpawnViolet, SpawnViolet, SpawnViolet, Vert, SpawnViolet, sableChemin, sableChemin, sableChemin, sableChemin,
+			sableChemin, sableChemin, sableChemin, sableChemin, sableChemin, sableChemin, sableChemin, SPAWNTOURELLES, Sable, Sable, Sable, Sable, Sable, Sable, SPAWNTOURELLES, sableChemin, sableChemin, sableChemin,
 			sableChemin, sableChemin, sableChemin, sableChemin, sableChemin, sableChemin, sableChemin, Hosto, RougeHospital, RougeHospital, RougeHospital, Hosto, Vert, SpawnViolet, Vert, Vert, SpawnViolet, SpawnViolet,
-			Sable, Sable, Sable, Sable, Sable, Sable, Sable, Sable, Sable, SpawnMob, sableChemin, Sable, Sable, Sable, Sable, Sable, Sable, Sable,
-			Sable, sableChemin, SpawnMob, Sable, Sable, Sable, Sable, SpawnMob, Sable, Sable, Sable, Hosto, RougeHospital, Hosto, RougeHospital, Hosto, SpawnViolet, SpawnViolet,
+			Sable, Sable, Sable, Sable, Sable, Sable, Sable, Sable, Sable, SPAWNTOURELLES, sableChemin, Sable, Sable, Sable, Sable, Sable, Sable, Sable,
+			Sable, sableChemin, SPAWNTOURELLES, Sable, Sable, Sable, Sable, SPAWNTOURELLES, Sable, Sable, Sable, Hosto, RougeHospital, Hosto, RougeHospital, Hosto, SpawnViolet, SpawnViolet,
 			SpawnViolet, SpawnViolet, SpawnViolet, SpawnViolet, Sable, Sable, Sable, Sable, Sable, Sable, Sable, Sable, Sable, Sable, sableChemin, Sable, Sable, Sable,
 			Sable, Sable, Sable, Sable, Sable, sableChemin, Sable, Sable, Sable, Sable, Sable, Sable, Sable, Sable, Sable, Hosto, RougeHospital, Hosto,
 			RougeHospital, Hosto, Sable, Sable, Sable, Sable, Sable, Sable, Sable, Sable, Sable, Sable, Sable, Sable, Sable, Sable, Sable, Sable,
-			sableChemin, SpawnMob, Sable, Sable, Sable, Sable, Sable, Sable, SpawnMob, sableChemin, Sable, Sable, Sable, Sable, Sable, Sable, Sable, Sable,
+			sableChemin, SPAWNTOURELLES, Sable, Sable, Sable, Sable, Sable, Sable, SPAWNTOURELLES, sableChemin, Sable, Sable, Sable, Sable, Sable, Sable, Sable, Sable,
 			Sable, Hosto, Hosto, Hosto, Hosto, Hosto, Sable, Sable, Sable, Sable, Sable, Sable, Sable, Sable, Sable, Sable, Sable, Sable,
-			Sable, Sable, Sable, SpawnMob, sableChemin, sableChemin, sableChemin, sableChemin, sableChemin, sableChemin, sableChemin, sableChemin, sableChemin, sableChemin, SpawnMob, Sable, Sable, Sable,
+			Sable, Sable, Sable, SPAWNTOURELLES, sableChemin, sableChemin, sableChemin, sableChemin, sableChemin, sableChemin, sableChemin, sableChemin, sableChemin, sableChemin, SPAWNTOURELLES, Sable, Sable, Sable,
 			Sable, Sable, Sable, Sable, Sable, Herbe, Herbe, Herbe, Herbe, Herbe, Herbe, Herbe, Herbe, Herbe, Herbe, Herbe, Herbe, Herbe,
-			Sable, Sable, Sable, Sable, Sable, Sable, Sable, Sable, SpawnMob, Sable, Sable, Sable, Sable, Sable, Sable, Sable, Sable, SpawnMob,
+			Sable, Sable, Sable, Sable, Sable, Sable, Sable, Sable, SPAWNTOURELLES, Sable, Sable, Sable, Sable, Sable, Sable, Sable, Sable, SPAWNTOURELLES,
 			Sable, Sable, Sable, Sable, Sable, Sable, Sable, Sable, Sable, Herbe, Herbe, Herbe, Herbe, Herbe, Herbe, Herbe, Herbe, Herbe,
 			Herbe, Herbe, Herbe, Herbe, Herbe, Herbe, Sable, Sable, Sable, Sable, Sable, Sable, Sable, Sable, Herbe, Herbe, Herbe, Herbe,
 			Herbe, Herbe, Herbe, Herbe, Herbe, Herbe, Sable, Sable, Sable, Sable, Herbe, Herbe, Herbe, Herbe, Herbe, Herbe, Herbe, Herbe,
@@ -76,7 +73,7 @@ public class Config {
 			 return "hitBoxHosto";
 		 else if(n== Vert)
 			 return "vertEnnemi";
-		 else if(n==SpawnMob)
+		 else if(n==SPAWNTOURELLES)
 			 return "spawnTourelles";
 		 else if(n==sableChemin)
 			 return "sableChemin";

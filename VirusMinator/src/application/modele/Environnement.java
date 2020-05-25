@@ -3,10 +3,10 @@ package application.modele;
 import java.util.List;
 
 import application.Config;
-import application.modele.tourelles.Tourelles;
 import application.modele.virus.Virus;
 import application.modele.virus.VirusVhealrus;
 import application.modele.virus.VirusViboomrus;
+import application.tourelles.Tourelles;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -22,9 +22,6 @@ public class Environnement {
 		this.width = width;
 		this.height = height;
 		this.terrain = new String[18][40];
-		this.tourelles = FXCollections.observableArrayList();
-		this.viruses = FXCollections.observableArrayList();
-		this.nextViruses =  FXCollections.observableArrayList();
 		initTerrain();
 		this.nextViruses.add(new VirusVhealrus(50, 10, 0.0015, "VirusVhealrus", 0, 288));
 		this.nextViruses.add(new VirusViboomrus(50, 10, 0.0035, "VirusBoomrus", 0, 288));
@@ -72,9 +69,38 @@ public class Environnement {
 		tourelles.add(a);
 	}
 
-	public boolean dansTerrain(int x, int y){
-		return (0 <= x && x<this.width && 0<=y && y< this.height);
+	public boolean dansTerrain(int x, int y) {
+		return (0 <= x && x < this.width && 0 <= y && y < this.height);
 	}
+
+	public void unTour() {
+		for (int i = 0; i < viruses.size(); i++) {
+			Virus v = viruses.get(i);
+			v.seDeplace();
+		}
+		for (int i = viruses.size() - 1; i >= 0; i--) {
+			Virus v = viruses.get(i);
+			if(!v.estVivant()) {
+				System.out.println("mort de : "+ v);
+				viruses.remove(i);
+			}
+		}
+		
+	}
+
+	public int getTerrain(int valeurI) {
+		for (int i = 0; i < this.terrain.length; i++) {
+			for (int j = 0; j < this.terrain[i].length; j++) {
+				if (this.terrain[valeurI][j] == "0") {
+					return 1;
+				}
+			}
+
+		}
+		return 0;
+
+	}
+
 	public void initTerrain() {
 		List<Integer> listeMap = Config.listeMap;
 		int x = 0;
@@ -83,7 +109,12 @@ public class Environnement {
 
 			for (int j = 0; j < this.terrain[i].length; j++) {
 
-				if (listeMap.get(x) == Config.Herbe) {
+//				if (listeMap.get(x) == Config.BordTerrain) {
+//					this.terrain[i][j] = "1";
+//
+//				}
+
+				/* else */if (listeMap.get(x) == Config.Herbe) {
 					this.terrain[i][j] = "1";
 
 				}
@@ -109,22 +140,27 @@ public class Environnement {
 				else if (listeMap.get(x) == Config.sableChemin) {
 					this.terrain[i][j] = "0";
 
-				}
-
+//				}
+//
 //				else if (listeMap.get(x) == Config.BlocBlancHopital) {
 //					this.terrain[i][j] = "1";
-//
-//				}
 
-				else if (listeMap.get(x) == Config.SpawnMob) {
+				}
+
+				else if (listeMap.get(x) == Config.SPAWNTOURELLES) {
+					this.terrain[i][j] = "1";
+
+//				}
+//
+//				else if (listeMap.get(x) == Config.BLOCROUGEHOPITAL) {
+//					this.terrain[i][j] = "1";
+
+				}
+
+				else if (listeMap.get(x) == Config.Hosto) {
 					this.terrain[i][j] = "1";
 
 				}
-
-//				else if (listeMap.get(x) == Config.BLOCROUGEHOPITAL) {
-//					this.terrain[i][j] = "1";
-//
-//				}
 
 				x++;
 			}
