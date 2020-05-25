@@ -36,7 +36,7 @@ public class Environnement {
 	}
 
 	public ObservableList<Virus> getViruses() {
-		return nextViruses;
+		return viruses;
 	}
 
 	public ObservableList<Tourelles> getTourelles() {
@@ -63,6 +63,7 @@ public class Environnement {
 
 	public void ajouterVirus(Virus a) {
 		viruses.add(a);
+		System.out.println(viruses.get(0).getNom());
 	}
 
 	public void ajouterTourelles(Tourelles a) {

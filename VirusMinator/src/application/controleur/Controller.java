@@ -244,22 +244,19 @@ public class Controller implements Initializable {
 		this.panneauEnnemis.setMaxHeight(832);
 		creerTerrainVue();
 		ajouter(new VirusBasirus(50, 10, 0.015, "VirusBasirus", 0, 288));
-
-		/* this.panneauEnnemis.bind() */
 		System.out.println("fait");
-//		int compteur = 0;
-		initAnimation(this.e1.getViruses().get(1));
+		initAnimation(this.e1.getViruses().get(0));
 
 		// demarre l'animation
 
 		gameLoop.play();
-		System.out.println(e1.getViruses().get(1).getX());
+		System.out.println(e1.getViruses().get(0).getX());
 //		try {
 //			Thread.sleep(1000);
 //		} catch (InterruptedException e) {
 //			e.printStackTrace();
 //		}
-		System.out.println(e1.getViruses().get(1).getX());
+		System.out.println(e1.getViruses().get(0).getX());
 
 	}
 
