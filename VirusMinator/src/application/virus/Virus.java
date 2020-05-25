@@ -110,7 +110,7 @@ public abstract class Virus {
 		 * .setTranslateY(panneauEnnemis.getChildren().get(i).getTranslateY() + 32); }
 		 * posX += 32; }
 		 */
-		int nposX = this.getX() + (1);
+		int nposX = this.getX() + (32);
 		int nposY = this.getY() + (0);
 		this.setX(nposX);
 		this.setY(nposY);

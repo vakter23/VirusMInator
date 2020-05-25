@@ -79,8 +79,7 @@ public class Controller implements Initializable {
 	private Timeline gameLoop;
 
 	private int temps;
-	private IntegerProperty imagePosX;
-	private IntegerProperty imagePosY;
+
 
 	public void ajouter(Virus v) {
 		this.e1.ajouterVirus(v);
@@ -141,11 +140,11 @@ public class Controller implements Initializable {
 
 		gameLoop.play();
 		System.out.println(e1.getViruses().get(1).getX());
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			Thread.sleep(1000);
+//		} catch (InterruptedException e) {
+//			e.printStackTrace();
+//		}
 		System.out.println(e1.getViruses().get(1).getX());
 
 	}
@@ -163,12 +162,12 @@ public class Controller implements Initializable {
 
 		KeyFrame kf = new KeyFrame(
 				// on définit le FPS (nbre de frame par seconde)
-				Duration.seconds(0.001),
+				Duration.seconds(0.15),
 
 				// on définit ce qui se passe à chaque frame
 				// c'est un eventHandler d'ou le lambda
 				(ev -> {
-					if (temps == 200) {
+					if (temps == 300) {
 						System.out.println("fini");
 						gameLoop.stop();
 					} else if (temps % 10 == 0) {
