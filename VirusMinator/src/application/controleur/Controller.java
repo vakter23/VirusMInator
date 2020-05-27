@@ -27,6 +27,7 @@ import java.util.ResourceBundle;
 
 import application.Config;
 import application.modele.Environnement;
+import application.modele.tourelles.TourelleSavonneuse;
 import application.modele.virus.Virus;
 import application.modele.virus.VirusBasirus;
 
@@ -195,15 +196,13 @@ public class Controller implements Initializable {
 	}
 */
 	void clicTourelle(MouseEvent event) {
-
-		System.out.println("Tourelle ajoutée");// Coder Placement Tourelle
-
-		ImageView sourc = (ImageView) event.getSource();
-		Image tourelleGel = (Image) (getImgg("/src/ressources/tourelles/gelHydro.png"));
-
-		sourc.setImage(tourelleGel);
-
-	}
+        System.out.println("Tourelle ajoutée");// Coder Placement Tourelle
+        ImageView sourc = (ImageView) event.getSource();
+        Image tourelleGel = (getImgg("/src/ressources/tourelles/gelHydro.png"));
+        sourc.setImage(tourelleGel);
+        this.e1.ajouterTourelles(new TourelleSavonneuse(20, 128, 0.015, 0.015, "TourelleSavonneuse",
+                (int) event.getSceneX(), (int) event.getSceneY(), e1));
+        }
 
 	private static Image getImgg(String... paths) {
 		return new Image(Paths.get(System.getProperty("user.dir"), paths).toUri().toString());

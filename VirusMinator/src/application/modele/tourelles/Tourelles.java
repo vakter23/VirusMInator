@@ -3,7 +3,6 @@ package application.modele.tourelles;
 import application.modele.virus.Virus;
 import application.modele.virus.VirusBasirus;
 import application.modele.Environnement;
-import javafx.animation.Timeline;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -20,7 +19,7 @@ public abstract class Tourelles {
 	private int temps;//Variable pour gerer temps entre le tir des tourelles (1 unité de temps = 1 tour) <- variable crée dans environnement
 
 	public Tourelles(double atq, int portee, double atqSpeed, double slow, String nom, int x,
-			int y) { /* Constructeur tourelles */
+			int y ,Environnement env) { /* Constructeur tourelles */
 
 		this.setAtq(atq);
 		this.setPortee(portee);
@@ -29,6 +28,7 @@ public abstract class Tourelles {
 		this.nom = nom;
 		this.setX(x);
 		this.setY(y);
+		this.env=env;
 
 	}
 
@@ -136,9 +136,9 @@ public abstract class Tourelles {
 			Environnement e1 = new Environnement(500, 500);
 		
 			
-			Tourelles t = new TourelleHydroClaque(10, 100, 10, 0, "nom", 9, 9);
+			Tourelles t = new TourelleHydroClaque(10, 10, 10, 0, "nom", 9, 9, e1);
 			
-			Virus v = new VirusBasirus(10, 10, 10, "noom", 9, 9);
+			Virus v = new VirusBasirus(11, 10, 10, "noom", 9, 9);
 			
 			System.out.println(v.getVie());
 	
@@ -184,6 +184,8 @@ public abstract class Tourelles {
 
 	public Virus VirusAPorteeDeTir() {
 
+		System.out.println("env" + this.env);
+		
 		for (int i = 0; i < env.getViruses().size(); i++) {
 			System.out.println(env.getViruses());
 			if (env.getViruses().get(i).estVivant()) {

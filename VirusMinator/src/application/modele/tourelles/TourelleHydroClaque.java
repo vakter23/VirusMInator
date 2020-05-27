@@ -1,13 +1,15 @@
 package application.modele.tourelles;
 
+import application.modele.Environnement;
+
 public class TourelleHydroClaque extends Tourelles{
 
 	
 	//cette tourelle dispose d’un petit champs de tir mais asperge les ennemis non-stop
 
 	
-	public TourelleHydroClaque(double atq, int portee, double atqSpeed, double slow, String nom, int x, int y) {
-		super(atq, portee, atqSpeed, 0, nom, x, y);
+	public TourelleHydroClaque(double atq, int portee, double atqSpeed, double slow, String nom, int x, int y, Environnement env) {
+		super(atq, portee, atqSpeed, 0, nom, x, y, env);
 	}
 
 	

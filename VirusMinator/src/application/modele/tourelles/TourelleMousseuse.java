@@ -1,12 +1,14 @@
 package application.modele.tourelles;
 
+import application.modele.Environnement;
+
 public class TourelleMousseuse extends Tourelles {
 
 	
 	// cette tourelle ralentit les ennemis mais inflige peu de dégâts
 
-	public TourelleMousseuse(double atq, int portee, double atqSpeed, double slow, String nom, int x, int y) {
-		super(atq, portee, atqSpeed, slow, nom, x, y);
+	public TourelleMousseuse(double atq, int portee, double atqSpeed, double slow, String nom, int x, int y,Environnement env) {
+		super(atq, portee, atqSpeed, slow, nom, x, y,env);
 	}
 	
 
