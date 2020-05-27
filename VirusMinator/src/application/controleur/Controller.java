@@ -27,8 +27,13 @@ import java.util.ResourceBundle;
 
 import application.Config;
 import application.modele.Environnement;
+import application.modele.tourelles.TourelleSavonneuse;
 import application.modele.virus.Virus;
 import application.modele.virus.VirusBasirus;
+import application.modele.virus.VirusDivirus;
+import application.modele.virus.VirusVhealrus;
+import application.modele.virus.VirusViboomrus;
+import application.modele.virus.VirusViterus;
 
 public class Controller implements Initializable {
 
@@ -135,6 +140,7 @@ public class Controller implements Initializable {
 				map.getChildren().add(spawnTourelles);
 				System.out.println(spawnTourelles);
 				spawnTourelles.setOnMouseClicked(e -> gelHydro.setOnMouseClicked(ee -> clicTourelle(e)));
+
 				break;
 			case "vertEnnemi":
 				map.getChildren().add(vertEnnemi);
@@ -152,52 +158,44 @@ public class Controller implements Initializable {
 
 	}
 
-
 	/*
 	 * @FXML void creerSprite(ActionEvent event) { Circle r = new Circle(10);
 	 * r.setFill(Color.RED); r.setTranslateX(10); r.setTranslateY(10);
 	 * panneauEnnemis.getChildren().add(r); }
 	 */
 
-
-	public void ajouter(Virus v) {
-		this.e1.ajouterVirus(v);
-		creerSpriteVirus(v);
-
-	}
-/*
-	void supprimer(ActionEvent event) {
-		for (int i = 0; i < map.getChildren().size(); i++) {
-			ImageView spawnTourelles = Config.getImg("/src/ressources/tiles/spawnTourelles.png");
-			String retour = Config.imageDe(Config.listeMap.get(i));
-			if (map.getChildren().contains(tourelleGel)) {
-				map.getChildren().remove(i);
-			}
+	public void ajouter() {
+		this.e1.initVirus();
+		for (int i = 0; i < this.e1.getNextViruses().size(); i++) {
+			creerSpriteVirus(this.e1.getNextViruses().get(i));
 		}
-//    	for (int i = 0; i < e1.getTourelles().size(); i++) {
-//			
-//		}
-//    	for (int i = 0; i < panneauEnnemis.getChildren().size(); i++) {
-//			if(panneauEnnemis.getChildren().get(i).contains(tourelleGel)) {
-//				
-//			}
-//		}
+
 	}
 
-//>>>>>>> branch 'develop' of https:github.com/vakter23/VirusMInator.git
-	/*public void dessinEnnemi() {
-		ImageView Virus = Config.getImg("/src/ressources/Virus/base_Virus.png");
-		Virus.setTranslateX(720);
-		Virus.setTranslateY(720);
-		getPanneauEnnemis().getChildren().add(Virus);
-	}
-*/
+	/*
+	 * void supprimer(ActionEvent event) { for (int i = 0; i <
+	 * map.getChildren().size(); i++) { ImageView spawnTourelles =
+	 * Config.getImg("/src/ressources/tiles/spawnTourelles.png"); String retour =
+	 * Config.imageDe(Config.listeMap.get(i)); if
+	 * (map.getChildren().contains(tourelleGel)) { map.getChildren().remove(i); } }
+	 * // for (int i = 0; i < e1.getTourelles().size(); i++) { // // } // for (int i
+	 * = 0; i < panneauEnnemis.getChildren().size(); i++) { //
+	 * if(panneauEnnemis.getChildren().get(i).contains(tourelleGel)) { // // } // }
+	 * }
+	 * 
+	 * //>>>>>>> branch 'develop' of https:github.com/vakter23/VirusMInator.git
+	 * /*public void dessinEnnemi() { ImageView Virus =
+	 * Config.getImg("/src/ressources/Virus/base_Virus.png");
+	 * Virus.setTranslateX(720); Virus.setTranslateY(720);
+	 * getPanneauEnnemis().getChildren().add(Virus); }
+	 */
 	void clicTourelle(MouseEvent event) {
 		System.out.println("Tourelle ajoutée");// Coder Placement Tourelle
 		ImageView sourc = (ImageView) event.getSource();
-		Image tourelleGel = (Image) (getImgg("/src/ressources/tourelles/gelHydro.png"));
-		
+		Image tourelleGel = (getImgg("/src/ressources/tourelles/gelHydro.png"));
 		sourc.setImage(tourelleGel);
+		this.e1.ajouterTourelles(new TourelleSavonneuse(20, 128, 0.015, 0.015, "TourelleSavonneuse",
+				(int) event.getSceneX(), (int) event.getSceneY()));
 
 	}
 
@@ -207,11 +205,10 @@ public class Controller implements Initializable {
 		// "ressources").toString(), paths).toUri().toString());
 	}
 
-	/*@FXML
-	void placerEnnemis(ActionEvent event) {
-		System.out.println("lancement");
-		dessinEnnemi();
-	}*/
+	/*
+	 * @FXML void placerEnnemis(ActionEvent event) {
+	 * System.out.println("lancement"); dessinEnnemi(); }
+	 */
 //	void placerEnnemis(ActionEvent event) {
 //		Circle r = new Circle(3);
 //		r.setFill(Color.RED);
@@ -232,14 +229,12 @@ public class Controller implements Initializable {
 		this.panneauEnnemis.setMaxWidth(1632);
 		this.panneauEnnemis.setMaxHeight(832);
 		creerTerrainVue();
-		ajouter(new VirusBasirus(50, 10, 0.015, "VirusBasirus", 0, 288));
+		System.out.println(this.e1.getNextViruses().size());
+		ajouter();
 		System.out.println("fait");
 		initAnimation();
-
 		// demarre l'animation
-
 		gameLoop.play();
-		System.out.println(e1.getViruses().get(0).getX());
 //		try {
 //			Thread.sleep(1000);
 //		} catch (InterruptedException e) {
@@ -252,23 +247,23 @@ public class Controller implements Initializable {
 		gameLoop = new Timeline();
 		temps = 0;
 		gameLoop.setCycleCount(Timeline.INDEFINITE);
-		double vitesse;
-		
-
 		KeyFrame kf = new KeyFrame(
 				// on définit le FPS (nbre de frame par seconde)
-				Duration.seconds(0.0009),
+				Duration.seconds(0.0050),
 
 				// on définit ce qui se passe à chaque frame
 				// c'est un eventHandler d'ou le lambda
 				(ev -> {
-					if (temps == 8032) {
+					if (temps == 8000) {
 						System.out.println("fini");
 						gameLoop.stop();
 					} else if (temps % 5 == 0) {
-						System.out.println("tour" + temps);
+						// System.out.println("tour" + temps);
 						unTour();
 						// rafraichirPanneauEnnemis(/* v */);
+					}
+					else if (temps % 60 ==0) {
+						
 					}
 					temps++;
 				}));
@@ -280,16 +275,23 @@ public class Controller implements Initializable {
 
 	void unTour() {
 		this.e1.unTour();
-		
+
 	}
 
 	@FXML
 	void reinit(ActionEvent event) {
-		/*Relance l'animation*/
-		Virus v = this.e1.getViruses().get(0);
-		v.setX(0);
-		v.setY(288);
+		/* Relance l'animation */
+		System.out.println(this.e1.getNextViruses().size());
+		for (int i = 0; i < this.e1.getNextViruses().size(); i++) {
+			Virus v = this.e1.getNextViruses().get(i);
+			v.setX(0);
+			v.setY(288);
+		}
+		for (int j = 0; j < this.e1.getTourelles().size(); j++) {
+			this.e1.getTourelles().remove(j);
+		}
 		this.temps = 0;
+		System.out.println(this.e1.getViruses().size());
 		gameLoop.play();
 	}
 
@@ -313,7 +315,7 @@ public class Controller implements Initializable {
 			System.out.println(r.getTranslateX());
 			System.out.println(r.getTranslateY());
 			panneauEnnemis.getChildren().add(r);
-			
+
 			VirusActuel = Config.getImg("/src/ressources/virus/base_Virus.png");
 			VirusActuel.setId(v.getId());
 			VirusActuel.translateXProperty().bind(v.getXproperty());
@@ -322,29 +324,44 @@ public class Controller implements Initializable {
 			System.out.println(VirusActuel.getTranslateY());
 			panneauEnnemis.getChildren().add(VirusActuel);
 
-			
-		} /*
-			 * else if (v instanceof VirusDivirus) { ajouter(v); ImageView VirusDivirus =
-			 * Config.getImg("/src/ressources/virus/divisible_Virus.png");
-			 * VirusDivirus.setId(v.getId()); VirusDivirus.setTranslateX(v.getX());
-			 * VirusDivirus.setTranslateY(v.getY());
-			 * panneauEnnemis.getChildren().add(VirusDivirus); } else if (v instanceof
-			 * VirusVhealrus) { ajouter(v); ImageView VirusVhealrus =
-			 * Config.getImg("/src/ressources/virus/healing_Virus.png");
-			 * VirusVhealrus.setId(v.getId()); VirusVhealrus.setTranslateX(v.getX());
-			 * VirusVhealrus.setTranslateY(v.getY());
-			 * panneauEnnemis.getChildren().add(VirusVhealrus); } else if (v instanceof
-			 * VirusViboomrus) { ajouter(v); ImageView VirusViboomrus =
-			 * Config.getImg("/src/ressources/virus/impact_Virus.png");
-			 * VirusViboomrus.setId(v.getId()); VirusViboomrus.setTranslateX(v.getX());
-			 * VirusViboomrus.setTranslateY(v.getY());
-			 * panneauEnnemis.getChildren().add(VirusViboomrus); } else if (v instanceof
-			 * VirusViterus) { ajouter(v); ImageView VirusViterus =
-			 * Config.getImg("/src/ressources/virus/rapid_Virus.png");
-			 * VirusViterus.setId(v.getId()); VirusViterus.setTranslateX(v.getX());
-			 * VirusViterus.setTranslateY(v.getY());
-			 * panneauEnnemis.getChildren().add(VirusViterus); }
-			 */
+		} else if (v instanceof VirusDivirus) {
+			VirusActuel = Config.getImg("/src/ressources/virus/divisible_Virus.png");
+			VirusActuel.setId(v.getId());
+			VirusActuel.translateXProperty().bind(v.getXproperty());
+			VirusActuel.translateYProperty().bind(v.getYproperty());
+			System.out.println(VirusActuel.getTranslateX());
+			System.out.println(VirusActuel.getTranslateY());
+			panneauEnnemis.getChildren().add(VirusActuel);
+		}
+
+		else if (v instanceof VirusVhealrus) {
+			ajouter();
+			VirusActuel = Config.getImg("/src/ressources/virus/healing_Virus.png");
+			VirusActuel.setId(v.getId());
+			VirusActuel.translateXProperty().bind(v.getXproperty());
+			VirusActuel.translateYProperty().bind(v.getYproperty());
+			System.out.println(VirusActuel.getTranslateX());
+			System.out.println(VirusActuel.getTranslateY());
+			panneauEnnemis.getChildren().add(VirusActuel);
+		} else if (v instanceof VirusViboomrus) {
+			ajouter();
+			VirusActuel = Config.getImg("/src/ressources/virus/impact_Virus.png");
+			VirusActuel.setId(v.getId());
+			VirusActuel.translateXProperty().bind(v.getXproperty());
+			VirusActuel.translateYProperty().bind(v.getYproperty());
+			System.out.println(VirusActuel.getTranslateX());
+			System.out.println(VirusActuel.getTranslateY());
+			panneauEnnemis.getChildren().add(VirusActuel);
+		} else if (v instanceof VirusViterus) {
+			ajouter();
+			VirusActuel = Config.getImg("/src/ressources/virus/rapid_Virus.png");
+			VirusActuel.setId(v.getId());
+			VirusActuel.translateXProperty().bind(v.getXproperty());
+			VirusActuel.translateYProperty().bind(v.getYproperty());
+			System.out.println(VirusActuel.getTranslateX());
+			System.out.println(VirusActuel.getTranslateY());
+			panneauEnnemis.getChildren().add(VirusActuel);
+		}
 
 	}
 

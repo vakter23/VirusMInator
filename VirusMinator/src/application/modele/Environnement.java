@@ -5,6 +5,8 @@ import java.util.List;
 import application.Config;
 import application.modele.tourelles.Tourelles;
 import application.modele.virus.Virus;
+import application.modele.virus.VirusBasirus;
+import application.modele.virus.VirusDivirus;
 import application.modele.virus.VirusVhealrus;
 import application.modele.virus.VirusViboomrus;
 import javafx.collections.FXCollections;
@@ -34,11 +36,18 @@ public class Environnement {
 	public int getHeight() {
 		return height;
 	}
-
+	public void initVirus() {
+		nextViruses.add(new VirusDivirus(70, 10, 0.025, "VirusDivirus", 0, 288));
+		nextViruses.add(new VirusBasirus(50, 10, 0.015, "VirusBasirus", -30, 288));
+		nextViruses.add(new VirusBasirus(50, 10, 0.015, "VirusBasirus", -60, 288));	
+		nextViruses.add(new VirusDivirus(70, 10, 0.025, "VirusDivirus", -90, 288));
+	}
 	public ObservableList<Virus> getViruses() {
 		return viruses;
 	}
-
+	public ObservableList<Virus> getNextViruses() {
+		return nextViruses;
+	}
 	public ObservableList<Tourelles> getTourelles() {
 		return tourelles;
 	}
@@ -75,8 +84,8 @@ public class Environnement {
 	}
 
 	public void unTour() {
-		for (int i = 0; i < viruses.size(); i++) {
-			Virus v = viruses.get(i);
+		for (int i = 0; i < nextViruses.size(); i++) {
+			Virus v = nextViruses.get(i);
 			v.seDeplace();
 		}
 		for (int i = viruses.size() - 1; i >= 0; i--) {
