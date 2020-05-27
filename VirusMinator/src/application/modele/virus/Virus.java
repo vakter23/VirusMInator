@@ -77,6 +77,10 @@ public abstract class Virus {
 		return vie;
 
 	}
+	
+	public void setVie(double viee) {
+		this.vie = viee;
+	}
 
 	public boolean estVivant() {
 		return this.vie > 0;

@@ -102,7 +102,7 @@ public abstract class Tourelles {
 		this.slow = slow;
 	}
 
-	public void Tir() {// Methode qui fait que la tourelle tir
+	/*public void Tir() {// Methode qui fait que la tourelle tir
 
 		if (VirusAPorteeDeTir() != null) {
 			
@@ -110,10 +110,17 @@ public abstract class Tourelles {
 			
 			Virus v = new VirusBasirus(10, 10, 10, nom, 9, 9);
 			
+			
+			
 			env.ajouterVirus(v);
 			
 			
 			t.VirusAPorteeDeTir();
+			
+			
+			double newVie = (v.getVie() - t.getAtq());
+			
+			v.setVie(newVie);
 			
 			System.out.println(t.VirusAPorteeDeTir());
 			
@@ -122,25 +129,35 @@ public abstract class Tourelles {
 
 		}
 
-	}
+	}*/
 	
-	/*public static void main(String[] args) {
+	public static void main(String[] args) {
 		
 			Environnement e1 = new Environnement(500, 500);
 		
-			Tourelles t = new TourelleHydroClaque(10, 10, 10, 0, "nom", 9, 9);
+			
+			Tourelles t = new TourelleHydroClaque(10, 100, 10, 0, "nom", 9, 9);
 			
 			Virus v = new VirusBasirus(10, 10, 10, "noom", 9, 9);
 			
-			e1.ajouterVirus(v);
+			System.out.println(v.getVie());
+	
+				e1.ajouterVirus(v);
 			
 			
-			t.VirusAPorteeDeTir();
+			System.out.println("ou");
+			System.out.println(v.getVie());
 			
-			System.out.println(t.VirusAPorteeDeTir());
 			
 			
-			for (int i = 0; i < e1.getViruses().size(); i++) {
+			double newVie = (t.VirusAPorteeDeTir().getVie() - t.getAtq());
+			t.VirusAPorteeDeTir().setVie(newVie);
+			
+			System.out.println("where");
+			System.out.println(v.getVie());
+
+			
+			/*for (int i = 0; i < e1.getViruses().size(); i++) {
 				if (e1.getViruses().get(i).estVivant()) {
 					if ((t.getY() - t.portee <= e1.getViruses().get(i).getY()
 							&& e1.getViruses().get(i).getY() <= t.getY() + t.portee)
@@ -149,16 +166,15 @@ public abstract class Tourelles {
 						e1.getViruses().get(i);
 					}
 				}
-			}
+			}*/
 			
-			System.out.println(t.VirusAPorteeDeTir());
 
 			
 			
 			//System.out.println(VirusAPorteeDeTir().getVie());
 
 
-		}*/
+		}
 	
 	
 	public void gestionTir() { //Methode qui gere le missile et réduit les pv du virus quand le missile le touche
@@ -169,6 +185,7 @@ public abstract class Tourelles {
 	public Virus VirusAPorteeDeTir() {
 
 		for (int i = 0; i < env.getViruses().size(); i++) {
+			System.out.println(env.getViruses());
 			if (env.getViruses().get(i).estVivant()) {
 				if ((this.getY() - this.portee <= env.getViruses().get(i).getY()
 						&& env.getViruses().get(i).getY() <= this.getY() + this.portee)
@@ -184,9 +201,11 @@ public abstract class Tourelles {
 	
 	public void agit() {
 		
-		if (temps % this.atqSpeed ==0)
+		if (temps % this.atqSpeed ==0  && this.VirusAPorteeDeTir() != null) // tentative d'evittement du null pointer exception
 		{
-			
+			double newVie = (VirusAPorteeDeTir().getVie() - this.getAtq());
+			VirusAPorteeDeTir().setVie(newVie);
+			//VirusAPorteeDeTir().setVie(VirusAPorteeDeTir().getVie()-this.getAtq());
 			//code pour tirer / apelle de la méthode tir
 		}
 	}
