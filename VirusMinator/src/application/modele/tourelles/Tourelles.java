@@ -1,6 +1,7 @@
 package application.modele.tourelles;
 
 import application.modele.virus.Virus;
+import application.modele.virus.VirusBasirus;
 import application.modele.Environnement;
 import javafx.animation.Timeline;
 import javafx.beans.property.IntegerProperty;
@@ -105,12 +106,60 @@ public abstract class Tourelles {
 
 		if (VirusAPorteeDeTir() != null) {
 			
+			Tourelles t = new TourelleHydroClaque(10, 10, 10, 0, nom, 9, 9);
+			
+			Virus v = new VirusBasirus(10, 10, 10, nom, 9, 9);
+			
+			env.ajouterVirus(v);
+			
+			
+			t.VirusAPorteeDeTir();
+			
+			System.out.println(t.VirusAPorteeDeTir());
+			
 			System.out.println(VirusAPorteeDeTir().getVie());
 
 
 		}
 
 	}
+	
+	/*public static void main(String[] args) {
+		
+			Environnement e1 = new Environnement(500, 500);
+		
+			Tourelles t = new TourelleHydroClaque(10, 10, 10, 0, "nom", 9, 9);
+			
+			Virus v = new VirusBasirus(10, 10, 10, "noom", 9, 9);
+			
+			e1.ajouterVirus(v);
+			
+			
+			t.VirusAPorteeDeTir();
+			
+			System.out.println(t.VirusAPorteeDeTir());
+			
+			
+			for (int i = 0; i < e1.getViruses().size(); i++) {
+				if (e1.getViruses().get(i).estVivant()) {
+					if ((t.getY() - t.portee <= e1.getViruses().get(i).getY()
+							&& e1.getViruses().get(i).getY() <= t.getY() + t.portee)
+							&& (t.getX() - t.portee <= e1.getViruses().get(i).getX()
+									&& e1.getViruses().get(i).getX() <= t.getX() + t.portee)) {
+						e1.getViruses().get(i);
+					}
+				}
+			}
+			
+			System.out.println(t.VirusAPorteeDeTir());
+
+			
+			
+			//System.out.println(VirusAPorteeDeTir().getVie());
+
+
+		}*/
+	
 	
 	public void gestionTir() { //Methode qui gere le missile et réduit les pv du virus quand le missile le touche
 		
