@@ -1,4 +1,4 @@
-package application.tourelles;
+package application.modele.tourelles;
 
 public class TourelleDocteurPingoLimbo extends Tourelles{
 
