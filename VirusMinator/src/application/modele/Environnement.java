@@ -88,6 +88,10 @@ public class Environnement {
 			Virus v = nextViruses.get(i);
 			v.seDeplace();
 		}
+		for (int i = 0; i < tourelles.size(); i++) {
+			Tourelles t = tourelles.get(i);
+			t.agit();
+		}
 		for (int i = viruses.size() - 1; i >= 0; i--) {
 			Virus v = viruses.get(i);
 			if (!v.estVivant()) {
