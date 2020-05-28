@@ -29,7 +29,11 @@ import java.util.ResourceBundle;
 
 import application.Config;
 import application.modele.Environnement;
+import application.modele.tourelles.TourelleDocteurPingoLimbo;
+import application.modele.tourelles.TourelleHydroClaque;
+import application.modele.tourelles.TourelleMousseuse;
 import application.modele.tourelles.TourelleSavonneuse;
+import application.modele.tourelles.TourelleSilliteBang;
 import application.modele.tourelles.Tourelles;
 import application.modele.virus.Virus;
 import application.modele.virus.VirusBasirus;
@@ -163,7 +167,7 @@ public class Controller implements Initializable {
 				spawnTourelles.setId("spawnTourelles");
 				map.getChildren().add(spawnTourelles);
 				System.out.println(spawnTourelles);
-//				spawnTourelles.setOnMouseClicked(e -> clicTourelle(e));
+				spawnTourelles.setOnMouseClicked(e -> clicTourelle(e));
 				break;
 			case "vertEnnemi":
 				vertEnnemi.setId("vertEnnemi");
@@ -222,43 +226,36 @@ public class Controller implements Initializable {
 	 * Virus.setTranslateX(720); Virus.setTranslateY(720);
 	 * getPanneauEnnemis().getChildren().add(Virus); }
 	 */
+	
+	/*
+	 * Lorsqu'on clique sur un spawnTourelle puis sur une tourelle du shop la tourelle est automatiquement ajoutée a la liste
+	 * */
 	void clicTourelle(MouseEvent event) {
-		if (event.getClickCount() == 2) {
-			ImageView sourc = (ImageView) event.getSource();
-			Image spawnTourellesR = getImgg("/src/ressources/tiles/spawnTourelleRouge.png");
-			sourc.setImage(spawnTourellesR);
-			savonneuse.setOnMouseClicked((e) -> {
-//			this.e1.ajouterTourelles(new TourelleSavonneuse(0, 0, 0, 0, "0", event.getX(), event.getY()));
-				Image tourelle = (Image) (getImgg("/src/ressources/tourelles/gelHydro.png"));
-				sourc.setImage(tourelle);
-			});
-			avastirus.setOnMouseClicked((e) -> {
-				Image tourelle = (Image) (getImgg("/src/ressources/tourelles/Avast.png"));
-				sourc.setImage(tourelle);
-			});
-			gelHydroClaque.setOnMouseClicked((e) -> {
-				Image tourelle = (Image) (getImgg("/src/ressources/tourelles/gel-hydoralcoolique.png"));
-				sourc.setImage(tourelle);
-			});
-			siliteBang.setOnMouseClicked((e) -> {
-				Image tourelle = (Image) (getImgg("/src/ressources/tourelles/javel.png"));
-				sourc.setImage(tourelle);
-			});
-			drPingoLimbo.setOnMouseClicked((e) -> {
-				Image tourelle = (Image) (getImgg("/src/ressources/tourelles/drPingoLimbo.png"));
-				sourc.setImage(tourelle);
-			});
+//		ImageView sourc = (ImageView) event.getSource();
+//		Image spawnTourellesR = getImgg("/src/ressources/tiles/spawnTourelleRouge.png");
+//		sourc.setImage(spawnTourellesR);
+		savonneuse.setOnMouseClicked((e) -> {
+			this.e1.ajouterTourelles(new TourelleSavonneuse(0, 0, 0, 0, "0", (int) event.getX(), (int) event.getY()));
+		});
+		avastirus.setOnMouseClicked((e) -> {
+			this.e1.ajouterTourelles(new TourelleMousseuse(0, 0, 0, 0, "", (int) event.getX(), (int) event.getY()));
+		});
+		gelHydroClaque.setOnMouseClicked((e) -> {
+			this.e1.ajouterTourelles(new TourelleHydroClaque(0, 0, 0, 0, "", (int) event.getX(), (int) event.getY()));
 
-		}
-		else {
-			System.out.println("clic");
-		}
+		});
+		siliteBang.setOnMouseClicked((e) -> {
+			this.e1.ajouterTourelles(new TourelleSilliteBang(0, 0, 0, 0, "", (int) event.getX(), (int) event.getY()));
+		});
+		drPingoLimbo.setOnMouseClicked((e) -> {
+			this.e1.ajouterTourelles(
+					new TourelleDocteurPingoLimbo(0, 0, 0, 0, "", (int) event.getX(), (int) event.getY()));
+		});
+
 	}
 
 	private static Image getImgg(String... paths) {
 		return new Image(Paths.get(System.getProperty("user.dir"), paths).toUri().toString());
-		// ImageView(Paths.get(Paths.get(System.getProperty("user.dir"),
-		// "ressources").toString(), paths).toUri().toString());
 	}
 
 	/*
@@ -291,7 +288,7 @@ public class Controller implements Initializable {
 
 		ListChangeListener<? super Tourelles> ecouteur;
 		// demarre l'animation
-		e1.getTourelles().addListener(ecouteur);
+		this.e1.getTourelles().addListener(new ecouteurTourelle(panneauEnnemis));
 		gameLoop.play();
 		System.out.println(e1.getViruses().get(0).getX());
 //		try {
@@ -352,13 +349,13 @@ public class Controller implements Initializable {
 		gameLoop.play();
 		ImageView spawnTourelles = Config.getImg("/src/ressources/tiles/spawnTourelles.png");
 		for (int i = 0; i < map.getChildren().size(); i++) {
-			if(map.getChildren().get(i).getId()== "spawnTourelles") {
+			if (map.getChildren().get(i).getId() == "spawnTourelles") {
 //				map.getChildren().remove(i);
 				map.getChildren().set(i, spawnTourelles);
 				spawnTourelles.setOnMouseClicked(e -> clicTourelle(e));
 
 			}
-				
+
 		}
 	}
 
