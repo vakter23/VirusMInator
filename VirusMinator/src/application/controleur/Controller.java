@@ -200,7 +200,7 @@ public class Controller implements Initializable {
         ImageView sourc = (ImageView) event.getSource();
         Image tourelleGel = (getImgg("/src/ressources/tourelles/gelHydro.png"));
         sourc.setImage(tourelleGel);
-        this.e1.ajouterTourelles(new TourelleSavonneuse(20, 128, 0.015, 0.015, "TourelleSavonneuse",
+        this.e1.ajouterTourelles(new TourelleSavonneuse(20, 128, 0.015, "TourelleSavonneuse",
                 (int) event.getSceneX(), (int) event.getSceneY(), e1));
         }
 

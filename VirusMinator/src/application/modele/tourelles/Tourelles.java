@@ -18,13 +18,12 @@ public abstract class Tourelles {
 	protected Environnement env;
 	private int temps;//Variable pour gerer temps entre le tir des tourelles (1 unité de temps = 1 tour) <- variable crée dans environnement
 
-	public Tourelles(double atq, int portee, double atqSpeed, double slow, String nom, int x,
+	public Tourelles( int portee, double atqSpeed,  String nom, int x,
 			int y ,Environnement env) { /* Constructeur tourelles */
 
 		this.setAtq(atq);
 		this.setPortee(portee);
 		this.setAtqSpeed(atqSpeed);
-		this.setSlow(slow);
 		this.nom = nom;
 		this.setX(x);
 		this.setY(y);
@@ -94,9 +93,7 @@ public abstract class Tourelles {
 		this.atqSpeed = atqSpeed;
 	}
 
-	public double getSlow() {
-		return slow;
-	}
+	
 
 	public void setSlow(double slow) {
 		this.slow = slow;
@@ -136,7 +133,7 @@ public abstract class Tourelles {
 			Environnement e1 = new Environnement(500, 500);
 		
 			
-			Tourelles t = new TourelleHydroClaque(10, 10, 10, 0, "nom", 9, 9, e1);
+			Tourelles t = new TourelleHydroClaque(10, 10, 10, "nom", 9, 9, e1);
 			
 			Virus v = new VirusBasirus(11, 10, 10, "noom", 9, 9);
 			
@@ -221,11 +218,7 @@ public abstract class Tourelles {
 
 	}
 	
-	/*public void slowVirus() {
-		
-		this.se
-		
-	}*/
+	
 	
 	public void boostAttaqueSpeed() {
 		
@@ -233,12 +226,21 @@ public abstract class Tourelles {
 		
 	}
 	
+	public abstract void tirer();
+		
+		
+	
 	
 	public void agit() {
 		
-		if (temps % this.atqSpeed ==0  && this.VirusAPorteeDeTir() != null) // tentative d'evittement du null pointer exception ( car virusaporteedetir retourne null si pas de virus
+		if (temps % this.atqSpeed == 0  && this.VirusAPorteeDeTir() != null) // tentative d'evittement du null pointer exception ( car virusaporteedetir retourne null si pas de virus
 		{
-			if(this.atq>0) {	
+			
+			tirer();
+			
+		}
+			
+		/*	if(this.atq>0) {	
 
 			double newVie = (VirusAPorteeDeTir().getVie() - this.getAtq());
 			VirusAPorteeDeTir().setVie(newVie);
@@ -249,8 +251,8 @@ public abstract class Tourelles {
 	
 			else if (slow>0) { // Tourelles qui slow (Mousseuse/AvastiVirus)
 		
-				/*double newVitesse = (VirusAPorteeDeTir().getVitesse()-this.getSlow());
-				VirusAPorteeDeTir().setVitesse(newVitesse);*/
+				//double newVitesse = (VirusAPorteeDeTir().getVitesse()-this.getSlow());
+				//VirusAPorteeDeTir().setVitesse(newVitesse);
 				
 				VirusAPorteeDeTir().slowVirus();
 	
@@ -261,7 +263,7 @@ public abstract class Tourelles {
 				TourelleAPorteeDeTir().boostAttaqueSpeed();
 				
 			}
-		}
+		}*/
 	}
 
 	public boolean placementTourelles() {
