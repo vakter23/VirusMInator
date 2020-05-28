@@ -13,6 +13,7 @@ public abstract class Virus {
 	private int atq, vie; 
 	private double vitesse; // vitesse= vitesse de deplacement
 	private String nom, ID;
+	public static int compteur;
 
 	static public VirusBasirus bas = new VirusBasirus(100, 30, 10, "bas", 200, 400);
 	static public VirusDivirus div = new VirusDivirus(100, 30, 10, "divirus", 100, 200);
@@ -25,24 +26,22 @@ public abstract class Virus {
 			vib, vib, vib, vib, vib, vib, vib, vib, vit, vit, vit, vit, vit, vit, vit, vit, vit, vit);
 
 	public Virus(int vie, int atq, double vitesse, String nom, int x, int y) { /* Constructeur Virus */
-
+		this.ID = "v"+compteur;
 		this.vie = vie;
 		this.atq = atq;
 		this.setVitesse(vitesse);
 		this.nom = nom;
 		this.setX(x);
 		this.setY(y);
-
+		compteur ++;
+		System.out.println("v"+compteur);
 	}
 
 	public String getNom() {
-
 		return nom;
-
 	}
 
 	public String getId() {
-
 		return ID;
 
 	}
@@ -137,6 +136,11 @@ public abstract class Virus {
 	 */
 	public void setVitesse(double vitesse) {
 		this.vitesse = vitesse;
+	}
+
+	public void setVie(double newVie) {
+		this.vie=(int)newVie;
+		
 	}
 
 }

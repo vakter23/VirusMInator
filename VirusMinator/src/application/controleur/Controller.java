@@ -166,8 +166,9 @@ public class Controller implements Initializable {
 
 	public void ajouter() {
 		this.e1.initVirus();
-		for (int i = 0; i < this.e1.getNextViruses().size(); i++) {
-			creerSpriteVirus(this.e1.getNextViruses().get(i));
+		for (int i = 0; i < this.e1.getViruses().size(); i++) {
+			//creerSpriteVirus(this.e1.getViruses().get(i));
+			
 		}
 
 	}
@@ -195,7 +196,7 @@ public class Controller implements Initializable {
 		Image tourelleGel = (getImgg("/src/ressources/tourelles/gelHydro.png"));
 		sourc.setImage(tourelleGel);
 		this.e1.ajouterTourelles(new TourelleSavonneuse(20, 128, 0.015, 0.015, "TourelleSavonneuse",
-				(int) event.getSceneX(), (int) event.getSceneY()));
+				(int) event.getSceneX(), (int) event.getSceneY(), e1));
 
 	}
 
@@ -228,8 +229,9 @@ public class Controller implements Initializable {
 		this.e1 = new Environnement(1600, 800);
 		this.panneauEnnemis.setMaxWidth(1632);
 		this.panneauEnnemis.setMaxHeight(832);
+		this.e1.getViruses().addListener(new MonObservateurViruses(panneauEnnemis));
 		creerTerrainVue();
-		System.out.println(this.e1.getNextViruses().size());
+		System.out.println(this.e1.getViruses().size());
 		ajouter();
 		System.out.println("fait");
 		initAnimation();
@@ -281,9 +283,9 @@ public class Controller implements Initializable {
 	@FXML
 	void reinit(ActionEvent event) {
 		/* Relance l'animation */
-		System.out.println(this.e1.getNextViruses().size());
-		for (int i = 0; i < this.e1.getNextViruses().size(); i++) {
-			Virus v = this.e1.getNextViruses().get(i);
+		System.out.println(this.e1.getViruses().size());
+		for (int i = 0; i < this.e1.getViruses().size(); i++) {
+			Virus v = this.e1.getViruses().get(i);
 			v.setX(0);
 			v.setY(288);
 		}
@@ -295,75 +297,75 @@ public class Controller implements Initializable {
 		gameLoop.play();
 	}
 
-	public void creerSpriteVirus(Virus v) {
-		Circle r;
-		ImageView VirusActuel;
-		/*
-		 * { Demander à la prof pour la gameloop, et pour la facon d'afficher un ennemi
-		 * en fonction de sa sous classe
-		 * 
-		 *
-		 */
-
-		// this.e1.getViruses().addListener()
-		if (v instanceof VirusBasirus) {
-			r = new Circle(3);
-			r.setFill(Color.RED);
-			r.setId(v.getId());
-			r.translateXProperty().bind(v.getXproperty());
-			r.translateYProperty().bind(v.getYproperty());
-			System.out.println(r.getTranslateX());
-			System.out.println(r.getTranslateY());
-			panneauEnnemis.getChildren().add(r);
-
-			VirusActuel = Config.getImg("/src/ressources/virus/base_Virus.png");
-			VirusActuel.setId(v.getId());
-			VirusActuel.translateXProperty().bind(v.getXproperty());
-			VirusActuel.translateYProperty().bind(v.getYproperty());
-			System.out.println(VirusActuel.getTranslateX());
-			System.out.println(VirusActuel.getTranslateY());
-			panneauEnnemis.getChildren().add(VirusActuel);
-
-		} else if (v instanceof VirusDivirus) {
-			VirusActuel = Config.getImg("/src/ressources/virus/divisible_Virus.png");
-			VirusActuel.setId(v.getId());
-			VirusActuel.translateXProperty().bind(v.getXproperty());
-			VirusActuel.translateYProperty().bind(v.getYproperty());
-			System.out.println(VirusActuel.getTranslateX());
-			System.out.println(VirusActuel.getTranslateY());
-			panneauEnnemis.getChildren().add(VirusActuel);
-		}
-
-		else if (v instanceof VirusVhealrus) {
-			ajouter();
-			VirusActuel = Config.getImg("/src/ressources/virus/healing_Virus.png");
-			VirusActuel.setId(v.getId());
-			VirusActuel.translateXProperty().bind(v.getXproperty());
-			VirusActuel.translateYProperty().bind(v.getYproperty());
-			System.out.println(VirusActuel.getTranslateX());
-			System.out.println(VirusActuel.getTranslateY());
-			panneauEnnemis.getChildren().add(VirusActuel);
-		} else if (v instanceof VirusViboomrus) {
-			ajouter();
-			VirusActuel = Config.getImg("/src/ressources/virus/impact_Virus.png");
-			VirusActuel.setId(v.getId());
-			VirusActuel.translateXProperty().bind(v.getXproperty());
-			VirusActuel.translateYProperty().bind(v.getYproperty());
-			System.out.println(VirusActuel.getTranslateX());
-			System.out.println(VirusActuel.getTranslateY());
-			panneauEnnemis.getChildren().add(VirusActuel);
-		} else if (v instanceof VirusViterus) {
-			ajouter();
-			VirusActuel = Config.getImg("/src/ressources/virus/rapid_Virus.png");
-			VirusActuel.setId(v.getId());
-			VirusActuel.translateXProperty().bind(v.getXproperty());
-			VirusActuel.translateYProperty().bind(v.getYproperty());
-			System.out.println(VirusActuel.getTranslateX());
-			System.out.println(VirusActuel.getTranslateY());
-			panneauEnnemis.getChildren().add(VirusActuel);
-		}
-
-	}
+//	public void creerSpriteVirus(Virus v) {
+//		Circle r;
+//		ImageView VirusActuel;
+//		/*
+//		 * { Demander à la prof pour la gameloop, et pour la facon d'afficher un ennemi
+//		 * en fonction de sa sous classe
+//		 * 
+//		 *
+//		 */
+//
+//		// this.e1.getViruses().addListener()
+//		if (v instanceof VirusBasirus) {
+//			r = new Circle(3);
+//			r.setFill(Color.RED);
+//			r.setId(v.getId());
+//			r.translateXProperty().bind(v.getXproperty());
+//			r.translateYProperty().bind(v.getYproperty());
+//			System.out.println(r.getTranslateX());
+//			System.out.println(r.getTranslateY());
+//			panneauEnnemis.getChildren().add(r);
+//
+//			VirusActuel = Config.getImg("/src/ressources/virus/base_Virus.png");
+//			VirusActuel.setId(v.getId());
+//			VirusActuel.translateXProperty().bind(v.getXproperty());
+//			VirusActuel.translateYProperty().bind(v.getYproperty());
+//			System.out.println(VirusActuel.getTranslateX());
+//			System.out.println(VirusActuel.getTranslateY());
+//			panneauEnnemis.getChildren().add(VirusActuel);
+//
+//		} else if (v instanceof VirusDivirus) {
+//			VirusActuel = Config.getImg("/src/ressources/virus/divisible_Virus.png");
+//			VirusActuel.setId(v.getId());
+//			VirusActuel.translateXProperty().bind(v.getXproperty());
+//			VirusActuel.translateYProperty().bind(v.getYproperty());
+//			System.out.println(VirusActuel.getTranslateX());
+//			System.out.println(VirusActuel.getTranslateY());
+//			panneauEnnemis.getChildren().add(VirusActuel);
+//		}
+//
+//		else if (v instanceof VirusVhealrus) {
+//			ajouter();
+//			VirusActuel = Config.getImg("/src/ressources/virus/healing_Virus.png");
+//			VirusActuel.setId(v.getId());
+//			VirusActuel.translateXProperty().bind(v.getXproperty());
+//			VirusActuel.translateYProperty().bind(v.getYproperty());
+//			System.out.println(VirusActuel.getTranslateX());
+//			System.out.println(VirusActuel.getTranslateY());
+//			panneauEnnemis.getChildren().add(VirusActuel);
+//		} else if (v instanceof VirusViboomrus) {
+//			ajouter();
+//			VirusActuel = Config.getImg("/src/ressources/virus/impact_Virus.png");
+//			VirusActuel.setId(v.getId());
+//			VirusActuel.translateXProperty().bind(v.getXproperty());
+//			VirusActuel.translateYProperty().bind(v.getYproperty());
+//			System.out.println(VirusActuel.getTranslateX());
+//			System.out.println(VirusActuel.getTranslateY());
+//			panneauEnnemis.getChildren().add(VirusActuel);
+//		} else if (v instanceof VirusViterus) {
+//			ajouter();
+//			VirusActuel = Config.getImg("/src/ressources/virus/rapid_Virus.png");
+//			VirusActuel.setId(v.getId());
+//			VirusActuel.translateXProperty().bind(v.getXproperty());
+//			VirusActuel.translateYProperty().bind(v.getYproperty());
+//			System.out.println(VirusActuel.getTranslateX());
+//			System.out.println(VirusActuel.getTranslateY());
+//			panneauEnnemis.getChildren().add(VirusActuel);
+//		}
+//
+//	}
 
 	public String lvl1() {
 		return null;

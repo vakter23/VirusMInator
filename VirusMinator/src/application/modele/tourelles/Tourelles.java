@@ -184,10 +184,10 @@ public abstract class Tourelles {
 
 	public Virus VirusAPorteeDeTir() {
 
-		System.out.println("env" + this.env);
+		//System.out.println("env" + this.env);
 		
 		for (int i = 0; i < env.getViruses().size(); i++) {
-			System.out.println(env.getViruses());
+//			System.out.println(env.getViruses());
 			if (env.getViruses().get(i).estVivant()) {
 				if ((this.getY() - this.portee <= env.getViruses().get(i).getY()
 						&& env.getViruses().get(i).getY() <= this.getY() + this.portee)

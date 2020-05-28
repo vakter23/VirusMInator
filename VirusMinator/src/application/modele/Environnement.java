@@ -37,10 +37,10 @@ public class Environnement {
 		return height;
 	}
 	public void initVirus() {
-		nextViruses.add(new VirusDivirus(70, 10, 0.025, "VirusDivirus", 0, 288));
-		nextViruses.add(new VirusBasirus(50, 10, 0.015, "VirusBasirus", -30, 288));
-		nextViruses.add(new VirusBasirus(50, 10, 0.015, "VirusBasirus", -60, 288));	
-		nextViruses.add(new VirusDivirus(70, 10, 0.025, "VirusDivirus", -90, 288));
+		viruses.add(new VirusDivirus(70, 10, 0.025, "VirusDivirus", 0, 288));
+		viruses.add(new VirusBasirus(50, 10, 0.015, "VirusBasirus", -30, 288));
+		viruses.add(new VirusBasirus(50, 10, 0.015, "VirusBasirus", -60, 288));	
+		viruses.add(new VirusDivirus(70, 10, 0.025, "VirusDivirus", -90, 288));
 	}
 	public ObservableList<Virus> getViruses() {
 		return viruses;
@@ -84,8 +84,8 @@ public class Environnement {
 	}
 
 	public void unTour() {
-		for (int i = 0; i < nextViruses.size(); i++) {
-			Virus v = nextViruses.get(i);
+		for (int i = 0; i < viruses.size(); i++) {
+			Virus v = viruses.get(i);
 			v.seDeplace();
 		}
 		for (int i = 0; i < tourelles.size(); i++) {
@@ -95,7 +95,7 @@ public class Environnement {
 		for (int i = viruses.size() - 1; i >= 0; i--) {
 			Virus v = viruses.get(i);
 			if (!v.estVivant()) {
-				System.out.println("mort de : " + v);
+				System.out.println("mort de : " + v.getId());
 				viruses.remove(i);
 			}
 		}
