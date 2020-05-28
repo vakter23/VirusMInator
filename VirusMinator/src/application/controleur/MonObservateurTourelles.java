@@ -18,7 +18,7 @@ public class MonObservateurTourelles implements ObservableList<Tourelles>{
 
 	@Override
 	public boolean add(Tourelles e) {
-		// TODO Auto-generated method stub
+		this.add(e);
 		return false;
 	}
 
@@ -42,26 +42,32 @@ public class MonObservateurTourelles implements ObservableList<Tourelles>{
 
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
-		
+		this.clear();
 	}
 
 	@Override
 	public boolean contains(Object o) {
-		// TODO Auto-generated method stub
-		return false;
+		if(this.contains(o)) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	@Override
 	public boolean containsAll(Collection<?> c) {
-		// TODO Auto-generated method stub
+		for (int i = 0; i < c.size(); i++) {
+			if(this.get(i)!=c.) {
+				
+			}
+		}
 		return false;
 	}
 
 	@Override
 	public Tourelles get(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.get(index);
 	}
 
 	@Override
@@ -72,8 +78,10 @@ public class MonObservateurTourelles implements ObservableList<Tourelles>{
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		if(this.size()>0) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override

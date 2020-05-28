@@ -2,6 +2,7 @@ package application.controleur;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -29,6 +30,7 @@ import java.util.ResourceBundle;
 import application.Config;
 import application.modele.Environnement;
 import application.modele.tourelles.TourelleSavonneuse;
+import application.modele.tourelles.Tourelles;
 import application.modele.virus.Virus;
 import application.modele.virus.VirusBasirus;
 
@@ -91,8 +93,10 @@ public class Controller implements Initializable {
 	private ImageView drPingoLimbo;
 	@FXML
 	private ImageView gelHydroClaque;
-    @FXML
-    private Label money;
+	@FXML
+	private Label money;
+	@FXML
+	private Pane panneauTourelles;
 
 	public void creerTerrainVue() {
 		System.out.println(Config.listeMap.size());
@@ -124,38 +128,49 @@ public class Controller implements Initializable {
 			String retour = Config.imageDe(Config.listeMap.get(i));
 			switch (retour) {
 			case "blancHopital":
+				blancHopital.setId("blancHosto");
 				map.getChildren().add(blancHopital);
 				break;
 			case "herbe":
+				herbe.setId("herbe");
 				map.getChildren().add(herbe);
 				break;
 			case "BordTerrain":
+				BordTerrain.setId("BordTerrain");
 				map.getChildren().add(BordTerrain);
 				break;
 			case "hitBoxHosto":
+				hitBoxHosto.setId("hitBoxHosto");
 				map.getChildren().add(hitBoxHosto);
 				break;
 			case "rougeHopital":
+				rougeHopital.setId("rougeHospital");
 				map.getChildren().add(rougeHopital);
 				break;
 			case "sableChemin":
+				sableChemin.setId("sableChemin");
 				map.getChildren().add(sableChemin);
 				break;
 			case "sable":
+				sableTerrain.setId("sableTerrain");
 				map.getChildren().add(sableTerrain);
 				break;
 			case "spawnMob":
+				spawnMob.setId("spawnMob");
 				map.getChildren().add(spawnMob);
 				break;
 			case "spawnTourelles":
+				spawnTourelles.setId("spawnTourelles");
 				map.getChildren().add(spawnTourelles);
 				System.out.println(spawnTourelles);
-				spawnTourelles.setOnMouseClicked(e -> clicTourelle(e));
+//				spawnTourelles.setOnMouseClicked(e -> clicTourelle(e));
 				break;
 			case "vertEnnemi":
+				vertEnnemi.setId("vertEnnemi");
 				map.getChildren().add(vertEnnemi);
 				break;
 			case "violetEnnemi":
+				violetEnnemi.setId("violetEnnemi");
 				map.getChildren().add(violetEnnemi);
 				break;
 			}
@@ -201,7 +216,6 @@ public class Controller implements Initializable {
 //		}
 	}
 
-//>>>>>>> branch 'develop' of https:github.com/vakter23/VirusMInator.git
 	/*
 	 * public void dessinEnnemi() { ImageView Virus =
 	 * Config.getImg("/src/ressources/Virus/base_Virus.png");
@@ -235,6 +249,9 @@ public class Controller implements Initializable {
 				sourc.setImage(tourelle);
 			});
 
+		}
+		else {
+			System.out.println("clic");
 		}
 	}
 
@@ -272,8 +289,9 @@ public class Controller implements Initializable {
 		System.out.println("fait");
 		initAnimation(this.e1.getViruses().get(0));
 
+		ListChangeListener<? super Tourelles> ecouteur;
 		// demarre l'animation
-
+		e1.getTourelles().addListener(ecouteur);
 		gameLoop.play();
 		System.out.println(e1.getViruses().get(0).getX());
 //		try {
@@ -304,10 +322,10 @@ public class Controller implements Initializable {
 				// c'est un eventHandler d'ou le lambda
 				(ev -> {
 					if (temps == 8032) {
-						System.out.println("fini");
+//						System.out.println("fini");
 						gameLoop.stop();
 					} else if (temps % 5 == 0) {
-						System.out.println("un tour");
+//						System.out.println("un tour");
 						unTour();
 						// rafraichirPanneauEnnemis(/* v */);
 					}
@@ -332,6 +350,16 @@ public class Controller implements Initializable {
 		v.setY(288);
 		this.temps = 0;
 		gameLoop.play();
+		ImageView spawnTourelles = Config.getImg("/src/ressources/tiles/spawnTourelles.png");
+		for (int i = 0; i < map.getChildren().size(); i++) {
+			if(map.getChildren().get(i).getId()== "spawnTourelles") {
+//				map.getChildren().remove(i);
+				map.getChildren().set(i, spawnTourelles);
+				spawnTourelles.setOnMouseClicked(e -> clicTourelle(e));
+
+			}
+				
+		}
 	}
 
 	public void creerSpriteVirus(Virus v) {
