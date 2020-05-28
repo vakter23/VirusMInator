@@ -184,10 +184,10 @@ public abstract class Tourelles {
 
 	public Virus VirusAPorteeDeTir() {
 
-		System.out.println("env" + this.env);
+		//System.out.println("env" + this.env);
 		
 		for (int i = 0; i < env.getViruses().size(); i++) {
-			System.out.println(env.getViruses());
+			//System.out.println(env.getViruses());
 			if (env.getViruses().get(i).estVivant()) {
 				if ((this.getY() - this.portee <= env.getViruses().get(i).getY()
 						&& env.getViruses().get(i).getY() <= this.getY() + this.portee)
@@ -201,14 +201,66 @@ public abstract class Tourelles {
 
 	}
 	
+	
+	public Tourelles TourelleAPorteeDeTir() { //Utilise pour la tourelle Pingolimbo qui boost la vitesse d'attaque des tourelles dans un certain rayon
+
+		
+		
+		for (int i = 0; i < env.getTourelles().size(); i++) {
+			//System.out.println(env.getTourelles());
+			//if (env.getTourelles().get(i).estVivant()) { (Pas besoin de check ca normalement
+				if ((this.getY() - this.portee <= env.getTourelles().get(i).getY()
+						&& env.getTourelles().get(i).getY() <= this.getY() + this.portee)
+						&& (this.getX() - this.portee <= env.getTourelles().get(i).getX()
+								&& env.getTourelles().get(i).getX() <= this.getX() + this.portee)) {
+					return env.getTourelles().get(i);
+				}
+			//}
+		}
+		return null;
+
+	}
+	
+	/*public void slowVirus() {
+		
+		this.se
+		
+	}*/
+	
+	public void boostAttaqueSpeed() {
+		
+		this.setAtqSpeed(this.atqSpeed*1.2);
+		
+	}
+	
+	
 	public void agit() {
 		
-		if (temps % this.atqSpeed ==0  && this.VirusAPorteeDeTir() != null) // tentative d'evittement du null pointer exception
+		if (temps % this.atqSpeed ==0  && this.VirusAPorteeDeTir() != null) // tentative d'evittement du null pointer exception ( car virusaporteedetir retourne null si pas de virus
 		{
+			if(this.atq>0) {	
+
 			double newVie = (VirusAPorteeDeTir().getVie() - this.getAtq());
 			VirusAPorteeDeTir().setVie(newVie);
 			//VirusAPorteeDeTir().setVie(VirusAPorteeDeTir().getVie()-this.getAtq());
 			//code pour tirer / apelle de la méthode tir
+			}
+	
+	
+			else if (slow>0) { // Tourelles qui slow (Mousseuse/AvastiVirus)
+		
+				/*double newVitesse = (VirusAPorteeDeTir().getVitesse()-this.getSlow());
+				VirusAPorteeDeTir().setVitesse(newVitesse);*/
+				
+				VirusAPorteeDeTir().slowVirus();
+	
+			}
+			
+			else {//TOurelle PingoLimbo
+				
+				TourelleAPorteeDeTir().boostAttaqueSpeed();
+				
+			}
 		}
 	}
 

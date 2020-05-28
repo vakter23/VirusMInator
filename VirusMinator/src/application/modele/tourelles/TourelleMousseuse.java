@@ -2,10 +2,10 @@ package application.modele.tourelles;
 
 import application.modele.Environnement;
 
-public class TourelleMousseuse extends Tourelles {
+public class TourelleMousseuse extends Tourelles { // == TourelleAvastiVirus
 
 	
-	// cette tourelle ralentit les ennemis mais inflige peu de dégâts
+	// cette tourelle ralentit les ennemis mais inflige peu/pas de dégâts
 
 	public TourelleMousseuse(double atq, int portee, double atqSpeed, double slow, String nom, int x, int y,Environnement env) {
 		super(atq, portee, atqSpeed, slow, nom, x, y,env);

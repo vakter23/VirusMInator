@@ -136,5 +136,12 @@ public abstract class Virus {
 	public void setVitesse(double vitesse) {
 		this.vitesse = vitesse;
 	}
+	
+	public void slowVirus() {
+		
+		this.setVitesse(this.vitesse/1.2);
+		
+	}
+	
 
 }
