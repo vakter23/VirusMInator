@@ -3,6 +3,7 @@ package application.modele;
 import java.util.List;
 
 import application.Config;
+import application.controleur.Controller;
 import application.modele.tourelles.Tourelles;
 import application.modele.virus.Virus;
 import application.modele.virus.VirusBasirus;
@@ -18,7 +19,7 @@ public class Environnement {
 	private ObservableList<Tourelles> tourelles = FXCollections.observableArrayList();
 	private ObservableList<Virus> nextViruses = FXCollections.observableArrayList();
 	private String[][] terrain;
-
+	
 	public Environnement(int width, int height) {
 		super();
 		this.width = width;
@@ -36,11 +37,17 @@ public class Environnement {
 	public int getHeight() {
 		return height;
 	}
-	public void initVirus() {
-		viruses.add(new VirusDivirus(70, 10, 0.025, "VirusDivirus", 0, 288));
-		viruses.add(new VirusBasirus(50, 10, 0.015, "VirusBasirus", -30, 288));
-		viruses.add(new VirusBasirus(50, 10, 0.015, "VirusBasirus", -60, 288));	
-		viruses.add(new VirusDivirus(70, 10, 0.025, "VirusDivirus", -90, 288));
+	public void initVirus(int nbVirusVague) {
+		this.viruses.clear();
+		for (int i = 0; i<Virus.listeVirusAttente.size(); i++) {
+			nextViruses.add(Virus.listeVirusAttente.get(i));
+			resetPos((nextViruses.get(i)));
+			//Virus.listeVirusAttente.remove(i);
+		}		
+//		viruses.add(new VirusDivirus(70, 10, 0.025, "VirusDivirus", 0, 288));
+//		viruses.add(new VirusBasirus(50, 10, 0.015, "VirusBasirus", -30, 288));
+//		viruses.add(new VirusBasirus(50, 10, 0.015, "VirusBasirus", -60, 288));	
+//		viruses.add(new VirusDivirus(70, 10, 0.025, "VirusDivirus", -90, 288));
 	}
 	public ObservableList<Virus> getViruses() {
 		return viruses;
@@ -51,7 +58,10 @@ public class Environnement {
 	public ObservableList<Tourelles> getTourelles() {
 		return tourelles;
 	}
-
+	public void resetPos(Virus v) {
+		v.setX(0);
+		v.setY(288);
+	}
 	public Virus getVirus(String id) {
 		for (Virus v : this.viruses) {
 			if (v.getId().equals(id)) {
@@ -84,9 +94,10 @@ public class Environnement {
 	}
 
 	public void unTour() {
+		
 		for (int i = 0; i < viruses.size(); i++) {
 			Virus v = viruses.get(i);
-			v.seDeplace();
+			v.seDeplace(v);
 		}
 		for (int i = 0; i < tourelles.size(); i++) {
 			Tourelles t = tourelles.get(i);
@@ -99,6 +110,12 @@ public class Environnement {
 				viruses.remove(i);
 			}
 		}
+		for(int i = 0; i < nextViruses.size(); i++) {
+            if (nextViruses.get(i).getTempsSpawn() == Controller.temps) {
+                viruses.add(nextViruses.get(i));
+                System.out.println("Virus : "+ nextViruses.get(i).getNom() + " ajouté !");
+            }
+        }
 
 	}
 

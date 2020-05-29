@@ -42,6 +42,7 @@ public class MonObservateurViruses implements ListChangeListener<Virus> {
 			VirusActuel.setId(v.getId());
 			VirusActuel.translateXProperty().bind(v.getXproperty());
 			VirusActuel.translateYProperty().bind(v.getYproperty());
+			System.out.println(VirusActuel.getId());
 			System.out.println(VirusActuel.getTranslateX());
 			System.out.println(VirusActuel.getTranslateY());
 			panneauEnnemis.getChildren().add(VirusActuel);
@@ -51,6 +52,7 @@ public class MonObservateurViruses implements ListChangeListener<Virus> {
 			VirusActuel.setId(v.getId());
 			VirusActuel.translateXProperty().bind(v.getXproperty());
 			VirusActuel.translateYProperty().bind(v.getYproperty());
+			System.out.println(VirusActuel.getId());
 			System.out.println(VirusActuel.getTranslateX());
 			System.out.println(VirusActuel.getTranslateY());
 			panneauEnnemis.getChildren().add(VirusActuel);
@@ -61,6 +63,7 @@ public class MonObservateurViruses implements ListChangeListener<Virus> {
 			VirusActuel.setId(v.getId());
 			VirusActuel.translateXProperty().bind(v.getXproperty());
 			VirusActuel.translateYProperty().bind(v.getYproperty());
+			System.out.println(VirusActuel.getId());
 			System.out.println(VirusActuel.getTranslateX());
 			System.out.println(VirusActuel.getTranslateY());
 			panneauEnnemis.getChildren().add(VirusActuel);
@@ -70,6 +73,7 @@ public class MonObservateurViruses implements ListChangeListener<Virus> {
 			VirusActuel.setId(v.getId());
 			VirusActuel.translateXProperty().bind(v.getXproperty());
 			VirusActuel.translateYProperty().bind(v.getYproperty());
+			System.out.println(VirusActuel.getId());
 			System.out.println(VirusActuel.getTranslateX());
 			System.out.println(VirusActuel.getTranslateY());
 			panneauEnnemis.getChildren().add(VirusActuel);
@@ -79,6 +83,7 @@ public class MonObservateurViruses implements ListChangeListener<Virus> {
 			VirusActuel.setId(v.getId());
 			VirusActuel.translateXProperty().bind(v.getXproperty());
 			VirusActuel.translateYProperty().bind(v.getYproperty());
+			System.out.println(VirusActuel.getId());
 			System.out.println(VirusActuel.getTranslateX());
 			System.out.println(VirusActuel.getTranslateY());
 			panneauEnnemis.getChildren().add(VirusActuel);
@@ -95,7 +100,6 @@ public class MonObservateurViruses implements ListChangeListener<Virus> {
 			for (Virus mort : c.getRemoved()){
 				System.out.println(mort.getId());
 				enleverSprite(mort);
-				
 			}
 			for (Virus nouveau : c.getAddedSubList()) {
 				creerSpriteVirus(nouveau);

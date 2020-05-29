@@ -82,7 +82,7 @@ public class Controller implements Initializable {
 
 	private Timeline gameLoop;
 
-	private int temps;
+	public static int temps;
 
 	private Image tourelleGel = (Image) (getImgg("/src/ressources/tourelles/gelHydro.png"));
 	@FXML
@@ -165,12 +165,7 @@ public class Controller implements Initializable {
 	 */
 
 	public void ajouter() {
-		this.e1.initVirus();
-		for (int i = 0; i < this.e1.getViruses().size(); i++) {
-			//creerSpriteVirus(this.e1.getViruses().get(i));
-			
-		}
-
+		this.e1.initVirus(7);
 	}
 
 	/*
@@ -233,10 +228,10 @@ public class Controller implements Initializable {
 		creerTerrainVue();
 		System.out.println(this.e1.getViruses().size());
 		ajouter();
-		System.out.println("fait");
+		System.out.println("Viruses initialisés");
 		initAnimation();
 		// demarre l'animation
-		gameLoop.play();
+
 //		try {
 //			Thread.sleep(1000);
 //		} catch (InterruptedException e) {
@@ -251,7 +246,7 @@ public class Controller implements Initializable {
 		gameLoop.setCycleCount(Timeline.INDEFINITE);
 		KeyFrame kf = new KeyFrame(
 				// on définit le FPS (nbre de frame par seconde)
-				Duration.seconds(0.0050),
+				Duration.seconds(0.0955),
 
 				// on définit ce qui se passe à chaque frame
 				// c'est un eventHandler d'ou le lambda
@@ -260,13 +255,11 @@ public class Controller implements Initializable {
 						System.out.println("fini");
 						gameLoop.stop();
 					} else if (temps % 5 == 0) {
-						// System.out.println("tour" + temps);
+						System.out.println("tour" + temps);
 						unTour();
 						// rafraichirPanneauEnnemis(/* v */);
 					}
-					else if (temps % 60 ==0) {
-						
-					}
+
 					temps++;
 				}));
 		gameLoop.getKeyFrames().add(kf);
@@ -282,21 +275,29 @@ public class Controller implements Initializable {
 
 	@FXML
 	void reinit(ActionEvent event) {
-		/* Relance l'animation */
+		gameLoop.stop();
 		System.out.println(this.e1.getViruses().size());
+		//for (Virus v : this.e1.getViruses()) {
+			this.e1.getViruses().clear();
+			//}
+//		for (int j = 0; j < this.e1.getTourelles().size(); j++) {
+//			this.e1.getTourelles().remove(j);
+//		}
 		for (int i = 0; i < this.e1.getViruses().size(); i++) {
-			Virus v = this.e1.getViruses().get(i);
-			v.setX(0);
-			v.setY(288);
+			System.out.println(this.e1.getViruses().get(i).getId());
 		}
-		for (int j = 0; j < this.e1.getTourelles().size(); j++) {
-			this.e1.getTourelles().remove(j);
-		}
+	
 		this.temps = 0;
 		System.out.println(this.e1.getViruses().size());
-		gameLoop.play();
+
 	}
 
+	@FXML
+	void Start(ActionEvent event) {
+		ajouter();
+		initAnimation();
+		gameLoop.play();
+	}
 //	public void creerSpriteVirus(Virus v) {
 //		Circle r;
 //		ImageView VirusActuel;

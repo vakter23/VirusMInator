@@ -131,50 +131,50 @@ public abstract class Tourelles {
 
 	}*/
 	
-	public static void main(String[] args) {
-		
-			Environnement e1 = new Environnement(500, 500);
-		
-			
-			Tourelles t = new TourelleHydroClaque(10, 10, 10, 0, "nom", 9, 9, e1);
-			
-			Virus v = new VirusBasirus(11, 10, 10, "noom", 9, 9);
-			
-			System.out.println(v.getVie());
-	
-				e1.ajouterVirus(v);
-			
-			
-			System.out.println("ou");
-			System.out.println(v.getVie());
-			
-			
-			
-			double newVie = (t.VirusAPorteeDeTir().getVie() - t.getAtq());
-			t.VirusAPorteeDeTir().setVie(newVie);
-			
-			System.out.println("where");
-			System.out.println(v.getVie());
-
-			
-			/*for (int i = 0; i < e1.getViruses().size(); i++) {
-				if (e1.getViruses().get(i).estVivant()) {
-					if ((t.getY() - t.portee <= e1.getViruses().get(i).getY()
-							&& e1.getViruses().get(i).getY() <= t.getY() + t.portee)
-							&& (t.getX() - t.portee <= e1.getViruses().get(i).getX()
-									&& e1.getViruses().get(i).getX() <= t.getX() + t.portee)) {
-						e1.getViruses().get(i);
-					}
-				}
-			}*/
-			
-
-			
-			
-			//System.out.println(VirusAPorteeDeTir().getVie());
-
-
-		}
+//	public static void main(String[] args) {
+//		
+//			Environnement e1 = new Environnement(500, 500);
+//		
+//			
+//			Tourelles t = new TourelleHydroClaque(10, 10, 10, 0, "nom", 9, 9, e1);
+//			
+//			Virus v = new VirusBasirus(11, 10, 10, "noom", 9, 9);
+//			
+//			System.out.println(v.getVie());
+//	
+//				e1.ajouterVirus(v);
+//			
+//			
+//			System.out.println("ou");
+//			System.out.println(v.getVie());
+//			
+//			
+//			
+//			double newVie = (t.VirusAPorteeDeTir().getVie() - t.getAtq());
+//			t.VirusAPorteeDeTir().setVie(newVie);
+//			
+//			System.out.println("where");
+//			System.out.println(v.getVie());
+//
+//			
+//			/*for (int i = 0; i < e1.getViruses().size(); i++) {
+//				if (e1.getViruses().get(i).estVivant()) {
+//					if ((t.getY() - t.portee <= e1.getViruses().get(i).getY()
+//							&& e1.getViruses().get(i).getY() <= t.getY() + t.portee)
+//							&& (t.getX() - t.portee <= e1.getViruses().get(i).getX()
+//									&& e1.getViruses().get(i).getX() <= t.getX() + t.portee)) {
+//						e1.getViruses().get(i);
+//					}
+//				}
+//			}*/
+//			
+//
+//			
+//			
+//			//System.out.println(VirusAPorteeDeTir().getVie());
+//
+//
+//		}
 	
 	
 	public void gestionTir() { //Methode qui gere le missile et réduit les pv du virus quand le missile le touche

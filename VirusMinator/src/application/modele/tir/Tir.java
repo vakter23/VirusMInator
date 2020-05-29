@@ -7,5 +7,5 @@ public class Tir {
 	private IntegerProperty xProperty;
 	private IntegerProperty yProperty;
 	private int destination;
-
+	
 }
