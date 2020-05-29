@@ -43,6 +43,7 @@
                </children></HBox>
             <VBox prefHeight="200.0" prefWidth="100.0" />
             <Button fx:id="restart" mnemonicParsing="false" onAction="#reinit" text="Button" />
+            <Button fx:id="bouttonVendre" mnemonicParsing="false" text="VENDRE" />
          </children>
          <BorderPane.margin>
             <Insets right="50.0" top="20.0" />

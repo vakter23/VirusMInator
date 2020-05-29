@@ -6,6 +6,7 @@ import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -87,6 +88,8 @@ public class Controller implements Initializable {
 
 	private int temps;
 
+	@FXML
+	private Button bouttonVendre;
 	@FXML
 	private ImageView savonneuse;
 	@FXML
@@ -226,32 +229,81 @@ public class Controller implements Initializable {
 	 * Virus.setTranslateX(720); Virus.setTranslateY(720);
 	 * getPanneauEnnemis().getChildren().add(Virus); }
 	 */
-	
+
 	/*
-	 * Lorsqu'on clique sur un spawnTourelle puis sur une tourelle du shop la tourelle est automatiquement ajoutée a la liste
-	 * */
+	 * Lorsqu'on clique sur un spawnTourelle puis sur une tourelle du shop la
+	 * tourelle est automatiquement ajoutée a la liste
+	 */
 	void clicTourelle(MouseEvent event) {
 //		ImageView sourc = (ImageView) event.getSource();
 //		Image spawnTourellesR = getImgg("/src/ressources/tiles/spawnTourelleRouge.png");
 //		sourc.setImage(spawnTourellesR);
-		savonneuse.setOnMouseClicked((e) -> {
-			this.e1.ajouterTourelles(new TourelleSavonneuse(0, 0, 0, 0, "0", (int) event.getX(), (int) event.getY()));
-		});
-		avastirus.setOnMouseClicked((e) -> {
-			this.e1.ajouterTourelles(new TourelleMousseuse(0, 0, 0, 0, "", (int) event.getX(), (int) event.getY()));
-		});
-		gelHydroClaque.setOnMouseClicked((e) -> {
-			this.e1.ajouterTourelles(new TourelleHydroClaque(0, 0, 0, 0, "", (int) event.getX(), (int) event.getY()));
+		event.getTarget();
+		Node test = (Node) event.getSource();
+		System.out.println("x=" + test.getLayoutX() + "y = " + test.getLayoutY());
+//		System.out.println("clic tourelle" + event.getSceneX()() + event.getSceneY() + event.getSource().);
+		if (verifiePlaceLibre(test.getLayoutX(), test.getLayoutY()) == true) {
+			savonneuse.setOnMouseClicked((e) -> {
+				if (verifiePlaceLibre(test.getLayoutX(), test.getLayoutY()) == true) {
+					Tourelles t1 = new TourelleSavonneuse(0, 0, 0, 0, "0", (int) test.getLayoutX(),
+							(int) test.getLayoutY());
+					System.out.println(t1);
+					this.e1.ajouterTourelles(t1);
+				}
+			});
+			avastirus.setOnMouseClicked((e) -> {
+				if (verifiePlaceLibre(test.getLayoutX(), test.getLayoutY()) == true) {
 
-		});
-		siliteBang.setOnMouseClicked((e) -> {
-			this.e1.ajouterTourelles(new TourelleSilliteBang(0, 0, 0, 0, "", (int) event.getX(), (int) event.getY()));
-		});
-		drPingoLimbo.setOnMouseClicked((e) -> {
-			this.e1.ajouterTourelles(
-					new TourelleDocteurPingoLimbo(0, 0, 0, 0, "", (int) event.getX(), (int) event.getY()));
-		});
+					this.e1.ajouterTourelles(
+							new TourelleMousseuse(0, 0, 0, 0, "", (int) test.getLayoutX(), (int) test.getLayoutY()));
+				}
+			});
+			gelHydroClaque.setOnMouseClicked((e) -> {
+				if (verifiePlaceLibre(test.getLayoutX(), test.getLayoutY()) == true) {
 
+					this.e1.ajouterTourelles(
+							new TourelleHydroClaque(0, 0, 0, 0, "", (int) test.getLayoutX(), (int) test.getLayoutY()));
+				}
+			});
+			siliteBang.setOnMouseClicked((e) -> {
+				if (verifiePlaceLibre(test.getLayoutX(), test.getLayoutY()) == true) {
+
+					this.e1.ajouterTourelles(
+							new TourelleSilliteBang(0, 0, 0, 0, "", (int) test.getLayoutX(), (int) test.getLayoutY()));
+				}
+			});
+			drPingoLimbo.setOnMouseClicked((e) -> {
+				if (verifiePlaceLibre(test.getLayoutX(), test.getLayoutY()) == true) {
+
+					this.e1.ajouterTourelles(new TourelleDocteurPingoLimbo(0, 0, 0, 0, "", (int) test.getLayoutX(),
+							(int) test.getLayoutY()));
+				}
+			});
+		} else {
+			System.out.println(e1.getTourelles());
+			System.out.println("DEJA TOURELLES");
+			System.out.println(test.getId());
+			bouttonVendre.setOnMouseClicked((e) -> {
+				for (int i = 0; i < this.e1.getTourelles().size(); i++) {
+					if (this.e1.getTourelles().get(i).getX() == test.getLayoutX()
+							&& this.e1.getTourelles().get(i).getY() == test.getLayoutY()) {
+						this.e1.getTourelles().remove(e1.getTourelles().get(i));
+						System.out.println("xx=" + e1.getTourelles().get(0).getX());
+						System.out.println("yy=" + e1.getTourelles().get(0).getY());
+
+					}
+				}
+			});
+		}
+	}
+
+	public boolean verifiePlaceLibre(double d, double e) {
+		for (int i = 0; i < this.e1.getTourelles().size(); i++) {
+			if (this.e1.getTourelles().get(i).getX() == d && this.e1.getTourelles().get(i).getY() == e) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	private static Image getImgg(String... paths) {

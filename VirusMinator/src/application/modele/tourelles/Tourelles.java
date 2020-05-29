@@ -15,7 +15,8 @@ public abstract class Tourelles {
 	private double atqSpeed, atq, slow;
 	private String nom, ID;
 	protected Environnement env;
-
+	private static int compteur = 1;
+	
 	public Tourelles(double atq, int portee, double atqSpeed, double slow, String nom, int x,
 			int y) { /* Constructeur tourelles */
 
@@ -24,9 +25,10 @@ public abstract class Tourelles {
 		this.setAtqSpeed(atqSpeed);
 		this.setSlow(slow);
 		this.nom = nom;
+		this.ID = "t" + compteur;
 		this.setX(x);
 		this.setY(y);
-
+		compteur++;
 	}
 
 	public abstract void amelioration(); // Ou coder argent necessaire a amelioration
@@ -52,7 +54,7 @@ public abstract class Tourelles {
 	}
 
 	public final int getY() {
-		return x.getValue();
+		return y.getValue();
 	}
 
 	public final IntegerProperty getYProperty() {
@@ -64,7 +66,7 @@ public abstract class Tourelles {
 	}
 
 	public final void setY(int n) {
-		x.setValue(n);
+		y.setValue(n);
 	}
 
 	public double getAtq() {
@@ -125,6 +127,14 @@ public abstract class Tourelles {
 		}
 		return null;
 
+	}
+	
+
+
+	@Override
+	public String toString() {
+		return "Tourelles [x=" + x + ", y=" + y + ", portee=" + portee + ", atqSpeed=" + atqSpeed + ", atq=" + atq
+				+ ", slow=" + slow + ", nom=" + nom + ", ID=" + ID + "]";
 	}
 
 	public boolean placementTourelles() {

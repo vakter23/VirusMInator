@@ -36,6 +36,10 @@ public class ecouteurTourelle implements ListChangeListener<Tourelles> {
 			for (Tourelles nouvelle : c.getAddedSubList()) {
 				creerSpriteTourelle(nouvelle);
 			}
+			for (Tourelles nouvelle : c.getRemoved()) {
+				supprimerSpriteTourelle(nouvelle);
+			}
+			
 		}
 	}
 
@@ -45,29 +49,43 @@ public class ecouteurTourelle implements ListChangeListener<Tourelles> {
 //			sourc.setImage(spawnTourellesR);
 			if(t instanceof TourelleSavonneuse){
 				ImageView tourelle =  getImgg("/src/ressources/tourelles/gelHydro.png");
-				panneauEnnemi.getChildren().add(t.getX()*t.getY(), tourelle);
+				tourelle.setLayoutX(t.getX());
+				tourelle.setLayoutY(t.getY());
+				panneauEnnemi.getChildren().add(tourelle);
 //				panneauEnnemi.getChildren().add(tourelle.getHeight()*tourelle.getWidth(), tourelle);
 			}
 			else if (t instanceof TourelleMousseuse){
 				ImageView tourelle = getImgg("/src/ressources/tourelles/Avast.png");
-				panneauEnnemi.getChildren().add(t.getX()*t.getY(), tourelle);
+				tourelle.setLayoutX(t.getX());
+				tourelle.setLayoutY(t.getY());
+				panneauEnnemi.getChildren().add(tourelle);
 			}
 			else if (t instanceof TourelleHydroClaque){
 				ImageView tourelle = getImgg("/src/ressources/tourelles/gel-hydoralcoolique.png");
-				panneauEnnemi.getChildren().add(t.getX()*t.getY(), tourelle);
+				tourelle.setLayoutX(t.getX());
+				tourelle.setLayoutY(t.getY());
+				panneauEnnemi.getChildren().add(tourelle);
 
 			}
 			else if (t instanceof TourelleSilliteBang){
 				ImageView tourelle = getImgg("/src/ressources/tourelles/javel.png");
-				panneauEnnemi.getChildren().add(t.getX()*t.getY(), tourelle);
+				tourelle.setLayoutX(t.getX());
+				tourelle.setLayoutY(t.getY());
+				panneauEnnemi.getChildren().add(tourelle);
 
 			}
 			else if (t instanceof TourelleDocteurPingoLimbo){
 				ImageView tourelle = getImgg("/src/ressources/tourelles/drPingoLimbo.png");
-				panneauEnnemi.getChildren().add(t.getX()*t.getY(), tourelle);
+				tourelle.setLayoutX(t.getX());
+				tourelle.setLayoutY(t.getY());
+				panneauEnnemi.getChildren().add(tourelle);
 			}
 		
 
+	}
+
+	private void supprimerSpriteTourelle(Tourelles t) {
+		panneauEnnemi.getChildren().remove(t);
 	}
 
 	public int recupererX(MouseEvent e) {
