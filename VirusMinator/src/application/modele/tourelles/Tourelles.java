@@ -13,15 +13,15 @@ public abstract class Tourelles {
 
 	// private int x,y;
 	private int portee;
-	private double atqSpeed, atq, slow;
+	private double atqSpeed; //atq, slow
 	private String nom, ID;
 	protected Environnement env;
 	private int temps;//Variable pour gerer temps entre le tir des tourelles (1 unité de temps = 1 tour) <- variable crée dans environnement
 
+	
 	public Tourelles( int portee, double atqSpeed,  String nom, int x,
 			int y ,Environnement env) { /* Constructeur tourelles */
 
-		this.setAtq(atq);
 		this.setPortee(portee);
 		this.setAtqSpeed(atqSpeed);
 		this.nom = nom;
@@ -69,13 +69,7 @@ public abstract class Tourelles {
 		y.setValue(n);
 	}
 
-	public double getAtq() {
-		return atq;
-	}
-
-	public void setAtq(double atq2) {
-		this.atq = atq2;
-	}
+	
 
 	public int getPortee() {
 		return portee;
@@ -95,45 +89,16 @@ public abstract class Tourelles {
 
 	
 
-	public void setSlow(double slow) {
-		this.slow = slow;
-	}
+	
 
-	/*public void Tir() {// Methode qui fait que la tourelle tir
-
-		if (VirusAPorteeDeTir() != null) {
-			
-			Tourelles t = new TourelleHydroClaque(10, 10, 10, 0, nom, 9, 9);
-			
-			Virus v = new VirusBasirus(10, 10, 10, nom, 9, 9);
-			
-			
-			
-			env.ajouterVirus(v);
-			
-			
-			t.VirusAPorteeDeTir();
-			
-			
-			double newVie = (v.getVie() - t.getAtq());
-			
-			v.setVie(newVie);
-			
-			System.out.println(t.VirusAPorteeDeTir());
-			
-			System.out.println(VirusAPorteeDeTir().getVie());
-
-
-		}
-
-	}*/
+	
 	
 	public static void main(String[] args) {
 		
 			Environnement e1 = new Environnement(500, 500);
 		
 			
-			Tourelles t = new TourelleHydroClaque(10, 10, 10, "nom", 9, 9, e1);
+			Tourelles t = new TourelleHydroClaque(10, 10, "nom", 9, 9, e1);
 			
 			Virus v = new VirusBasirus(11, 10, 10, "noom", 9, 9);
 			
@@ -147,8 +112,8 @@ public abstract class Tourelles {
 			
 			
 			
-			double newVie = (t.VirusAPorteeDeTir().getVie() - t.getAtq());
-			t.VirusAPorteeDeTir().setVie(newVie);
+			//double newVie = (t.VirusAPorteeDeTir().getVie() - t.getAtq());
+			//t.VirusAPorteeDeTir().setVie(newVie);
 			
 			System.out.println("where");
 			System.out.println(v.getVie());
@@ -220,9 +185,9 @@ public abstract class Tourelles {
 	
 	
 	
-	public void boostAttaqueSpeed() {
+	public void boostAttaqueSpeed(double boost) {
 		
-		this.setAtqSpeed(this.atqSpeed*1.2);
+		this.setAtqSpeed(this.atqSpeed*boost);
 		
 	}
 	

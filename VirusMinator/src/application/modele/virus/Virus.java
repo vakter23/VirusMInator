@@ -137,9 +137,9 @@ public abstract class Virus {
 		this.vitesse = vitesse;
 	}
 	
-	public void slowVirus() {
+	public void slowVirus(double slow) {
 		
-		this.setVitesse(this.vitesse/1.2);
+		this.setVitesse(this.vitesse/slow);
 		
 	}
 	

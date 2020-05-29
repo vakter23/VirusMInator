@@ -4,12 +4,16 @@ import application.modele.Environnement;
 
 public class TourelleHydroClaque extends TourellesAvecDegats{
 
+	
+
 	//cette tourelle dispose d’un petit champs de tir mais asperge les ennemis non-stop
 
 	
 	
-	public TourelleHydroClaque(int attaque, int portee, double atqSpeed, String nom, int x, int y, Environnement env) {
-		super(attaque, portee, atqSpeed, nom, x, y, env);
+	public TourelleHydroClaque(int portee, double atqSpeed, String nom, int x, int y, Environnement env) {
+		super(portee, atqSpeed, nom, x, y, env);
+		
+		this.setAtq(18);
 	}
 
 

@@ -3,13 +3,18 @@ package application.modele.tourelles;
 import application.modele.Environnement;
 
 public class TourelleSavonneuse extends TourellesAvecDegats {
+	
+
 	// cette tourelle (tourelle de base) inflige dégât basique
 
 	
-	
-	public TourelleSavonneuse(int attaque, int portee, double atqSpeed, String nom, int x, int y, Environnement env) {
-		super(attaque, portee, atqSpeed, nom, x, y, env);
+	public TourelleSavonneuse(int portee, double atqSpeed, String nom, int x, int y, Environnement env) {
+		super(portee, atqSpeed, nom, x, y, env);
+		
+		this.setAtq(18);
+
 	}
+	
 
 
 	@Override

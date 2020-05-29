@@ -2,30 +2,24 @@ package application.modele.tourelles;
 
 import application.modele.Environnement;
 
-public class TourellesAvecDegats extends Tourelles {
+public abstract class TourellesAvecDegats extends Tourelles {
 
-	private int attaque;
+	private double attaque;
 	
-	public TourellesAvecDegats(int attaque,int portee, double atqSpeed, String nom, int x, int y, Environnement env) {
+	public TourellesAvecDegats(int portee, double atqSpeed, String nom, int x, int y, Environnement env) {
 		super(portee, atqSpeed, nom, x, y, env);
 
-		this.attaque=attaque;
 	
 	}
 
-	@Override
-	public void amelioration() {
-		// TODO Auto-generated method stub
-		
+	
+	public double getAtq() {
+		return attaque;
 	}
 
-	@Override
-	public void tirer() {
-		// TODO Auto-generated method stub
-		
+	public void setAtq(double atq2) {
+		this.attaque = atq2;
+	
+	
 	}
-
-	
-	
-
 }

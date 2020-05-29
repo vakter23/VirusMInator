@@ -4,15 +4,19 @@ import application.modele.Environnement;
 
 public class TourelleSilliteBang extends TourellesAvecDegats {
 
+	
+
 	// puissante tourelle qui balance des rockets de super loin mais prend du temps
 	// à recharger. (tours qui tirent à un endroit désigné à la souris)
 	
 	
 	
-	public TourelleSilliteBang(int attaque, int portee, double atqSpeed, String nom, int x, int y, Environnement env) {
-		super(attaque, portee, atqSpeed, nom, x, y, env);
-	}
+	public TourelleSilliteBang(int portee, double atqSpeed, String nom, int x, int y, Environnement env) {
+		super(portee, atqSpeed, nom, x, y, env);
+		
+		this.setAtq(18);
 
+	}
 
 
 	@Override
