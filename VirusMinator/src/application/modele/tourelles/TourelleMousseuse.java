@@ -1,14 +1,21 @@
 package application.modele.tourelles;
 
 import application.modele.Environnement;
+public class TourelleMousseuse extends Tourelles { // == TourelleAvastiVirus
 
-public class TourelleMousseuse extends Tourelles {
-
+	// cette tourelle ralentit les ennemis mais inflige peu/pas de dégâts
 	
-	// cette tourelle ralentit les ennemis mais inflige peu de dégâts
+	private double slow;
+	
 
-	public TourelleMousseuse(double atq, int portee, double atqSpeed, double slow, String nom, int x, int y,Environnement e1) {
-		super(atq, portee, atqSpeed, slow, nom, x, y, e1);
+	public TourelleMousseuse( int portee, double atqSpeed, String nom, int x, int y,Environnement env) {
+		super(portee, atqSpeed,  nom, x, y,env);
+		
+		this.slow=1.2;
+	}
+	
+	public void setSlow(double slow) {
+	this.slow = slow;
 	}
 	
 
@@ -16,9 +23,22 @@ public class TourelleMousseuse extends Tourelles {
 	public void amelioration() {
 
 
-		this.setAtq(this.getAtq()*1.2);
+		this.setSlow(slow+2);
 		this.setPortee(this.getPortee()+5);
 		this.setAtqSpeed(this.getAtqSpeed()+1);		
+	}
+
+
+	@Override
+	public void tirer() {
+
+
+		 // Tourelles qui slow (Mousseuse/AvastiVirus)
+		
+		/*double newVitesse = (VirusAPorteeDeTir().getVitesse()-this.getSlow());
+		VirusAPorteeDeTir().setVitesse(newVitesse);*/
+		
+		VirusAPorteeDeTir().slowVirus(this.slow);
 	}
 
 }

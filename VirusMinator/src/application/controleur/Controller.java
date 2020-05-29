@@ -47,6 +47,8 @@ public class Controller implements Initializable {
 	private Button placerEnnemis;
 
 	@FXML
+	private Button Start;
+	@FXML
 	private HBox shopTFT;
 
 	@FXML
@@ -140,7 +142,6 @@ public class Controller implements Initializable {
 				map.getChildren().add(spawnTourelles);
 				System.out.println(spawnTourelles);
 				spawnTourelles.setOnMouseClicked(e -> gelHydro.setOnMouseClicked(ee -> clicTourelle(e)));
-
 				break;
 			case "vertEnnemi":
 				map.getChildren().add(vertEnnemi);
@@ -190,10 +191,33 @@ public class Controller implements Initializable {
 		ImageView sourc = (ImageView) event.getSource();
 		Image tourelleGel = (getImgg("/src/ressources/tourelles/gelHydro.png"));
 		sourc.setImage(tourelleGel);
-		this.e1.ajouterTourelles(new TourelleSavonneuse(20, 128, 0.015, 0.015, "TourelleSavonneuse",
-				(int) event.getSceneX(), (int) event.getSceneY(), e1));
-
 	}
+	void supprimer(ActionEvent event) {
+		for (int i = 0; i < map.getChildren().size(); i++) {
+			ImageView spawnTourelles = Config.getImg("/src/ressources/tiles/spawnTourelles.png");
+			String retour = Config.imageDe(Config.listeMap.get(i));
+			if (map.getChildren().contains(tourelleGel)) {
+				map.getChildren().remove(i);
+			}
+		}
+//    	for (int i = 0; i < e1.getTourelles().size(); i++) {
+//			
+//		}
+//    	for (int i = 0; i < panneauEnnemis.getChildren().size(); i++) {
+//			if(panneauEnnemis.getChildren().get(i).contains(tourelleGel)) {
+//				
+//			}
+//		}
+	}
+
+//>>>>>>> branch 'develop' of https:github.com/vakter23/VirusMInator.git
+	/*public void dessinEnnemi() {
+		ImageView Virus = Config.getImg("/src/ressources/Virus/base_Virus.png");
+		Virus.setTranslateX(720);
+		Virus.setTranslateY(720);
+		getPanneauEnnemis().getChildren().add(Virus);
+	}
+*/
 
 	private static Image getImgg(String... paths) {
 		return new Image(Paths.get(System.getProperty("user.dir"), paths).toUri().toString());
@@ -205,6 +229,11 @@ public class Controller implements Initializable {
 	 * @FXML void placerEnnemis(ActionEvent event) {
 	 * System.out.println("lancement"); dessinEnnemi(); }
 	 */
+	/*@FXML
+	void placerEnnemis(ActionEvent event) {
+		System.out.println("lancement");
+		dessinEnnemi();
+	}*/
 //	void placerEnnemis(ActionEvent event) {
 //		Circle r = new Circle(3);
 //		r.setFill(Color.RED);
@@ -298,76 +327,39 @@ public class Controller implements Initializable {
 		initAnimation();
 		gameLoop.play();
 	}
-//	public void creerSpriteVirus(Virus v) {
-//		Circle r;
-//		ImageView VirusActuel;
-//		/*
-//		 * { Demander à la prof pour la gameloop, et pour la facon d'afficher un ennemi
-//		 * en fonction de sa sous classe
-//		 * 
-//		 *
-//		 */
-//
-//		// this.e1.getViruses().addListener()
-//		if (v instanceof VirusBasirus) {
-//			r = new Circle(3);
-//			r.setFill(Color.RED);
-//			r.setId(v.getId());
-//			r.translateXProperty().bind(v.getXproperty());
-//			r.translateYProperty().bind(v.getYproperty());
-//			System.out.println(r.getTranslateX());
-//			System.out.println(r.getTranslateY());
-//			panneauEnnemis.getChildren().add(r);
-//
-//			VirusActuel = Config.getImg("/src/ressources/virus/base_Virus.png");
-//			VirusActuel.setId(v.getId());
-//			VirusActuel.translateXProperty().bind(v.getXproperty());
-//			VirusActuel.translateYProperty().bind(v.getYproperty());
-//			System.out.println(VirusActuel.getTranslateX());
-//			System.out.println(VirusActuel.getTranslateY());
-//			panneauEnnemis.getChildren().add(VirusActuel);
-//
-//		} else if (v instanceof VirusDivirus) {
-//			VirusActuel = Config.getImg("/src/ressources/virus/divisible_Virus.png");
-//			VirusActuel.setId(v.getId());
-//			VirusActuel.translateXProperty().bind(v.getXproperty());
-//			VirusActuel.translateYProperty().bind(v.getYproperty());
-//			System.out.println(VirusActuel.getTranslateX());
-//			System.out.println(VirusActuel.getTranslateY());
-//			panneauEnnemis.getChildren().add(VirusActuel);
-//		}
-//
-//		else if (v instanceof VirusVhealrus) {
-//			ajouter();
-//			VirusActuel = Config.getImg("/src/ressources/virus/healing_Virus.png");
-//			VirusActuel.setId(v.getId());
-//			VirusActuel.translateXProperty().bind(v.getXproperty());
-//			VirusActuel.translateYProperty().bind(v.getYproperty());
-//			System.out.println(VirusActuel.getTranslateX());
-//			System.out.println(VirusActuel.getTranslateY());
-//			panneauEnnemis.getChildren().add(VirusActuel);
-//		} else if (v instanceof VirusViboomrus) {
-//			ajouter();
-//			VirusActuel = Config.getImg("/src/ressources/virus/impact_Virus.png");
-//			VirusActuel.setId(v.getId());
-//			VirusActuel.translateXProperty().bind(v.getXproperty());
-//			VirusActuel.translateYProperty().bind(v.getYproperty());
-//			System.out.println(VirusActuel.getTranslateX());
-//			System.out.println(VirusActuel.getTranslateY());
-//			panneauEnnemis.getChildren().add(VirusActuel);
-//		} else if (v instanceof VirusViterus) {
-//			ajouter();
-//			VirusActuel = Config.getImg("/src/ressources/virus/rapid_Virus.png");
-//			VirusActuel.setId(v.getId());
-//			VirusActuel.translateXProperty().bind(v.getXproperty());
-//			VirusActuel.translateYProperty().bind(v.getYproperty());
-//			System.out.println(VirusActuel.getTranslateX());
-//			System.out.println(VirusActuel.getTranslateY());
-//			panneauEnnemis.getChildren().add(VirusActuel);
-//		}
-//
-//	}
+	private void initAnimation(Virus v) {
+		gameLoop = new Timeline();
+		temps = 0;
+		gameLoop.setCycleCount(Timeline.INDEFINITE);
+		double vitesse;
+		if (true) {
+			vitesse = v.getVitesse();
+		} else {
+			vitesse = v.getVitesse();
+		}
 
+		KeyFrame kf = new KeyFrame(
+				// on définit le FPS (nbre de frame par seconde)
+				Duration.seconds(0.0009),
+
+				// on définit ce qui se passe à chaque frame
+				// c'est un eventHandler d'ou le lambda
+				(ev -> {
+					if (temps == 8032) {
+						System.out.println("fini");
+						gameLoop.stop();
+					} else if (temps % 5 == 0) {
+						System.out.println("un tour");
+						unTour();
+						// rafraichirPanneauEnnemis(/* v */);
+					}
+					temps++;
+				}));
+		gameLoop.getKeyFrames().add(kf);
+		/* A MODIFIER */
+
+//		
+	}
 	public String lvl1() {
 		return null;
 		/*

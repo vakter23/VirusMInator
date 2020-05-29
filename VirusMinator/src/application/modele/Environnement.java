@@ -20,6 +20,8 @@ public class Environnement {
 	private ObservableList<Virus> nextViruses = FXCollections.observableArrayList();
 	private String[][] terrain;
 	
+	private int temps=0;
+	
 	public Environnement(int width, int height) {
 		super();
 		this.width = width;

@@ -229,5 +229,10 @@ public int getTempsSpawn() {
 		this.vie=(int)newVie;
 		
 	}
-
+	
+	public void slowVirus(double slow) {
+		
+		this.setVitesse(this.vitesse/slow);
+		
+	}
 }
