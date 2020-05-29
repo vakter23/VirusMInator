@@ -17,19 +17,21 @@ public abstract class Tourelles {
 	private String nom, ID;
 	protected Environnement env;
 	private int temps;//Variable pour gerer temps entre le tir des tourelles (1 unité de temps = 1 tour) <- variable crée dans environnement
+	private static int compteur = 1;
 
 	
 	public Tourelles( int portee, double atqSpeed,  String nom, int x,
 			int y ,Environnement env) { /* Constructeur tourelles */
-
 		this.setPortee(portee);
 		this.setAtqSpeed(atqSpeed);
 		this.nom = nom;
+		this.ID = "t" + compteur;
 		this.setX(x);
 		this.setY(y);
 		this.env=env;
-
+		compteur++;
 	}
+
 
 	public abstract void amelioration(); // Ou coder argent necessaire a amelioration
 
@@ -112,8 +114,7 @@ public abstract class Tourelles {
 		return null;
 
 	}
-	
-	
+		
 	public Tourelles TourelleAPorteeDeTir() { //Utilise pour la tourelle Pingolimbo qui boost la vitesse d'attaque des tourelles dans un certain rayon
 
 		
@@ -154,6 +155,8 @@ public abstract class Tourelles {
 			tirer();
 			
 		}
+		
+	
 			
 		/*	if(this.atq>0) {	
 
@@ -177,8 +180,13 @@ public abstract class Tourelles {
 				
 				TourelleAPorteeDeTir().boostAttaqueSpeed();
 				
-			}
-		}*/
+			}*/
+		}
+
+	@Override
+	public String toString() {
+		return "Tourelles [x=" + x + ", y=" + y + ", portee=" + portee + ", atqSpeed=" + atqSpeed
+				+ ", nom=" + nom + ", ID=" + ID + "]";
 	}
 
 	public boolean placementTourelles() {

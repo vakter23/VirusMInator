@@ -89,6 +89,7 @@ public class Environnement {
 
 	public void ajouterTourelles(Tourelles a) {
 		tourelles.add(a);
+		System.out.println("une tourelle a été ajoutée" + a);
 	}
 
 	public boolean dansTerrain(int x, int y) {
@@ -199,5 +200,6 @@ public class Environnement {
 		System.out.println("test");
 
 	}
+	
 
 }
