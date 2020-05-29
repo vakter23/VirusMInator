@@ -49,6 +49,7 @@ public class ecouteurTourelle implements ListChangeListener<Tourelles> {
 //			sourc.setImage(spawnTourellesR);
 			if(t instanceof TourelleSavonneuse){
 				ImageView tourelle =  getImgg("/src/ressources/tourelles/gelHydro.png");
+				tourelle.setId(t.getId());
 				tourelle.setLayoutX(t.getX());
 				tourelle.setLayoutY(t.getY());
 				panneauEnnemi.getChildren().add(tourelle);
@@ -56,12 +57,14 @@ public class ecouteurTourelle implements ListChangeListener<Tourelles> {
 			}
 			else if (t instanceof TourelleMousseuse){
 				ImageView tourelle = getImgg("/src/ressources/tourelles/Avast.png");
+				tourelle.setId(t.getId());
 				tourelle.setLayoutX(t.getX());
 				tourelle.setLayoutY(t.getY());
 				panneauEnnemi.getChildren().add(tourelle);
 			}
 			else if (t instanceof TourelleHydroClaque){
 				ImageView tourelle = getImgg("/src/ressources/tourelles/gel-hydoralcoolique.png");
+				tourelle.setId(t.getId());
 				tourelle.setLayoutX(t.getX());
 				tourelle.setLayoutY(t.getY());
 				panneauEnnemi.getChildren().add(tourelle);
@@ -69,6 +72,7 @@ public class ecouteurTourelle implements ListChangeListener<Tourelles> {
 			}
 			else if (t instanceof TourelleSilliteBang){
 				ImageView tourelle = getImgg("/src/ressources/tourelles/javel.png");
+				tourelle.setId(t.getId());
 				tourelle.setLayoutX(t.getX());
 				tourelle.setLayoutY(t.getY());
 				panneauEnnemi.getChildren().add(tourelle);
@@ -76,6 +80,7 @@ public class ecouteurTourelle implements ListChangeListener<Tourelles> {
 			}
 			else if (t instanceof TourelleDocteurPingoLimbo){
 				ImageView tourelle = getImgg("/src/ressources/tourelles/drPingoLimbo.png");
+				tourelle.setId(t.getId());
 				tourelle.setLayoutX(t.getX());
 				tourelle.setLayoutY(t.getY());
 				panneauEnnemi.getChildren().add(tourelle);
@@ -85,7 +90,7 @@ public class ecouteurTourelle implements ListChangeListener<Tourelles> {
 	}
 
 	private void supprimerSpriteTourelle(Tourelles t) {
-		panneauEnnemi.getChildren().remove(t);
+		panneauEnnemi.getChildren().remove(this.panneauEnnemi.lookup("#"+t.getId()));
 	}
 
 	public int recupererX(MouseEvent e) {

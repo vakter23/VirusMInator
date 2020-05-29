@@ -280,9 +280,8 @@ public class Controller implements Initializable {
 				}
 			});
 		} else {
-			System.out.println(e1.getTourelles());
-			System.out.println("DEJA TOURELLES");
-			System.out.println(test.getId());
+			System.out.println("taille avant boucle" + e1.getTourelles().size());
+			System.out.println("l id de la tuile " + test.getId());
 			bouttonVendre.setOnMouseClicked((e) -> {
 				for (int i = 0; i < this.e1.getTourelles().size(); i++) {
 					if (this.e1.getTourelles().get(i).getX() == test.getLayoutX()
@@ -290,6 +289,8 @@ public class Controller implements Initializable {
 						this.e1.getTourelles().remove(e1.getTourelles().get(i));
 						System.out.println("xx=" + e1.getTourelles().get(0).getX());
 						System.out.println("yy=" + e1.getTourelles().get(0).getY());
+						System.out.println("taille apres boucle" + e1.getTourelles().size());
+
 
 					}
 				}
