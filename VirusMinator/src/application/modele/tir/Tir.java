@@ -62,7 +62,10 @@ public class Tir {
 
 	public void setAtq(int atq2) {
 		this.atq = atq2;
-	}/*
+	}
+	
+	
+	/*
 	public void seDeplace() {
 		for (int i = 0; i < env.getViruses().size(); i++) {
 //			System.out.println(env.getViruses());

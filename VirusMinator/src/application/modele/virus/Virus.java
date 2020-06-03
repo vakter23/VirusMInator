@@ -17,7 +17,7 @@ public abstract class Virus {
 	private int tpsPerso;
 	private static int tpsSuivant = 200;
 
-	public static List<Integer> listeVirusAttente = Arrays.asList(1,1,1,2,2,2,3,2,3,3,4);
+	public static List<Integer> listeVirusAttente = Arrays.asList(1,1,1,2,2,2,3,2,3,3,4);/*liste des viruses a ajouter*/
 
 	public Virus(int vie, int atq, double vitesse, String nom, int x, int y, int tpsSpawn) { /* Constructeur Virus */
 		this.ID = "v" + compteur;

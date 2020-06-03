@@ -16,7 +16,7 @@ import javafx.collections.ObservableList;
 
 public class Environnement {
 	private int width, height;
-	private ObservableList<Virus> viruses = FXCollections.observableArrayList();
+	private ObservableList<Virus> virusesSurTerrain = FXCollections.observableArrayList(); /*les viruses présents sur le terrain*/
 	private ObservableList<Tourelles> tourelles = FXCollections.observableArrayList();
 	private ObservableList<Virus> nextViruses = FXCollections.observableArrayList();
 	private String[][] terrain;
@@ -42,7 +42,7 @@ public class Environnement {
 	}
 
 	public void initVirus() {
-		this.viruses.clear();
+		this.virusesSurTerrain.clear();
 		for (int i = 0; i < Virus.listeVirusAttente.size(); i++) {
 			switch (Virus.listeVirusAttente.get(i)) {
 			case 1:
@@ -86,7 +86,7 @@ public class Environnement {
 ////		viruses.add(new VirusDivirus(70, 10, 0.025, "VirusDivirus", -90, 288));
 //	}
 	public ObservableList<Virus> getViruses() {
-		return viruses;
+		return virusesSurTerrain;
 	}
 
 	public void updateSprite() {
@@ -94,30 +94,30 @@ public class Environnement {
 			switch (Virus.listeVirusAttente.get(i)) {
 			case 1:
 				if (nextViruses.get(i).getTempsSpawn() == Controller.temps) {
-					this.viruses.add(nextViruses.get(i));
+					this.virusesSurTerrain.add(nextViruses.get(i));
 				}
 				break;
 			case 2:
 
 				if (nextViruses.get(i).getTempsSpawn() == Controller.temps) {
-					this.viruses.add(nextViruses.get(i));
+					this.virusesSurTerrain.add(nextViruses.get(i));
 				}
 				break;
 			case 3:
 
 				if (nextViruses.get(i).getTempsSpawn() == Controller.temps) {
-					this.viruses.add(nextViruses.get(i));
+					this.virusesSurTerrain.add(nextViruses.get(i));
 				}
 				break;
 			case 4:
 
 				if (nextViruses.get(i).getTempsSpawn() == Controller.temps) {
-					this.viruses.add(nextViruses.get(i));
+					this.virusesSurTerrain.add(nextViruses.get(i));
 				}
 				break;
 			case 5:
 				if (nextViruses.get(i).getTempsSpawn() == Controller.temps) {
-					this.viruses.add(nextViruses.get(i));
+					this.virusesSurTerrain.add(nextViruses.get(i));
 				}
 				break;
 			default:
@@ -143,7 +143,7 @@ public class Environnement {
 	}
 
 	public Virus getVirus(String id) {
-		for (Virus v : this.viruses) {
+		for (Virus v : this.virusesSurTerrain) {
 			if (v.getId().equals(id)) {
 				return v;
 			}
@@ -161,8 +161,8 @@ public class Environnement {
 	}
 
 	public void ajouterVirus(Virus v) {
-		viruses.add(v);
-		System.out.println(viruses.get(0).getNom());
+		virusesSurTerrain.add(v);
+		System.out.println(virusesSurTerrain.get(0).getNom());
 	}
 
 	public void ajouterTourelles(Tourelles a) {
@@ -175,24 +175,24 @@ public class Environnement {
 
 	public void unTour() {
 		updateSprite();
-		for (int i = 0; i < viruses.size(); i++) {
-			Virus v = viruses.get(i);
+		for (int i = 0; i < virusesSurTerrain.size(); i++) {
+			Virus v = virusesSurTerrain.get(i);
 			v.seDeplace(v);
 		}
 		for (int i = 0; i < tourelles.size(); i++) {
 			Tourelles t = tourelles.get(i);
 			t.agit();
 		}
-		for (int i = viruses.size() - 1; i >= 0; i--) {
-			Virus v = viruses.get(i);
+		for (int i = virusesSurTerrain.size() - 1; i >= 0; i--) {
+			Virus v = virusesSurTerrain.get(i);
 			if (!v.estVivant()) {
 				System.out.println("mort de : " + v.getId());
-				viruses.remove(i);
+				virusesSurTerrain.remove(i);
 			}
 		}
 		for (int i = 0; i < nextViruses.size(); i++) {
 			if (nextViruses.get(i).getTempsSpawn() == Controller.temps) {
-				viruses.add(nextViruses.get(i));
+				virusesSurTerrain.add(nextViruses.get(i));
 				System.out.println("Virus : " + nextViruses.get(i).getNom() + " ajouté !");
 			}
 		}
