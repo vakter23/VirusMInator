@@ -165,7 +165,7 @@ public class Controller implements Initializable {
 	 */
 
 	public void ajouter() {
-		this.e1.initVirus(7);
+		this.e1.initVirus();
 	}
 
 	/*
@@ -190,7 +190,7 @@ public class Controller implements Initializable {
 		ImageView sourc = (ImageView) event.getSource();
 		Image tourelleGel = (getImgg("/src/ressources/tourelles/gelHydro.png"));
 		sourc.setImage(tourelleGel);
-		this.e1.ajouterTourelles(new TourelleSavonneuse(20, 128, 0.015, 0.015, "TourelleSavonneuse",
+		this.e1.ajouterTourelles(new TourelleSavonneuse(1, 64, 5.0, 0.015, "TourelleSavonneuse",
 				(int) event.getSceneX(), (int) event.getSceneY(), e1));
 
 	}
@@ -246,7 +246,7 @@ public class Controller implements Initializable {
 		gameLoop.setCycleCount(Timeline.INDEFINITE);
 		KeyFrame kf = new KeyFrame(
 				// on définit le FPS (nbre de frame par seconde)
-				Duration.seconds(0.0955),
+				Duration.seconds(0.0055),
 
 				// on définit ce qui se passe à chaque frame
 				// c'est un eventHandler d'ou le lambda
@@ -278,7 +278,7 @@ public class Controller implements Initializable {
 		gameLoop.stop();
 		System.out.println(this.e1.getViruses().size());
 		//for (Virus v : this.e1.getViruses()) {
-			this.e1.getViruses().clear();
+			//this.e1.getViruses().clear();
 			//}
 //		for (int j = 0; j < this.e1.getTourelles().size(); j++) {
 //			this.e1.getTourelles().remove(j);
@@ -294,7 +294,7 @@ public class Controller implements Initializable {
 
 	@FXML
 	void Start(ActionEvent event) {
-		ajouter();
+		
 		initAnimation();
 		gameLoop.play();
 	}
