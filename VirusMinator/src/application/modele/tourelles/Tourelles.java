@@ -5,6 +5,8 @@ import application.modele.virus.VirusBasirus;
 import application.modele.Environnement;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public abstract class Tourelles {
 
@@ -17,7 +19,9 @@ public abstract class Tourelles {
 	private String nom, ID;
 	protected Environnement env;
 	private int temps;//Variable pour gerer temps entre le tir des tourelles (1 unité de temps = 1 tour) <- variable crée dans environnement
+	private ObservableList<Virus> virusesMultiples = FXCollections.observableArrayList();
 
+	
 	
 	public Tourelles( int portee, double atqSpeed,  String nom, int x,
 			int y ,Environnement env) { /* Constructeur tourelles */
@@ -156,6 +160,25 @@ public abstract class Tourelles {
 						&& (this.getX() - this.portee <= env.getViruses().get(i).getX()
 								&& env.getViruses().get(i).getX() <= this.getX() + this.portee)) {
 					return env.getViruses().get(i);
+				}
+			}
+		}
+		return null;
+
+	}
+	
+	public Virus PlusieursVirusAPorteeDeTir() {//return tout les virus a portee de tir pour les tourelles aoe (hydroclaque/mousseuse
+
+		
+		for (int i = 0; i < env.getViruses().size(); i++) {
+			//System.out.println(env.getViruses());
+			if (env.getViruses().get(i).estVivant()) {
+				if ((this.getY() - this.portee <= env.getViruses().get(i).getY()
+						&& env.getViruses().get(i).getY() <= this.getY() + this.portee)
+						&& (this.getX() - this.portee <= env.getViruses().get(i).getX()
+								&& env.getViruses().get(i).getX() <= this.getX() + this.portee)) {
+					Virus virus= env.getViruses().get(i);
+					virusesMultiples.add(virus);
 				}
 			}
 		}

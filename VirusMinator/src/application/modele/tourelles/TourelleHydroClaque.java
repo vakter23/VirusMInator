@@ -35,8 +35,10 @@ public class TourelleHydroClaque extends TourellesAvecDegats{
 		
 		double newVie = (VirusAPorteeDeTir().getVie() - this.getAtq());
 		VirusAPorteeDeTir().setVie(newVie);
-		//VirusAPorteeDeTir().setVie(VirusAPorteeDeTir().getVie()-this.getAtq());
-		//code pour tirer / apelle de la méthode tir
+		
+		double newVie2 = (PlusieursVirusAPorteeDeTir().getVie() - this.getAtq());
+		PlusieursVirusAPorteeDeTir().setVie(newVie2);
+		
 		
 		
 	}

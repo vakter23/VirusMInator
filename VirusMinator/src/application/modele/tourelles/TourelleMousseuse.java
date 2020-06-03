@@ -41,6 +41,8 @@ public class TourelleMousseuse extends Tourelles { // == TourelleAvastiVirus
 		
 		VirusAPorteeDeTir().slowVirus(this.slow);
 		
+		PlusieursVirusAPorteeDeTir().slowVirus(this.slow);
+		
 	}
 
 }
