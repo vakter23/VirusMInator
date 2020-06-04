@@ -1,6 +1,10 @@
 package application.modele.tourelles;
 
 import application.modele.Environnement;
+import application.modele.tir.Tir;
+import application.modele.tir.TirAvecDegats;
+import application.modele.tir.TirSansDegats;
+import application.modele.virus.Virus;
 public class TourelleHydroClaque extends TourellesAvecDegats{
 
 	
@@ -31,9 +35,11 @@ public class TourelleHydroClaque extends TourellesAvecDegats{
 
 	@Override
 	public void tirer() {
-		
-		double newVie = (VirusAPorteeDeTir().getVie() - this.getAtq());
-		VirusAPorteeDeTir().setVie(newVie);
+		Virus v = VirusAPorteeDeTir();
+		double newVie = (v.getVie() - this.getAtq());
+		v.setVie(newVie);
+		Tir t1 = new TirAvecDegats(this.getX(),this.getY(),v);
+		this.env.ajouterListeTirs(t1);
 		//VirusAPorteeDeTir().setVie(VirusAPorteeDeTir().getVie()-this.getAtq());
 		//code pour tirer / apelle de la méthode tir
 		

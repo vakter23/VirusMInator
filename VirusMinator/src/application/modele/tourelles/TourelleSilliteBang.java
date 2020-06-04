@@ -14,7 +14,7 @@ public class TourelleSilliteBang extends TourellesAvecDegats {
 	public TourelleSilliteBang(int portee, double atqSpeed, String nom, int x, int y, Environnement env) {
 		super(portee, atqSpeed, nom, x, y, env);
 		
-		this.setAtq(18);
+		this.setAtq(1000);
 
 	}
 

@@ -1,6 +1,7 @@
 package application.modele.tourelles;
 
 import application.modele.Environnement;
+import application.modele.tir.TirSansDegats;
 public class TourelleMousseuse extends Tourelles { // == TourelleAvastiVirus
 
 	// cette tourelle ralentit les ennemis mais inflige peu/pas de dégâts

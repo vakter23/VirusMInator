@@ -4,6 +4,7 @@ import java.util.List;
 
 import application.Config;
 import application.controleur.Controller;
+import application.modele.tir.Tir;
 import application.modele.tourelles.Tourelles;
 import application.modele.virus.Virus;
 import application.modele.virus.VirusBasirus;
@@ -18,6 +19,7 @@ public class Environnement {
 	private ObservableList<Virus> viruses = FXCollections.observableArrayList();
 	private ObservableList<Tourelles> tourelles = FXCollections.observableArrayList();
 	private ObservableList<Virus> nextViruses = FXCollections.observableArrayList();
+	private ObservableList<Tir> listeTirs = FXCollections.observableArrayList();
 	private String[][] terrain;
 	
 	private int temps=0;
@@ -60,6 +62,10 @@ public class Environnement {
 	public ObservableList<Tourelles> getTourelles() {
 		return tourelles;
 	}
+	public ObservableList<Tir> getListeTir() {
+		return listeTirs;
+	}
+
 	public void resetPos(Virus v) {
 		v.setX(0);
 		v.setY(288);
@@ -91,6 +97,10 @@ public class Environnement {
 		tourelles.add(a);
 		System.out.println("une tourelle a été ajoutée" + a);
 	}
+	public void ajouterListeTirs(Tir t) {
+		listeTirs.add(t);
+		System.out.println("Un tir a été ajoutée" + t);
+	}
 
 	public boolean dansTerrain(int x, int y) {
 		return (0 <= x && x < this.width && 0 <= y && y < this.height);
@@ -119,6 +129,8 @@ public class Environnement {
                 System.out.println("Virus : "+ nextViruses.get(i).getNom() + " ajouté !");
             }
         }
+		for (int i = 0; i < listeTirs.size(); i++) {
+		}
 
 	}
 
@@ -199,6 +211,20 @@ public class Environnement {
 		}
 		System.out.println("test");
 
+	}
+
+	/**
+	 * @return the listeTirs
+	 */
+	public ObservableList<Tir> getListeTirs() {
+		return listeTirs;
+	}
+
+	/**
+	 * @param listeTirs the listeTirs to set
+	 */
+	public void setListeTirs(ObservableList<Tir> listeTirs) {
+		this.listeTirs = listeTirs;
 	}
 	
 

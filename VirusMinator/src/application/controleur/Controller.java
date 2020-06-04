@@ -273,7 +273,7 @@ public class Controller implements Initializable {
 		if (verifiePlaceLibre(test.getLayoutX(), test.getLayoutY()) == true) {
 			savonneuse.setOnMouseClicked((e) -> {
 				if (verifiePlaceLibre(test.getLayoutX(), test.getLayoutY()) == true) {
-					Tourelles t1 = new TourelleSavonneuse(0, 0, "0", (int) test.getLayoutX(),
+					Tourelles t1 = new TourelleSavonneuse(20, 128, "0", (int) test.getLayoutX(),
 							(int) test.getLayoutY(), e1);
 					System.out.println(t1);
 					this.e1.ajouterTourelles(t1);
@@ -326,6 +326,7 @@ public class Controller implements Initializable {
 		}
 	}
 
+
 	public boolean verifiePlaceLibre(double d, double e) {
 		for (int i = 0; i < this.e1.getTourelles().size(); i++) {
 			if (this.e1.getTourelles().get(i).getX() == d && this.e1.getTourelles().get(i).getY() == e) {
@@ -339,6 +340,9 @@ public class Controller implements Initializable {
 		return new Image(Paths.get(System.getProperty("user.dir"), paths).toUri().toString());
 	}
 
+	public void tir() {
+		
+	}
 	/*
 	 * @FXML void placerEnnemis(ActionEvent event) {
 	 * System.out.println("lancement"); dessinEnnemi(); }
@@ -376,7 +380,6 @@ public class Controller implements Initializable {
 		System.out.println("fait");
 //		initAnimation(this.e1.getViruses().get(0));
 
-		ListChangeListener<? super Tourelles> ecouteur;
 		// demarre l'animation
 		this.e1.getTourelles().addListener(new ecouteurTourelle(panneauEnnemis));
 		gameLoop.play();
