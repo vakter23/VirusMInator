@@ -8,9 +8,19 @@ public class TirAvecDegats extends Tir {
 
 	private double atq;
 	private Virus v;
+	private int vecteurX,vecteurY;
 	public TirAvecDegats(IntegerProperty x, IntegerProperty y, Virus v,Environnement env) {
 		super(x, y, env);
 		this.v=v;
+		this.vecteurX = (v.getX() - this.getX())/2;
+        this.vecteurY = (v.getY() - this.getY())/2;
+
+	}
+	public void seDeplace(Virus v) {
+		
+        this.setX(this.getX()+ vecteurX);
+        this.setY(this.getY()+ vecteurY);
+        
 	}
 
 	/**
