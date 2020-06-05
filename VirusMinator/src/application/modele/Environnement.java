@@ -17,6 +17,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Point2D;
+import javafx.scene.Node;
 
 public class Environnement {
 	private int width, height, vie;
@@ -147,17 +148,11 @@ public class Environnement {
 		entreeVirusTerrain();
 		deplacerLesViruses();
 		faireAgirTourelles();
-		ramasserLesMorts();
+		ramasserLesViruses();
 		gameOver();
 	}
 
-	private void gameOver() {
-		if (this.getVie() == 0) {
-			Controller.getGameLoop().stop();
-			System.out.println("D.É.F.A.I.T.E");
-		}
-		
-	}
+	
 
 	public void entreeVirusTerrain() {
 		for (int i = 0; i < nextViruses.size(); i++) {
@@ -184,9 +179,10 @@ public class Environnement {
 		}
 	}
 
-	public void ramasserLesMorts() {
+	public void ramasserLesViruses() {
 		for (int i = virusesSurTerrain.size() - 1; i >= 0; i--) {
 			Virus v = virusesSurTerrain.get(i);
+			
 			if (!v.estVivant()) {
 				System.out.println("mort de : " + v.getId());
 				/* duplication du virus lors de la mort */
@@ -201,6 +197,30 @@ public class Environnement {
 				virusesSurTerrain.remove(i);
 			}
 		}
+		
+	}
+	private void gameOver() {
+		if (this.getVie() == 0) {
+			Controller.getGameLoop().stop();
+			System.out.println("D.É.F.A.I.T.E");
+		}
+		
+	}
+	public void unTourTir() {
+		for (int i = 0; i < listeTirs.size(); i++) {
+			listeTirs.get(i).seDeplace();
+		}
+		ramasserLesTirs();
+	}
+	public void ramasserLesTirs() {
+		for (int i = listeTirs.size() - 1; i>=0; i--) {
+			Tir t = listeTirs.get(i);
+			if(!t.estVivant()) {
+				System.out.println("le tir : "+ t + "a atteint sa cible");
+				System.out.println(listeTirs.get(i) + " a été supprimé");
+				listeTirs.remove(i);
+			}
+		}
 	}
 	public void ajouterListeTirs(Tir t) {
 		listeTirs.add(t);
@@ -212,11 +232,7 @@ public ObservableList<Tir> getListeTirs() {
 public void setListeTirs(ObservableList<Tir> listeTirs) {
 		this.listeTirs = listeTirs;
 	}
-public void unTourTir() {
-		for (int i = 0; i < listeTirs.size(); i++) {
-			listeTirs.get(i).seDeplace();
-		}
-	}
+
 
 	public int getTerrain(int valeurI) {
 		for (int i = 0; i < this.terrain.length; i++) {
@@ -229,6 +245,25 @@ public void unTourTir() {
 		}
 		return 0;
 
+	}
+
+	public int getVie() {
+		return vie;
+	}
+
+	public void setVie(int vie) {
+		this.vie = vie;
+	}
+	public ObservableList<Tir> getTirs() {
+		return this.listeTirs;
+	}
+	public Tir getTir(String id) {
+		for (Tir t : this.listeTirs) {
+			if (t.getId().equals(id)) {
+				return t;
+			}
+		}
+		return null;
 	}
 
 	public void initTerrain() {
@@ -293,13 +328,6 @@ public void unTourTir() {
 
 	}
 
-	public int getVie() {
-		return vie;
-	}
-
-	public void setVie(int vie) {
-		this.vie = vie;
-	}
 
 
 }

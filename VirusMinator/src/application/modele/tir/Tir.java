@@ -12,19 +12,32 @@ public abstract class Tir {
 //	private int destinationY;
 	private String ID;
 	protected Environnement env;
+	private int vie;
 	private static int compteur;
 
-	public Tir(IntegerProperty x, IntegerProperty y,Environnement env/*, int destinationX, int destinationY*/) {
-
+	public Tir(IntegerProperty x, IntegerProperty y, Environnement env/* , int destinationX, int destinationY */) {
+/*ajouter une vitesse au tirs peut-être ?*/
 		this.xProperty = x;
 		this.yProperty = y;
-		this.env=env;
+		this.env = env;
+		this.vie = 1;
 //		this.destinationX = destinationX;
 //		this.destinationY = destinationY;
-		this.ID = "tir" + compteur;
+		this.ID = "t" + compteur;
 		compteur++;
 	}
 
+	public boolean estVivant(){
+		if (this.vie>0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	public void meurt() {
+		this.vie=0;
+	}
 	public String getId() {
 		return ID;
 	}
@@ -54,7 +67,6 @@ public abstract class Tir {
 	}
 
 	public abstract void seDeplace();
-		
-		
+
 	public abstract void agit();
 }

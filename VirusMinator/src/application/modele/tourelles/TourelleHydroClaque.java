@@ -31,11 +31,10 @@ public class TourelleHydroClaque extends TourellesAvecDegats {
 	public void tirer() {
 		ArrayList<Virus> v = PlusieursVirusAPorteeDeTir();
 		for (int i = 0; i < v.size(); i++) {
-			double newVie = (v.get(i).getVie() - this.getAtq());
-			v.get(i).setVie(newVie);
 			Tir t1 = new TirAvecDegats(this.getXProperty(), this.getYProperty(), v.get(i), this.env);
 			this.env.ajouterListeTirs(t1);
-
+			double newVie = (v.get(i).getVie() - this.getAtq());
+			v.get(i).setVie(newVie);
 		}
 		// VirusAPorteeDeTir().setVie(VirusAPorteeDeTir().getVie()-this.getAtq());
 		// code pour tirer / apelle de la méthode tir

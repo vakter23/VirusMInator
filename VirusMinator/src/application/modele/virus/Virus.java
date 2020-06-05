@@ -94,6 +94,7 @@ public abstract class Virus {
 
 	/* Changer les 1, 2, et 0 en vitesse des virus */
 	public void seDeplace(Virus v) {
+		v.agit();
 		if (v instanceof VirusViterus) {
 			if (this.getXproperty().getValue() < 520 && this.getYproperty().getValue() < 289) {
 				int nposX = this.getX() +(int) (v.getVitesse());
@@ -221,6 +222,8 @@ public abstract class Virus {
 		System.out.println(this.getId() + "y : " + this.getY() + "\n");
 
 	}
+
+	protected abstract void agit();
 
 	private void infligerDegats(int atq2) {
 		this.env.setVie(this.env.getVie() - atq2);	

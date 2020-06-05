@@ -213,58 +213,62 @@ public class Controller implements Initializable {
 //		Image spawnTourellesR = getImgg("/src/ressources/tiles/spawnTourelleRouge.png");
 //		sourc.setImage(spawnTourellesR);
 		event.getTarget();
-		Node test = (Node) event.getSource();
-		System.out.println("x=" + test.getLayoutX() + "y = " + test.getLayoutY());
+		Node tuile = (Node) event.getSource();
+		System.out.println("x=" + tuile.getLayoutX() + "y = " + tuile.getLayoutY());
 //		System.out.println("clic tourelle" + event.getSceneX()() + event.getSceneY() + event.getSource().);
-		if (verifiePlaceLibre(test.getLayoutX(), test.getLayoutY()) == true && this.e1.getArgent() > 7) {
+		if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) == true) {
 			savonneuse.setOnMouseClicked((e) -> {
-				if (verifiePlaceLibre(test.getLayoutX(), test.getLayoutY()) == true) {
-					Tourelles t1 = new TourelleSavonneuse(50, 64, "TourelleSavonneuse", (int) test.getLayoutX(),
-							(int) test.getLayoutY(), e1);
+				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY())&& this.e1.getArgent() > 7) {
+					Tourelles t1 = new TourelleSavonneuse(50, 64, "TourelleSavonneuse", (int) tuile.getLayoutX(),
+							(int) tuile.getLayoutY(), e1);
 					this.e1.enleverArgent(7);
 					System.out.println(t1);
 					this.e1.ajouterTourelles(t1);
 				}
 			});
 			avastirus.setOnMouseClicked((e) -> {
-				if (verifiePlaceLibre(test.getLayoutX(), test.getLayoutY()) == true && this.e1.getArgent() > 5) {
+				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) == true && this.e1.getArgent() > 5) {
 					this.e1.enleverArgent(5);
 					this.e1.ajouterTourelles(
-							new TourelleMousseuse(0, 0, "", (int) test.getLayoutX(), (int) test.getLayoutY(), e1));
+							new TourelleMousseuse(0, 0, "", (int) tuile.getLayoutX(), (int) tuile.getLayoutY(), e1));
 				}
 			});
 			gelHydroClaque.setOnMouseClicked((e) -> {
-				if (verifiePlaceLibre(test.getLayoutX(), test.getLayoutY()) == true && this.e1.getArgent() > 9) {
+				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) == true && this.e1.getArgent() > 9) {
 					this.e1.enleverArgent(9);
 					this.e1.ajouterTourelles(
-							new TourelleHydroClaque(0, 0, "", (int) test.getLayoutX(), (int) test.getLayoutY(), e1));
+							new TourelleHydroClaque(0, 0, "", (int) tuile.getLayoutX(), (int) tuile.getLayoutY(), e1));
 				}
 			});
 			siliteBang.setOnMouseClicked((e) -> {
-				if (verifiePlaceLibre(test.getLayoutX(), test.getLayoutY()) == true && this.e1.getArgent() > 12) {
+				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) == true && this.e1.getArgent() > 12) {
 					this.e1.enleverArgent(12);
 					this.e1.ajouterTourelles(
-							new TourelleSilliteBang( 0, 0, "", (int) test.getLayoutX(), (int) test.getLayoutY(), e1));
+							new TourelleSilliteBang( 0, 0, "", (int) tuile.getLayoutX(), (int) tuile.getLayoutY(), e1));
 				}
 			});
 			drPingoLimbo.setOnMouseClicked((e) -> {
-				if (verifiePlaceLibre(test.getLayoutX(), test.getLayoutY()) == true && this.e1.getArgent() > 12) {
+				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) == true && this.e1.getArgent() > 12) {
 					this.e1.enleverArgent(12);
-					this.e1.ajouterTourelles(new TourelleDocteurPingoLimbo(0, 0, "", (int) test.getLayoutX(),
-							(int) test.getLayoutY(), e1));
+					this.e1.ajouterTourelles(new TourelleDocteurPingoLimbo(0, 0, "", (int) tuile.getLayoutX(),
+							(int) tuile.getLayoutY(), e1));
 				}
 			});
 		} else {
 			System.out.println("taille avant boucle" + e1.getTourelles().size());
-			System.out.println("l id de la tuile " + test.getId());
+			System.out.println("l id de la tuile " + tuile.getId());
+			
+			
+			
 			bouttonVendre.setOnMouseClicked((e) -> {
 				for (int i = 0; i < this.e1.getTourelles().size(); i++) {
-					if (this.e1.getTourelles().get(i).getX() == test.getLayoutX()
-							&& this.e1.getTourelles().get(i).getY() == test.getLayoutY()) {
+					this.e1.enleverArgent(-4);
+					if (this.e1.getTourelles().get(i).getX() == tuile.getLayoutX()
+							&& this.e1.getTourelles().get(i).getY() == tuile.getLayoutY()) {
 						this.e1.getTourelles().remove(e1.getTourelles().get(i));
-						System.out.println("xx=" + e1.getTourelles().get(0).getX());
-						System.out.println("yy=" + e1.getTourelles().get(0).getY());
-						System.out.println("taille apres boucle" + e1.getTourelles().size());
+						System.out.println("xx = " + e1.getTourelles().get(0).getX());
+						System.out.println("yy = " + e1.getTourelles().get(0).getY());
+						System.out.println("taille apres boucle " + e1.getTourelles().size());
 
 
 					}
@@ -272,9 +276,9 @@ public class Controller implements Initializable {
 			});
 		}
 	}
-	public boolean verifiePlaceLibre(double d, double e) {
+	public boolean verifiePlaceLibre(double x, double y) {
 		for (int i = 0; i < this.e1.getTourelles().size(); i++) {
-			if (this.e1.getTourelles().get(i).getX() == d && this.e1.getTourelles().get(i).getY() == e) {
+			if (this.e1.getTourelles().get(i).getX() == x && this.e1.getTourelles().get(i).getY() == y) {
 				return false;
 			}
 		}
@@ -296,13 +300,15 @@ public class Controller implements Initializable {
 		this.e1 = new Environnement(1600, 800);
 		this.panneauEnnemis.setMaxWidth(1632);
 		this.panneauEnnemis.setMaxHeight(832);
-		this.e1.getViruses().addListener(new MonObservateurViruses(panneauEnnemis));
+		
 		creerTerrainVue();
 		System.out.println(this.e1.getViruses().size());
 		ajouter();
 		System.out.println("Viruses initialisés");
 		initAnimation();
 		this.labelArgent.textProperty().bind(this.e1.getArgentProperty().asString());
+		this.e1.getViruses().addListener(new MonObservateurViruses(panneauEnnemis));
+		this.e1.getTirs().addListener(new MonObservateurTirs(panneauEnnemis));
 		this.e1.getTourelles().addListener(new ecouteurTourelle(panneauEnnemis));
 
 	}
@@ -322,21 +328,21 @@ public class Controller implements Initializable {
 						System.out.println("fini");
 						getGameLoop().stop();
 					} 
-					
+				
 					else if (temps % 20 == 0) {
 						System.out.println("tour" + temps);
 						unTour();
-					} if(temps % 10 == 0 && temps < 8000) {
+					} if(temps % 1 == 0 && temps < 8000) {
 						this.e1.unTourTir();
 					}
 					
 					if (temps % 800 == 0) {
 						this.e1.incrementerArgent();
 					}
-					/*if (this.e1.getViruses().isEmpty() && temps > 401) {
+					if (this.e1.getViruses().isEmpty() && temps > 401) {
 						gameLoop.stop();
 						System.out.println("V.I.C.T.O.I.R.E");
-					}*/
+					}
 						
 
 					temps++;

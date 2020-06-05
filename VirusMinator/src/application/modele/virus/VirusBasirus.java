@@ -8,4 +8,9 @@ public class VirusBasirus extends Virus {
 		super(vie, atq, vitesse, nom, x, y, tps, env);
 	}
 
+	@Override
+	protected void agit() {
+		
+	}
+
 }
