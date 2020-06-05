@@ -216,39 +216,40 @@ public class Controller implements Initializable {
 		Node test = (Node) event.getSource();
 		System.out.println("x=" + test.getLayoutX() + "y = " + test.getLayoutY());
 //		System.out.println("clic tourelle" + event.getSceneX()() + event.getSceneY() + event.getSource().);
-		if (verifiePlaceLibre(test.getLayoutX(), test.getLayoutY()) == true) {
+		if (verifiePlaceLibre(test.getLayoutX(), test.getLayoutY()) == true && this.e1.getArgent() > 7) {
 			savonneuse.setOnMouseClicked((e) -> {
 				if (verifiePlaceLibre(test.getLayoutX(), test.getLayoutY()) == true) {
 					Tourelles t1 = new TourelleSavonneuse(50, 64, "TourelleSavonneuse", (int) test.getLayoutX(),
 							(int) test.getLayoutY(), e1);
+					this.e1.enleverArgent(7);
 					System.out.println(t1);
 					this.e1.ajouterTourelles(t1);
 				}
 			});
 			avastirus.setOnMouseClicked((e) -> {
-				if (verifiePlaceLibre(test.getLayoutX(), test.getLayoutY()) == true) {
-
+				if (verifiePlaceLibre(test.getLayoutX(), test.getLayoutY()) == true && this.e1.getArgent() > 5) {
+					this.e1.enleverArgent(5);
 					this.e1.ajouterTourelles(
 							new TourelleMousseuse(0, 0, "", (int) test.getLayoutX(), (int) test.getLayoutY(), e1));
 				}
 			});
 			gelHydroClaque.setOnMouseClicked((e) -> {
-				if (verifiePlaceLibre(test.getLayoutX(), test.getLayoutY()) == true) {
-
+				if (verifiePlaceLibre(test.getLayoutX(), test.getLayoutY()) == true && this.e1.getArgent() > 9) {
+					this.e1.enleverArgent(9);
 					this.e1.ajouterTourelles(
 							new TourelleHydroClaque(0, 0, "", (int) test.getLayoutX(), (int) test.getLayoutY(), e1));
 				}
 			});
 			siliteBang.setOnMouseClicked((e) -> {
-				if (verifiePlaceLibre(test.getLayoutX(), test.getLayoutY()) == true) {
-
+				if (verifiePlaceLibre(test.getLayoutX(), test.getLayoutY()) == true && this.e1.getArgent() > 12) {
+					this.e1.enleverArgent(12);
 					this.e1.ajouterTourelles(
 							new TourelleSilliteBang( 0, 0, "", (int) test.getLayoutX(), (int) test.getLayoutY(), e1));
 				}
 			});
 			drPingoLimbo.setOnMouseClicked((e) -> {
-				if (verifiePlaceLibre(test.getLayoutX(), test.getLayoutY()) == true) {
-
+				if (verifiePlaceLibre(test.getLayoutX(), test.getLayoutY()) == true && this.e1.getArgent() > 12) {
+					this.e1.enleverArgent(12);
 					this.e1.ajouterTourelles(new TourelleDocteurPingoLimbo(0, 0, "", (int) test.getLayoutX(),
 							(int) test.getLayoutY(), e1));
 				}
@@ -296,7 +297,6 @@ public class Controller implements Initializable {
 		this.panneauEnnemis.setMaxWidth(1632);
 		this.panneauEnnemis.setMaxHeight(832);
 		this.e1.getViruses().addListener(new MonObservateurViruses(panneauEnnemis));
-		
 		creerTerrainVue();
 		System.out.println(this.e1.getViruses().size());
 		ajouter();
@@ -321,20 +321,22 @@ public class Controller implements Initializable {
 					if (temps == 8000) {
 						System.out.println("fini");
 						getGameLoop().stop();
-					} else if (temps % 20 == 0) {
+					} 
+					
+					else if (temps % 20 == 0) {
 						System.out.println("tour" + temps);
 						unTour();
+					} if(temps % 10 == 0 && temps < 8000) {
+						this.e1.unTourTir();
 					}
-					else {
-						//this.e1.unTourTir();
-					}
+					
 					if (temps % 800 == 0) {
 						this.e1.incrementerArgent();
 					}
-					if (this.e1.getViruses().isEmpty() && temps > 400) {
+					/*if (this.e1.getViruses().isEmpty() && temps > 401) {
 						gameLoop.stop();
 						System.out.println("V.I.C.T.O.I.R.E");
-					}
+					}*/
 						
 
 					temps++;
