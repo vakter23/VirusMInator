@@ -1,9 +1,11 @@
 package application.modele.virus;
 
+import application.modele.Environnement;
+
 public class VirusDivirus extends Virus {
 
-	public VirusDivirus(int vie, int atq, double vitesse, String nom, int x, int y, int tps) {
-		super(vie, atq, vitesse, nom, x, y, tps);
+	public VirusDivirus(int vie, int atq, double vitesse, String nom, int x, int y, int tps,Environnement env) {
+		super(vie, atq, vitesse, nom, x, y, tps, env);
 	}
 
 }

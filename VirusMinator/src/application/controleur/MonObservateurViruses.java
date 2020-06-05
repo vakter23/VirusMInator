@@ -29,14 +29,7 @@ public class MonObservateurViruses implements ListChangeListener<Virus> {
 	public void creerSpriteVirus(Virus v) {
 		
 		ImageView VirusActuel;
-		/*
-		 * { Demander à la prof pour la gameloop, et pour la facon d'afficher un ennemi
-		 * en fonction de sa sous classe
-		 * 
-		 *
-		 */
-
-		// this.e1.getViruses().addListener()
+		
 		if (v instanceof VirusBasirus) {
 			VirusActuel = Config.getImg("/src/ressources/virus/base_Virus.png");
 			VirusActuel.setId(v.getId());

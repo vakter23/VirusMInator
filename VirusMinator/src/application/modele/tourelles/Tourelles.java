@@ -203,12 +203,14 @@ public abstract class Tourelles {
 	
 	public void agit() {
 		
-		if (temps % this.atqSpeed ==0  && this.VirusAPorteeDeTir() != null) // tentative d'evittement du null pointer exception
+		if (temps % this.atqSpeed == 0  && this.VirusAPorteeDeTir() != null) // tentative d'evitement du null pointer exception
 		{
 			double newVie = (VirusAPorteeDeTir().getVie() - this.getAtq());
 			VirusAPorteeDeTir().setVie(newVie);
+			
+			System.out.println("Virus apres tir : " + VirusAPorteeDeTir().getVie());
 			//VirusAPorteeDeTir().setVie(VirusAPorteeDeTir().getVie()-this.getAtq());
-			//code pour tirer / apelle de la méthode tir
+			//code pour tirer / appel de la méthode tir
 		}
 	}
 

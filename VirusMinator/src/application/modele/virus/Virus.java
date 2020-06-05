@@ -3,6 +3,7 @@ package application.modele.virus;
 import java.util.Arrays;
 import java.util.List;
 
+import application.modele.Environnement;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -16,10 +17,11 @@ public abstract class Virus {
 	public static int compteur;
 	private int tpsPerso;
 	private static int tpsSuivant = 200;
+	protected Environnement env;
 
-	public static List<Integer> listeVirusAttente = Arrays.asList(1,1,1,2,2,2,3,2,3,3,4);/*liste des viruses a ajouter*/
-
-	public Virus(int vie, int atq, double vitesse, String nom, int x, int y, int tpsSpawn) { /* Constructeur Virus */
+	public static List<Integer> listeVirusAttente = Arrays.asList(1,5,5,2,4);/*liste des viruses a ajouter*/
+	public static List<Integer> listeVirusAttente2 = Arrays.asList(2,2,3,4,5);
+	public Virus(int vie, int atq, double vitesse, String nom, int x, int y, int tpsSpawn,Environnement env) { /* Constructeur Virus */
 		this.ID = "v" + compteur;
 		this.vie = vie;
 		this.atq = atq;
@@ -28,11 +30,11 @@ public abstract class Virus {
 		this.setX(x);
 		this.setY(y);
 		compteur++;
-		
+		this.env = env;
 		this.tpsPerso = tpsSuivant+tpsSpawn;
 		System.out.println("v" + compteur);
-		tpsSuivant += 175;
-		System.out.println(this.toString());
+		tpsSuivant += 140;
+	//	System.out.println(this.toString());
 	}
 
 	@Override
@@ -104,8 +106,8 @@ public abstract class Virus {
 				int nposY = this.getY() +((int) (v.getVitesse()));
 				this.setX(nposX);
 				this.setY(nposY);
-			} else if (this.getXproperty().getValue() >= 808 && this.getYproperty().getValue() <= 449
-					&& this.getYproperty().getValue() > 288 && this.getXproperty().getValue() <= 1234) {
+			} else if (this.getXproperty().getValue() >= 809 && this.getYproperty().getValue() <= 450
+					&& this.getYproperty().getValue() >  288 && this.getXproperty().getValue() <= 1234) {
 				int nposX = this.getX() + (0);
 				int nposY = this.getY() +((int) (-v.getVitesse()));
 				this.setX(nposX);
@@ -126,6 +128,13 @@ public abstract class Virus {
 				this.setY(288);
 
 			}
+		
+		if (this.getYproperty().getValue() >= 288 && this.getXproperty().getValue() >= 1104) {
+			v.meurt();
+			v.infligerDegats(v.getAtq());
+			
+
+		}
 			System.out.println(this.getId() + "x : " + this.getX());
 			System.out.println(this.getId() + "y : " + this.getY() + "\n");
 		} else if (v instanceof VirusViboomrus) {
@@ -162,6 +171,13 @@ public abstract class Virus {
 				this.setY(288);
 
 			}
+		
+		if (this.getYproperty().getValue() >= 288 && this.getXproperty().getValue() >= 1104) {
+			v.meurt();
+			v.infligerDegats(v.getAtq());
+			
+
+		}
 			System.out.println(this.getId() + "x : " + this.getX());
 			System.out.println(this.getId() + "y : " + this.getY() + "\n");
 		} else {
@@ -194,15 +210,29 @@ public abstract class Virus {
 				this.setX(nposX);
 				this.setY(nposY);
 			}
-			if (this.getYproperty().getValue() == 288 && this.getXproperty().getValue() >= 1235) {
-				this.setX(1235);
-				this.setY(288);
+			if (this.getYproperty().getValue() >= 288 && this.getXproperty().getValue() >= 1104) {
+				v.meurt();
+				v.infligerDegats(v.getAtq());
+				
 
 			}
 		}
 		System.out.println(this.getId() + "x : " + this.getX());
 		System.out.println(this.getId() + "y : " + this.getY() + "\n");
 
+	}
+
+	private void infligerDegats(int atq2) {
+		this.env.setVie(this.env.getVie() - atq2);	
+	}
+
+	private int getAtq() {
+		return this.atq;
+	}
+
+	private void meurt() {
+		this.vie = 0;
+		
 	}
 
 	/**
@@ -224,14 +254,4 @@ public abstract class Virus {
 
 	}
 
-	/*
-	 * bas, bas,div, bas, bas, bas, bas, bas, bas, bas, bas, div, div, div, div,
-	 * div, div, div, div, div, vhe, vhe, vhe, vhe, vhe, vhe, vhe, vhe, vhe, vhe,
-	 * vib, vib, vib, vib, vib, vib, vib, vib, vib, vib, vit, vit, vit, vit, vit,
-	 * vit, vit, vit, vit, vit
-	 *
-	 *
-	 * 
-	 * liste de virus souhaitée
-	 */
 }
