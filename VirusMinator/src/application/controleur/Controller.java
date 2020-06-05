@@ -28,8 +28,11 @@ import java.util.ResourceBundle;
 
 import application.Config;
 import application.modele.Environnement;
+import application.modele.tourelles.TourelleDocteurPingoLimbo;
+import application.modele.tourelles.TourelleHydroClaque;
 import application.modele.tourelles.TourelleMousseuse;
 import application.modele.tourelles.TourelleSavonneuse;
+import application.modele.tourelles.TourelleSilliteBang;
 import application.modele.tourelles.Tourelles;
 import application.modele.virus.Virus;
 import application.modele.virus.VirusBasirus;
@@ -203,7 +206,7 @@ public class Controller implements Initializable {
 		if (verifiePlaceLibre(test.getLayoutX(), test.getLayoutY()) == true) {
 			savonneuse.setOnMouseClicked((e) -> {
 				if (verifiePlaceLibre(test.getLayoutX(), test.getLayoutY()) == true) {
-					Tourelles t1 = new TourelleSavonneuse(50, 64, 0,"TourelleSavonneuse", (int) test.getLayoutX(),
+					Tourelles t1 = new TourelleSavonneuse(50, 64, "TourelleSavonneuse", (int) test.getLayoutX(),
 							(int) test.getLayoutY(), e1);
 					System.out.println(t1);
 					this.e1.ajouterTourelles(t1);
