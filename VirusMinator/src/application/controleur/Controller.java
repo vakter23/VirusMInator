@@ -170,7 +170,7 @@ public class Controller implements Initializable {
 			case "spawnTourelles":
 				map.getChildren().add(spawnTourelles);
 				System.out.println(spawnTourelles);
-				spawnTourelles.setOnMouseClicked(e -> gelHydro.setOnMouseClicked(ee -> clicTourelle(e)));
+				spawnTourelles.setOnMouseClicked(e -> clicTourelle(e));
 				break;
 			case "vertEnnemi":
 				map.getChildren().add(vertEnnemi);
