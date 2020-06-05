@@ -53,6 +53,8 @@ public class Controller implements Initializable {
 	private Button placerEnnemis;
 
 	@FXML
+	private Button Start;
+	@FXML
 	private HBox shopTFT;
 
 	@FXML
@@ -63,9 +65,6 @@ public class Controller implements Initializable {
 
 	@FXML
 	private HBox shopGelHydro;
-	
-	@FXML
-    private Label labelArgent;
 
 	@FXML
 	private HBox shopSlow;
@@ -85,19 +84,6 @@ public class Controller implements Initializable {
 	@FXML
 	private Pane panneauEnnemis;
 	@FXML
-	private Button bouttonVendre;
-	@FXML
-	private ImageView savonneuse;
-	@FXML
-	private ImageView avastirus;
-	@FXML
-	private ImageView siliteBang;
-	@FXML
-	private ImageView drPingoLimbo;
-	@FXML
-	private ImageView gelHydroClaque;
-
-	@FXML
 	private Button restart;
 
 	private Environnement e1;
@@ -106,13 +92,36 @@ public class Controller implements Initializable {
 
 	public static int temps;
 
-	private Image tourelleGel = (Image) (getImgg("/src/ressources/tourelles/gelHydro.png"));
+
+	    @FXML
+	    private Label labelArgent;
+
+
+	    @FXML
+	    private Button bouttonVendre;
+
+	    @FXML
+	    private ImageView savonneuse;
+
+	    @FXML
+	    private ImageView avastirus;
+
+	    @FXML
+	    private ImageView gelHydroClaque;
+
+	    @FXML
+	    private ImageView siliteBang;
+
+	    @FXML
+	    private ImageView drPingoLimbo;
+
+
+
 	@FXML
 	private ImageView gelHydro;
 
 	public void creerTerrainVue() {
 		System.out.println(Config.listeMap.size());
-		  System.out.println(Config.listeMap.size());
 	        savonneuse.setImage((Image) (getImgg("/src/ressources/magasin/gelHydro.png")));
 	        avastirus.setImage((Image) (getImgg("/src/ressources/magasin/Avast.png")));
 	        gelHydroClaque.setImage((Image) (getImgg("/src/ressources/magasin/gel-hydoralcoolique.png")));
@@ -162,7 +171,6 @@ public class Controller implements Initializable {
 				map.getChildren().add(spawnTourelles);
 				System.out.println(spawnTourelles);
 				spawnTourelles.setOnMouseClicked(e -> gelHydro.setOnMouseClicked(ee -> clicTourelle(e)));
-
 				break;
 			case "vertEnnemi":
 				map.getChildren().add(vertEnnemi);
