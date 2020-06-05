@@ -28,7 +28,9 @@ import java.util.ResourceBundle;
 
 import application.Config;
 import application.modele.Environnement;
+import application.modele.tourelles.TourelleMousseuse;
 import application.modele.tourelles.TourelleSavonneuse;
+import application.modele.tourelles.Tourelles;
 import application.modele.virus.Virus;
 import application.modele.virus.VirusBasirus;
 import application.modele.virus.VirusDivirus;
@@ -79,6 +81,19 @@ public class Controller implements Initializable {
 
 	@FXML
 	private Pane panneauEnnemis;
+	@FXML
+	private Button bouttonVendre;
+	@FXML
+	private ImageView savonneuse;
+	@FXML
+	private ImageView avastirus;
+	@FXML
+	private ImageView siliteBang;
+	@FXML
+	private ImageView drPingoLimbo;
+	@FXML
+	private ImageView gelHydroClaque;
+
 	@FXML
 	private Button restart;
 
@@ -188,7 +203,7 @@ public class Controller implements Initializable {
 		if (verifiePlaceLibre(test.getLayoutX(), test.getLayoutY()) == true) {
 			savonneuse.setOnMouseClicked((e) -> {
 				if (verifiePlaceLibre(test.getLayoutX(), test.getLayoutY()) == true) {
-					Tourelles t1 = new TourelleSavonneuse(50, 5, "0", (int) test.getLayoutX(),
+					Tourelles t1 = new TourelleSavonneuse(50, 64, 0,"TourelleSavonneuse", (int) test.getLayoutX(),
 							(int) test.getLayoutY(), e1);
 					System.out.println(t1);
 					this.e1.ajouterTourelles(t1);
@@ -240,6 +255,15 @@ public class Controller implements Initializable {
 			});
 		}
 	}
+	public boolean verifiePlaceLibre(double d, double e) {
+		for (int i = 0; i < this.e1.getTourelles().size(); i++) {
+			if (this.e1.getTourelles().get(i).getX() == d && this.e1.getTourelles().get(i).getY() == e) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 
 	private static Image getImgg(String... paths) {
 		return new Image(Paths.get(System.getProperty("user.dir"), paths).toUri().toString());

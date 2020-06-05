@@ -1,7 +1,6 @@
 package application.modele.tourelles;
 
 import application.modele.virus.Virus;
-import application.modele.virus.VirusBasirus;
 import application.modele.Environnement;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -16,11 +15,10 @@ public abstract class Tourelles {
 	private double atqSpeed, atq, slow;
 	private String nom, ID;
 	protected Environnement env;
-	private int temps;//Variable pour gerer temps entre le tir des tourelles (1 unité de temps = 1 tour) <- variable crée dans environnement
 
-	public Tourelles(double atq, int portee, double atqSpeed, double slow, String nom, int x,
-			int y ,Environnement env) { /* Constructeur tourelles */
-
+	public Tourelles(double atq, int portee, double atqSpeed,  String nom, int x,
+			int y, Environnement e1) { /* Constructeur tourelles */
+		this.env = e1;
 		this.setAtq(atq);
 		this.setPortee(portee);
 		this.setAtqSpeed(atqSpeed);
@@ -28,7 +26,6 @@ public abstract class Tourelles {
 		this.nom = nom;
 		this.setX(x);
 		this.setY(y);
-		this.env=env;
 
 	}
 
@@ -55,11 +52,11 @@ public abstract class Tourelles {
 	}
 
 	public final int getY() {
-		return y.getValue();
+		return x.getValue();
 	}
 
 	public final IntegerProperty getYProperty() {
-		return y;
+		return x;
 	}
 
 	public final void setX(int n) {
@@ -67,7 +64,7 @@ public abstract class Tourelles {
 	}
 
 	public final void setY(int n) {
-		y.setValue(n);
+		x.setValue(n);
 	}
 
 	public double getAtq() {
@@ -102,92 +99,21 @@ public abstract class Tourelles {
 		this.slow = slow;
 	}
 
-	/*public void Tir() {// Methode qui fait que la tourelle tir
+	public void Tir() {
 
 		if (VirusAPorteeDeTir() != null) {
-			
-			Tourelles t = new TourelleHydroClaque(10, 10, 10, 0, nom, 9, 9);
-			
-			Virus v = new VirusBasirus(10, 10, 10, nom, 9, 9);
-			
-			
-			
-			env.ajouterVirus(v);
-			
-			
-			t.VirusAPorteeDeTir();
-			
-			
-			double newVie = (v.getVie() - t.getAtq());
-			
-			v.setVie(newVie);
-			
-			System.out.println(t.VirusAPorteeDeTir());
-			
-			System.out.println(VirusAPorteeDeTir().getVie());
-
+			while (this.VirusAPorteeDeTir().estVivant()) {
+				// (VirusAPorteeDeTir().getVie()-this.atq*this.atqSpeed);
+				// ((VirusAPorteeDeTir().getVie())-this.getAtq()*this.getAtqSpeed());
+			}
 
 		}
 
-	}*/
-	
-//	public static void main(String[] args) {
-//		
-//			Environnement e1 = new Environnement(500, 500);
-//		
-//			
-//			Tourelles t = new TourelleHydroClaque(10, 10, 10, 0, "nom", 9, 9, e1);
-//			
-//			Virus v = new VirusBasirus(11, 10, 10, "noom", 9, 9);
-//			
-//			System.out.println(v.getVie());
-//	
-//				e1.ajouterVirus(v);
-//			
-//			
-//			System.out.println("ou");
-//			System.out.println(v.getVie());
-//			
-//			
-//			
-//			double newVie = (t.VirusAPorteeDeTir().getVie() - t.getAtq());
-//			t.VirusAPorteeDeTir().setVie(newVie);
-//			
-//			System.out.println("where");
-//			System.out.println(v.getVie());
-//
-//			
-//			/*for (int i = 0; i < e1.getViruses().size(); i++) {
-//				if (e1.getViruses().get(i).estVivant()) {
-//					if ((t.getY() - t.portee <= e1.getViruses().get(i).getY()
-//							&& e1.getViruses().get(i).getY() <= t.getY() + t.portee)
-//							&& (t.getX() - t.portee <= e1.getViruses().get(i).getX()
-//									&& e1.getViruses().get(i).getX() <= t.getX() + t.portee)) {
-//						e1.getViruses().get(i);
-//					}
-//				}
-//			}*/
-//			
-//
-//			
-//			
-//			//System.out.println(VirusAPorteeDeTir().getVie());
-//
-//
-//		}
-	
-	
-	public void gestionTir() { //Methode qui gere le missile et réduit les pv du virus quand le missile le touche
-		
-		
 	}
 
 	public Virus VirusAPorteeDeTir() {
 
-		//System.out.println("env" + this.env);
-		
 		for (int i = 0; i < env.getViruses().size(); i++) {
-//			System.out.println(env.getViruses());
 			if (env.getViruses().get(i).estVivant()) {
 				if ((this.getY() - this.portee <= env.getViruses().get(i).getY()
 						&& env.getViruses().get(i).getY() <= this.getY() + this.portee)
@@ -199,19 +125,6 @@ public abstract class Tourelles {
 		}
 		return null;
 
-	}
-	
-	public void agit() {
-		
-		if (temps % this.atqSpeed == 0  && this.VirusAPorteeDeTir() != null) // tentative d'evitement du null pointer exception
-		{
-			double newVie = (VirusAPorteeDeTir().getVie() - this.getAtq());
-			VirusAPorteeDeTir().setVie(newVie);
-			
-			System.out.println("Virus apres tir : " + VirusAPorteeDeTir().getVie());
-			//VirusAPorteeDeTir().setVie(VirusAPorteeDeTir().getVie()-this.getAtq());
-			//code pour tirer / appel de la méthode tir
-		}
 	}
 
 	public boolean placementTourelles() {

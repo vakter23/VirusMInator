@@ -8,8 +8,8 @@ public class TourelleHydroClaque extends Tourelles{
 	//cette tourelle dispose d’un petit champs de tir mais asperge les ennemis non-stop
 
 	
-	public TourelleHydroClaque(double atq, int portee, double atqSpeed, double slow, String nom, int x, int y, Environnement e1) {
-		super(atq, portee, atqSpeed, 0, nom, x, y, e1);
+	public TourelleHydroClaque(double atq, int portee, double atqSpeed,  String nom, int x, int y, Environnement e1) {
+		super(atq, portee, atqSpeed,  nom, x, y,e1);
 	}
 
 	

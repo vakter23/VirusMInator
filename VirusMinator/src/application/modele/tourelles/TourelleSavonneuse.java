@@ -6,8 +6,8 @@ public class TourelleSavonneuse extends Tourelles {
 
 	// cette tourelle (tourelle de base) inflige dégât basique
 
-	public TourelleSavonneuse(double atq, int portee, double atqSpeed, double slow, String nom, int x, int y,Environnement e1) {
-		super(atq, portee, atqSpeed, 0, nom, x, y, e1);
+	public TourelleSavonneuse(double atq, int portee, double atqSpeed,  String nom, int x, int y, Environnement e1) {
+		super(atq, portee, atqSpeed, nom, x, y, e1);
 	}
 
 	@Override

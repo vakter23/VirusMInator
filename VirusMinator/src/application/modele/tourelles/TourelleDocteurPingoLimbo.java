@@ -8,8 +8,8 @@ public class TourelleDocteurPingoLimbo extends Tourelles{
 	
 	// si il est placé proche de 2 tourelle les tourelles adjacentes prennent une amélioration de vitesse d’attaque
 
-	public TourelleDocteurPingoLimbo(double atq, int portee, double atqSpeed, double slow, String nom, int x, int y, Environnement e1) {
-		super(0, portee, 0, 0, nom, x, y,e1);
+	public TourelleDocteurPingoLimbo(double atq, int portee, double atqSpeed, String nom, int x, int y, Environnement e1) {
+		super(0, portee, 0, nom, x, y, e1);
 	}
 
 	

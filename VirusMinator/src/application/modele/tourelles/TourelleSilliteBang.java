@@ -7,8 +7,8 @@ public class TourelleSilliteBang extends Tourelles {
 	// puissante tourelle qui balance des rockets de super loin mais prend du temps
 	// à recharger. (tours qui tirent à un endroit désigné à la souris)
 
-	public TourelleSilliteBang(double atq, int portee, double atqSpeed, double slow, String nom, int x, int y, Environnement e1) {
-		super(atq, portee, atqSpeed, 0, nom, x, y, e1);
+	public TourelleSilliteBang(double atq, int portee, double atqSpeed, String nom, int x, int y, Environnement env) {
+		super(atq, portee, atqSpeed, nom, x, y, env);
 	}
 
 	@Override
