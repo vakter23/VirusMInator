@@ -226,6 +226,11 @@ public class Environnement {
 	public void setListeTirs(ObservableList<Tir> listeTirs) {
 		this.listeTirs = listeTirs;
 	}
-	
+	public void unTourTir() {
+		for (int i = 0; i < listeTirs.size(); i++) {
+//			listeTirs.get(i).seDeplace();
+		}
+	}
+
 
 }

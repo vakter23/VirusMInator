@@ -1,7 +1,9 @@
 package application.modele.tir;
 
 import application.modele.Environnement;
+import application.modele.virus.Virus;
 import javafx.beans.property.IntegerProperty;
+import javafx.geometry.Point2D;
 
 public abstract class Tir {
 	private IntegerProperty xProperty;
@@ -51,5 +53,13 @@ public abstract class Tir {
 		yProperty.setValue(n);
 	}
 
+	public void seDeplace(Virus v) {
+		
+		int vecteurX = (v.getX() - this.getX())/2;
+        int vecteurY = (v.getY() - this.getY())/2;
+        this.setX(this.getX()+ vecteurX);
+        this.setY(this.getY()+ vecteurY);
+        
+	}
 	public abstract void agit();
 }
