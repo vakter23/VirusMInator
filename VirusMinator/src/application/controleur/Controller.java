@@ -296,13 +296,14 @@ public class Controller implements Initializable {
 		this.panneauEnnemis.setMaxWidth(1632);
 		this.panneauEnnemis.setMaxHeight(832);
 		this.e1.getViruses().addListener(new MonObservateurViruses(panneauEnnemis));
+		
 		creerTerrainVue();
 		System.out.println(this.e1.getViruses().size());
 		ajouter();
 		System.out.println("Viruses initialisés");
 		initAnimation();
 		this.labelArgent.textProperty().bind(this.e1.getArgentProperty().asString());
-
+		this.e1.getTourelles().addListener(new ecouteurTourelle(panneauEnnemis));
 
 	}
 
