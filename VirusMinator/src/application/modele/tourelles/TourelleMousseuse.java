@@ -1,7 +1,12 @@
 package application.modele.tourelles;
 
+import java.util.ArrayList;
+
 import application.modele.Environnement;
+import application.modele.tir.Tir;
+import application.modele.tir.TirAvecDegats;
 import application.modele.tir.TirSansDegats;
+import application.modele.virus.Virus;
 public class TourelleMousseuse extends Tourelles { // == TourelleAvastiVirus
 
 	// cette tourelle ralentit les ennemis mais inflige peu/pas de dégâts
@@ -33,13 +38,21 @@ public class TourelleMousseuse extends Tourelles { // == TourelleAvastiVirus
 	@Override
 	public void tirer() {
 
-
-		 // Tourelles qui slow (Mousseuse/AvastiVirus)
+		ArrayList<Virus> listeV = PlusieursVirusAPorteeDeTir();
+		for (int i = 0; i < listeV.size(); i++) {
+			listeV.get(i).setVie(this.slow);
+			Tir t1 = new TirSansDegats(this.getXProperty(), this.getYProperty(), this.env);
+			this.env.ajouterListeTirs(t1);
+		}
 		
-		/*double newVitesse = (VirusAPorteeDeTir().getVitesse()-this.getSlow());
-		VirusAPorteeDeTir().setVitesse(newVitesse);*/
+//		  Tourelles qui slow (Mousseuse/AvastiVirus)
 		
-		VirusAPorteeDeTir().slowVirus(this.slow);
+//		double newVitesse = (VirusAPorteeDeTir().getVitesse()-this.getSlow());
+//		VirusAPorteeDeTir().setVitesse(newVitesse);
+		for (int i = 0; i < listeV.size(); i++) {
+			PlusieursVirusAPorteeDeTir().get(i).slowVirus(this.slow);
+			
+		}
 	}
 
 }

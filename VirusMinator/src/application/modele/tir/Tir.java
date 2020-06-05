@@ -12,9 +12,11 @@ public abstract class Tir {
 	protected Environnement env;
 	private static int compteur;
 
-	public Tir(int x, int y/*, int destinationX, int destinationY*/) {
-		this.xProperty.set(x);
-		this.yProperty.set(y);
+	public Tir(IntegerProperty x, IntegerProperty y,Environnement env/*, int destinationX, int destinationY*/) {
+
+		this.xProperty = x;
+		this.yProperty = y;
+		this.env=env;
 //		this.destinationX = destinationX;
 //		this.destinationY = destinationY;
 		this.ID = "tir" + compteur;

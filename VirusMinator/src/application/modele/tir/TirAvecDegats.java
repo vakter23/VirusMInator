@@ -1,13 +1,15 @@
 package application.modele.tir;
 
+import application.modele.Environnement;
 import application.modele.virus.Virus;
+import javafx.beans.property.IntegerProperty;
 
 public class TirAvecDegats extends Tir {
 
 	private double atq;
 	private Virus v;
-	public TirAvecDegats(int x, int y, Virus v) {
-		super(x, y);
+	public TirAvecDegats(IntegerProperty x, IntegerProperty y, Virus v,Environnement env) {
+		super(x, y, env);
 		this.v=v;
 	}
 

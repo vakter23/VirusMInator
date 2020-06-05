@@ -1,7 +1,12 @@
 package application.modele.tourelles;
 
+import java.util.ArrayList;
+
 import application.modele.Environnement;
+import application.modele.tir.Tir;
+import application.modele.tir.TirAvecDegats;
 import application.modele.tir.TirSansDegats;
+import application.modele.virus.Virus;
 
 public class TourelleDocteurPingoLimbo extends Tourelles {
 	private double boostAtqSpeed;
@@ -26,8 +31,13 @@ public class TourelleDocteurPingoLimbo extends Tourelles {
 
 	@Override
 	public void tirer() {
+		ArrayList<Tourelles> liste = TourelleAPorteeDeTir();
+		for (int i = 0; i < liste.size(); i++) {
+			Tir t1 = new TirSansDegats(this.getXProperty(), this.getYProperty(), this.env);
+			this.env.ajouterListeTirs(t1);
+			TourelleAPorteeDeTir().get(i).boostAttaqueSpeed(boostAtqSpeed);
 
-		TourelleAPorteeDeTir().boostAttaqueSpeed(boostAtqSpeed);
+		}
 
 	}
 

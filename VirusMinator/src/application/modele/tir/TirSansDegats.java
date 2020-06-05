@@ -1,9 +1,12 @@
 package application.modele.tir;
 
+import application.modele.Environnement;
+import javafx.beans.property.IntegerProperty;
+
 public class TirSansDegats extends Tir {
 	
-	public TirSansDegats(int x, int y) {
-		super(x, y);
+	public TirSansDegats(IntegerProperty x, IntegerProperty y,Environnement env) {
+		super(x, y, env);
 	}
 
 	@Override

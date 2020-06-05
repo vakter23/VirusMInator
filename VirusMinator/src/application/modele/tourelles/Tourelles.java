@@ -114,9 +114,9 @@ public abstract class Tourelles {
 
 	}
 
-	public Tourelles TourelleAPorteeDeTir() { // Utilise pour la tourelle Pingolimbo qui boost la vitesse d'attaque des
+	public ArrayList<Tourelles> TourelleAPorteeDeTir() { // Utilise pour la tourelle Pingolimbo qui boost la vitesse d'attaque des
 												// tourelles dans un certain rayon
-
+		ArrayList<Tourelles> listeTourelle = new ArrayList<Tourelles>();
 		for (int i = 0; i < env.getTourelles().size(); i++) {
 			// System.out.println(env.getTourelles());
 			// if (env.getTourelles().get(i).estVivant()) { (Pas besoin de check ca
@@ -125,15 +125,16 @@ public abstract class Tourelles {
 					&& env.getTourelles().get(i).getY() <= this.getY() + this.portee)
 					&& (this.getX() - this.portee <= env.getTourelles().get(i).getX()
 							&& env.getTourelles().get(i).getX() <= this.getX() + this.portee)) {
-				return env.getTourelles().get(i);
+					listeTourelle.add(env.getTourelles().get(i));
 			}
+			return listeTourelle;
 			// }
 		}
 		return null;
 
 	}
 
-	public Virus PlusieursVirusAPorteeDeTir() {// return tout les virus a portee de tir pour les tourelles aoe
+	public ArrayList<Virus> PlusieursVirusAPorteeDeTir() {// return tout les virus a portee de tir pour les tourelles aoe
 		// (hydroclaque/mousseuse
 		ArrayList<Virus> virusesMultiples = new ArrayList<Virus>();
 		for (int i = 0; i < env.getViruses().size(); i++) {
@@ -145,8 +146,10 @@ public abstract class Tourelles {
 								&& env.getViruses().get(i).getX() <= this.getX() + this.portee)) {
 					Virus virus = env.getViruses().get(i);
 					virusesMultiples.add(virus);
+					
 				}
 			}
+		return virusesMultiples;
 		}
 		return null;
 

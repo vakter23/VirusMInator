@@ -273,7 +273,7 @@ public class Controller implements Initializable {
 		if (verifiePlaceLibre(test.getLayoutX(), test.getLayoutY()) == true) {
 			savonneuse.setOnMouseClicked((e) -> {
 				if (verifiePlaceLibre(test.getLayoutX(), test.getLayoutY()) == true) {
-					Tourelles t1 = new TourelleSavonneuse(20, 128, "0", (int) test.getLayoutX(),
+					Tourelles t1 = new TourelleSavonneuse(50, 5, "0", (int) test.getLayoutX(),
 							(int) test.getLayoutY(), e1);
 					System.out.println(t1);
 					this.e1.ajouterTourelles(t1);

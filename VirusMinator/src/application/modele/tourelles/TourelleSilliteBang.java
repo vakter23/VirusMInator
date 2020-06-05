@@ -1,6 +1,9 @@
 package application.modele.tourelles;
 
 import application.modele.Environnement;
+import application.modele.tir.Tir;
+import application.modele.tir.TirAvecDegats;
+import application.modele.virus.Virus;
 
 public class TourelleSilliteBang extends TourellesAvecDegats {
 
@@ -31,8 +34,11 @@ public class TourelleSilliteBang extends TourellesAvecDegats {
 	@Override
 	public void tirer() {
 
-		double newVie = (VirusAPorteeDeTir().getVie() - this.getAtq());
-		VirusAPorteeDeTir().setVie(newVie);
+		Virus v = VirusAPorteeDeTir();
+		double newVie = (v.getVie() - this.getAtq());
+		v.setVie(newVie);
+		Tir t1 = new TirAvecDegats(this.getXProperty(), this.getYProperty(), v, this.env);
+		this.env.ajouterListeTirs(t1);
 		//VirusAPorteeDeTir().setVie(VirusAPorteeDeTir().getVie()-this.getAtq());
 		//code pour tirer / apelle de la méthode tir
 			}
