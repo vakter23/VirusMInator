@@ -241,6 +241,13 @@ public abstract class Virus {
 	public double getVitesse() {
 		return vitesse;
 	}
+public void slowVirus(double slow) {
+		
+		this.setVitesse(this.vitesse/slow);
+		
+	}
+
+
 
 	/**
 	 * @param vitesse the vitesse to set

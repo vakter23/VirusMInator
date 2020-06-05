@@ -36,7 +36,7 @@ public class TourelleSavonneuse extends TourellesAvecDegats {
 		this.env.ajouterListeTirs(t1);
 		System.out.println("Apres tirer cette tourelle a tirer sur  " + v);
 		System.out.println(v.getVie());
-		System.out.println(env.getListeTir());
+		System.out.println(env.getListeTirs());
 
 		// VirusAPorteeDeTir().setVie(VirusAPorteeDeTir().getVie()-this.getAtq());
 		// code pour tirer / apelle de la méthode tir

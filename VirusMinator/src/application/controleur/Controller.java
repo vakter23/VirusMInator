@@ -112,7 +112,12 @@ public class Controller implements Initializable {
 
 	public void creerTerrainVue() {
 		System.out.println(Config.listeMap.size());
-		gelHydro.setImage(tourelleGel);
+		  System.out.println(Config.listeMap.size());
+	        savonneuse.setImage((Image) (getImgg("/src/ressources/magasin/gelHydro.png")));
+	        avastirus.setImage((Image) (getImgg("/src/ressources/magasin/Avast.png")));
+	        gelHydroClaque.setImage((Image) (getImgg("/src/ressources/magasin/gel-hydoralcoolique.png")));
+	        siliteBang.setImage((Image) (getImgg("/src/ressources/magasin/javel.png")));
+	        drPingoLimbo.setImage((Image) (getImgg("/src/ressources/magasin/drPingoLimbo.png")));
 
 
 		for (int i = 0; i < Config.listeMap.size(); i++) {

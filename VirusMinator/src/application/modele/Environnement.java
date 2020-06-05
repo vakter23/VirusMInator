@@ -4,6 +4,7 @@ import java.util.List;
 
 import application.Config;
 import application.controleur.Controller;
+import application.modele.tir.Tir;
 import application.modele.tourelles.Tourelles;
 import application.modele.virus.Virus;
 import application.modele.virus.VirusBasirus;
@@ -25,6 +26,7 @@ public class Environnement {
 	 tourelles sur le terrain*/
 	private ObservableList<Virus> nextViruses = FXCollections.observableArrayList();/*la liste des virus à 
 	ajouter dans les virus présents*/
+	private ObservableList<Tir> listeTirs = FXCollections.observableArrayList();
 	private String[][] terrain; 
 	private IntegerProperty argent = new SimpleIntegerProperty(15);
 
@@ -198,6 +200,21 @@ public class Environnement {
 				System.out.println(virusesSurTerrain.get(i) + "a été supprimée");
 				virusesSurTerrain.remove(i);
 			}
+		}
+	}
+	public void ajouterListeTirs(Tir t) {
+		listeTirs.add(t);
+		System.out.println("Un tir a été ajoutée" + t);
+	}
+public ObservableList<Tir> getListeTirs() {
+		return listeTirs;
+	}
+public void setListeTirs(ObservableList<Tir> listeTirs) {
+		this.listeTirs = listeTirs;
+	}
+public void unTourTir() {
+		for (int i = 0; i < listeTirs.size(); i++) {
+			listeTirs.get(i).seDeplace();
 		}
 	}
 
