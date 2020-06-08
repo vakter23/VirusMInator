@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import application.modele.Environnement;
+import application.modele.Graph;
+import application.modele.Sommet;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -18,6 +20,8 @@ public abstract class Virus {
 	private int tpsPerso;
 	private static int tpsSuivant = 200;
 	protected Environnement env;
+	public int compteurDeplacement =0;
+
 	/*
 	 * 1 = basirus 2 = divirus 3 = healrus 4 = boomirus 5 = viterus
 	 */
@@ -101,6 +105,15 @@ public abstract class Virus {
 		return this.vie > 0;
 	}
 
+	public void seDeplacer() {
+		if(compteur < 37) {
+		this.setY(Graph.getSommetDansLordre().get(compteur).getX()*32);
+		this.setX(Graph.getSommetDansLordre().get(compteur).getY()*32);
+		System.out.println(this.toString());
+		compteur++;
+		}
+		
+	}
 	/* Changer les 1, 2, et 0 en vitesse des virus */
 	public void agit(Virus v) {
 		if (v instanceof VirusViterus) {

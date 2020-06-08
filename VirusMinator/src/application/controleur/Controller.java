@@ -28,6 +28,7 @@ import java.util.ResourceBundle;
 
 import application.Config;
 import application.modele.Environnement;
+import application.modele.Graph;
 import application.modele.Magasin;
 import application.modele.tourelles.TourelleDocteurPingoLimbo;
 import application.modele.tourelles.TourelleHydroClaque;
@@ -126,6 +127,9 @@ public class Controller implements Initializable {
 
 		creerTerrainVue();
 		System.out.println(this.e1.getViruses().size());
+		Graph g = new Graph();
+        g.addEdge();
+        g.BFS(Graph.getSommet().get(20));
 		ajouter();// cahnger le nom
 		System.out.println("Viruses initialisés");
 		initAnimation();
@@ -133,7 +137,8 @@ public class Controller implements Initializable {
 		this.e1.getViruses().addListener(new MonObservateurViruses(panneauEnnemis));
 		this.e1.getTirs().addListener(new MonObservateurTirs(panneauEnnemis));
 		this.e1.getTourelles().addListener(new ecouteurTourelle(panneauEnnemis));
-
+		System.out.println(g.getSommet().toString());
+		System.out.println(g.getSommetDansLordre().toString());
 	}
 
 	private void initAnimation() {
@@ -142,7 +147,7 @@ public class Controller implements Initializable {
 		getGameLoop().setCycleCount(Timeline.INDEFINITE);
 		KeyFrame kf = new KeyFrame(
 				// on définit le FPS (nbre de frame par seconde)
-				Duration.seconds(0.0005),
+				Duration.seconds(0.025),
 
 				// on définit ce qui se passe à chaque frame
 				// c'est un eventHandler d'ou le lambda

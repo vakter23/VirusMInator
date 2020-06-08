@@ -165,7 +165,8 @@ public class Environnement {
 		System.out.println("Les viruses se sont déplacés");
 		for (int i = 0; i < virusesSurTerrain.size(); i++) {
 			Virus v = virusesSurTerrain.get(i);
-			v.agit(v);
+//			v.agit(v);
+			v.seDeplacer();
 		}
 	}
 

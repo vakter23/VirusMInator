@@ -14,7 +14,7 @@ public class Sommet {
 	private boolean visited;
 	
 	public Sommet(int x , int y) {
-		this.x=x ;
+		this.x =x;
 		this.y =y;
 		this.adjacent = new ArrayList<Sommet>();
 		
@@ -57,6 +57,9 @@ public class Sommet {
 		
 	}
 	
+	public String toString() {
+		return "x" + this.getX()+ "y" + this.getY();
+	}
 	
 	
 }	
