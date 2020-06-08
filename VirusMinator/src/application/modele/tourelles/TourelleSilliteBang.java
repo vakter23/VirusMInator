@@ -37,7 +37,7 @@ public class TourelleSilliteBang extends TourellesAvecDegats {
 		Virus v = VirusAPorteeDeTir();
 		double newVie = (v.getVie() - this.getAtq());
 		v.setVie(newVie);
-		Tir t1 = new TirAvecDegats(this.getXProperty(), this.getYProperty(), v, this.env);
+		Tir t1 = new TirAvecDegats(this.getXProperty(), this.getYProperty(), v, this.env,this.getAtq());
 		this.env.ajouterListeTirs(t1);
 		//VirusAPorteeDeTir().setVie(VirusAPorteeDeTir().getVie()-this.getAtq());
 		//code pour tirer / apelle de la méthode tir

@@ -31,7 +31,7 @@ public class Environnement {
 			.observableArrayList();/*
 									 * la liste des virus à ajouter dans les virus présents
 									 */
-	private ObservableList<Tir> listeTirs = FXCollections.observableArrayList();
+	public ObservableList<Tir> listeTirs = FXCollections.observableArrayList();
 	private String[][] terrain;
 	private IntegerProperty argent = new SimpleIntegerProperty(15);
 

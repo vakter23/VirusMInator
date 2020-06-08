@@ -145,7 +145,7 @@ public class Controller implements Initializable {
 		getGameLoop().setCycleCount(Timeline.INDEFINITE);
 		KeyFrame kf = new KeyFrame(
 				// on définit le FPS (nbre de frame par seconde)
-				Duration.seconds(0.0025),
+				Duration.seconds(0.0005),
 
 				// on définit ce qui se passe à chaque frame
 				// c'est un eventHandler d'ou le lambda
@@ -158,14 +158,14 @@ public class Controller implements Initializable {
 					else if (temps % 20 == 0) {
 						System.out.println("tour" + temps);
 						unTour();
-					} if(temps % 1 == 0 && temps < 8000) {
+					} if(temps % 5 == 0 && temps < 8000) {
 						this.e1.unTourTir();
 					}
 					
 					if (temps % 800 == 0) {
 						this.e1.incrementerArgent();
 					}
-					if (this.e1.getViruses().isEmpty() && temps > 1000) {
+					if (this.e1.getViruses().isEmpty() && temps > 7000) {
 						gameLoop.stop();
 						System.out.println("V.I.C.T.O.I.R.E");
 					}

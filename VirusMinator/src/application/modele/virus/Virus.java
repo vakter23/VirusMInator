@@ -18,8 +18,13 @@ public abstract class Virus {
 	private int tpsPerso;
 	private static int tpsSuivant = 200;
 	protected Environnement env;
-	
-	public static List<Integer> listeVirusAttente = Arrays.asList(2);/*liste des viruses a ajouter*/
+	/* 1 = basirus
+	 * 2 = divirus
+	 * 3 = healrus
+	 * 4 = boomirus
+	 * 5 = viterus
+	 */
+	public static List<Integer> listeVirusAttente = Arrays.asList(1,2);/*liste des viruses a ajouter*/
 	public static List<Integer> listeVirusAttente2 = Arrays.asList(2,2,3,4,5);
 	public Virus(int vie, int atq, double vitesse, String nom, int x, int y, int tpsSpawn,Environnement env) { /* Constructeur Virus */
 		this.ID = "v" + compteur;

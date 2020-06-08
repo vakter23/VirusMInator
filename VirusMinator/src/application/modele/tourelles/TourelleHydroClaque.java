@@ -31,7 +31,7 @@ public class TourelleHydroClaque extends TourellesAvecDegats {
 	public void tirer() {
 		ArrayList<Virus> v = PlusieursVirusAPorteeDeTir();
 		for (int i = 0; i < v.size(); i++) {
-			Tir t1 = new TirAvecDegats(this.getXProperty(), this.getYProperty(), v.get(i), this.env);
+			Tir t1 = new TirAvecDegats(this.getXProperty(), this.getYProperty(), v.get(i), this.env, this.getAtq());
 			this.env.ajouterListeTirs(t1);
 			double newVie = (v.get(i).getVie() - this.getAtq());
 			v.get(i).setVie(newVie);
