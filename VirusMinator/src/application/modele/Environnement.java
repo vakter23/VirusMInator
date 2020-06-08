@@ -20,7 +20,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.Node;
 
 public class Environnement {
-	private int width, height, vie;
+	private int width, height;
 	public ObservableList<Virus> virusesSurTerrain = FXCollections
 			.observableArrayList(); /* les viruses présents sur le terrain */
 	private ObservableList<Tourelles> tourelles = FXCollections
@@ -33,33 +33,19 @@ public class Environnement {
 									 */
 	public ObservableList<Tir> listeTirs = FXCollections.observableArrayList();
 	private String[][] terrain;
-	private IntegerProperty argent = new SimpleIntegerProperty(15);
+	private Magasin magasin;
+	private Hopital hopital;
 
-	public Environnement(int width, int height) {
+	public Environnement(int width, int height,Magasin magasin) {
 		super();
 		this.width = width;
 		this.height = height;
 		this.terrain = new String[18][40];
 		initTerrain();
-		this.setVie(60);
-
-	}
-
-	public void incrementerArgent() {
-		this.argent.setValue(argent.getValue() + 1);
-
-	}
-
-	public IntegerProperty getArgentProperty() {
-		return this.argent;
-	}
-
-	public int getArgent() {
-		return this.argent.getValue();
-	}
-
-	public void enleverArgent(int somme) {
-		this.argent.setValue(argent.getValue() - somme);
+		this.setMagasin(magasin);
+		this.hopital = new Hopital();
+//		this.getHopital.setVie(60);
+		
 	}
 
 	public int getWidth() {
@@ -204,7 +190,7 @@ public class Environnement {
 	}
 
 	private void gameOver() {
-		if (this.getVie() == 0) {
+		if (this.getHopital().getVie() == 0) {
 			Controller.getGameLoop().stop();
 			System.out.println("D.É.F.A.I.T.E");
 		}
@@ -253,14 +239,6 @@ public class Environnement {
 		}
 		return 0;
 
-	}
-
-	public int getVie() {
-		return vie;
-	}
-
-	public void setVie(int vie) {
-		this.vie = vie;
 	}
 
 	public ObservableList<Tir> getTirs() {
@@ -336,6 +314,34 @@ public class Environnement {
 		}
 		System.out.println("test");
 
+	}
+
+	/**
+	 * @return the magasin
+	 */
+	public Magasin getMagasin() {
+		return magasin;
+	}
+
+	/**
+	 * @param magasin the magasin to set
+	 */
+	public void setMagasin(Magasin magasin) {
+		this.magasin = magasin;
+	}
+
+	/**
+	 * @return the hopital
+	 */
+	public Hopital getHopital() {
+		return hopital;
+	}
+
+	/**
+	 * @param hopital the hopital to set
+	 */
+	public void setHopital(Hopital hopital) {
+		this.hopital = hopital;
 	}
 
 }
