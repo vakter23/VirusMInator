@@ -1,14 +1,19 @@
 package application.modele.tourelles;
 
-import application.modele.Environnement;
-import application.modele.virus.Virus;
+import java.util.ArrayList;
 
+import application.modele.Environnement;
+import application.modele.tir.Tir;
+import application.modele.tir.TirAvecDegats;
+import application.modele.tir.TirSansDegats;
+import application.modele.virus.Virus;
 public class TourelleMousseuse extends Tourelles { // == TourelleAvastiVirus
 
 	// cette tourelle ralentit les ennemis mais inflige peu/pas de dégâts
 	
 	private double slow;
-	
+	private int niveau =1;
+
 
 	public TourelleMousseuse( int portee, double atqSpeed, String nom, int x, int y,Environnement env) {
 		super(portee, atqSpeed,  nom, x, y,env);
@@ -21,29 +26,36 @@ public class TourelleMousseuse extends Tourelles { // == TourelleAvastiVirus
 	}
 	
 
-	@Override
-	public void amelioration() {
+public void amelioration() {
 
+		
+		if(this.niveau<3) {
+		
+		
+		this.setPortee(this.getPortee() + 5);
+		this.setAtqSpeed(this.getAtqSpeed() + 1);
 
-		this.setSlow(slow+2);
-		this.setPortee(this.getPortee()+5);
-		this.setAtqSpeed(this.getAtqSpeed()+1);		
+		this.niveau++;
+		}
 	}
-
-
 	@Override
 	public void tirer() {
 
-
-		 // Tourelles qui slow (Mousseuse/AvastiVirus)
+		ArrayList<Virus> listeV = PlusieursVirusAPorteeDeTir();
+		for (int i = 0; i < listeV.size(); i++) {
+			listeV.get(i).setVie(this.slow);
+			Tir t1 = new TirSansDegats(this.getXProperty(), this.getYProperty(), this.env);
+			this.env.ajouterListeTirs(t1);
+		}
 		
-		/*double newVitesse = (VirusAPorteeDeTir().getVitesse()-this.getSlow());
-		VirusAPorteeDeTir().setVitesse(newVitesse);*/
+//		  Tourelles qui slow (Mousseuse/AvastiVirus)
 		
-		VirusAPorteeDeTir().slowVirus(this.slow);
-		
-		((Virus) PlusieursVirusAPorteeDeTir()).slowVirus(this.slow);
-		
+//		double newVitesse = (VirusAPorteeDeTir().getVitesse()-this.getSlow());
+//		VirusAPorteeDeTir().setVitesse(newVitesse);
+		for (int i = 0; i < listeV.size(); i++) {
+			PlusieursVirusAPorteeDeTir().get(i).slowVirus(this.slow);
+			
+		}
 	}
 
 }

@@ -3,8 +3,12 @@ package application.modele;
 import java.util.List;
 
 import application.Config;
+import application.controleur.Controller;
+import application.modele.tir.Tir;
 import application.modele.tourelles.Tourelles;
 import application.modele.virus.Virus;
+import application.modele.virus.VirusBasirus;
+import application.modele.virus.VirusDivirus;
 import application.modele.virus.VirusVhealrus;
 import application.modele.virus.VirusViboomrus;
 import javafx.collections.FXCollections;
@@ -15,7 +19,9 @@ public class Environnement {
 	private ObservableList<Virus> viruses = FXCollections.observableArrayList();
 	private ObservableList<Tourelles> tourelles = FXCollections.observableArrayList();
 	private ObservableList<Virus> nextViruses = FXCollections.observableArrayList();
+	private ObservableList<Tir> listeTirs = FXCollections.observableArrayList();
 	private String[][] terrain;
+	
 	private int temps=0;
 	
 	public Environnement(int width, int height) {
@@ -35,15 +41,35 @@ public class Environnement {
 	public int getHeight() {
 		return height;
 	}
-
+	public void initVirus(int nbVirusVague) {
+		this.viruses.clear();
+		for (int i = 0; i<Virus.listeVirusAttente.size(); i++) {
+			nextViruses.add(Virus.listeVirusAttente.get(i));
+			resetPos((nextViruses.get(i)));
+			//Virus.listeVirusAttente.remove(i);
+		}		
+//		viruses.add(new VirusDivirus(70, 10, 0.025, "VirusDivirus", 0, 288));
+//		viruses.add(new VirusBasirus(50, 10, 0.015, "VirusBasirus", -30, 288));
+//		viruses.add(new VirusBasirus(50, 10, 0.015, "VirusBasirus", -60, 288));	
+//		viruses.add(new VirusDivirus(70, 10, 0.025, "VirusDivirus", -90, 288));
+	}
 	public ObservableList<Virus> getViruses() {
 		return viruses;
 	}
-
+	public ObservableList<Virus> getNextViruses() {
+		return nextViruses;
+	}
 	public ObservableList<Tourelles> getTourelles() {
 		return tourelles;
 	}
+	public ObservableList<Tir> getListeTir() {
+		return listeTirs;
+	}
 
+	public void resetPos(Virus v) {
+		v.setX(0);
+		v.setY(288);
+	}
 	public Virus getVirus(String id) {
 		for (Virus v : this.viruses) {
 			if (v.getId().equals(id)) {
@@ -62,13 +88,18 @@ public class Environnement {
 		return null;
 	}
 
-	public void ajouterVirus(Virus a) {
-		viruses.add(a);
+	public void ajouterVirus(Virus v) {
+		viruses.add(v);
 		System.out.println(viruses.get(0).getNom());
 	}
 
 	public void ajouterTourelles(Tourelles a) {
 		tourelles.add(a);
+		System.out.println("une tourelle a été ajoutée" + a);
+	}
+	public void ajouterListeTirs(Tir t) {
+		listeTirs.add(t);
+		System.out.println("Un tir a été ajoutée" + t);
 	}
 
 	public boolean dansTerrain(int x, int y) {
@@ -76,26 +107,31 @@ public class Environnement {
 	}
 
 	public void unTour() {
+		
 		for (int i = 0; i < viruses.size(); i++) {
 			Virus v = viruses.get(i);
-			v.seDeplace();
+			v.seDeplace(v);
+		}
+		for (int i = 0; i < tourelles.size(); i++) {
+			Tourelles t = tourelles.get(i);
+			t.agit();
 		}
 		for (int i = viruses.size() - 1; i >= 0; i--) {
 			Virus v = viruses.get(i);
 			if (!v.estVivant()) {
-				System.out.println("mort de : " + v);
+				System.out.println("mort de : " + v.getId());
 				viruses.remove(i);
 			}
 		}
-		
-		temps++;
+		for(int i = 0; i < nextViruses.size(); i++) {
+            if (nextViruses.get(i).getTempsSpawn() == Controller.temps) {
+                viruses.add(nextViruses.get(i));
+                System.out.println("Virus : "+ nextViruses.get(i).getNom() + " ajouté !");
+            }
+        }
+		for (int i = 0; i < listeTirs.size(); i++) {
+		}
 
-	}
-	
-	public int getTemps() { // permet de gerer le temps de tir pour les tourelles (public void agit)
-		
-		return temps;
-		
 	}
 
 	public int getTerrain(int valeurI) {
@@ -114,7 +150,7 @@ public class Environnement {
 	public void initTerrain() {
         List<Integer> listeMap = Config.listeMap;
         int x = 0;
-
+        /*Graph(36);*/
         for (int i = 0; i < this.terrain.length; i++) {
 
             for (int j = 0; j < this.terrain[i].length; j++) {
@@ -176,5 +212,25 @@ public class Environnement {
 		System.out.println("test");
 
 	}
+
+	/**
+	 * @return the listeTirs
+	 */
+	public ObservableList<Tir> getListeTirs() {
+		return listeTirs;
+	}
+
+	/**
+	 * @param listeTirs the listeTirs to set
+	 */
+	public void setListeTirs(ObservableList<Tir> listeTirs) {
+		this.listeTirs = listeTirs;
+	}
+	public void unTourTir() {
+		for (int i = 0; i < listeTirs.size(); i++) {
+//			listeTirs.get(i).seDeplace();
+		}
+	}
+
 
 }

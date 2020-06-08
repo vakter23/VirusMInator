@@ -6,6 +6,7 @@ public class TourelleSavonneuse extends TourellesAvecDegats {
 	
 
 	// cette tourelle (tourelle de base) inflige dégât basique
+	private int niveau =1;
 
 	
 	public TourelleSavonneuse(int portee, double atqSpeed, String nom, int x, int y, Environnement env) {
@@ -17,13 +18,17 @@ public class TourelleSavonneuse extends TourellesAvecDegats {
 	
 
 
-	@Override
-	public void amelioration() {
+public void amelioration() {
 
+		
+		if(this.niveau<3) {
+		
 		this.setAtq(this.getAtq() * 1.2);
 		this.setPortee(this.getPortee() + 5);
 		this.setAtqSpeed(this.getAtqSpeed() + 1);
 
+		this.niveau++;
+		}
 	}
 
 	@Override
