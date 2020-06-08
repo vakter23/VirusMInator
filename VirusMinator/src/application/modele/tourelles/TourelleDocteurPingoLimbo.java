@@ -11,6 +11,9 @@ import application.modele.virus.Virus;
 public class TourelleDocteurPingoLimbo extends Tourelles {
 	private double boostAtqSpeed;
 
+	private int niveau = 1;
+
+	
 	public TourelleDocteurPingoLimbo(int portee, double atqSpeed, String nom, int x, int y, Environnement env) {
 		super(portee, atqSpeed, nom, x, y, env);
 
@@ -24,9 +27,14 @@ public class TourelleDocteurPingoLimbo extends Tourelles {
 	@Override
 	public void amelioration() {
 
+		if(niveau<3) {
+		
 		this.setBoostatqSpeed(boostAtqSpeed + 2);
 		this.setPortee(this.getPortee() + 5);
 		this.setAtqSpeed(this.getAtqSpeed() + 1);
+		
+		niveau++;
+		}
 	}
 
 	@Override

@@ -12,7 +12,8 @@ public class TourelleMousseuse extends Tourelles { // == TourelleAvastiVirus
 	// cette tourelle ralentit les ennemis mais inflige peu/pas de dégâts
 	
 	private double slow;
-	
+	private int niveau = 1;
+
 
 	public TourelleMousseuse( int portee, double atqSpeed, String nom, int x, int y,Environnement env) {
 		super(portee, atqSpeed,  nom, x, y,env);
@@ -28,10 +29,15 @@ public class TourelleMousseuse extends Tourelles { // == TourelleAvastiVirus
 	@Override
 	public void amelioration() {
 
-
+		if(niveau<3) {
+		
 		this.setSlow(slow+2);
 		this.setPortee(this.getPortee()+5);
 		this.setAtqSpeed(this.getAtqSpeed()+1);		
+		
+		niveau++;
+		
+		}
 	}
 
 
