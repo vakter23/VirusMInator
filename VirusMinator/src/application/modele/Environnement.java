@@ -32,11 +32,11 @@ public class Environnement {
 									 * la liste des virus à ajouter dans les virus présents
 									 */
 	public ObservableList<Tir> listeTirs = FXCollections.observableArrayList();
-	private String[][] terrain;
+	private static String[][] terrain;
 	private Magasin magasin;
 	private Hopital hopital;
 
-	public Environnement(int width, int height,Magasin magasin) {
+	public Environnement(int width, int height, Magasin magasin) {
 		super();
 		this.width = width;
 		this.height = height;
@@ -45,7 +45,7 @@ public class Environnement {
 		this.setMagasin(magasin);
 		this.hopital = new Hopital();
 //		this.getHopital.setVie(60);
-		
+
 	}
 
 	public int getWidth() {
@@ -342,6 +342,66 @@ public class Environnement {
 	 */
 	public void setHopital(Hopital hopital) {
 		this.hopital = hopital;
+	}
+
+	public static int[][] getTerrainInt() {
+		int[][] terrainInt = new int[18][40];
+		List<Integer> listeMap = Config.listeMap;
+		int x = 0;
+		/* Graph(36); */
+		for (int i = 0; i < terrainInt.length; i++) {
+
+			for (int j = 0; j < terrainInt[i].length; j++) {
+
+				if (listeMap.get(x) == Config.Herbe) {
+					terrainInt[i][j] = 1;
+
+				}
+
+				else if (listeMap.get(x) == Config.Sable) {
+					terrainInt[i][j] = 1;
+
+				}
+
+				else if (listeMap.get(x) == Config.SpawnViolet) {
+					terrainInt[i][j] = 1;
+
+				}
+
+				else if (listeMap.get(x) == Config.Vert) {
+					terrainInt[i][j] = 1;
+
+				}
+
+				else if (listeMap.get(x) == Config.sableChemin) {
+					terrainInt[i][j] = 0;
+
+				}
+
+				else if (listeMap.get(x) == Config.SPAWNTOURELLES) {
+					terrainInt[i][j] = 1;
+				}
+
+				else if (listeMap.get(x) == Config.Hosto) {
+					terrainInt[i][j] = 1;
+
+				} else if (listeMap.get(x) == Config.RougeHospital) {
+					terrainInt[i][j] = 1;
+
+				}
+
+				x++;
+			}
+		}
+
+		return terrainInt;
+	}
+
+	public static boolean estUnChemin(int i, int j) {
+		if (terrain[i][j] == "0") {
+			return true;
+		}
+		return false;
 	}
 
 }
