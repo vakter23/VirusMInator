@@ -1,37 +1,32 @@
 package application.modele.tir;
 
 import application.modele.Environnement;
+import application.modele.virus.Virus;
 import javafx.beans.property.IntegerProperty;
+import javafx.geometry.Point2D;
 
-public class Tir {
-	private int atq;
+public abstract class Tir {
 	private IntegerProperty xProperty;
 	private IntegerProperty yProperty;
-	private int destinationX;
-	private int destinationY;
+//	private int destinationX;
+//	private int destinationY;
 	private String ID;
-	private int portee;
 	protected Environnement env;
 	private static int compteur;
-	
-	//public Tir (int atq, int x, int y, int portee, int destinationX, int destinationY) {
-	public Tir ( int x, int y) {
 
-		//this.atq = atq;
-		this.xProperty.set(x);
-		this.yProperty.set(y);
-		//this.destinationX = destinationX;
-		//this.destinationY = destinationY;
-		//this.portee = portee;
-		this.ID = "tir"+compteur;
+	public Tir(IntegerProperty x, IntegerProperty y,Environnement env/*, int destinationX, int destinationY*/) {
+
+		this.xProperty = x;
+		this.yProperty = y;
+		this.env=env;
+//		this.destinationX = destinationX;
+//		this.destinationY = destinationY;
+		this.ID = "tir" + compteur;
 		compteur++;
 	}
 
-
 	public String getId() {
-
 		return ID;
-
 	}
 
 	public final int getX() {
@@ -58,5 +53,5 @@ public class Tir {
 		yProperty.setValue(n);
 	}
 
-	
+	public abstract void agit();
 }
