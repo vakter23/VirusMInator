@@ -93,44 +93,40 @@ public class Controller implements Initializable {
 
 	public static int temps;
 
+	@FXML
+	private Label labelArgent;
 
-	    @FXML
-	    private Label labelArgent;
+	@FXML
+	private Button bouttonVendre;
 
+	@FXML
+	private ImageView savonneuse;
 
-	    @FXML
-	    private Button bouttonVendre;
+	@FXML
+	private ImageView avastirus;
 
-	    @FXML
-	    private ImageView savonneuse;
+	@FXML
+	private ImageView gelHydroClaque;
 
-	    @FXML
-	    private ImageView avastirus;
+	@FXML
+	private ImageView siliteBang;
 
-	    @FXML
-	    private ImageView gelHydroClaque;
-
-	    @FXML
-	    private ImageView siliteBang;
-
-	    @FXML
-	    private ImageView drPingoLimbo;
-
-
+	@FXML
+	private ImageView drPingoLimbo;
 
 	@FXML
 	private ImageView gelHydro;
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
-		
+
 		this.e1 = new Environnement(1600, 800, new Magasin());
 		this.panneauEnnemis.setMaxWidth(1632);
 		this.panneauEnnemis.setMaxHeight(832);
-		
+
 		creerTerrainVue();
 		System.out.println(this.e1.getViruses().size());
-		ajouter();//cahnger le nom
+		ajouter();// cahnger le nom
 		System.out.println("Viruses initialisés");
 		initAnimation();
 		this.labelArgent.textProperty().bind(this.e1.getMagasin().getArgentProperty().asString());
@@ -154,15 +150,16 @@ public class Controller implements Initializable {
 					if (temps == 8000) {
 						System.out.println("fini");
 						getGameLoop().stop();
-					} 
-				
-					else if (temps % 20 == 0) {
+					}
+
+				else if (temps % 20 == 0) {
 						System.out.println("tour" + temps);
 						unTour();
-					} if(temps % 5 == 0 && temps < 8000) {
+					}
+					if (temps % 5 == 0 && temps < 8000) {
 						this.e1.unTourTir();
 					}
-					
+
 					if (temps % 800 == 0) {
 						this.e1.getMagasin().incrementerArgent();
 					}
@@ -170,7 +167,6 @@ public class Controller implements Initializable {
 						gameLoop.stop();
 						System.out.println("V.I.C.T.O.I.R.E");
 					}
-						
 
 					temps++;
 				}));
@@ -183,14 +179,14 @@ public class Controller implements Initializable {
 		this.e1.unTour();
 
 	}
+
 	public void creerTerrainVue() {
 		System.out.println(Config.listeMap.size());
-	        savonneuse.setImage((Image) (getImgg("/src/ressources/magasin/gelHydro.png")));
-	        avastirus.setImage((Image) (getImgg("/src/ressources/magasin/Avast.png")));
-	        gelHydroClaque.setImage((Image) (getImgg("/src/ressources/magasin/gel-hydoralcoolique.png")));
-	        siliteBang.setImage((Image) (getImgg("/src/ressources/magasin/javel.png")));
-	        drPingoLimbo.setImage((Image) (getImgg("/src/ressources/magasin/drPingoLimbo.png")));
-
+		savonneuse.setImage((Image) (getImgg("/src/ressources/magasin/gelHydro.png")));
+		avastirus.setImage((Image) (getImgg("/src/ressources/magasin/Avast.png")));
+		gelHydroClaque.setImage((Image) (getImgg("/src/ressources/magasin/gel-hydoralcoolique.png")));
+		siliteBang.setImage((Image) (getImgg("/src/ressources/magasin/javel.png")));
+		drPingoLimbo.setImage((Image) (getImgg("/src/ressources/magasin/drPingoLimbo.png")));
 
 		for (int i = 0; i < Config.listeMap.size(); i++) {
 			ImageView blancHopital = Config.getImg("/src/ressources/tiles/blancHopital");
@@ -245,10 +241,7 @@ public class Controller implements Initializable {
 
 		}
 
-
 	}
-
-
 
 	public void ajouter() {
 		this.e1.initVirus();
@@ -272,57 +265,54 @@ public class Controller implements Initializable {
 	 * getPanneauEnnemis().getChildren().add(Virus); }
 	 */
 	void clicTourelle(MouseEvent event) {
-//		ImageView sourc = (ImageView) event.getSource();
-//		Image spawnTourellesR = getImgg("/src/ressources/tiles/spawnTourelleRouge.png");
-//		sourc.setImage(spawnTourellesR);
 		event.getTarget();
 		Node tuile = (Node) event.getSource();
 		System.out.println("x=" + tuile.getLayoutX() + "y = " + tuile.getLayoutY());
-//		System.out.println("clic tourelle" + event.getSceneX()() + event.getSceneY() + event.getSource().);
 		if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) == true) {
 			savonneuse.setOnMouseClicked((e) -> {
-				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY())&& this.e1.getMagasin().getArgent() > 7) {
-					Tourelles t1 = new TourelleSavonneuse(50, 64, "TourelleSavonneuse", (int) tuile.getLayoutX(),
-							(int) tuile.getLayoutY(), e1);
-					this.e1.getMagasin().enleverArgent(7);
+				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) && this.e1.getMagasin().getArgent() > 7) {
+					Tourelles t1 = new TourelleSavonneuse((int) tuile.getLayoutX(), (int) tuile.getLayoutY(), e1);
+					this.e1.getMagasin().enleverArgent(Magasin.prixSavonneuse);
 					System.out.println(t1);
 					this.e1.ajouterTourelles(t1);
 				}
 			});
 			avastirus.setOnMouseClicked((e) -> {
-				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) == true && this.e1.getMagasin().getArgent() > 5) {
+				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) == true
+						&& this.e1.getMagasin().getArgent() > 5) {
 					this.e1.getMagasin().enleverArgent(5);
 					this.e1.ajouterTourelles(
-							new TourelleMousseuse(0, 0, "", (int) tuile.getLayoutX(), (int) tuile.getLayoutY(), e1));
+							new TourelleMousseuse((int) tuile.getLayoutX(), (int) tuile.getLayoutY(), e1));
 				}
 			});
 			gelHydroClaque.setOnMouseClicked((e) -> {
-				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) == true && this.e1.getMagasin().getArgent() > 9) {
+				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) == true
+						&& this.e1.getMagasin().getArgent() > 9) {
 					this.e1.getMagasin().enleverArgent(9);
 					this.e1.ajouterTourelles(
-							new TourelleHydroClaque(0, 0, "", (int) tuile.getLayoutX(), (int) tuile.getLayoutY(), e1));
+							new TourelleHydroClaque((int) tuile.getLayoutX(), (int) tuile.getLayoutY(), e1));
 				}
 			});
 			siliteBang.setOnMouseClicked((e) -> {
-				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) == true && this.e1.getMagasin().getArgent() > 12) {
+				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) == true
+						&& this.e1.getMagasin().getArgent() > 12) {
 					this.e1.getMagasin().enleverArgent(12);
 					this.e1.ajouterTourelles(
-							new TourelleSilliteBang( 0, 0, "", (int) tuile.getLayoutX(), (int) tuile.getLayoutY(), e1));
+							new TourelleSilliteBang((int) tuile.getLayoutX(), (int) tuile.getLayoutY(), e1));
 				}
 			});
 			drPingoLimbo.setOnMouseClicked((e) -> {
-				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) == true && this.e1.getMagasin().getArgent() > 12) {
+				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) == true
+						&& this.e1.getMagasin().getArgent() > 12) {
 					this.e1.getMagasin().enleverArgent(12);
-					this.e1.ajouterTourelles(new TourelleDocteurPingoLimbo(0, 0, "", (int) tuile.getLayoutX(),
-							(int) tuile.getLayoutY(), e1));
+					this.e1.ajouterTourelles(
+							new TourelleDocteurPingoLimbo((int) tuile.getLayoutX(), (int) tuile.getLayoutY(), e1));
 				}
 			});
 		} else {
 			System.out.println("taille avant boucle" + e1.getTourelles().size());
 			System.out.println("l id de la tuile " + tuile.getId());
-			
-			
-			
+
 			bouttonVendre.setOnMouseClicked((e) -> {
 				for (int i = 0; i < this.e1.getTourelles().size(); i++) {
 					this.e1.getMagasin().enleverArgent(-4);
@@ -333,12 +323,12 @@ public class Controller implements Initializable {
 						System.out.println("yy = " + e1.getTourelles().get(0).getY());
 						System.out.println("taille apres boucle " + e1.getTourelles().size());
 
-
 					}
 				}
 			});
 		}
 	}
+
 	public boolean verifiePlaceLibre(double x, double y) {
 		for (int i = 0; i < this.e1.getTourelles().size(); i++) {
 			if (this.e1.getTourelles().get(i).getX() == x && this.e1.getTourelles().get(i).getY() == y) {
@@ -348,30 +338,26 @@ public class Controller implements Initializable {
 		return true;
 	}
 
-
 	private static Image getImgg(String... paths) {
 		return new Image(Paths.get(System.getProperty("user.dir"), paths).toUri().toString());
 		// ImageView(Paths.get(Paths.get(System.getProperty("user.dir"),
 		// "ressources").toString(), paths).toUri().toString());
 	}
 
-
-	
-
 	@FXML
 	void reinit(ActionEvent event) {
 		getGameLoop().stop();
 		System.out.println(this.e1.getViruses().size());
-		//for (Virus v : this.e1.getViruses()) {
-			//this.e1.getViruses().clear();
-			//}
+		// for (Virus v : this.e1.getViruses()) {
+		// this.e1.getViruses().clear();
+		// }
 //		for (int j = 0; j < this.e1.getTourelles().size(); j++) {
 //			this.e1.getTourelles().remove(j);
 //		}
 		for (int i = 0; i < this.e1.getViruses().size(); i++) {
 			System.out.println(this.e1.getViruses().get(i).getId());
 		}
-	
+
 		this.temps = 0;
 		System.out.println(this.e1.getViruses().size());
 
@@ -379,11 +365,10 @@ public class Controller implements Initializable {
 
 	@FXML
 	void Start(ActionEvent event) {
-		
+
 		initAnimation();
 		getGameLoop().play();
 	}
-
 
 	public String lvl1() {
 		return null;

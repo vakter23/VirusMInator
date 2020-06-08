@@ -14,9 +14,8 @@ public class TourelleMousseuse extends Tourelles { // == TourelleAvastiVirus
 	private double slow;
 	
 
-	public TourelleMousseuse( int portee, double atqSpeed, String nom, int x, int y,Environnement env) {
-		super(portee, atqSpeed,  nom, x, y,env);
-		
+	public TourelleMousseuse(int x, int y,Environnement env) {
+		super(50, 5,  "Avastirus", x, y,env);
 		this.slow=1.2;
 	}
 	

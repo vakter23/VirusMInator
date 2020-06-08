@@ -13,8 +13,8 @@ public class TourelleHydroClaque extends TourellesAvecDegats {
 	// cette tourelle dispose d’un petit champs de tir mais asperge les ennemis
 	// non-stop
 
-	public TourelleHydroClaque(int portee, double atqSpeed, String nom, int x, int y, Environnement env) {
-		super(portee, atqSpeed, nom, x, y, env);
+	public TourelleHydroClaque(int x, int y, Environnement env) {
+		super(0, 0, "TourelleHydroClaque", x, y, env);
 
 		this.setAtq(18);
 	}

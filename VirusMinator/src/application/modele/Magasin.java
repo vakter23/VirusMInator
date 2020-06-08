@@ -6,6 +6,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 public class Magasin {
 	private int argentDuDebut = 20;
 	private IntegerProperty argent = new SimpleIntegerProperty();
+	public final static int prixSavonneuse = 12;
 
 	public Magasin() {
 		this.argent.set(argentDuDebut);
