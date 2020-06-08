@@ -11,19 +11,20 @@ public abstract class Virus {
 	private IntegerProperty xProperty = new SimpleIntegerProperty();
 	private IntegerProperty yProperty = new SimpleIntegerProperty();
 	private int dx, dy; // direction
-	private int atq, vie;
+	private int atq, vie, pvMax;
 	private double vitesse; // vitesse= vitesse de deplacement
 	private String nom, ID;
 	public static int compteur;
 	private int tpsPerso;
 	private static int tpsSuivant = 200;
 	protected Environnement env;
-
-	public static List<Integer> listeVirusAttente = Arrays.asList(1,5,5,2,4);/*liste des viruses a ajouter*/
+	
+	public static List<Integer> listeVirusAttente = Arrays.asList(2);/*liste des viruses a ajouter*/
 	public static List<Integer> listeVirusAttente2 = Arrays.asList(2,2,3,4,5);
 	public Virus(int vie, int atq, double vitesse, String nom, int x, int y, int tpsSpawn,Environnement env) { /* Constructeur Virus */
 		this.ID = "v" + compteur;
 		this.vie = vie;
+		this.pvMax = vie;
 		this.atq = atq;
 		this.setVitesse(vitesse);
 		this.nom = nom;
@@ -87,14 +88,16 @@ public abstract class Virus {
 		return vie;
 
 	}
+	public final int getPvMax() {
+		return this.pvMax;
+	}
 
 	public boolean estVivant() {
 		return this.vie > 0;
 	}
 
 	/* Changer les 1, 2, et 0 en vitesse des virus */
-	public void seDeplace(Virus v) {
-		v.agit();
+	public void agit(Virus v) {
 		if (v instanceof VirusViterus) {
 			if (this.getXproperty().getValue() < 520 && this.getYproperty().getValue() < 289) {
 				int nposX = this.getX() +(int) (v.getVitesse());
@@ -220,10 +223,10 @@ public abstract class Virus {
 		}
 		System.out.println(this.getId() + "x : " + this.getX());
 		System.out.println(this.getId() + "y : " + this.getY() + "\n");
-
+		v.appliquerEffets();
 	}
 
-	protected abstract void agit();
+	protected abstract void appliquerEffets();
 
 	private void infligerDegats(int atq2) {
 		this.env.setVie(this.env.getVie() - atq2);	

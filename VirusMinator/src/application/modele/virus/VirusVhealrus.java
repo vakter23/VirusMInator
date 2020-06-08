@@ -11,7 +11,7 @@ public class VirusVhealrus extends Virus {
 	}
 
 	@Override
-	protected void agit() {
+	protected void appliquerEffets() {
 		// return tout les virus a portee de tir pour les tourelles aoe
 				// (hydroclaque/mousseuse
 				ArrayList<Virus> virusesMultiples = new ArrayList<Virus>();
@@ -29,8 +29,10 @@ public class VirusVhealrus extends Virus {
 					}
 				}
 				for (Virus virus : virusesMultiples) {
-					virus.setVie(virus.getVie()+15);
-					
+					virus.setVie(virus.getVie()+5);
+					if(virus.getVie()>virus.getPvMax()) {
+						virus.setVie(virus.getPvMax());
+					}
 					
 				}
 				System.out.println("le Vhealrus a soigné ses alliés !");

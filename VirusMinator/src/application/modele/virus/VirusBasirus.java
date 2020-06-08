@@ -9,7 +9,7 @@ public class VirusBasirus extends Virus {
 	}
 
 	@Override
-	protected void agit() {
+	protected void appliquerEffets() {
 		
 	}
 

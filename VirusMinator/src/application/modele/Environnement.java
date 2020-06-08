@@ -21,14 +21,18 @@ import javafx.scene.Node;
 
 public class Environnement {
 	private int width, height, vie;
-	private ObservableList<Virus> virusesSurTerrain = FXCollections
+	public ObservableList<Virus> virusesSurTerrain = FXCollections
 			.observableArrayList(); /* les viruses présents sur le terrain */
-	private ObservableList<Tourelles> tourelles = FXCollections.observableArrayList();/*La liste des
-	 tourelles sur le terrain*/
-	private ObservableList<Virus> nextViruses = FXCollections.observableArrayList();/*la liste des virus à 
-	ajouter dans les virus présents*/
+	private ObservableList<Tourelles> tourelles = FXCollections
+			.observableArrayList();/*
+									 * La liste des tourelles sur le terrain
+									 */
+	private ObservableList<Virus> nextViruses = FXCollections
+			.observableArrayList();/*
+									 * la liste des virus à ajouter dans les virus présents
+									 */
 	private ObservableList<Tir> listeTirs = FXCollections.observableArrayList();
-	private String[][] terrain; 
+	private String[][] terrain;
 	private IntegerProperty argent = new SimpleIntegerProperty(15);
 
 	public Environnement(int width, int height) {
@@ -40,18 +44,22 @@ public class Environnement {
 		this.setVie(60);
 
 	}
-	public void incrementerArgent(){
-		this.argent.setValue(argent.getValue()+1);
-		
+
+	public void incrementerArgent() {
+		this.argent.setValue(argent.getValue() + 1);
+
 	}
+
 	public IntegerProperty getArgentProperty() {
 		return this.argent;
 	}
+
 	public int getArgent() {
 		return this.argent.getValue();
 	}
+
 	public void enleverArgent(int somme) {
-		this.argent.setValue(argent.getValue()-somme);
+		this.argent.setValue(argent.getValue() - somme);
 	}
 
 	public int getWidth() {
@@ -94,7 +102,6 @@ public class Environnement {
 			// Virus.listeVirusAttente.remove(i);
 		}
 	}
-
 
 	public ObservableList<Virus> getViruses() {
 		return virusesSurTerrain;
@@ -143,21 +150,24 @@ public class Environnement {
 	public boolean dansTerrain(int x, int y) {
 		return (0 <= x && x < this.width && 0 <= y && y < this.height);
 	}
+
 	/**/
 	public void unTour() {
+		System.out.println("La taille de la liste nextViruses: " + nextViruses.size());
 		entreeVirusTerrain();
 		deplacerLesViruses();
 		faireAgirTourelles();
 		ramasserLesViruses();
+		System.out.println("La taille de la liste virusesSurTerrain : " + virusesSurTerrain.size());
 		gameOver();
-	}
 
-	
+	}
 
 	public void entreeVirusTerrain() {
 		for (int i = 0; i < nextViruses.size(); i++) {
 			if (nextViruses.get(i).getTempsSpawn() == Controller.temps) {
 				this.virusesSurTerrain.add(nextViruses.get(i));
+				System.out.println(" Virus ajouté : " + nextViruses.get(i));
 				System.out.println("Création Virus");
 			}
 
@@ -166,9 +176,10 @@ public class Environnement {
 	}
 
 	public void deplacerLesViruses() {
+		System.out.println("Les viruses se sont déplacés");
 		for (int i = 0; i < virusesSurTerrain.size(); i++) {
 			Virus v = virusesSurTerrain.get(i);
-			v.seDeplace(v);
+			v.agit(v);
 		}
 	}
 
@@ -182,57 +193,54 @@ public class Environnement {
 	public void ramasserLesViruses() {
 		for (int i = virusesSurTerrain.size() - 1; i >= 0; i--) {
 			Virus v = virusesSurTerrain.get(i);
-			
+
 			if (!v.estVivant()) {
 				System.out.println("mort de : " + v.getId());
-				/* duplication du virus lors de la mort */
-				if (v instanceof VirusDivirus) {
-					Virus div1 = new VirusBasirus(40, 5, 2, "VirusBasirus", v.getX(), v.getY(), Controller.temps + 1, this);
-					Virus div2 = new VirusBasirus(40, 5, 2, "VirusBasirus", v.getX(), v.getY(), Controller.temps + 200, this);
-					System.out.println("Le virus : " + v.getId() + "s'est divisé en deux Virus !");
-					virusesSurTerrain.add(div1);
-					virusesSurTerrain.add(div2);
-				}
+				v.agit(v);
 				System.out.println(virusesSurTerrain.get(i) + "a été supprimée");
 				virusesSurTerrain.remove(i);
 			}
 		}
-		
 	}
+
 	private void gameOver() {
 		if (this.getVie() == 0) {
 			Controller.getGameLoop().stop();
 			System.out.println("D.É.F.A.I.T.E");
 		}
-		
+
 	}
+
 	public void unTourTir() {
 		for (int i = 0; i < listeTirs.size(); i++) {
 			listeTirs.get(i).seDeplace();
 		}
 		ramasserLesTirs();
 	}
+
 	public void ramasserLesTirs() {
-		for (int i = listeTirs.size() - 1; i>=0; i--) {
+		for (int i = listeTirs.size() - 1; i >= 0; i--) {
 			Tir t = listeTirs.get(i);
-			if(!t.estVivant()) {
-				System.out.println("le tir : "+ t + "a atteint sa cible");
+			if (!t.estVivant()) {
+				System.out.println("le tir : " + t + "a atteint sa cible");
 				System.out.println(listeTirs.get(i) + " a été supprimé");
 				listeTirs.remove(i);
 			}
 		}
 	}
+
 	public void ajouterListeTirs(Tir t) {
 		listeTirs.add(t);
 		System.out.println("Un tir a été ajoutée" + t);
 	}
-public ObservableList<Tir> getListeTirs() {
+
+	public ObservableList<Tir> getListeTirs() {
 		return listeTirs;
 	}
-public void setListeTirs(ObservableList<Tir> listeTirs) {
+
+	public void setListeTirs(ObservableList<Tir> listeTirs) {
 		this.listeTirs = listeTirs;
 	}
-
 
 	public int getTerrain(int valeurI) {
 		for (int i = 0; i < this.terrain.length; i++) {
@@ -254,9 +262,11 @@ public void setListeTirs(ObservableList<Tir> listeTirs) {
 	public void setVie(int vie) {
 		this.vie = vie;
 	}
+
 	public ObservableList<Tir> getTirs() {
 		return this.listeTirs;
 	}
+
 	public Tir getTir(String id) {
 		for (Tir t : this.listeTirs) {
 			if (t.getId().equals(id)) {
@@ -327,7 +337,5 @@ public void setListeTirs(ObservableList<Tir> listeTirs) {
 		System.out.println("test");
 
 	}
-
-
 
 }

@@ -119,7 +119,69 @@ public class Controller implements Initializable {
 
 	@FXML
 	private ImageView gelHydro;
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		
+		
+		this.e1 = new Environnement(1600, 800);
+		this.panneauEnnemis.setMaxWidth(1632);
+		this.panneauEnnemis.setMaxHeight(832);
+		
+		creerTerrainVue();
+		System.out.println(this.e1.getViruses().size());
+		ajouter();
+		System.out.println("Viruses initialisés");
+		initAnimation();
+		this.labelArgent.textProperty().bind(this.e1.getArgentProperty().asString());
+		this.e1.getViruses().addListener(new MonObservateurViruses(panneauEnnemis));
+		this.e1.getTirs().addListener(new MonObservateurTirs(panneauEnnemis));
+		this.e1.getTourelles().addListener(new ecouteurTourelle(panneauEnnemis));
 
+	}
+
+	private void initAnimation() {
+		setGameLoop(new Timeline());
+		temps = 0;
+		getGameLoop().setCycleCount(Timeline.INDEFINITE);
+		KeyFrame kf = new KeyFrame(
+				// on définit le FPS (nbre de frame par seconde)
+				Duration.seconds(0.0025),
+
+				// on définit ce qui se passe à chaque frame
+				// c'est un eventHandler d'ou le lambda
+				(ev -> {
+					if (temps == 8000) {
+						System.out.println("fini");
+						getGameLoop().stop();
+					} 
+				
+					else if (temps % 20 == 0) {
+						System.out.println("tour" + temps);
+						unTour();
+					} if(temps % 1 == 0 && temps < 8000) {
+						this.e1.unTourTir();
+					}
+					
+					if (temps % 800 == 0) {
+						this.e1.incrementerArgent();
+					}
+					if (this.e1.getViruses().isEmpty() && temps > 1000) {
+						gameLoop.stop();
+						System.out.println("V.I.C.T.O.I.R.E");
+					}
+						
+
+					temps++;
+				}));
+		getGameLoop().getKeyFrames().add(kf);
+
+//		
+	}
+
+	void unTour() {
+		this.e1.unTour();
+
+	}
 	public void creerTerrainVue() {
 		System.out.println(Config.listeMap.size());
 	        savonneuse.setImage((Image) (getImgg("/src/ressources/magasin/gelHydro.png")));
@@ -293,69 +355,7 @@ public class Controller implements Initializable {
 	}
 
 
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		
-		
-		this.e1 = new Environnement(1600, 800);
-		this.panneauEnnemis.setMaxWidth(1632);
-		this.panneauEnnemis.setMaxHeight(832);
-		
-		creerTerrainVue();
-		System.out.println(this.e1.getViruses().size());
-		ajouter();
-		System.out.println("Viruses initialisés");
-		initAnimation();
-		this.labelArgent.textProperty().bind(this.e1.getArgentProperty().asString());
-		this.e1.getViruses().addListener(new MonObservateurViruses(panneauEnnemis));
-		this.e1.getTirs().addListener(new MonObservateurTirs(panneauEnnemis));
-		this.e1.getTourelles().addListener(new ecouteurTourelle(panneauEnnemis));
-
-	}
-
-	private void initAnimation() {
-		setGameLoop(new Timeline());
-		temps = 0;
-		getGameLoop().setCycleCount(Timeline.INDEFINITE);
-		KeyFrame kf = new KeyFrame(
-				// on définit le FPS (nbre de frame par seconde)
-				Duration.seconds(0.0025),
-
-				// on définit ce qui se passe à chaque frame
-				// c'est un eventHandler d'ou le lambda
-				(ev -> {
-					if (temps == 8000) {
-						System.out.println("fini");
-						getGameLoop().stop();
-					} 
-				
-					else if (temps % 20 == 0) {
-						System.out.println("tour" + temps);
-						unTour();
-					} if(temps % 1 == 0 && temps < 8000) {
-						this.e1.unTourTir();
-					}
-					
-					if (temps % 800 == 0) {
-						this.e1.incrementerArgent();
-					}
-					if (this.e1.getViruses().isEmpty() && temps > 401) {
-						gameLoop.stop();
-						System.out.println("V.I.C.T.O.I.R.E");
-					}
-						
-
-					temps++;
-				}));
-		getGameLoop().getKeyFrames().add(kf);
-
-//		
-	}
-
-	void unTour() {
-		this.e1.unTour();
-
-	}
+	
 
 	@FXML
 	void reinit(ActionEvent event) {
