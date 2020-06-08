@@ -280,7 +280,7 @@ public class Controller implements Initializable {
 			avastirus.setOnMouseClicked((e) -> {
 				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) == true
 						&& this.e1.getMagasin().getArgent() > 5) {
-					this.e1.getMagasin().enleverArgent(5);
+					this.e1.getMagasin().enleverArgent(Magasin.avastirus);
 					this.e1.ajouterTourelles(
 							new TourelleMousseuse((int) tuile.getLayoutX(), (int) tuile.getLayoutY(), e1));
 				}
@@ -288,7 +288,7 @@ public class Controller implements Initializable {
 			gelHydroClaque.setOnMouseClicked((e) -> {
 				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) == true
 						&& this.e1.getMagasin().getArgent() > 9) {
-					this.e1.getMagasin().enleverArgent(9);
+					this.e1.getMagasin().enleverArgent(Magasin.gelHydroClaque);
 					this.e1.ajouterTourelles(
 							new TourelleHydroClaque((int) tuile.getLayoutX(), (int) tuile.getLayoutY(), e1));
 				}
@@ -296,7 +296,7 @@ public class Controller implements Initializable {
 			siliteBang.setOnMouseClicked((e) -> {
 				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) == true
 						&& this.e1.getMagasin().getArgent() > 12) {
-					this.e1.getMagasin().enleverArgent(12);
+					this.e1.getMagasin().enleverArgent(Magasin.siliteBang);
 					this.e1.ajouterTourelles(
 							new TourelleSilliteBang((int) tuile.getLayoutX(), (int) tuile.getLayoutY(), e1));
 				}
@@ -304,7 +304,7 @@ public class Controller implements Initializable {
 			drPingoLimbo.setOnMouseClicked((e) -> {
 				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) == true
 						&& this.e1.getMagasin().getArgent() > 12) {
-					this.e1.getMagasin().enleverArgent(12);
+					this.e1.getMagasin().enleverArgent(Magasin.drPingoLimbo);
 					this.e1.ajouterTourelles(
 							new TourelleDocteurPingoLimbo((int) tuile.getLayoutX(), (int) tuile.getLayoutY(), e1));
 				}
