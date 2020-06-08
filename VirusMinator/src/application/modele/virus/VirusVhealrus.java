@@ -29,13 +29,17 @@ public class VirusVhealrus extends Virus {
 					}
 				}
 				for (Virus virus : virusesMultiples) {
+					System.out.println("vie avant soin" + virus.getVie());
 					virus.setVie(virus.getVie()+5);
 					if(virus.getVie()>virus.getPvMax()) {
 						virus.setVie(virus.getPvMax());
+						
 					}
 					
+					System.out.println("vie après soin : " + virus.getVie());
 				}
 				System.out.println("le Vhealrus a soigné ses alliés !");
+				
 
 			}
 		

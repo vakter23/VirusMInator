@@ -29,11 +29,13 @@ public class MonObservateurTirs implements ListChangeListener<Tir>{
 			
 		}
 	}
-
+/*TOUJOURS VERIFIER L'ID*/ 
+	/*Supprimer la duplication de code*/
 	private void creerSpriteTir(Tir t) {
 		if (t instanceof TirAvecDegats) {
 		Circle r = new Circle(3);
 		r.setFill(Color.RED);
+		r.setId(t.getId());
 		r.setTranslateX(t.getX());
 		r.setTranslateY(t.getY());
 		pane.getChildren().add(r);
@@ -41,6 +43,7 @@ public class MonObservateurTirs implements ListChangeListener<Tir>{
 		else {
 			Circle r = new Circle(3);
 			r.setFill(Color.BLUE);
+			r.setId(t.getId());
 			r.setTranslateX(t.getX());
 			r.setTranslateY(t.getY());
 			pane.getChildren().add(r);
@@ -50,6 +53,7 @@ public class MonObservateurTirs implements ListChangeListener<Tir>{
 	private void supprimerSpriteTir(Tir t) {
 		this.pane.getChildren().remove(this.pane.lookup("#"+t.getId()));
 		System.out.println("tir supprimé");
+		System.out.println("L'ID du tir supprimé : "+t.getId());
 		
 	}
 

@@ -136,7 +136,6 @@ public class Controller implements Initializable {
 		this.e1.getViruses().addListener(new MonObservateurViruses(panneauEnnemis));
 		this.e1.getTirs().addListener(new MonObservateurTirs(panneauEnnemis));
 		this.e1.getTourelles().addListener(new ecouteurTourelle(panneauEnnemis));
-
 	}
 
 	private void initAnimation() {
@@ -145,12 +144,12 @@ public class Controller implements Initializable {
 		getGameLoop().setCycleCount(Timeline.INDEFINITE);
 		KeyFrame kf = new KeyFrame(
 				// on définit le FPS (nbre de frame par seconde)
-				Duration.seconds(0.0005),
+				Duration.seconds(0.0025),
 
 				// on définit ce qui se passe à chaque frame
 				// c'est un eventHandler d'ou le lambda
 				(ev -> {
-					if (temps == 8000) {
+					if (temps == 20000) {
 						System.out.println("fini");
 						getGameLoop().stop();
 					} 
@@ -165,7 +164,7 @@ public class Controller implements Initializable {
 					if (temps % 800 == 0) {
 						this.e1.incrementerArgent();
 					}
-					if (this.e1.getViruses().isEmpty() && temps > 7000) {
+					if (this.e1.getViruses().isEmpty() && temps > 8000) {
 						gameLoop.stop();
 						System.out.println("V.I.C.T.O.I.R.E");
 					}
@@ -281,7 +280,7 @@ public class Controller implements Initializable {
 		if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) == true) {
 			savonneuse.setOnMouseClicked((e) -> {
 				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY())&& this.e1.getArgent() > 7) {
-					Tourelles t1 = new TourelleSavonneuse(50, 64, "TourelleSavonneuse", (int) tuile.getLayoutX(),
+					Tourelles t1 = new TourelleSavonneuse(50, 100000, "TourelleSavonneuse", (int) tuile.getLayoutX(),
 							(int) tuile.getLayoutY(), e1);
 					this.e1.enleverArgent(7);
 					System.out.println(t1);
@@ -331,7 +330,7 @@ public class Controller implements Initializable {
 						System.out.println("xx = " + e1.getTourelles().get(0).getX());
 						System.out.println("yy = " + e1.getTourelles().get(0).getY());
 						System.out.println("taille apres boucle " + e1.getTourelles().size());
-
+						
 
 					}
 				}
@@ -360,17 +359,21 @@ public class Controller implements Initializable {
 	@FXML
 	void reinit(ActionEvent event) {
 		getGameLoop().stop();
-		System.out.println(this.e1.getViruses().size());
-		//for (Virus v : this.e1.getViruses()) {
-			//this.e1.getViruses().clear();
-			//}
-//		for (int j = 0; j < this.e1.getTourelles().size(); j++) {
-//			this.e1.getTourelles().remove(j);
-//		}
+		if (this.e1.getTourelles().size() != 0) {
+		for (Virus v : this.e1.getViruses()) {
+			this.e1.getViruses().clear();
+			}
+		}
+		if (this.e1.getTourelles().size() != 0) {
+		for (int j = 0; j < this.e1.getTourelles().size(); j++) {
+			this.e1.getTourelles().remove(j);
+		}
+		}
+		
 		for (int i = 0; i < this.e1.getViruses().size(); i++) {
 			System.out.println(this.e1.getViruses().get(i).getId());
 		}
-	
+		
 		this.temps = 0;
 		System.out.println(this.e1.getViruses().size());
 

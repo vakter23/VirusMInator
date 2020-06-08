@@ -43,4 +43,7 @@ public class TourelleSilliteBang extends TourellesAvecDegats {
 		//code pour tirer / apelle de la méthode tir
 			}
 
+
+	
+
 }

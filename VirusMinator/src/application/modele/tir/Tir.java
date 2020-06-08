@@ -16,7 +16,8 @@ public abstract class Tir {
 	private double vitesse;
 	private static int compteur;
 
-	public Tir(IntegerProperty x, IntegerProperty y,  Environnement env/* , int destinationX, int destinationY */) {
+	public Tir(IntegerProperty x, IntegerProperty y,  Environnement env/* , int destinationX,
+	 int destinationY */) {
 /*ajouter une vitesse au tirs peut-être ?*/
 		
 		this.xProperty = x;

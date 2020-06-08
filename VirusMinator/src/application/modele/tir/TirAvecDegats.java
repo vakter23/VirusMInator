@@ -48,6 +48,7 @@ public void seDeplace() {
 	public void appliquerDégats() {
 		double newVie = this.v.getVie()-this.getAtq();
 		this.v.setVie(newVie);
+		System.out.println("La vie du virus est maintenant de : " + newVie);
 	}
 //	
 //	

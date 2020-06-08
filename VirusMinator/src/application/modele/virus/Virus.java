@@ -24,7 +24,7 @@ public abstract class Virus {
 	 * 4 = boomirus
 	 * 5 = viterus
 	 */
-	public static List<Integer> listeVirusAttente = Arrays.asList(1,2);/*liste des viruses a ajouter*/
+	public static List<Integer> listeVirusAttente = Arrays.asList(2,3);/*liste des viruses a ajouter*/
 	public static List<Integer> listeVirusAttente2 = Arrays.asList(2,2,3,4,5);
 	public Virus(int vie, int atq, double vitesse, String nom, int x, int y, int tpsSpawn,Environnement env) { /* Constructeur Virus */
 		this.ID = "v" + compteur;
@@ -219,13 +219,18 @@ public abstract class Virus {
 				this.setX(nposX);
 				this.setY(nposY);
 			}
-			if (this.getYproperty().getValue() >= 288 && this.getXproperty().getValue() >= 1104) {
+			if (this.getYproperty().getValue() >= 288 && this.getXproperty().getValue() >= 1104) {/*Infliger
+			des dégats à l'hopital*/
+				/* Tout ce qui est du déplacement = méthode se déplacer.
+				 * Méthode agir = seDéplacer + appliquerEffets 
+				 * supprimer le instance of de seDéplacer et le coder dans chaque Viruses différents des autres*/
 				v.meurt();
 				v.infligerDegats(v.getAtq());
-				
+				/* créer methode creer tir en abstraite pour factoriser le code (Public Tir creerTir(){}
+				 * */
 
 			}
-		}
+		}/* On aurait pu faire une classe effet avec des sous classes et les ajouter en tant qu'attribut*/
 		System.out.println(this.getId() + "x : " + this.getX());
 		System.out.println(this.getId() + "y : " + this.getY() + "\n");
 		v.appliquerEffets();
