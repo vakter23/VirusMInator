@@ -24,7 +24,7 @@ public abstract class Virus {
 	 * 4 = boomirus
 	 * 5 = viterus
 	 */
-	public static List<Integer> listeVirusAttente = Arrays.asList(2,3);/*liste des viruses a ajouter*/
+	public static List<Integer> listeVirusAttente = Arrays.asList(2,3,1,1,5);/*liste des viruses a ajouter*/
 	public static List<Integer> listeVirusAttente2 = Arrays.asList(2,2,3,4,5);
 	public Virus(int vie, int atq, double vitesse, String nom, int x, int y, int tpsSpawn,Environnement env) { /* Constructeur Virus */
 		this.ID = "v" + compteur;

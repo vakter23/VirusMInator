@@ -291,27 +291,27 @@ public class Controller implements Initializable {
 				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) == true && this.e1.getArgent() > 5) {
 					this.e1.enleverArgent(5);
 					this.e1.ajouterTourelles(
-							new TourelleMousseuse(0, 0, "", (int) tuile.getLayoutX(), (int) tuile.getLayoutY(), e1));
+							new TourelleMousseuse(50, 0, "", (int) tuile.getLayoutX(), (int) tuile.getLayoutY(), e1));
 				}
 			});
 			gelHydroClaque.setOnMouseClicked((e) -> {
 				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) == true && this.e1.getArgent() > 9) {
 					this.e1.enleverArgent(9);
 					this.e1.ajouterTourelles(
-							new TourelleHydroClaque(0, 0, "", (int) tuile.getLayoutX(), (int) tuile.getLayoutY(), e1));
+							new TourelleHydroClaque(75, 0.01, "", (int) tuile.getLayoutX(), (int) tuile.getLayoutY(), e1));
 				}
 			});
 			siliteBang.setOnMouseClicked((e) -> {
 				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) == true && this.e1.getArgent() > 12) {
 					this.e1.enleverArgent(12);
 					this.e1.ajouterTourelles(
-							new TourelleSilliteBang( 0, 0, "", (int) tuile.getLayoutX(), (int) tuile.getLayoutY(), e1));
+							new TourelleSilliteBang( 75, 0, "", (int) tuile.getLayoutX(), (int) tuile.getLayoutY(), e1));
 				}
 			});
 			drPingoLimbo.setOnMouseClicked((e) -> {
 				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) == true && this.e1.getArgent() > 12) {
 					this.e1.enleverArgent(12);
-					this.e1.ajouterTourelles(new TourelleDocteurPingoLimbo(0, 0, "", (int) tuile.getLayoutX(),
+					this.e1.ajouterTourelles(new TourelleDocteurPingoLimbo(75, 0, "", (int) tuile.getLayoutX(),
 							(int) tuile.getLayoutY(), e1));
 				}
 			});

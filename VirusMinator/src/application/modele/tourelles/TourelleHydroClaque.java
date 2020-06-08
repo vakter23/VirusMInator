@@ -16,7 +16,7 @@ public class TourelleHydroClaque extends TourellesAvecDegats {
 	public TourelleHydroClaque(int portee, double atqSpeed, String nom, int x, int y, Environnement env) {
 		super(portee, atqSpeed, nom, x, y, env);
 
-		this.setAtq(18);
+		this.setAtq(10);
 	}
 
 	public void amelioration() {
@@ -31,7 +31,7 @@ public class TourelleHydroClaque extends TourellesAvecDegats {
 	public void tirer() {
 		ArrayList<Virus> v = PlusieursVirusAPorteeDeTir();
 		for (int i = 0; i < v.size(); i++) {
-			Tir t1 = new TirAvecDegats(this.getXProperty(), this.getYProperty(), v.get(i), this.env, this.getAtq());
+			Tir t1 = new TirAvecDegats(this.getXProperty(), this.getYProperty(), v.get(i), this.env, this.getAtq(), this.getPortee());
 			this.env.ajouterListeTirs(t1);
 			double newVie = (v.get(i).getVie() - this.getAtq());
 			v.get(i).setVie(newVie);

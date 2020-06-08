@@ -30,7 +30,7 @@ public class TourelleSavonneuse extends TourellesAvecDegats {
 		Virus v = VirusAPorteeDeTir();
 		System.out.println("avant tirer cette tourelle vise " + v);
 		System.out.println(v.getVie());
-		Tir t1 = new TirAvecDegats(this.getXProperty(), this.getYProperty(), v, this.env, this.getAtq());
+		Tir t1 = new TirAvecDegats(this.getXProperty(), this.getYProperty(), v, this.env, this.getAtq(), this.getPortee());
 		this.env.ajouterListeTirs(t1);
 		System.out.println(env.getListeTirs());
 

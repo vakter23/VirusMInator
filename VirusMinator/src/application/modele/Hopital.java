@@ -5,7 +5,10 @@ import application.controleur.Controller;
 public class Hopital {
 
 	private int vie;
+	private int x, y;
 	public Hopital() {
+		this.x = 1088;
+		this.y = 288;
 		this.vie = 60;
 	}
 	
