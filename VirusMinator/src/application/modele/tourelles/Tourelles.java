@@ -167,7 +167,7 @@ public abstract class Tourelles {
 
 	}
 	
-	public Virus PlusieursVirusAPorteeDeTir() {//return tout les virus a portee de tir pour les tourelles aoe (hydroclaque/mousseuse
+	public ObservableList<Virus> PlusieursVirusAPorteeDeTir() {//return tout les virus a portee de tir pour les tourelles aoe (hydroclaque/mousseuse
 
 		
 		for (int i = 0; i < env.getViruses().size(); i++) {
@@ -180,6 +180,8 @@ public abstract class Tourelles {
 					Virus virus= env.getViruses().get(i);
 					virusesMultiples.add(virus);
 				}
+				return virusesMultiples;
+
 			}
 		}
 		return null;

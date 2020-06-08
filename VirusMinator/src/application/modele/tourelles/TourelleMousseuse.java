@@ -1,6 +1,7 @@
 package application.modele.tourelles;
 
 import application.modele.Environnement;
+import application.modele.virus.Virus;
 
 public class TourelleMousseuse extends Tourelles { // == TourelleAvastiVirus
 
@@ -41,7 +42,7 @@ public class TourelleMousseuse extends Tourelles { // == TourelleAvastiVirus
 		
 		VirusAPorteeDeTir().slowVirus(this.slow);
 		
-		PlusieursVirusAPorteeDeTir().slowVirus(this.slow);
+		((Virus) PlusieursVirusAPorteeDeTir()).slowVirus(this.slow);
 		
 	}
 

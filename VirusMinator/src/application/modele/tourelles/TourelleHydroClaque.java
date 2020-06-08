@@ -1,6 +1,7 @@
 package application.modele.tourelles;
 
 import application.modele.Environnement;
+import application.modele.virus.Virus;
 
 public class TourelleHydroClaque extends TourellesAvecDegats{
 
@@ -36,8 +37,8 @@ public class TourelleHydroClaque extends TourellesAvecDegats{
 		double newVie = (VirusAPorteeDeTir().getVie() - this.getAtq());
 		VirusAPorteeDeTir().setVie(newVie);
 		
-		double newVie2 = (PlusieursVirusAPorteeDeTir().getVie() - this.getAtq());
-		PlusieursVirusAPorteeDeTir().setVie(newVie2);
+		double newVie2 = (((Virus) PlusieursVirusAPorteeDeTir()).getVie() - this.getAtq());
+		((Virus) PlusieursVirusAPorteeDeTir()).setVie(newVie2);
 		
 		
 		
