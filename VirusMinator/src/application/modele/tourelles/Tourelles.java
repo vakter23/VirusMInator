@@ -9,6 +9,10 @@ import application.modele.Environnement;
 import application.modele.tir.Tir;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.scene.Node;
+import javafx.scene.input.MouseEvent;
+
+
 
 public abstract class Tourelles {
 
@@ -37,6 +41,7 @@ public abstract class Tourelles {
 
 	public abstract void amelioration(); // Ou coder argent necessaire a amelioration
 
+	
 	public String getNom() {
 
 		return nom;
@@ -197,6 +202,8 @@ public abstract class Tourelles {
 		 * }
 		 */
 	}
+	
+	
 
 	@Override
 	public String toString() {

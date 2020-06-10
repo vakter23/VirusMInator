@@ -28,6 +28,7 @@ import java.util.ResourceBundle;
 
 import application.Config;
 import application.modele.Environnement;
+import application.modele.Magasin;
 import application.modele.tourelles.TourelleDocteurPingoLimbo;
 import application.modele.tourelles.TourelleHydroClaque;
 import application.modele.tourelles.TourelleMousseuse;
@@ -81,12 +82,17 @@ public class Controller implements Initializable {
 	@FXML
 	private TilePane map;
 
+	  @FXML
+	    private Button bouttonAmeliorer;
+
 	@FXML
 	private Pane panneauEnnemis;
 	@FXML
 	private Button restart;
 
 	private Environnement e1;
+	
+	private Magasin m1;
 
 	private static Timeline gameLoop;
 
@@ -119,10 +125,13 @@ public class Controller implements Initializable {
 
 	@FXML
 	private ImageView gelHydro;
+
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
 		
+		this.m1 = new Magasin();
 		this.e1 = new Environnement(1600, 800);
 		this.panneauEnnemis.setMaxWidth(1632);
 		this.panneauEnnemis.setMaxHeight(832);
@@ -335,6 +344,26 @@ public class Controller implements Initializable {
 					}
 				}
 			});
+			
+			bouttonAmeliorer.setOnMouseClicked((e) -> {
+
+				for (int i = 0; i < this.e1.getTourelles().size(); i++) {
+					this.e1.enleverArgent(10);
+					if (this.e1.getTourelles().get(i).getX() == tuile.getLayoutX()
+							&& this.e1.getTourelles().get(i).getY() == tuile.getLayoutY()) {
+						System.out.println("avant amelio" + e1.getTourelles().get(i).getAtqSpeed());
+
+						this.e1.getTourelles().get(i).amelioration();
+						//this.m1.amelioration(e1.getTourelles().get(i));
+						System.out.println("xx = " + e1.getTourelles().get(0).getX());
+						System.out.println("yy = " + e1.getTourelles().get(0).getY());
+						System.out.println("taille apres boucle " + e1.getTourelles().size());
+						
+						System.out.println("apres amelio" + e1.getTourelles().get(i).getAtqSpeed());
+
+					}
+				}
+			});
 		}
 	}
 	public boolean verifiePlaceLibre(double x, double y) {
@@ -358,10 +387,10 @@ public class Controller implements Initializable {
 
 	@FXML
 	void reinit(ActionEvent event) {
-		getGameLoop().stop();
-		if (this.e1.getTourelles().size() != 0) {
+		/*	getGameLoop().stop();
+		if (this.e1.getViruses().size() != 0) {
 		for (Virus v : this.e1.getViruses()) {
-			this.e1.getViruses().clear();
+			this.e1.getViruses().remove(v);
 			}
 		}
 		if (this.e1.getTourelles().size() != 0) {
@@ -375,7 +404,7 @@ public class Controller implements Initializable {
 		}
 		
 		this.temps = 0;
-		System.out.println(this.e1.getViruses().size());
+		System.out.println(this.e1.getViruses().size());*/
 
 	}
 

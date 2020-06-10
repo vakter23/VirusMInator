@@ -1,5 +1,6 @@
 package application.modele;
 
+import application.modele.tourelles.Tourelles;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -26,6 +27,11 @@ public class Magasin {
 
 	public void enleverArgent(int somme) {
 		this.argent.setValue(argent.getValue() - somme);
+	}
+	
+	public void amelioration( Tourelles t) {
+		
+		t.amelioration();
 	}
 
 }
