@@ -354,7 +354,6 @@ public class Controller implements Initializable {
 						System.out.println("avant amelio" + e1.getTourelles().get(i).getAtqSpeed());
 
 						this.e1.getTourelles().get(i).amelioration();
-						//this.m1.amelioration(e1.getTourelles().get(i));
 						System.out.println("xx = " + e1.getTourelles().get(0).getX());
 						System.out.println("yy = " + e1.getTourelles().get(0).getY());
 						System.out.println("taille apres boucle " + e1.getTourelles().size());
