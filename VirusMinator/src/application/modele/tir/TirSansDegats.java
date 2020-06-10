@@ -5,8 +5,8 @@ import javafx.beans.property.IntegerProperty;
 
 public class TirSansDegats extends Tir {
 	
-	public TirSansDegats(IntegerProperty x, IntegerProperty y,Environnement env) {
-		super(x, y, env);
+	public TirSansDegats(IntegerProperty x, IntegerProperty y,Environnement env, int portee) {
+		super(x, y,env, portee);
 	}
 
 	@Override

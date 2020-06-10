@@ -47,7 +47,7 @@ public class TourelleMousseuse extends Tourelles { // == TourelleAvastiVirus
 		ArrayList<Virus> listeV = PlusieursVirusAPorteeDeTir();
 		for (int i = 0; i < listeV.size(); i++) {
 			listeV.get(i).setVie(this.slow);
-			Tir t1 = new TirSansDegats(this.getXProperty(), this.getYProperty(), this.env);
+			Tir t1 = new TirSansDegats(this.getXProperty(), this.getYProperty(), this.env, this.getPortee());
 			this.env.ajouterListeTirs(t1);
 		}
 		

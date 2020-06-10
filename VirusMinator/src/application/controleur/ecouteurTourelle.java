@@ -91,6 +91,15 @@ public class ecouteurTourelle implements ListChangeListener<Tourelles> {
 
 	private void supprimerSpriteTourelle(Tourelles t) {
 		panneauEnnemi.getChildren().remove(this.panneauEnnemi.lookup("#"+t.getId()));
+		if (t instanceof TourelleDocteurPingoLimbo) {
+			onDeath(t);
+		}
+	}
+
+	private void onDeath(Tourelles t) {
+		t.boostAttaqueSpeed(0.8);
+		System.out.println("La méthode on death s'est appliquée");
+		
 	}
 
 	public int recupererX(MouseEvent e) {

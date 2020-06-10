@@ -35,7 +35,6 @@ public abstract class Tourelles {
 		compteur++;
 	}
 
-
 	public abstract void amelioration(); // Ou coder argent necessaire a amelioration
 
 	public String getNom() {
