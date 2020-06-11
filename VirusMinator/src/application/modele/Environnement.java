@@ -24,7 +24,7 @@ public class Environnement {
 			.observableArrayList();/*
 									 * La liste des tourelles sur le terrain
 									 */
-	private ObservableList<Virus> nextViruses = FXCollections
+	private ObservableList<Virus> virusesSuivants = FXCollections
 			.observableArrayList();/*
 									 * la liste des virus à ajouter dans les virus présents
 									 */
@@ -78,23 +78,23 @@ public class Environnement {
 			switch (Virus.listeVirusAttente.get(i)) {
 			case 1:
 				Virus vb = new VirusBasirus(70, 10, 2.0, "VirusBasirus", 0, 288, 200, this);
-				this.VirusesSuivants.add(vb);
+				this.virusesSuivants.add(vb);
 				break;
 			case 2:
 				Virus vd = new VirusDivirus(40, 10, 2.0, "VirusDivirus", 0, 288, 200, this);
-				this.VirusesSuivants.add(vd);
+				this.virusesSuivants.add(vd);
 				break;
 			case 3:
 				Virus vh = new VirusVhealrus(30, 10, 2.0, "VirusVhealrus", 0, 288, 200, this);
-				this.VirusesSuivants.add(vh);
+				this.virusesSuivants.add(vh);
 				break;
 			case 4:
 				Virus vbi = new VirusViboomrus(170, 10, 1.0, "VirusViboomrus", 0, 288, 200, this);
-				this.VirusesSuivants.add(vbi);
+				this.virusesSuivants.add(vbi);
 				break;
 			case 5:
 				Virus vv = new VirusViterus(70, 10, 3.0, "VirusViterus", 0, 288, 200, this);
-				this.VirusesSuivants.add(vv);
+				this.virusesSuivants.add(vv);
 				break;
 			default:
 				break;
@@ -110,7 +110,7 @@ public class Environnement {
 	}
 
 	public ObservableList<Virus> getNextViruses() {
-		return VirusesSuivants;
+		return virusesSuivants;
 	}
 
 	public ObservableList<Tourelles> getTourelles() {
@@ -164,10 +164,10 @@ public class Environnement {
 	}
 
 	public void entreeVirusTerrain() {
-		for (int i = 0; i < VirusesSuivants.size(); i++) {
-			if (VirusesSuivants.get(i).getTempsSpawn() == Controller.temps) {
-				this.virusesSurTerrain.add(VirusesSuivants.get(i));
-				System.out.println(" Virus ajouté : " + VirusesSuivants.get(i));
+		for (int i = 0; i < virusesSuivants.size(); i++) {
+			if (virusesSuivants.get(i).getTempsSpawn() == Controller.temps) {
+				this.virusesSurTerrain.add(virusesSuivants.get(i));
+				System.out.println(" Virus ajouté : " + virusesSuivants.get(i));
 				System.out.println("Création Virus");
 			}
 
@@ -188,7 +188,33 @@ public class Environnement {
 			t.agit();
 		}
 	}
+	/**
+	 * @return the magasin
+	 */
+	public Magasin getMagasin() {
+		return magasin;
+	}
 
+	/**
+	 * @param magasin the magasin to set
+	 */
+	public void setMagasin(Magasin magasin) {
+		this.magasin = magasin;
+	}
+
+	/**
+	 * @return the hopital
+	 */
+	public Hopital getHopital() {
+		return hopital;
+	}
+
+	/**
+	 * @param hopital the hopital to set
+	 */
+	public void setHopital(Hopital hopital) {
+		this.hopital = hopital;
+	}
 	public void ramasserLesViruses() {
 		for (int i = virusesSurTerrain.size() - 1; i >= 0; i--) {
 			Virus v = virusesSurTerrain.get(i);
