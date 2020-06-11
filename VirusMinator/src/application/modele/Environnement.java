@@ -28,7 +28,7 @@ public class Environnement {
 									 * la liste des virus à ajouter dans les virus présents sur le terrain
 									 */
 	public ObservableList<Tir> listeTirs = FXCollections.observableArrayList();
-	private String[][] terrain;
+	private static String[][] terrain;
 	private IntegerProperty argent = new SimpleIntegerProperty(100);
 
 	public Environnement(int width, int height) {
@@ -237,10 +237,10 @@ public class Environnement {
 		this.listeTirs = listeTirs;
 	}
 
-	public int getTerrain(int valeurI) {
+	public int getTerrain(int valeurI, int valeurJ) {
 		for (int i = 0; i < this.terrain.length; i++) {
 			for (int j = 0; j < this.terrain[i].length; j++) {
-				if (this.terrain[valeurI][j] == "0") {
+				if (this.terrain[valeurI][valeurJ] == "0") {
 					return 1;
 				}
 			}
@@ -270,7 +270,60 @@ public class Environnement {
 		}
 		return null;
 	}
+	public static int [][] getTerrainInt(){
+        int [][] terrainInt = new int[18][40];
+       List<Integer> listeMap = Config.listeMap;
+       int x = 0;
+       /*Graph(36);*/
+       for (int i = 0; i < terrainInt.length; i++) {
 
+           for (int j = 0; j < terrainInt[i].length; j++) {
+
+               if (listeMap.get(x) == Config.Herbe) {
+                   terrainInt[i][j] = 1;
+
+               }
+
+               else if (listeMap.get(x) == Config.Sable) {
+                   terrainInt[i][j] = 1;
+
+               }
+
+               else if (listeMap.get(x) == Config.SpawnViolet) {
+                   terrainInt[i][j] = 1;
+
+               }
+
+               else if (listeMap.get(x) == Config.Vert) {
+                   terrainInt[i][j] = 1;
+
+               }
+
+               else if (listeMap.get(x) == Config.sableChemin) {
+                   terrainInt[i][j] = 0;
+
+               }
+
+               else if (listeMap.get(x) == Config.SPAWNTOURELLES) {
+                   terrainInt[i][j] = 1;
+               }
+
+               else if (listeMap.get(x) == Config.Hosto) {
+                   terrainInt[i][j] = 1;
+
+               }
+               else if (listeMap.get(x) == Config.RougeHospital) {
+                   terrainInt[i][j] = 1;
+
+               }
+
+
+               x++;
+           }
+       }
+
+       return terrainInt;
+   }
 	public void initTerrain() {
 		List<Integer> listeMap = Config.listeMap;
 		int x = 0;
@@ -336,5 +389,12 @@ public class Environnement {
 	public double getTemps() {
 		return Controller.temps;
 	}
+
+	public static boolean estUnChemin(int i, int j) {
+        if(terrain[i][j] == "0") {
+            return true;
+        }
+        return false;
+    }
 
 }

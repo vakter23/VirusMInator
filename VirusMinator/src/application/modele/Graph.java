@@ -1,83 +1,108 @@
 package application.modele;
-//Java program to print BFS traversal from a given source vertex. 
-//BFS(int s) traverses vertices reachable from s. 
+
 import java.io.*; 
 import java.util.*; 
 
-//This class represents a directed graph using adjacency list 
-//representation 
 public class Graph 
 { 
-	private int V; // No. of vertices 
-	private LinkedList<Integer> adj[]; //Adjacency Lists 
-
-	// Constructor 
-	public Graph(int v) 
+	
+	private static ArrayList<Sommet> sommet; 
+	private static  ArrayList<Sommet> sommetDansLordre;
+	
+	public Graph() 
 	{ 
-		V = v; 
-		adj = new LinkedList[v]; 
-		for (int i=0; i<v; ++i) 
-			adj[i] = new LinkedList(); 
+		this.sommetDansLordre= new ArrayList<Sommet>();
+		this.sommet= new ArrayList<Sommet>();
 	} 
+	
+	public static ArrayList<Sommet> getSommet(){
+		return sommet;
+	}
 
-	// Function to add an edge into the graph 
-	void addEdge(int v,int w) 
-	{ 
-		adj[v].add(w); 
-	} 
 
-	// prints BFS traversal from a given source s 
-	void BFS(int s) 
-	{ 
-		// Mark all the vertices as not visited(By default 
-		// set as false) 
-		boolean visited[] = new boolean[V]; 
-
-		// Create a queue for BFS 
-		LinkedList<Integer> queue = new LinkedList<Integer>(); 
-
-		// Mark the current node as visited and enqueue it 
-		visited[s]=true; 
-		queue.add(s); 
+	public void addEdge() {
+		for(int i=0 ; i< Environnement.getTerrainInt().length ; i++) {
+			for(int j=0 ; j< Environnement.getTerrainInt()[i].length ; j++) {
+				if(Environnement.estUnChemin(i, j)) {
+					sommet.add(new Sommet (i , j)); 
+					
+				}
+			}
+		}
 		
+	} 
+	
+	public void ajouterAdj(Sommet s) {
+		
+		for(int i = 0 ; i < sommet.size() ; i++) {
+			
+			if(sommet.get(i).getX()==s.getX()-1 && sommet.get(i).getY()==s.getY()) {
+				s.getAdj().add(sommet.get(i));
+				
+				
+			
+			}else if (sommet.get(i).getX()==s.getX() && sommet.get(i).getY()==s.getY()-1) {
+				s.getAdj().add(sommet.get(i));
+				
+				
+			
+			}else if (sommet.get(i).getX()==s.getX() && sommet.get(i).getY()==s.getY()+1) {
+				s.getAdj().add(sommet.get(i));
+				
+				
+				
+			}
+			else if (sommet.get(i).getX()==s.getX()+1 && sommet.get(i).getY()==s.getY()) {
+				s.getAdj().add(sommet.get(i));
+				
+				
+			}
+		}
+	}
+	public static ArrayList<Sommet> getSommetDansLordre(){
+		return sommetDansLordre;
+	}
+	
+	public void BFS(Sommet s) 
+	{ 
+		
+		LinkedList<Sommet> queue = new LinkedList<Sommet>(); 
+
+		s.setVisited(true); 
+		queue.add(s); 
+		this.ajouterAdj(s);
+		int y=0;
 		while (queue.size() != 0) 
 		{ 
-			// Dequeue a vertex from queue and print it 
+			
 			s = queue.poll(); 
-			System.out.print(s+" "); 
+			
+			this.sommetDansLordre.add(s);
+			System.out.print("["+this.sommetDansLordre.get(y)+"] "); 
+			y++;
 
-			// Get all adjacent vertices of the dequeued vertex s 
-			// If a adjacent has not been visited, then mark it 
-			// visited and enqueue it 
-			Iterator<Integer> i = adj[s].listIterator(); 
-			while (i.hasNext()) 
+			
+			ArrayList<Sommet> i = s.getAdj(); 
+			for(Sommet n : i)
 			{ 
-				int n = i.next(); 
-				if (!visited[n]) 
+				
+				this.ajouterAdj(n);	
+				if (!n.getVisited()) 
 				{ 
-					visited[n] = true; 
+					
+					n.setVisited(true) ;
+					n.setParent(s);
 					queue.add(n); 
-				} 
+					
+				
+				}
+				
 			} 
-		} 
+		
+		}
+		
 	} 
-
-	// Driver method to 
-	public static void main(String args[]) 
-	{ 
-		Graph g = new Graph(4); 
-
-		g.addEdge(0, 1); 
-		g.addEdge(0, 2); 
-		g.addEdge(1, 2); 
-		g.addEdge(2, 0); 
-		g.addEdge(2, 3); 
-		g.addEdge(3, 3); 
-
-		System.out.println("Following is Breadth First Traversal "+ 
-						"(starting from vertex 2)"); 
-
-		g.BFS(2); 
-	} 
+	
+	 
 } 
-//This code is contributed by Aakash Hasija 
+
