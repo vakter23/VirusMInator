@@ -107,6 +107,8 @@ public class Controller implements Initializable {
 	@FXML
 	private ImageView gelHydro;
 
+	private Magasin m1;
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
@@ -122,7 +124,7 @@ public class Controller implements Initializable {
 		ajouter();
 		System.out.println("Viruses initialisés");
 		initAnimation();
-		this.labelArgent.textProperty().bind(this.e1.getArgentProperty().asString());
+		this.labelArgent.textProperty().bind(this.m1.getArgentProperty().asString());
 		this.e1.getViruses().addListener(new MonObservateurViruses(panneauEnnemis));
 		this.e1.getTirs().addListener(new MonObservateurTirs(panneauEnnemis));
 		this.e1.getTourelles().addListener(new ecouteurTourelle(panneauEnnemis));
@@ -153,7 +155,7 @@ public class Controller implements Initializable {
 					
 
 					if (temps % 800 == 0) {
-						this.e1.incrementerArgent();
+						this.m1.incrementerArgent();
 					}
 					if (this.e1.getViruses().isEmpty() && temps > 400) {
 						gameLoop.stop();
@@ -246,38 +248,38 @@ public class Controller implements Initializable {
 //		System.out.println("clic tourelle" + event.getSceneX()() + event.getSceneY() + event.getSource().);
 		if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) == true) {
 			savonneuse.setOnMouseClicked((e) -> {
-				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) && this.e1.getArgent() > 7) {
+				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) && this.m1.getArgent() > 7) {
 					Tourelles t1 = new TourelleSavonneuse(50, 100, "TourelleSavonneuse", (int) tuile.getLayoutX(),
 							(int) tuile.getLayoutY(), e1);
-					this.e1.enleverArgent(7);
+					this.m1.enleverArgent(7);
 					System.out.println(t1);
 					this.e1.ajouterTourelles(t1);
 				}
 			});
 			avastirus.setOnMouseClicked((e) -> {
-				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) == true && this.e1.getArgent() > 5) {
-					this.e1.enleverArgent(5);
+				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) == true && this.m1.getArgent() > 5) {
+					this.m1.enleverArgent(5);
 					this.e1.ajouterTourelles(
 							new TourelleMousseuse(50, 100, "", (int) tuile.getLayoutX(), (int) tuile.getLayoutY(), e1));
 				}
 			});
 			gelHydroClaque.setOnMouseClicked((e) -> {
-				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) == true && this.e1.getArgent() > 9) {
-					this.e1.enleverArgent(9);
+				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) == true && this.m1.getArgent() > 9) {
+					this.m1.enleverArgent(9);
 					this.e1.ajouterTourelles(new TourelleHydroClaque(75, 0.01, "", (int) tuile.getLayoutX(),
 							(int) tuile.getLayoutY(), e1));
 				}
 			});
 			siliteBang.setOnMouseClicked((e) -> {
-				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) == true && this.e1.getArgent() > 12) {
-					this.e1.enleverArgent(12);
+				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) == true && this.m1.getArgent() > 12) {
+					this.m1.enleverArgent(12);
 					this.e1.ajouterTourelles(new TourelleSilliteBang(75, 500, "", (int) tuile.getLayoutX(),
 							(int) tuile.getLayoutY(), e1));
 				}
 			});
 			drPingoLimbo.setOnMouseClicked((e) -> {
-				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) == true && this.e1.getArgent() > 12) {
-					this.e1.enleverArgent(12);
+				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) == true && this.m1.getArgent() > 12) {
+					this.m1.enleverArgent(12);
 					this.e1.ajouterTourelles(new TourelleDocteurPingoLimbo(75, 0, "", (int) tuile.getLayoutX(),
 							(int) tuile.getLayoutY(), e1));
 				}
@@ -289,7 +291,7 @@ public class Controller implements Initializable {
 			bouttonVendre.setOnMouseClicked((e) -> {
 				System.out.println("taille avant vente : " + this.e1.getTourelles().size());
 				for (int i = 0; i < this.e1.getTourelles().size(); i++) {
-					this.e1.enleverArgent(-4);
+					this.m1.ajouterArgent(-4);
 					if (this.e1.getTourelles().get(i).getX() == tuile.getLayoutX()
 							&& this.e1.getTourelles().get(i).getY() == tuile.getLayoutY()) {
 					try {

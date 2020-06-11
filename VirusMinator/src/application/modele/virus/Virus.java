@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import application.modele.Environnement;
+import application.modele.Hopital;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -18,6 +19,7 @@ public abstract class Virus {
 	private int tpsPerso;
 	private static int tpsSuivant = 200;
 	protected Environnement env;
+	private Hopital h1;
 	/* 1 = basirus
 	 * 2 = divirus
 	 * 3 = healrus
@@ -40,6 +42,7 @@ public abstract class Virus {
 		this.tpsPerso = tpsSuivant+tpsSpawn;
 		System.out.println("v" + compteur);
 		tpsSuivant += 300;
+		
 	}
 
 	@Override
@@ -238,7 +241,7 @@ public abstract class Virus {
 	protected abstract void appliquerEffets();
 
 	private void infligerDegats(int atq2) {
-		this.env.setVie(this.env.getVie() - atq2);	
+		this.h1.setVie(this.h1.getVie() - atq2);	
 	}
 
 	private int getAtq() {

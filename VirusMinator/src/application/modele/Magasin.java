@@ -34,4 +34,9 @@ public class Magasin {
 		this.argent.setValue(argent.getValue() - somme);
 	}
 
+	public void ajouterArgent(int somme) {
+		this.argent.setValue(argent.getValue() + somme);
+		
+	}
+
 }

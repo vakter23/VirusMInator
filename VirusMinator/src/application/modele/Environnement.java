@@ -45,24 +45,24 @@ public class Environnement {
 
 	}
 
-	public void incrementerArgent() {
-		this.argent.setValue(argent.getValue() + 1);
-	}
-
-	public IntegerProperty getArgentProperty() {
-		return this.argent;
-	}
-
-	public int getArgent() {
-		return this.argent.getValue();
-	}
-
-	public void enleverArgent(int somme) {
-		this.argent.setValue(argent.getValue() - somme);
-	}
-	public void ajouterArgent(int somme){
-		this.argent.setValue(argent.getValue() + somme);
-	}
+//	public void incrementerArgent() {
+//		this.argent.setValue(argent.getValue() + 1);
+//	}
+//
+//	public IntegerProperty getArgentProperty() {
+//		return this.argent;
+//	}
+//
+//	public int getArgent() {
+//		return this.argent.getValue();
+//	}
+//
+//	public void enleverArgent(int somme) {
+//		this.argent.setValue(argent.getValue() - somme);
+//	}
+//	public void ajouterArgent(int somme){
+//		this.argent.setValue(argent.getValue() + somme);
+//	}
 
 	public int getWidth() {
 		return width;
@@ -228,13 +228,13 @@ public class Environnement {
 		}
 	}
 
-	private void gameOver() {
-		if (this.getVie() == 0) {
-			Controller.getGameLoop().stop();
-			System.out.println("D.É.F.A.I.T.E");
-		}
-
-	}
+//	private void gameOver() {
+//		if (this.getVie() == 0) {
+//			Controller.getGameLoop().stop();
+//			System.out.println("D.É.F.A.I.T.E");
+//		}
+//
+//	}
 
 	public void unTourTir() {
 		for (int i = 0; i < listeTirs.size(); i++) {
@@ -280,13 +280,7 @@ public class Environnement {
 
 	}
 
-	public int getVie() {
-		return vie;
-	}
 
-	public void setVie(int vie) {
-		this.vie = vie;
-	}
 
 	public ObservableList<Tir> getTirs() {
 		return this.listeTirs;
