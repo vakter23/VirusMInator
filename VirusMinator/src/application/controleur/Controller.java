@@ -118,6 +118,10 @@ public class Controller implements Initializable {
 	@FXML
 	private ImageView gelHydro;
 
+    @FXML
+    private ImageView coronaCoin;
+
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
@@ -147,7 +151,7 @@ public class Controller implements Initializable {
 		getGameLoop().setCycleCount(Timeline.INDEFINITE);
 		KeyFrame kf = new KeyFrame(
 				// on définit le FPS (nbre de frame par seconde)
-				Duration.seconds(0.025),
+				Duration.seconds(0.0225),
 
 				// on définit ce qui se passe à chaque frame
 				// c'est un eventHandler d'ou le lambda
@@ -187,11 +191,12 @@ public class Controller implements Initializable {
 
 	public void creerTerrainVue() {
 		System.out.println(Config.listeMap.size());
-		savonneuse.setImage((Image) (getImgg("/src/ressources/magasin/gelHydro.png")));
-		avastirus.setImage((Image) (getImgg("/src/ressources/magasin/Avast.png")));
-		gelHydroClaque.setImage((Image) (getImgg("/src/ressources/magasin/gel-hydoralcoolique.png")));
-		siliteBang.setImage((Image) (getImgg("/src/ressources/magasin/javel.png")));
-		drPingoLimbo.setImage((Image) (getImgg("/src/ressources/magasin/drPingoLimbo.png")));
+		savonneuse.setImage((Image) (getImgg("/src/ressources/magasin/shopSavonneuse.png")));
+		avastirus.setImage((Image) (getImgg("/src/ressources/magasin/shopAvastirus.png")));
+		gelHydroClaque.setImage((Image) (getImgg("/src/ressources/magasin/shopHydroClaque.png")));
+		siliteBang.setImage((Image) (getImgg("/src/ressources/magasin/shopSiliteBang.png")));
+		drPingoLimbo.setImage((Image) (getImgg("/src/ressources/magasin/shopDrPingoLimbo.png")));
+		coronaCoin.setImage((Image) (getImgg("/src/ressources/magasin/coronacoin.jpg")));
 
 		for (int i = 0; i < Config.listeMap.size(); i++) {
 			ImageView blancHopital = Config.getImg("/src/ressources/tiles/blancHopital");

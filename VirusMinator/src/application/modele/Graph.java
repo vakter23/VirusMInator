@@ -50,6 +50,7 @@ public class Graph {
 	}
 
 	public static ArrayList<Sommet> getSommetDansLordre() {
+		Collections.reverse(sommetDansLordre);
 		return sommetDansLordre;
 	}
 
