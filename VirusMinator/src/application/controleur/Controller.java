@@ -117,6 +117,7 @@ public class Controller implements Initializable {
 		this.panneauEnnemis.setMaxHeight(832);
 
 		creerTerrainVue();
+		this.m1 = this.e1.getMagasin();
 		System.out.println(this.e1.getViruses().size());
 		Graph g = new Graph();
         g.addEdge();

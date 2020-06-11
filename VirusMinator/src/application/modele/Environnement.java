@@ -228,13 +228,13 @@ public class Environnement {
 		}
 	}
 
-//	private void gameOver() {
-//		if (this.getVie() == 0) {
-//			Controller.getGameLoop().stop();
-//			System.out.println("D.É.F.A.I.T.E");
-//		}
-//
-//	}
+	private void gameOver() {
+		if (this.h1.getVie() == 0) {
+			Controller.getGameLoop().stop();
+			System.out.println("D.É.F.A.I.T.E");
+		}
+
+	}
 
 	public void unTourTir() {
 		for (int i = 0; i < listeTirs.size(); i++) {
