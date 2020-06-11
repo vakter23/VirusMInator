@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import application.modele.Environnement;
+import application.modele.Graph;
 import application.modele.Hopital;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -19,7 +20,7 @@ public abstract class Virus {
 	private int tpsPerso;
 	private static int tpsSuivant = 200;
 	protected Environnement env;
-	private Hopital h1;
+	public int compteurDeplacement =0;
 	/* 1 = basirus
 	 * 2 = divirus
 	 * 3 = healrus
@@ -29,7 +30,7 @@ public abstract class Virus {
 	public static List<Integer> listeVirusAttente = Arrays.asList(4, 4);/*liste des viruses a ajouter*/
 	public static List<Integer> listeVirusAttente2 = Arrays.asList(2,2,3,4,5);
 	public Virus(int vie, int atq, double vitesse, String nom, int x, int y, int tpsSpawn,Environnement env) { /* Constructeur Virus */
-		this.ID = "v" + compteur;
+		this.ID = "v" + compteurDeplacement;
 		this.vie = vie;
 		this.pvMax = vie;
 		this.atq = atq;
@@ -37,10 +38,10 @@ public abstract class Virus {
 		this.nom = nom;
 		this.setX(x);
 		this.setY(y);
-		compteur++;
+		compteurDeplacement++;
 		this.env = env;
 		this.tpsPerso = tpsSuivant+tpsSpawn;
-		System.out.println("v" + compteur);
+		System.out.println("v" + compteurDeplacement);
 		tpsSuivant += 300;
 		
 	}
@@ -102,9 +103,20 @@ public abstract class Virus {
 	public boolean estVivant() {
 		return this.vie > 0;
 	}
+	public void agit() {
+		if(compteur < 37) {
+		this.setY(Graph.getSommetDansLordre().get(compteur).getX()*32);
+		this.setX(Graph.getSommetDansLordre().get(compteur).getY()*32);
+		System.out.println(this.toString());
+		compteur++ ;
+		}
+		
+	}
+
+
 
 	/* Changer les 1, 2, et 0 en vitesse des virus */
-	public void agit(Virus v) { /*Disparaitra quand on ajoute le BFS*/
+	public void agitOBS(Virus v) { /*Disparaitra quand on ajoute le BFS*/
 		if (v instanceof VirusViterus) {
 			if (this.getXproperty().getValue() < 520 && this.getYproperty().getValue() < 289) {
 				int nposX = this.getX() +(int) (v.getVitesse());
@@ -241,7 +253,7 @@ public abstract class Virus {
 	protected abstract void appliquerEffets();
 
 	private void infligerDegats(int atq2) {
-		this.h1.setVie(this.h1.getVie() - atq2);	
+		this.env.getHopital().setVie(this.env.getHopital().getVie() - atq2);	
 	}
 
 	private int getAtq() {

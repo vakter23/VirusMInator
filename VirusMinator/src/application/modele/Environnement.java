@@ -178,7 +178,7 @@ public class Environnement {
 	public void deplacerLesViruses() {
 		for (int i = 0; i < virusesSurTerrain.size(); i++) {
 			Virus v = virusesSurTerrain.get(i);
-			v.agit(v);
+			v.agit();
 		}
 	}
 
@@ -221,7 +221,7 @@ public class Environnement {
 
 			if (!v.estVivant()) {
 				System.out.println("mort de : " + v.getId());
-				v.agit(v);
+				v.agit();
 				System.out.println(virusesSurTerrain.get(i) + "a été supprimée");
 				virusesSurTerrain.remove(i);
 			}
