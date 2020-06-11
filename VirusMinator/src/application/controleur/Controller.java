@@ -21,6 +21,7 @@ import java.nio.file.Paths;
 import java.util.ResourceBundle;
 import application.Config;
 import application.modele.Environnement;
+import application.modele.Graph;
 import application.modele.tourelles.TourelleDocteurPingoLimbo;
 import application.modele.tourelles.TourelleHydroClaque;
 import application.modele.tourelles.TourelleMousseuse;
@@ -108,12 +109,15 @@ public class Controller implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
-		this.e1 = new Environnement(1600, 800);
+		this.e1 = new Environnement(1600, 800, new Magasin());
 		this.panneauEnnemis.setMaxWidth(1632);
 		this.panneauEnnemis.setMaxHeight(832);
 
 		creerTerrainVue();
 		System.out.println(this.e1.getViruses().size());
+		Graph g = new Graph();
+        g.addEdge();
+        g.BFS(Graph.getSommet().get(20));
 		ajouter();
 		System.out.println("Viruses initialisés");
 		initAnimation();
