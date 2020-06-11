@@ -1,9 +1,8 @@
 package application.modele.tir;
 
 import application.modele.Environnement;
-import application.modele.virus.Virus;
 import javafx.beans.property.IntegerProperty;
-import javafx.geometry.Point2D;
+import javafx.beans.property.SimpleIntegerProperty;
 
 public abstract class Tir {
 	private IntegerProperty xProperty;
@@ -18,17 +17,17 @@ public abstract class Tir {
 	private double vitesse;
 	private static int compteur;
 
-	public Tir(IntegerProperty x, IntegerProperty y,  Environnement env, int portee/* , int destinationX,
+	public Tir(int x, int y,  Environnement env, int portee/* , int destinationX,
 	 int destinationY */) {
 /*ajouter une vitesse au tirs peut-être ?*/
 		this.setPortee(portee);
-		this.xProperty = x;
-		this.yProperty = y;
-		this.setBaseX(x);
-		this.setBaseY(y);
+		this.xProperty = new SimpleIntegerProperty(x);
+		this.yProperty = new SimpleIntegerProperty(y);
+		this.baseX = new SimpleIntegerProperty (x);
+		this.baseY = new SimpleIntegerProperty (y);
 		this.env = env;
 		this.vie = 1;
-		this.setVitesse(2.0);
+		this.setVitesse(1.0);
 //		this.destinationX = destinationX;
 //		this.destinationY = destinationY;
 		this.ID = "tir" + compteur;
@@ -44,6 +43,7 @@ public abstract class Tir {
 		}
 	}
 	public void meurt() {
+		System.out.println("Methode meurt appliquée");
 		this.env.getListeTirs().remove(this);
 	}
 	public String getId() {
@@ -76,8 +76,6 @@ public abstract class Tir {
 
 	public abstract void seDeplace();
 
-	public abstract void agit();
-
 	public double getVitesse() {
 		return vitesse;
 	}
@@ -108,5 +106,9 @@ public abstract class Tir {
 
 	public void setBaseY(IntegerProperty baseY) {
 		this.baseY = baseY;
+	}
+	public String toString() {
+		return ("Le tir : " + this.getId() + " à la position x = " + this.getX() 
+		+ " et y = " + this.getY() + " d'une origine de base X = " + this.getBaseX() + " et baseY : " + this.baseY);
 	}
 }

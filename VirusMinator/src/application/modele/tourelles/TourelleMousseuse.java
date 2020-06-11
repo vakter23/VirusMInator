@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import application.modele.Environnement;
 import application.modele.tir.Tir;
-import application.modele.tir.TirAvecDegats;
 import application.modele.tir.TirSansDegats;
 import application.modele.virus.Virus;
 public class TourelleMousseuse extends Tourelles { // == TourelleAvastiVirus
@@ -17,7 +16,7 @@ public class TourelleMousseuse extends Tourelles { // == TourelleAvastiVirus
 	public TourelleMousseuse( int portee, double atqSpeed, String nom, int x, int y,Environnement env) {
 		super(portee, atqSpeed,  nom, x, y,env);
 		
-		this.slow=1.2;
+		this.slow=2;
 	}
 	
 	public void setSlow(double slow) {
@@ -27,9 +26,7 @@ public class TourelleMousseuse extends Tourelles { // == TourelleAvastiVirus
 
 	@Override
 	public void amelioration() {
-
-
-		this.setSlow(slow+2);
+		this.setSlow(slow+1);
 		this.setPortee(this.getPortee()+5);
 		this.setAtqSpeed(this.getAtqSpeed()+1);		
 	}
@@ -40,8 +37,7 @@ public class TourelleMousseuse extends Tourelles { // == TourelleAvastiVirus
 
 		ArrayList<Virus> listeV = PlusieursVirusAPorteeDeTir();
 		for (int i = 0; i < listeV.size(); i++) {
-			listeV.get(i).setVie(this.slow);
-			Tir t1 = new TirSansDegats(this.getXProperty(), this.getYProperty(), this.env, this.getPortee());
+			Tir t1 = new TirSansDegats(this.getX(), this.getY(), this.env, this.getPortee(),this.env.getViruses().get(i));
 			this.env.ajouterListeTirs(t1);
 		}
 		
@@ -49,10 +45,7 @@ public class TourelleMousseuse extends Tourelles { // == TourelleAvastiVirus
 		
 //		double newVitesse = (VirusAPorteeDeTir().getVitesse()-this.getSlow());
 //		VirusAPorteeDeTir().setVitesse(newVitesse);
-		for (int i = 0; i < listeV.size(); i++) {
-			PlusieursVirusAPorteeDeTir().get(i).slowVirus(this.slow);
-			
-		}
+		
 	}
 
 }

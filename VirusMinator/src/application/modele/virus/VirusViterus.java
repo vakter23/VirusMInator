@@ -10,7 +10,7 @@ public class VirusViterus extends Virus {
 
 	@Override
 	protected void appliquerEffets() {
-		// TODO Auto-generated method stub
+		
 		
 	}
 

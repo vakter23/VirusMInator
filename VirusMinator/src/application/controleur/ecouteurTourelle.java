@@ -9,8 +9,6 @@ import application.modele.tourelles.TourelleSavonneuse;
 import application.modele.tourelles.TourelleSilliteBang;
 import application.modele.tourelles.Tourelles;
 import javafx.collections.ListChangeListener;
-import javafx.fxml.FXML;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -18,11 +16,11 @@ import javafx.scene.layout.Pane;
 public class ecouteurTourelle implements ListChangeListener<Tourelles> {
 
 	private Pane panneauEnnemi;
-	private ImageView savonneuse;
-	private ImageView avastirus;
-	private ImageView siliteBang;
-	private ImageView drPingoLimbo;
-	private ImageView gelHydroClaque;
+//	private ImageView savonneuse;
+//	private ImageView avastirus;
+//	private ImageView siliteBang;
+//	private ImageView drPingoLimbo;
+//	private ImageView gelHydroClaque;
 
 	public ecouteurTourelle(Pane pane) {
 		super();

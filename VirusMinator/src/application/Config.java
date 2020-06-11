@@ -7,6 +7,7 @@ import java.util.List;
 import javafx.scene.image.ImageView;
 
 public class Config {
+	/*C'est grâce à cette classe que l'on installe la map.*/
 	public static final int sableChemin = 2025;
 	public static final int Vert = 2029;
 	public static final int SPAWNTOURELLES = 2039;
@@ -72,6 +73,7 @@ public class Config {
 			Herbe, Herbe, Herbe, Herbe, Herbe, Herbe, Herbe, Herbe, Herbe, Herbe, Herbe, Herbe);
 
 	public static String imageDe(int n) {
+		/*C'est cette méthode qui retourne le nom de l'image à placer*/
 		if (n == Herbe)
 			return "herbe";
 		else if (n == Sable)
@@ -92,7 +94,8 @@ public class Config {
 			return null;
 	}
 
-	public static ImageView getImg(String... paths) {
+	public static ImageView getImg(String... paths) { /*Cette méthode permet de trouver le chemin à la source
+	du String ajouté*/
 		return new ImageView(Paths.get(System.getProperty("user.dir"), paths).toUri().toString());
 	}
 

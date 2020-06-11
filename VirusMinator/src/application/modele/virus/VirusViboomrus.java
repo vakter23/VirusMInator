@@ -13,12 +13,13 @@ public class VirusViboomrus extends Virus {
 
 	@Override
 	protected void appliquerEffets() {
-		if(!estVivant()) {
-			String idTourellesProche = "t0"; 
+		if(!estVivant() && this.getX()!= 288 && this.getY() != 1104) {
+			try {
+			String idTourellesProche = this.env.getTourelles().get(1).getId(); 
 			for(int i = 0; i<this.env.getTourelles().size(); i++) {
 				/*On cherche la tourelle la plus proche de nous */
-				if (this.env.getTourelles().get(i).getX() < this.env.getTourelles(idTourellesProche).getX() && 
-					this.env.getTourelles().get(i).getY() < this.env.getTourelles(idTourellesProche).getY() &&
+				if (this.env.getTourelles().get(i).getX() < this.env.getTourelle(idTourellesProche).getX() && 
+					this.env.getTourelles().get(i).getY() < this.env.getTourelle(idTourellesProche).getY() &&
 					this.env.getTourelles().get(i).getX() <= this.getX() &&
 					this.env.getTourelles().get(i).getY() <= this.getY() ||
 					this.env.getTourelles().get(i).getX() >= this.getX() &&
@@ -26,7 +27,13 @@ public class VirusViboomrus extends Virus {
 					idTourellesProche = this.env.getTourelles().get(i).getId();
 				}
 			}
-			this.env.getTourelles(idTourellesProche).setAtqSpeed(this.env.getTourelles(idTourellesProche).getAtqSpeed()/1.5);
+			this.env.getTourelle(idTourellesProche).setAtqSpeed(this.env.getTourelle(idTourellesProche).getAtqSpeed()*1.5);
+			System.out.println(this.env.getTourelle(idTourellesProche).getAtqSpeed());
+		} catch (Exception e) {
+			System.out.println("Il n'y a pas de tourelles, le Virus n'applique pas son effet !");
+		}
+			
+			
 		}
 	}
 

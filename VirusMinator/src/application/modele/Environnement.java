@@ -1,7 +1,6 @@
 package application.modele;
 
 import java.util.List;
-
 import application.Config;
 import application.controleur.Controller;
 import application.modele.tir.Tir;
@@ -16,9 +15,6 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Point2D;
-import javafx.scene.Node;
-
 public class Environnement {
 	private int width, height, vie;
 	public ObservableList<Virus> virusesSurTerrain = FXCollections
@@ -27,13 +23,13 @@ public class Environnement {
 			.observableArrayList();/*
 									 * La liste des tourelles sur le terrain
 									 */
-	private ObservableList<Virus> nextViruses = FXCollections
+	private ObservableList<Virus> VirusesSuivants = FXCollections
 			.observableArrayList();/*
-									 * la liste des virus à ajouter dans les virus présents
+									 * la liste des virus à ajouter dans les virus présents sur le terrain
 									 */
 	public ObservableList<Tir> listeTirs = FXCollections.observableArrayList();
 	private String[][] terrain;
-	private IntegerProperty argent = new SimpleIntegerProperty(15);
+	private IntegerProperty argent = new SimpleIntegerProperty(100);
 
 	public Environnement(int width, int height) {
 		super();
@@ -41,13 +37,12 @@ public class Environnement {
 		this.height = height;
 		this.terrain = new String[18][40];
 		initTerrain();
-		this.setVie(60);
+		this.setVie(60);/*enlever une fois que hopital*/
 
 	}
 
 	public void incrementerArgent() {
 		this.argent.setValue(argent.getValue() + 1);
-
 	}
 
 	public IntegerProperty getArgentProperty() {
@@ -60,6 +55,9 @@ public class Environnement {
 
 	public void enleverArgent(int somme) {
 		this.argent.setValue(argent.getValue() - somme);
+	}
+	public void ajouterArgent(int somme){
+		this.argent.setValue(argent.getValue() + somme);
 	}
 
 	public int getWidth() {
@@ -76,28 +74,28 @@ public class Environnement {
 			switch (Virus.listeVirusAttente.get(i)) {
 			case 1:
 				Virus vb = new VirusBasirus(70, 10, 2.0, "VirusBasirus", 0, 288, 200, this);
-				this.nextViruses.add(vb);
+				this.VirusesSuivants.add(vb);
 				break;
 			case 2:
 				Virus vd = new VirusDivirus(40, 10, 2.0, "VirusDivirus", 0, 288, 200, this);
-				this.nextViruses.add(vd);
+				this.VirusesSuivants.add(vd);
 				break;
 			case 3:
 				Virus vh = new VirusVhealrus(30, 10, 2.0, "VirusVhealrus", 0, 288, 200, this);
-				this.nextViruses.add(vh);
+				this.VirusesSuivants.add(vh);
 				break;
 			case 4:
 				Virus vbi = new VirusViboomrus(170, 10, 1.0, "VirusViboomrus", 0, 288, 200, this);
-				this.nextViruses.add(vbi);
+				this.VirusesSuivants.add(vbi);
 				break;
 			case 5:
-				Virus vv = new VirusViterus(30, 10, 3.0, "VirusViterus", 0, 288, 200, this);
-				this.nextViruses.add(vv);
+				Virus vv = new VirusViterus(70, 10, 3.0, "VirusViterus", 0, 288, 200, this);
+				this.VirusesSuivants.add(vv);
 				break;
 			default:
 				break;
 			}
-			System.out.println("next viruses : " + nextViruses);
+			
 
 			// Virus.listeVirusAttente.remove(i);
 		}
@@ -108,14 +106,14 @@ public class Environnement {
 	}
 
 	public ObservableList<Virus> getNextViruses() {
-		return nextViruses;
+		return VirusesSuivants;
 	}
 
 	public ObservableList<Tourelles> getTourelles() {
 		return tourelles;
 	}
 
-	public void resetPos(Virus v) {
+	public void resetPos(Virus v) { /*à détruire une fois que le BFS est la*/
 		v.setX(0);
 		v.setY(288);
 	}
@@ -129,7 +127,7 @@ public class Environnement {
 		return null;
 	}
 
-	public Tourelles getTourelles(String id) {
+	public Tourelles getTourelle(String id) {
 		for (Tourelles t : this.tourelles) {
 			if (t.getId().equals(id)) {
 				return t;
@@ -140,7 +138,7 @@ public class Environnement {
 
 	public void ajouterVirus(Virus v) {
 		virusesSurTerrain.add(v);
-		System.out.println(virusesSurTerrain.get(0).getNom());
+		/*System.out.println(virusesSurTerrain.get(0).getNom());*/
 	}
 
 	public void ajouterTourelles(Tourelles a) {
@@ -151,23 +149,21 @@ public class Environnement {
 		return (0 <= x && x < this.width && 0 <= y && y < this.height);
 	}
 
-	/**/
+	
 	public void unTour() {
-		System.out.println("La taille de la liste nextViruses: " + nextViruses.size());
 		entreeVirusTerrain();
 		deplacerLesViruses();
 		faireAgirTourelles();
 		ramasserLesViruses();
-		System.out.println("La taille de la liste virusesSurTerrain : " + virusesSurTerrain.size());
 		gameOver();
 
 	}
 
 	public void entreeVirusTerrain() {
-		for (int i = 0; i < nextViruses.size(); i++) {
-			if (nextViruses.get(i).getTempsSpawn() == Controller.temps) {
-				this.virusesSurTerrain.add(nextViruses.get(i));
-				System.out.println(" Virus ajouté : " + nextViruses.get(i));
+		for (int i = 0; i < VirusesSuivants.size(); i++) {
+			if (VirusesSuivants.get(i).getTempsSpawn() == Controller.temps) {
+				this.virusesSurTerrain.add(VirusesSuivants.get(i));
+				System.out.println(" Virus ajouté : " + VirusesSuivants.get(i));
 				System.out.println("Création Virus");
 			}
 
@@ -176,7 +172,6 @@ public class Environnement {
 	}
 
 	public void deplacerLesViruses() {
-		System.out.println("Les viruses se sont déplacés");
 		for (int i = 0; i < virusesSurTerrain.size(); i++) {
 			Virus v = virusesSurTerrain.get(i);
 			v.agit(v);
@@ -222,8 +217,8 @@ public class Environnement {
 		for (int i = listeTirs.size() - 1; i >= 0; i--) {
 			Tir t = listeTirs.get(i);
 			if (!t.estVivant()) {
-				System.out.println("le tir : " + t + "a atteint sa cible");
-				System.out.println(listeTirs.get(i) + " a été supprimé");
+//				System.out.println("le tir : " + t + "a atteint sa cible");
+//				System.out.println(listeTirs.get(i) + " a été supprimé");
 				listeTirs.remove(i);
 			}
 		}
@@ -231,7 +226,7 @@ public class Environnement {
 
 	public void ajouterListeTirs(Tir t) {
 		listeTirs.add(t);
-		System.out.println("Un tir a été ajoutée" + t);
+		// System.out.println(t);
 	}
 
 	public ObservableList<Tir> getListeTirs() {
@@ -336,6 +331,10 @@ public class Environnement {
 		}
 		System.out.println("test");
 
+	}
+
+	public double getTemps() {
+		return Controller.temps;
 	}
 
 }

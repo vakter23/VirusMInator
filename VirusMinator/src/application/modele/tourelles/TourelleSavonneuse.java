@@ -12,7 +12,7 @@ public class TourelleSavonneuse extends TourellesAvecDegats {
 	public TourelleSavonneuse(int portee, double atqSpeed, String nom, int x, int y, Environnement env) {
 		super(portee, atqSpeed, nom, x, y, env);
 
-		this.setAtq(20);
+		this.setAtq(0);
 
 	}
 
@@ -30,10 +30,11 @@ public class TourelleSavonneuse extends TourellesAvecDegats {
 		Virus v = VirusAPorteeDeTir();
 		System.out.println("avant tirer cette tourelle vise " + v);
 		System.out.println(v.getVie());
-		Tir t1 = new TirAvecDegats(this.getXProperty(), this.getYProperty(), v, this.env, this.getAtq(), this.getPortee());
+		
+		Tir t1 = new TirAvecDegats(this.getX(), this.getY(), v, this.env, this.getAtq(), this.getPortee());
+		System.out.println("nouveau tir : " +t1);
 		this.env.ajouterListeTirs(t1);
-		System.out.println(env.getListeTirs());
-
+		System.out.println("Liste : " + this.env.getTirs());
 		// VirusAPorteeDeTir().setVie(VirusAPorteeDeTir().getVie()-this.getAtq());
 		// code pour tirer / apelle de la méthode tir
 

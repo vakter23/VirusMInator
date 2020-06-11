@@ -1,12 +1,8 @@
 package application.modele.tourelles;
 
 import application.modele.virus.Virus;
-import application.modele.virus.VirusBasirus;
-
 import java.util.ArrayList;
-
 import application.modele.Environnement;
-import application.modele.tir.Tir;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -20,7 +16,7 @@ public abstract class Tourelles {
 	private double atqSpeed; // atq, slow
 	private String nom, ID;
 	protected Environnement env;
-	private int temps;// Variable pour gerer temps entre le tir des tourelles (1 unité de temps = 1
+	//private int temps;// Variable pour gerer temps entre le tir des tourelles (1 unité de temps = 1
 						// tour) <- variable crée dans environnement
 	private static int compteur = 1;
 
@@ -32,6 +28,7 @@ public abstract class Tourelles {
 		this.setX(x);
 		this.setY(y);
 		this.env = env;
+		
 		compteur++;
 	}
 
@@ -164,7 +161,7 @@ public abstract class Tourelles {
 
 	public void agit() {
 
-		if (temps % this.atqSpeed == 0 && this.VirusAPorteeDeTir() != null) // tentative d'evittement du null pointer
+		if (this.env.getTemps() % this.atqSpeed == 0 && this.VirusAPorteeDeTir() != null) // tentative d'evittement du null pointer
 																			// exception ( car virusaporteedetir
 																			// retourne null si pas de virus
 		{
@@ -172,30 +169,7 @@ public abstract class Tourelles {
 			 
 		}
 
-		/*
-		 * if(this.atq>0) {
-		 * 
-		 * double newVie = (VirusAPorteeDeTir().getVie() - this.getAtq());
-		 * VirusAPorteeDeTir().setVie(newVie);
-		 * //VirusAPorteeDeTir().setVie(VirusAPorteeDeTir().getVie()-this.getAtq());
-		 * //code pour tirer / apelle de la méthode tir }
-		 * 
-		 * 
-		 * else if (slow>0) { // Tourelles qui slow (Mousseuse/AvastiVirus)
-		 * 
-		 * //double newVitesse = (VirusAPorteeDeTir().getVitesse()-this.getSlow());
-		 * //VirusAPorteeDeTir().setVitesse(newVitesse);
-		 * 
-		 * VirusAPorteeDeTir().slowVirus();
-		 * 
-		 * }
-		 * 
-		 * else {//TOurelle PingoLimbo
-		 * 
-		 * TourelleAPorteeDeTir().boostAttaqueSpeed();
-		 * 
-		 * }
-		 */
+		
 	}
 
 	@Override

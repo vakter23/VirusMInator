@@ -9,7 +9,7 @@ public class TirAvecDegats extends Tir {
 	private double atq;
 	private Virus v;
 
-	public TirAvecDegats(IntegerProperty x, IntegerProperty y, Virus v, Environnement env, double atq, int portee) {
+	public TirAvecDegats(int x, int y, Virus v, Environnement env, double atq, int portee) {
 		super(x, y, env, portee);
 		this.v = v;
 		this.atq = atq;
@@ -30,6 +30,8 @@ public class TirAvecDegats extends Tir {
 	}
 
 	public void seDeplace() {
+		/* verifPortee(); */
+
 		if (v.getX() < this.getX()) {
 			this.setX((int) (this.getX() - this.getVitesse()));
 		} else {
@@ -41,33 +43,34 @@ public class TirAvecDegats extends Tir {
 			this.setY((int) (this.getY() + this.getVitesse()));
 		}
 
-		if (this.getX() >= v.getX() && this.getY() >= v.getY()) {
+		if (this.getX() <= v.getX() && this.getY() <= v.getY()) {
 			this.appliquerDégats();
 			this.meurt();
+			System.out.println("Ce tir meurt : " + this);
+			v.getVie();
 		}
 
 	}
 
 	public void verifPortee() {
-		/* 
-		 * gérer les cas 
-		 * X>;Y<,
-		 * X>;Y>,
-		 * X<;Y>, check
-		 * X<;Y<, check
-		 * X>;Y<
-		*/
-		if(v.getX() < this.getBaseX()- getPortee()) {
-			this.meurt();
-		}
-		else if (v.getY()> this.getBaseY()-getPortee()) {
-			this.meurt();			
-		} else if (v.getX()> this.getBaseX() - getPortee()) {
-			/*if (v.getY())*/
-
+		/*
+		 * gérer les cas X>;Y<, check X>;Y>, check X<;Y>, check X<;Y<, check X>;Y<
+		 */
+		if (v.getX() < this.getBaseX() - getPortee()) {
+			if (v.getY() < this.getBaseY() - getPortee()) {
+				this.meurt();
+			} else if (v.getY() > this.getBaseY() + getPortee()) {
+				this.meurt();
+			}
+		} else if (v.getX() > this.getBaseX() + getPortee()) {
+			if (v.getY() < this.getBaseY() - getPortee()) {
+				this.meurt();
+			} else if (v.getY() > this.getBaseY() + getPortee()) {
+				this.meurt();
 			}
 		}
-	
+
+	}
 
 	public void appliquerDégats() {
 		double newVie = this.v.getVie() - this.getAtq();
@@ -85,13 +88,10 @@ public class TirAvecDegats extends Tir {
 //    this.setY(nposY);
 //    
 //}
-	static public double sqr(double a) {
-		return a * a;
-	}
-
-	@Override
-	public void agit() {
-
+	public String toString() {
+		return ("Le tir : " + this.getId() + " à la position x = " + this.getX() + " et y = " + this.getY()
+				+ " d'une origine de base X = " + this.getBaseX() + " et baseY : " + this.getBaseY()
+				+ " et vise le Virus : " + this.v);
 	}
 
 }

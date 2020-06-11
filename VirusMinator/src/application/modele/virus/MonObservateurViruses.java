@@ -1,24 +1,11 @@
-package application.controleur;
+package application.modele.virus;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+
 
 import application.Config;
-import application.modele.virus.Virus;
-import application.modele.virus.VirusBasirus;
-import application.modele.virus.VirusDivirus;
-import application.modele.virus.VirusVhealrus;
-import application.modele.virus.VirusViboomrus;
-import application.modele.virus.VirusViterus;
-import javafx.beans.InvalidationListener;
 import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 
 public class MonObservateurViruses implements ListChangeListener<Virus> {
 	private Pane panneauEnnemis;

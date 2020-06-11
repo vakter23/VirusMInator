@@ -24,7 +24,7 @@ public abstract class Virus {
 	 * 4 = boomirus
 	 * 5 = viterus
 	 */
-	public static List<Integer> listeVirusAttente = Arrays.asList(2,3,1,1,5);/*liste des viruses a ajouter*/
+	public static List<Integer> listeVirusAttente = Arrays.asList(4, 4);/*liste des viruses a ajouter*/
 	public static List<Integer> listeVirusAttente2 = Arrays.asList(2,2,3,4,5);
 	public Virus(int vie, int atq, double vitesse, String nom, int x, int y, int tpsSpawn,Environnement env) { /* Constructeur Virus */
 		this.ID = "v" + compteur;
@@ -39,8 +39,7 @@ public abstract class Virus {
 		this.env = env;
 		this.tpsPerso = tpsSuivant+tpsSpawn;
 		System.out.println("v" + compteur);
-		tpsSuivant += 140;
-	//	System.out.println(this.toString());
+		tpsSuivant += 300;
 	}
 
 	@Override
@@ -102,7 +101,7 @@ public abstract class Virus {
 	}
 
 	/* Changer les 1, 2, et 0 en vitesse des virus */
-	public void agit(Virus v) {
+	public void agit(Virus v) { /*Disparaitra quand on ajoute le BFS*/
 		if (v instanceof VirusViterus) {
 			if (this.getXproperty().getValue() < 520 && this.getYproperty().getValue() < 289) {
 				int nposX = this.getX() +(int) (v.getVitesse());
@@ -144,8 +143,8 @@ public abstract class Virus {
 			
 
 		}
-			System.out.println(this.getId() + "x : " + this.getX());
-			System.out.println(this.getId() + "y : " + this.getY() + "\n");
+//			System.out.println(this.getId() + "x : " + this.getX());
+//			System.out.println(this.getId() + "y : " + this.getY() + "\n");
 		} else if (v instanceof VirusViboomrus) {
 			if (this.getXproperty().getValue() < 520 && this.getYproperty().getValue() < 289) {
 				int nposX = this.getX() +((int) (v.getVitesse()));
@@ -187,8 +186,8 @@ public abstract class Virus {
 			
 
 		}
-			System.out.println(this.getId() + "x : " + this.getX());
-			System.out.println(this.getId() + "y : " + this.getY() + "\n");
+//			System.out.println(this.getId() + "x : " + this.getX());
+//			System.out.println(this.getId() + "y : " + this.getY() + "\n");
 		} else {
 			if (this.getXproperty().getValue() < 520 && this.getYproperty().getValue() < 289) {
 				int nposX = this.getX() +((int) (v.getVitesse()));
@@ -231,8 +230,8 @@ public abstract class Virus {
 
 			}
 		}/* On aurait pu faire une classe effet avec des sous classes et les ajouter en tant qu'attribut*/
-		System.out.println(this.getId() + "x : " + this.getX());
-		System.out.println(this.getId() + "y : " + this.getY() + "\n");
+//		System.out.println(this.getId() + "x : " + this.getX());
+//		System.out.println(this.getId() + "y : " + this.getY() + "\n");
 		v.appliquerEffets();
 	}
 
@@ -257,19 +256,18 @@ public abstract class Virus {
 	public double getVitesse() {
 		return vitesse;
 	}
-public void slowVirus(double slow) {
-		
-		this.setVitesse(this.vitesse/slow);
-		
-	}
+//	public void slowVirus(double slow) {
+//		
+//		this.setVitesse(this.vitesse/slow);
+//		
+//	}
 
-
-
-	/**
-	 * @param vitesse the vitesse to set
-	 */
 	public void setVitesse(double vitesse) {
+		if(vitesse<1) {
+			this.vitesse = 1.0;
+		} else {
 		this.vitesse = vitesse;
+		}
 	}
 
 	public void setVie(double newVie) {

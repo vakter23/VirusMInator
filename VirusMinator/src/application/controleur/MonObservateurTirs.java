@@ -2,9 +2,7 @@ package application.controleur;
 
 import application.modele.tir.Tir;
 import application.modele.tir.TirAvecDegats;
-import application.modele.tourelles.Tourelles;
 import javafx.collections.ListChangeListener;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -38,6 +36,8 @@ public class MonObservateurTirs implements ListChangeListener<Tir>{
 		r.setId(t.getId());
 		r.setTranslateX(t.getX());
 		r.setTranslateY(t.getY());
+		r.translateXProperty().bind(t.getXProperty());
+		r.translateYProperty().bind(t.getYProperty());
 		pane.getChildren().add(r);
 		}
 		else {
@@ -46,6 +46,8 @@ public class MonObservateurTirs implements ListChangeListener<Tir>{
 			r.setId(t.getId());
 			r.setTranslateX(t.getX());
 			r.setTranslateY(t.getY());
+			r.translateXProperty().bind(t.getXProperty());
+			r.translateYProperty().bind(t.getYProperty());
 			pane.getChildren().add(r);
 		}
 	}

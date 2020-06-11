@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import application.modele.Environnement;
 import application.modele.tir.Tir;
 import application.modele.tir.TirAvecDegats;
-import application.modele.tir.TirSansDegats;
 import application.modele.virus.Virus;
 
 public class TourelleHydroClaque extends TourellesAvecDegats {
@@ -31,7 +30,7 @@ public class TourelleHydroClaque extends TourellesAvecDegats {
 	public void tirer() {
 		ArrayList<Virus> v = PlusieursVirusAPorteeDeTir();
 		for (int i = 0; i < v.size(); i++) {
-			Tir t1 = new TirAvecDegats(this.getXProperty(), this.getYProperty(), v.get(i), this.env, this.getAtq(), this.getPortee());
+			Tir t1 = new TirAvecDegats(this.getX(), this.getY(), v.get(i), this.env, this.getAtq(), this.getPortee());
 			this.env.ajouterListeTirs(t1);
 			double newVie = (v.get(i).getVie() - this.getAtq());
 			v.get(i).setVie(newVie);
