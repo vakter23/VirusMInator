@@ -129,6 +129,8 @@ public class Controller implements Initializable {
 		this.e1.getViruses().addListener(new MonObservateurViruses(panneauEnnemis));
 		this.e1.getTirs().addListener(new MonObservateurTirs(panneauEnnemis));
 		this.e1.getTourelles().addListener(new ecouteurTourelle(panneauEnnemis));
+		System.out.println("Liste dans le désordre : " + g.getSommet().toString());
+	    System.out.println("Liste dans l'ordre  : " + g.getSommetDansLordre().toString());
 	}
 
 	private void initAnimation() {

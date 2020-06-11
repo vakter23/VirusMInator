@@ -12,8 +12,6 @@ import application.modele.virus.VirusVhealrus;
 import application.modele.virus.VirusViboomrus;
 import application.modele.virus.VirusViterus;
 import application.modele.Magasin;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 public class Environnement {
