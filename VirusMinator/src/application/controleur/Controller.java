@@ -22,6 +22,7 @@ import java.util.ResourceBundle;
 import application.Config;
 import application.modele.Environnement;
 import application.modele.Graph;
+import application.modele.Magasin;
 import application.modele.tourelles.TourelleDocteurPingoLimbo;
 import application.modele.tourelles.TourelleHydroClaque;
 import application.modele.tourelles.TourelleMousseuse;

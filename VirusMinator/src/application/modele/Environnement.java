@@ -11,33 +11,37 @@ import application.modele.virus.VirusDivirus;
 import application.modele.virus.VirusVhealrus;
 import application.modele.virus.VirusViboomrus;
 import application.modele.virus.VirusViterus;
+import application.modele.Magasin;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 public class Environnement {
-	private int width, height, vie;
+	private int width, height;
 	public ObservableList<Virus> virusesSurTerrain = FXCollections
 			.observableArrayList(); /* les viruses présents sur le terrain */
 	private ObservableList<Tourelles> tourelles = FXCollections
 			.observableArrayList();/*
 									 * La liste des tourelles sur le terrain
 									 */
-	private ObservableList<Virus> VirusesSuivants = FXCollections
+	private ObservableList<Virus> nextViruses = FXCollections
 			.observableArrayList();/*
-									 * la liste des virus à ajouter dans les virus présents sur le terrain
+									 * la liste des virus à ajouter dans les virus présents
 									 */
 	public ObservableList<Tir> listeTirs = FXCollections.observableArrayList();
 	private static String[][] terrain;
-	private IntegerProperty argent = new SimpleIntegerProperty(100);
+	private Magasin magasin;
+	private Hopital hopital;
 
-	public Environnement(int width, int height) {
+	public Environnement(int width, int height, Magasin magasin) {
 		super();
 		this.width = width;
 		this.height = height;
 		this.terrain = new String[18][40];
 		initTerrain();
-		this.setVie(60);/*enlever une fois que hopital*/
+		this.setMagasin(magasin);
+		this.hopital = new Hopital();
+//		this.getHopital.setVie(60);
 
 	}
 
