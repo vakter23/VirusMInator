@@ -1,83 +1,116 @@
 package application.modele;
-//Java program to print BFS traversal from a given source vertex. 
-//BFS(int s) traverses vertices reachable from s. 
-import java.io.*; 
-import java.util.*; 
 
-//This class represents a directed graph using adjacency list 
-//representation 
-public class Graph 
-{ 
-	private int V; // No. of vertices 
-	private LinkedList<Integer> adj[]; //Adjacency Lists 
+import java.io.*;
+import java.util.*;
 
-	// Constructor 
-	public Graph(int v) 
-	{ 
-		V = v; 
-		adj = new LinkedList[v]; 
-		for (int i=0; i<v; ++i) 
-			adj[i] = new LinkedList(); 
-	} 
+public class Graph {
 
-	// Function to add an edge into the graph 
-	void addEdge(int v,int w) 
-	{ 
-		adj[v].add(w); 
-	} 
 
-	// prints BFS traversal from a given source s 
-	void BFS(int s) 
-	{ 
-		// Mark all the vertices as not visited(By default 
-		// set as false) 
-		boolean visited[] = new boolean[V]; 
+	/*création de la liste de sommet de notre graphe
+	*/
+	private static ArrayList<Sommet> sommet;
 
-		// Create a queue for BFS 
-		LinkedList<Integer> queue = new LinkedList<Integer>(); 
 
-		// Mark the current node as visited and enqueue it 
-		visited[s]=true; 
-		queue.add(s); 
+	/*création de la liste de sommet dans l'ordre de notre parcours
+	*/
+	private static ArrayList<Sommet> sommetDansLordre;
+
+	/*constructeur du graphe
+	*/
+
+	public Graph() {
+		this.sommetDansLordre = new ArrayList<Sommet>();
+		this.sommet = new ArrayList<Sommet>();
+	}
+
+	/**
+	* accesseur de la liste sommet
+	* @return la liste sommet 
+	*/
+	public static ArrayList<Sommet> getSommet() {
+		return sommet;
+	}
+
+	 /* méthode permettant d'ajouter tous les Sommets de notre graphe
+	 * les sommet sont les 0 de notre matrice de terrain
+	*/
+	public void addEdge() {
+		for (int i = 0; i < Environnement.getTerrainInt().length; i++) {
+			for (int j = 0; j < Environnement.getTerrainInt()[i].length; j++) {
+				if (Environnement.estUnChemin(i, j)) {
+					sommet.add(new Sommet(i, j));
+
+				}
+			}
+		}
+
+	}
+
+	/**
+	* méthode ajouter les sommets voisin du Sommet en paramètre
+	*/
+	public void ajouterAdj(Sommet s) {
+
+		for (int i = 0; i < sommet.size(); i++) {
+
+			if (sommet.get(i).getX() == s.getX() - 1 && sommet.get(i).getY() == s.getY()) {
+				s.getAdj().add(sommet.get(i));
+
+			} else if (sommet.get(i).getX() == s.getX() && sommet.get(i).getY() == s.getY() - 1) {
+				s.getAdj().add(sommet.get(i));
+
+			} else if (sommet.get(i).getX() == s.getX() && sommet.get(i).getY() == s.getY() + 1) {
+				s.getAdj().add(sommet.get(i));
+
+			} else if (sommet.get(i).getX() == s.getX() + 1 && sommet.get(i).getY() == s.getY()) {
+				s.getAdj().add(sommet.get(i));
+
+			}
+		}
 		
-		while (queue.size() != 0) 
-		{ 
-			// Dequeue a vertex from queue and print it 
-			s = queue.poll(); 
-			System.out.print(s+" "); 
+	}
 
-			// Get all adjacent vertices of the dequeued vertex s 
-			// If a adjacent has not been visited, then mark it 
-			// visited and enqueue it 
-			Iterator<Integer> i = adj[s].listIterator(); 
-			while (i.hasNext()) 
-			{ 
-				int n = i.next(); 
-				if (!visited[n]) 
-				{ 
-					visited[n] = true; 
-					queue.add(n); 
-				} 
-			} 
-		} 
-	} 
+	public static ArrayList<Sommet> getSommetDansLordre() {
+		return sommetDansLordre;
+	}
 
-	// Driver method to 
-	public static void main(String args[]) 
-	{ 
-		Graph g = new Graph(4); 
+	/**
+	* méthode Breadth-first iterator
+	* permet faire un parcours en largeur du graphe Ã  partir du sommet en paramètre
+	*/
 
-		g.addEdge(0, 1); 
-		g.addEdge(0, 2); 
-		g.addEdge(1, 2); 
-		g.addEdge(2, 0); 
-		g.addEdge(2, 3); 
-		g.addEdge(3, 3); 
+	public void BFS(Sommet s) {
 
-		System.out.println("Following is Breadth First Traversal "+ 
-						"(starting from vertex 2)"); 
+		LinkedList<Sommet> queue = new LinkedList<Sommet>();
 
-		g.BFS(2); 
-	} 
-} 
-//This code is contributed by Aakash Hasija 
+		s.setVisited(true);
+		queue.add(s);
+		this.ajouterAdj(s);
+		int y = 0;
+		while (queue.size() != 0) {
+
+			s = queue.poll();
+
+			this.sommetDansLordre.add(s);
+			System.out.print("[" + this.sommetDansLordre.get(y) + "] ");
+			y++;
+
+			ArrayList<Sommet> i = s.getAdj();
+			for (Sommet n : i) {
+
+				this.ajouterAdj(n);
+				if (!n.getVisited()) {
+
+					n.setVisited(true);
+					n.setParent(s);
+					queue.add(n);
+
+				}
+
+			}
+
+		}
+		Collections.reverse(sommetDansLordre);
+	}
+
+}

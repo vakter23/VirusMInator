@@ -1,8 +1,19 @@
 package application.modele.virus;
 
-public class VirusBasirus extends Virus {
+import application.modele.Environnement;
 
-	public VirusBasirus(int vie, int atq, double vitesse, String nom, int x, int y, int tps) {
-		super(vie, atq, vitesse, nom, x, y, tps);
+public class VirusBasirus extends Virus {
+	/**
+	 * Le virus le plus basique, il n'a pas d'effets et ne possède pas d'une grande
+	 * vie ni d'une grande vitesse. Les autres viruses sont équilibrés autour de lui
+	 */
+	public VirusBasirus(int x, int y, int tps, Environnement env) {
+		super(60, 10, 2, "VirusBasirus", x, y, tps, env);
 	}
+
+	@Override
+	protected void appliquerEffets() {
+
+	}
+
 }
