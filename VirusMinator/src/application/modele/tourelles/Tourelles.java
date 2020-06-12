@@ -16,6 +16,7 @@ public abstract class Tourelles {
 	private double atqSpeed; // atq, slow
 	private String nom, ID;
 	protected Environnement env;
+	private boolean buff = false;
 	//private int temps;// Variable pour gerer temps entre le tir des tourelles (1 unité de temps = 1
 						// tour) <- variable crée dans environnement
 	private static int compteur = 1;
@@ -197,6 +198,11 @@ public abstract class Tourelles {
 	 */
 	public void setNiveau(int niveau) {
 		this.niveau = niveau;
+	}
+
+	public void setBuff(boolean b) {
+		this.buff = true;
+		
 	}
 
 }
