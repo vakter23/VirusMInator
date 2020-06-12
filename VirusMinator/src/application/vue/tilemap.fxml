@@ -46,6 +46,8 @@
             <Button fx:id="Start" mnemonicParsing="false" onAction="#Start" text="Start" />
             <Button fx:id="restart" mnemonicParsing="false" onAction="#reinit" text="Button" />
             <Button fx:id="bouttonVendre" mnemonicParsing="false" text="VENDRE" />
+            <ProgressBar fx:id="healthBar" prefWidth="200.0" progress="0.0" />
+            <Label fx:id="vie" text="Label" />
          </children>
          <BorderPane.margin>
             <Insets right="50.0" top="20.0" />

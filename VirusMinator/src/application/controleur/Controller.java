@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -120,15 +121,22 @@ public class Controller implements Initializable {
 
     @FXML
     private ImageView coronaCoin;
+    @FXML
+    private ProgressBar healthBar;
 
-
+    @FXML
+    private Label vie;
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
 		this.e1 = new Environnement(1600, 800, new Magasin());
 		this.panneauEnnemis.setMaxWidth(1632);
 		this.panneauEnnemis.setMaxHeight(832);
-
+		this.e1.getHopital().getVie();
+		this.vie.textProperty().bind(this.e1.getHopital().getVieProperty().asString());
+		
+		this.healthBar.progressProperty().bind(this.e1.getHopital().getVieProperty().divide(100));
+		System.out.println("Le progress bar de base" + this.healthBar.getProgress());
 		creerTerrainVue();
 		System.out.println(this.e1.getViruses().size());
 		Graph g = new Graph();
@@ -324,6 +332,12 @@ public class Controller implements Initializable {
 			System.out.println("l id de la tuile " + tuile.getId());
 
 			bouttonVendre.setOnMouseClicked((e) -> {
+				System.out.println("vie avant le set =" + this.e1.getHopital().getVie());
+				this.e1.getHopital().setVie(this.e1.getHopital().getVie()-93.0);
+				System.out.println("vie apres le set =" + this.e1.getHopital().getVie());
+				System.out.println("Le progress bar apres" + this.healthBar.getProgress());
+
+				
 				for (int i = 0; i < this.e1.getTourelles().size(); i++) {
 					this.e1.getMagasin().enleverArgent(-4);
 					if (this.e1.getTourelles().get(i).getX() == tuile.getLayoutX()

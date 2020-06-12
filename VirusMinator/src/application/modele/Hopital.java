@@ -1,12 +1,16 @@
 package application.modele;
 
 import application.controleur.Controller;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
 public class Hopital {
 
-	private int vie;
+	private DoubleProperty vieProperty = new SimpleDoubleProperty();
 	public Hopital() {
-		this.vie = 60;
+		this.setVie(100);
 	}
 	
 	/*DEPLACER DANS CONTROLLER*/
@@ -18,16 +22,17 @@ public class Hopital {
 
 	}
 
-	/**
-	 * @return the vie
-	 */
-	public int getVie() {
-		return vie;
+	public final double getVie() {
+		return this.vieProperty.getValue();
 	}
-	/**
-	 * @param vie the vie to set
-	 */
-	public void setVie(int vie) {
-		this.vie = vie;
+
+	public final DoubleProperty getVieProperty() {
+		return this.vieProperty;
 	}
+
+	public final void setVie(double n) {
+		this.vieProperty.setValue(n);
+
+	}
+
 }
