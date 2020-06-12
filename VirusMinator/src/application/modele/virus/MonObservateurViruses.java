@@ -22,7 +22,7 @@ public class MonObservateurViruses implements ListChangeListener<Virus> {
 		ImageView VirusActuel;
 
 		if (v instanceof VirusBasirus) {
-			VirusActuel = Config.getImg("/src/ressources/Virus/base_Virus.png");
+			VirusActuel = Config.getImageView("/src/ressources/Virus/base_Virus.png");
 			VirusActuel.setId(v.getId());
 			VirusActuel.translateXProperty().bind(v.getXproperty());
 			VirusActuel.translateYProperty().bind(v.getYproperty());
@@ -32,7 +32,7 @@ public class MonObservateurViruses implements ListChangeListener<Virus> {
 			panneauEnnemis.getChildren().add(VirusActuel);
 
 		} else if (v instanceof VirusDivirus) {
-			VirusActuel = Config.getImg("/src/ressources/Virus/divisible_Virus.png");
+			VirusActuel = Config.getImageView("/src/ressources/Virus/divisible_Virus.png");
 			VirusActuel.setId(v.getId());
 			VirusActuel.translateXProperty().bind(v.getXproperty());
 			VirusActuel.translateYProperty().bind(v.getYproperty());
@@ -43,7 +43,7 @@ public class MonObservateurViruses implements ListChangeListener<Virus> {
 		}
 
 		else if (v instanceof VirusVhealrus) {
-			VirusActuel = Config.getImg("/src/ressources/Virus/healing_Virus.png");
+			VirusActuel = Config.getImageView("/src/ressources/Virus/healing_Virus.png");
 			VirusActuel.setId(v.getId());
 			VirusActuel.translateXProperty().bind(v.getXproperty());
 			VirusActuel.translateYProperty().bind(v.getYproperty());
@@ -53,7 +53,7 @@ public class MonObservateurViruses implements ListChangeListener<Virus> {
 			panneauEnnemis.getChildren().add(VirusActuel);
 
 		} else if (v instanceof VirusViboomrus) {
-			VirusActuel = Config.getImg("/src/ressources/Virus/impact_Virus.png");
+			VirusActuel = Config.getImageView("/src/ressources/Virus/impact_Virus.png");
 			VirusActuel.setId(v.getId());
 			VirusActuel.translateXProperty().bind(v.getXproperty());
 			VirusActuel.translateYProperty().bind(v.getYproperty());
@@ -63,7 +63,7 @@ public class MonObservateurViruses implements ListChangeListener<Virus> {
 			panneauEnnemis.getChildren().add(VirusActuel);
 
 		} else if (v instanceof VirusViterus) {
-			VirusActuel = Config.getImg("/src/ressources/Virus/rapid_Virus.png");
+			VirusActuel = Config.getImageView("/src/ressources/Virus/rapid_Virus.png");
 			VirusActuel.setId(v.getId());
 			VirusActuel.translateXProperty().bind(v.getXproperty());
 			VirusActuel.translateYProperty().bind(v.getYproperty());
