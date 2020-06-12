@@ -126,6 +126,10 @@ public class Controller implements Initializable {
 
     @FXML
     private Label vie;
+
+    @FXML
+    private Label finDeJeu;
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
@@ -134,7 +138,6 @@ public class Controller implements Initializable {
 		this.panneauEnnemis.setMaxHeight(832);
 		this.e1.getHopital().getVie();
 		this.vie.textProperty().bind(this.e1.getHopital().getVieProperty().asString());
-		
 		this.healthBar.progressProperty().bind(this.e1.getHopital().getVieProperty().divide(100));
 		System.out.println("Le progress bar de base" + this.healthBar.getProgress());
 		creerTerrainVue();

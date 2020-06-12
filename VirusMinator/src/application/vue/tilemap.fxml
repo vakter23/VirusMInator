@@ -42,12 +42,21 @@
                   <ImageView fx:id="coronaCoin" fitHeight="50.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
                </children></HBox>
             <VBox prefHeight="200.0" prefWidth="100.0" />
-            <Button fx:id="restart" mnemonicParsing="false" onAction="#reinit" text="Réinitialiser" />
-            <Button fx:id="Start" mnemonicParsing="false" onAction="#Start" text="Start" />
-            <Button fx:id="restart" mnemonicParsing="false" onAction="#reinit" text="Button" />
-            <Button fx:id="bouttonVendre" mnemonicParsing="false" text="VENDRE" />
             <ProgressBar fx:id="healthBar" prefWidth="200.0" progress="0.0" />
             <Label fx:id="vie" text="Label" />
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Button fx:id="restart" mnemonicParsing="false" onAction="#reinit" text="Réinitialiser" />
+                  <Button fx:id="Start" mnemonicParsing="false" onAction="#Start" text="Start" />
+                  <Button fx:id="restart" mnemonicParsing="false" onAction="#reinit" text="Button" />
+                  <Button fx:id="bouttonVendre" mnemonicParsing="false" text="VENDRE" />
+                  <Label fx:id="finDeJeu" alignment="CENTER" prefHeight="96.0" prefWidth="100.0" text="Label">
+                     <font>
+                        <Font name="Arial Bold" size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
          </children>
          <BorderPane.margin>
             <Insets right="50.0" top="20.0" />
