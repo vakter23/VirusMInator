@@ -1,37 +1,39 @@
 package application.modele;
-
-import application.controleur.Controller;
-
-import application.controleur.Controller;
 import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 
 public class Hopital {
 
+
 	private DoubleProperty vieProperty = new SimpleDoubleProperty();
+	
+	/**
+	* constructeur de la classe hopital 
+	* initialise la vie de l'hopital a 100 points de vie.
+	*/
 	public Hopital() {
 		this.setVie(100);
 	}
 	
-	/*DEPLACER DANS CONTROLLER*/
-	private void gameOver() {
-		if (this.getVie() == 0) {
-			Controller.getGameLoop().stop();
-			System.out.println("D.É.F.A.I.T.E");
-		}
-
-	}
-
+	/**
+	* accesseur de valeur de la property vie
+	* @return la valeur de vieProperty
+	*/
 	public final double getVie() {
 		return this.vieProperty.getValue();
 	}
 
+	/**
+	* accesseur de la property vie
+	* @return vieProperty
+	*/
 	public final DoubleProperty getVieProperty() {
 		return this.vieProperty;
 	}
 
+    /**
+	* modificateur de valeur de la vieProperty
+	*/
 	public final void setVie(double n) {
 		this.vieProperty.setValue(n);
 
