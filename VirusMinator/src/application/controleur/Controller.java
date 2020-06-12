@@ -120,8 +120,8 @@ public class Controller implements Initializable {
 		this.m1 = this.e1.getMagasin();
 		System.out.println(this.e1.getViruses().size());
 		Graph g = new Graph();
-        g.addEdge();
-        g.BFS(Graph.getSommet().get(21));
+		g.addEdge();
+		g.BFS(Graph.getSommet().get(21));
 		ajouter();
 		System.out.println("Viruses initialisés");
 		initAnimation();
@@ -130,7 +130,7 @@ public class Controller implements Initializable {
 		this.e1.getTirs().addListener(new MonObservateurTirs(panneauEnnemis));
 		this.e1.getTourelles().addListener(new ecouteurTourelle(panneauEnnemis));
 		System.out.println("Liste dans le désordre : " + g.getSommet().toString());
-	    System.out.println("Liste dans l'ordre  : " + g.getSommetDansLordre().toString());
+		System.out.println("Liste dans l'ordre  : " + g.getSommetDansLordre().toString());
 	}
 
 	private void initAnimation() {
@@ -139,23 +139,22 @@ public class Controller implements Initializable {
 		getGameLoop().setCycleCount(Timeline.INDEFINITE);
 		KeyFrame kf = new KeyFrame(
 				// on définit le FPS (nbre de frame par seconde)
-				Duration.seconds(0.005),
+				Duration.seconds(0.0005),
 
 				// on définit ce qui se passe à chaque frame
 				// c'est un eventHandler d'ou le lambda
 				(ev -> {
-					if (temps == 20000) {
+					if (temps == 200000) {
 						System.out.println("fini");
 						getGameLoop().stop();
 					}
 
 				else if (temps % 50 == 0) {
-						//System.out.println("tour" + temps);
+						// System.out.println("tour" + temps);
 						this.e1.unTour();
 					}
-					
-						this.e1.unTourTir();
-					
+
+					this.e1.unTourTir();
 
 					if (temps % 800 == 0) {
 						this.m1.incrementerArgent();
@@ -163,6 +162,12 @@ public class Controller implements Initializable {
 					if (this.e1.getViruses().isEmpty() && temps > 400) {
 						gameLoop.stop();
 						System.out.println("V.I.C.T.O.I.R.E");
+						//this.afficherResultat("w");
+					}
+					if (this.e1.getHopital().getVie() == 0) {
+						Controller.getGameLoop().stop();
+						System.out.println("D.É.F.A.I.T.E");
+						//this.afficherResultat("l");
 					}
 
 					temps++;
@@ -171,8 +176,6 @@ public class Controller implements Initializable {
 
 //		
 	}
-
-	
 
 	public void creerTerrainVue() {
 		System.out.println(Config.listeMap.size());
@@ -252,8 +255,7 @@ public class Controller implements Initializable {
 		if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) == true) {
 			savonneuse.setOnMouseClicked((e) -> {
 				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) && this.m1.getArgent() > 7) {
-					Tourelles t1 = new TourelleSavonneuse((int) tuile.getLayoutX(),
-							(int) tuile.getLayoutY(), e1);
+					Tourelles t1 = new TourelleSavonneuse((int) tuile.getLayoutX(), (int) tuile.getLayoutY(), e1);
 					this.m1.enleverArgent(7);
 					System.out.println(t1);
 					this.e1.ajouterTourelles(t1);
@@ -269,22 +271,22 @@ public class Controller implements Initializable {
 			gelHydroClaque.setOnMouseClicked((e) -> {
 				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) == true && this.m1.getArgent() > 9) {
 					this.m1.enleverArgent(9);
-					this.e1.ajouterTourelles(new TourelleHydroClaque((int) tuile.getLayoutX(),
-							(int) tuile.getLayoutY(), e1));
+					this.e1.ajouterTourelles(
+							new TourelleHydroClaque((int) tuile.getLayoutX(), (int) tuile.getLayoutY(), e1));
 				}
 			});
 			siliteBang.setOnMouseClicked((e) -> {
 				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) == true && this.m1.getArgent() > 12) {
 					this.m1.enleverArgent(12);
-					this.e1.ajouterTourelles(new TourelleSilliteBang((int) tuile.getLayoutX(),
-							(int) tuile.getLayoutY(), e1));
+					this.e1.ajouterTourelles(
+							new TourelleSilliteBang((int) tuile.getLayoutX(), (int) tuile.getLayoutY(), e1));
 				}
 			});
 			drPingoLimbo.setOnMouseClicked((e) -> {
 				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) == true && this.m1.getArgent() > 12) {
 					this.m1.enleverArgent(12);
-					this.e1.ajouterTourelles(new TourelleDocteurPingoLimbo((int) tuile.getLayoutX(),
-							(int) tuile.getLayoutY(), e1));
+					this.e1.ajouterTourelles(
+							new TourelleDocteurPingoLimbo((int) tuile.getLayoutX(), (int) tuile.getLayoutY(), e1));
 				}
 			});
 		} else {
@@ -297,18 +299,16 @@ public class Controller implements Initializable {
 					this.m1.ajouterArgent(-4);
 					if (this.e1.getTourelles().get(i).getX() == tuile.getLayoutX()
 							&& this.e1.getTourelles().get(i).getY() == tuile.getLayoutY()) {
-					try {
-						this.e1.getTourelles().remove(e1.getTourelles().get(i));
-						System.out.println("xx = " + e1.getTourelles().get(0).getX());
-						System.out.println("yy = " + e1.getTourelles().get(0).getY());
-						System.out.println("taille apres boucle " + e1.getTourelles().size());
-					} catch (Exception e2) {
-						System.out.println("La tourelle à été vendue, la liste des tourelles est maintenant vide");
-						
+						try {
+							this.e1.getTourelles().remove(e1.getTourelles().get(i));
+							System.out.println("xx = " + e1.getTourelles().get(0).getX());
+							System.out.println("yy = " + e1.getTourelles().get(0).getY());
+							System.out.println("taille apres boucle " + e1.getTourelles().size());
+						} catch (Exception e2) {
+							System.out.println("La tourelle à été vendue, la liste des tourelles est maintenant vide");
 
-					} 
-						
-						
+						}
+
 					}
 				}
 			});
@@ -326,6 +326,16 @@ public class Controller implements Initializable {
 
 	private static Image getImgg(String... paths) {
 		return new Image(Paths.get(System.getProperty("user.dir"), paths).toUri().toString());
+
+	}
+
+	public void afficherResultat(String resultat) {
+		if (resultat == "w") {
+			this.labelArgent.setText("Victoire");
+		} else if (resultat == "l"){
+			this.labelArgent.setText("Défaite");
+
+		}
 
 	}
 

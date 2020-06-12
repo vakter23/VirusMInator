@@ -75,7 +75,7 @@ public class Environnement {
 		for (int i = 0; i < Virus.listeVirusAttente.size(); i++) {
 			switch (Virus.listeVirusAttente.get(i)) {
 			case 1:
-				Virus vb = new VirusBasirus(0, 288, 10, this);
+				Virus vb = new VirusBasirus(0, 288, 200, this);
 				this.virusesSuivants.add(vb);
 				break;
 			case 2:
@@ -91,7 +91,7 @@ public class Environnement {
 				this.virusesSuivants.add(vbi);
 				break;
 			case 5:
-				Virus vv = new VirusViterus(70, 10, 3.0, "VirusViterus", 0, 288, 200, this);
+				Virus vv = new VirusViterus(0, 288, 200, this);
 				this.virusesSuivants.add(vv);
 				break;
 			default:
@@ -157,8 +157,7 @@ public class Environnement {
 		deplacerLesViruses();
 		faireAgirTourelles();
 		ramasserLesViruses();
-		gameOver();
-
+		
 	}
 
 	public void entreeVirusTerrain() {
@@ -230,9 +229,11 @@ public class Environnement {
 		if (this.getHopital().getVie() == 0) {
 			Controller.getGameLoop().stop();
 			System.out.println("D.É.F.A.I.T.E");
+			
 		}
-
 	}
+
+	
 
 	public void unTourTir() {
 		for (int i = 0; i < listeTirs.size(); i++) {

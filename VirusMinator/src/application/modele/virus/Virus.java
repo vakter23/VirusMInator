@@ -20,11 +20,11 @@ public abstract class Virus {
 	private int tpsPerso;
 	private static int tpsSuivant = 200;
 	protected Environnement env;
-	public int compteurDeplacement = 0;
+	public static int compteurDeplacement = 0;
 	/*
 	 * 1 = basirus 2 = divirus 3 = healrus 4 = boomirus 5 = viterus
 	 */
-	public static List<Integer> listeVirusAttente = Arrays.asList(4, 4);/* liste des viruses a ajouter */
+	public static List<Integer> listeVirusAttente = Arrays.asList(1,2,3,4,5,1);/* liste des viruses a ajouter */
 	public static List<Integer> listeVirusAttente2 = Arrays.asList(2, 2, 3, 4, 5);
 
 	public Virus(int vie, int atq, double vitesse, String nom, int x, int y, int tpsSpawn,
@@ -41,7 +41,7 @@ public abstract class Virus {
 		this.env = env;
 		this.tpsPerso = tpsSuivant + tpsSpawn;
 		System.out.println("v" + compteurDeplacement);
-		tpsSuivant += 300;
+		tpsSuivant += 100;
 
 	}
 
@@ -105,18 +105,39 @@ public abstract class Virus {
 	}
 
 	public void agit() {
-		if (compteur < 38) {
-			this.setY(Graph.getSommetDansLordre().get(compteur).getX() * 32 );
-			this.setX(Graph.getSommetDansLordre().get(compteur).getY() * 32 );
-			compteur++;
+		if (compteur < 37) {
+			try {
+			if(Graph.getSommetDansLordre().get(compteur+1).getX() > Graph.getSommetDansLordre().get(compteur).getX()) {
+				this.dy = 1;
+				this.setY((this.getY()+ (int)vitesse)*dy);
+				if (this.getY() == Graph.getSommetDansLordre().get(compteur+1).getX()*32) {
+					compteur++;
+				}
+			} if(Graph.getSommetDansLordre().get(compteur+1).getY() > Graph.getSommetDansLordre().get(compteur).getY()) {
+				this.dx = 1;
+				this.setX((this.getX()+ (int)vitesse*dx));
+				if (this.getX() == Graph.getSommetDansLordre().get(compteur+1).getY()*32) {
+					compteur++;
+				}
+			}
+			if(Graph.getSommetDansLordre().get(compteur+1).getX() < Graph.getSommetDansLordre().get(compteur).getX()) {
+				this.dy = -1;
+				this.setY((this.getY()+ (int)vitesse*dy));
+				if (this.getY() == Graph.getSommetDansLordre().get(compteur+1).getX()*32) {
+					compteur++;
+				}
+			}
 			this.appliquerEffets();
+		} catch (Exception e) {
+			if ( compteur == 37) {
+				infligerDegats(this.atq);
+				System.out.println("Le virus à infligé ses dégats ! ");
+				this.meurt();
+				this.appliquerEffets();
+			}
 		}
-		if ( compteur == 38) {
-			infligerDegats(this.atq);
-			System.out.println("Le virus à infligé ses dégats ! ");
-			this.meurt();
-			this.appliquerEffets();
 		}
+		
 	}
 
 	/* Changer les 1, 2, et 0 en vitesse des virus */
