@@ -8,19 +8,19 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 public abstract class Tourelles {
 
-	private IntegerProperty x = new SimpleIntegerProperty();
-	private IntegerProperty y = new SimpleIntegerProperty();
+	private IntegerProperty x = new SimpleIntegerProperty(); // Position en X
+	private IntegerProperty y = new SimpleIntegerProperty(); //Postion en Y
 
 	// private int x,y;
 	private int portee;
-	private double atqSpeed; // atq, slow
+	private double atqSpeed; 
 	private String nom, ID;
 	protected Environnement env;
-	private boolean buff = false;
-	//private int temps;// Variable pour gerer temps entre le tir des tourelles (1 unité de temps = 1
-						// tour) <- variable crée dans environnement
-	private static int compteur = 1;
-	public int niveau;
+	private boolean buff = false;//Variable indiquant si la tourelle a deja recu un buff
+	
+	private static int compteur = 1; //Variable pour attribuer des ID Croissant aux tourelles
+
+	public int niveau; //Variable servant a limiter le nombre d'amélioration des tourelles
 
 	public Tourelles(int portee, double atqSpeed, String nom, int x, int y, Environnement env) { /* Constructeur tourelles */
 		this.setPortee(portee);
@@ -35,7 +35,7 @@ public abstract class Tourelles {
 		compteur++;
 	}
 
-	public abstract void amelioration(); // Ou coder argent necessaire a amelioration
+	public abstract void amelioration(); 
 
 	public String getNom() {
 
@@ -89,21 +89,20 @@ public abstract class Tourelles {
 		this.atqSpeed = atqSpeed;
 	}
 
-	public void gestionTir() { // Methode qui gere le missile et réduit les pv du virus quand le missile le
+	public void gestionTir() { // Methode qui gere le missile et réduit les pv ou ralentis du virus quand le missile le
 								// touche
 
 	}
 
-	public Virus VirusAPorteeDeTir() {
+	public Virus VirusAPorteeDeTir() { 
 
-		// System.out.println("env" + this.env);
 
 		for (int i = 0; i < env.getViruses().size(); i++) {
-			// System.out.println(env.getViruses());
+			
 			if (env.getViruses().get(i).estVivant()) {
 				if ((this.getY() - this.portee <= env.getViruses().get(i).getY()
-						&& env.getViruses().get(i).getY() <= this.getY() + this.portee)
-						&& (this.getX() - this.portee <= env.getViruses().get(i).getX()
+						&& env.getViruses().get(i).getY() <= this.getY() + this.portee)   //Verification si on trouve un Virus dnas la zone de chaque tourelle ,
+						&& (this.getX() - this.portee <= env.getViruses().get(i).getX()  //en additionnant ou en soustrayant la portee de la tourelle a sa position en X ou a sa position en Y	 
 								&& env.getViruses().get(i).getX() <= this.getX() + this.portee)) {
 					return env.getViruses().get(i);
 				}
@@ -114,14 +113,14 @@ public abstract class Tourelles {
 	}
 
 	public ArrayList<Tourelles> TourelleAPorteeDeTir() { // Utilise pour la tourelle Pingolimbo qui boost la vitesse d'attaque des
-												// tourelles dans un certain rayon
-		ArrayList<Tourelles> listeTourelle = new ArrayList<Tourelles>();
+												// tourelles dans un certain rayon et pour le Virus Viboomrus qui ralentit la vitesse 
+		ArrayList<Tourelles> listeTourelle = new ArrayList<Tourelles>();		//d'attaque de la tourelle la plus proche de son lieu de decés
 		for (int i = 0; i < env.getTourelles().size(); i++) {
 			// System.out.println(env.getTourelles());
 			// if (env.getTourelles().get(i).estVivant()) { (Pas besoin de check ca
 			// normalement
 			if ((this.getY() - this.portee <= env.getTourelles().get(i).getY()
-					&& env.getTourelles().get(i).getY() <= this.getY() + this.portee)
+					&& env.getTourelles().get(i).getY() <= this.getY() + this.portee)  //Meme facon de faire que pour VirusAPorteeDeTir
 					&& (this.getX() - this.portee <= env.getTourelles().get(i).getX()
 							&& env.getTourelles().get(i).getX() <= this.getX() + this.portee)) {
 					listeTourelle.add(env.getTourelles().get(i));
@@ -133,14 +132,14 @@ public abstract class Tourelles {
 
 	}
 
-	public ArrayList<Virus> PlusieursVirusAPorteeDeTir() {// return tout les virus a portee de tir pour les tourelles aoe
-		// (hydroclaque/mousseuse
+	public ArrayList<Virus> PlusieursVirusAPorteeDeTir() {	// return tout les virus a portee de tir pour les tourelles qui tir sur plusieurs Virus
+		
 		ArrayList<Virus> virusesMultiples = new ArrayList<Virus>();
 		for (int i = 0; i < env.getViruses().size(); i++) {
-// System.out.println(env.getViruses());
+
 			if (env.getViruses().get(i).estVivant()) {
 				if ((this.getY() - this.portee <= env.getViruses().get(i).getY()
-						&& env.getViruses().get(i).getY() <= this.getY() + this.portee)
+						&& env.getViruses().get(i).getY() <= this.getY() + this.portee)  //Meme facon de faire que pour VirusAPorteeDeTir
 						&& (this.getX() - this.portee <= env.getViruses().get(i).getX()
 								&& env.getViruses().get(i).getX() <= this.getX() + this.portee)) {
 					Virus virus = env.getViruses().get(i);
@@ -164,8 +163,7 @@ public abstract class Tourelles {
 	public void agit() {
 
 		if (this.env.getTemps() % this.atqSpeed == 0 && this.VirusAPorteeDeTir() != null) // tentative d'evittement du null pointer
-																			// exception ( car virusaporteedetir
-																			// retourne null si pas de virus
+																			
 		{
 			tirer();			
 			 
@@ -180,22 +178,14 @@ public abstract class Tourelles {
 				+ ", ID=" + ID + "]";
 	}
 
-	public boolean placementTourelles() {
+	
 
-		return false;
-
-	}
-
-	/**
-	 * @return the niveau
-	 */
+	
 	public int getNiveau() {
 		return niveau;
 	}
 
-	/**
-	 * @param niveau the niveau to set
-	 */
+	
 	public void setNiveau(int niveau) {
 		this.niveau = niveau;
 	}

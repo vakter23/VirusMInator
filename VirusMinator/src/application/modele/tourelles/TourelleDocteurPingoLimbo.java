@@ -2,11 +2,12 @@ package application.modele.tourelles;
 
 import java.util.ArrayList;
 import application.modele.Environnement;
-import application.modele.tir.Tir;
-import application.modele.tir.TirSansDegats;
-
 public class TourelleDocteurPingoLimbo extends Tourelles {
-	private double boostAtqSpeed;
+
+	private double boostAtqSpeed; //Variable indiquant la quantité d'augmentation de 
+				     //l'attaque des tourelles a proximité
+
+	//Cette Tourelle augmente la vitesse d'attaque des Tourelles a sa porté
 
 	public TourelleDocteurPingoLimbo(int x, int y, Environnement env) {
 		super(500, 1, "TourelleDocteurPingoLimbo", x, y, env);
@@ -34,9 +35,9 @@ public class TourelleDocteurPingoLimbo extends Tourelles {
 			System.out.println("Les tourelles buffées : " + liste);
 			//Tir t1 = new TirSansDegats(this.getXProperty(), this.getYProperty(), this.env, this.getPortee());
 			//this.env.ajouterListeTirs(t1);
-			if (TourelleAPorteeDeTir().get(i).getAtqSpeed() != 1) {
+			if (TourelleAPorteeDeTir().get(i).getAtqSpeed() != 1) { //La vitesse d'attaque ne peut descendre en dessous de 1
 			TourelleAPorteeDeTir().get(i).boostAttaqueSpeed(boostAtqSpeed);
-			TourelleAPorteeDeTir().get(i).setBuff(true);
+			TourelleAPorteeDeTir().get(i).setBuff(true); //Boolean verifiant si la tourelle a deja recu un buff pour ne pas les cumuelrs a l'infinie
 			}
 		}
 

@@ -1,13 +1,11 @@
 package application.modele.tir;
-
-import java.util.ArrayList;
-
 import application.modele.Environnement;
 import application.modele.virus.Virus;
-import javafx.beans.property.IntegerProperty;
 
-public class TirSansDegats extends Tir {
+public class TirSansDegats extends Tir { //Tir de la tourelle avastiVirus qui Ralentisse
+
 private Virus v;
+
     public TirSansDegats(int x, int y, Environnement env, int portee, Virus v) {
         super(x, y, env, portee);
         this.v = v;
@@ -37,7 +35,7 @@ private Virus v;
     }
         
     }
-    private void enleverSlow(Virus virusVise) {
+    private void enleverSlow(Virus virusVise) { //QUand le virus sort de la portee de la tourelleAvastivirus le virus recupere sa vitesse initiale
         virusVise.setVitesse(virusVise.getVitesse()*2);
     }
     private void appliquerSlow(Virus virusVise) {

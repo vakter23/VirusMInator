@@ -7,19 +7,16 @@ import javafx.beans.property.SimpleIntegerProperty;
 public abstract class Tir {
 	private IntegerProperty xProperty;
 	private IntegerProperty yProperty;
-	private IntegerProperty baseX;
-	private IntegerProperty baseY;
-//	private int destinationX;
-//	private int destinationY;
+	private IntegerProperty baseX; //Position de la Tourelle Tirant ce Tir en X
+	private IntegerProperty baseY; //Position de la Tourelle Tirant ce Tir en Y
 	private String ID;
 	protected Environnement env;
 	private int vie, portee;
 	private double vitesse;
 	private static int compteur;
 
-	public Tir(int x, int y,  Environnement env, int portee/* , int destinationX,
-	 int destinationY */) {
-/*ajouter une vitesse au tirs peut-être ?*/
+	public Tir(int x, int y,  Environnement env, int portee) {
+
 		this.setPortee(portee);
 		this.xProperty = new SimpleIntegerProperty(x);
 		this.yProperty = new SimpleIntegerProperty(y);
@@ -28,8 +25,6 @@ public abstract class Tir {
 		this.env = env;
 		this.vie = 1;
 		this.setVitesse(1.0);
-//		this.destinationX = destinationX;
-//		this.destinationY = destinationY;
 		this.ID = "tir" + compteur;
 		compteur++;
 	}

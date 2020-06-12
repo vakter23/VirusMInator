@@ -16,17 +16,14 @@ import javafx.scene.layout.Pane;
 public class ecouteurTourelle implements ListChangeListener<Tourelles> {
 
 	private Pane panneauEnnemi;
-//	private ImageView savonneuse;
-//	private ImageView avastirus;
-//	private ImageView siliteBang;
-//	private ImageView drPingoLimbo;
-//	private ImageView gelHydroClaque;
-
 	public ecouteurTourelle(Pane pane) {
 		super();
 		this.panneauEnnemi = pane;
 	}
-
+	/**
+	 * Cette méthode appelle "supprimerSpriteTourelle" pour les viruses morts et appelle
+	 * "creerSpriteTourelle"
+	 */
 	@Override
 	public void onChanged(Change<? extends Tourelles> c) {
 
@@ -42,16 +39,13 @@ public class ecouteurTourelle implements ListChangeListener<Tourelles> {
 	}
 
 	private void creerSpriteTourelle(Tourelles t) {
-//			ImageView sourc = (ImageView) event.getSource();
-//			ImageView spawnTourellesR = getImgg("/src/ressources/tiles/spawnTourelleRouge.png");
-//			sourc.setImage(spawnTourellesR);
+
 			if(t instanceof TourelleSavonneuse){
 				ImageView tourelle =  getImgg("/src/ressources/tourelles/gelHydro.png");
 				tourelle.setId(t.getId());
 				tourelle.setLayoutX(t.getX());
 				tourelle.setLayoutY(t.getY());
 				panneauEnnemi.getChildren().add(tourelle);
-//				panneauEnnemi.getChildren().add(tourelle.getHeight()*tourelle.getWidth(), tourelle);
 			}
 			else if (t instanceof TourelleMousseuse){
 				ImageView tourelle = getImgg("/src/ressources/tourelles/Avast.png");
@@ -110,8 +104,6 @@ public class ecouteurTourelle implements ListChangeListener<Tourelles> {
 
 	private static ImageView getImgg(String... paths) {
 		return new ImageView(Paths.get(System.getProperty("user.dir"), paths).toUri().toString());
-		// ImageView(Paths.get(Paths.get(System.getProperty("user.dir"),
-		// "ressources").toString(), paths).toUri().toString());
 	}
 
 }

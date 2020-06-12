@@ -13,42 +13,49 @@ public abstract class Virus {
 	private IntegerProperty yProperty = new SimpleIntegerProperty();
 	private int dx, dy; // direction
 	private int atq, vie, pvMax;
-	private double vitesse; // vitesse= vitesse de deplacement
+	private int vitesse; // vitesse= vitesse de deplacement
 	private String nom, ID;
 	private int compteur;
 	private int tpsPerso;
 	private static int tpsSuivant = 200;
 	protected Environnement env;
-	public static int compteurDeplacement = 0;
+	public static int compteurIdViruses = 0;
 
 	/*
 	 * 1 = basirus 2 = divirus 3 = healrus 4 = boomirus 5 = viterus
 	 */
-	public static List<Integer> listeVirusAttente = Arrays.asList(1,1,1,3,4);/* liste des viruses a ajouter */
+	public static List<Integer> listeVirusAttente = Arrays.asList(1, 1, 1, 3, 4);
+	/**
+	 * liste des viruses a ajouter dans la liste "virusesSuivants" de la classe
+	 * "Environnement"
+	 */
 	public static List<Integer> listeVirusAttente2 = Arrays.asList(2, 2, 3, 4, 5);
 
-	public Virus(int vie, int atq, double vitesse, String nom, int x, int y, int tpsSpawn,
+	/* cette liste représente la deuxième vague de viruses */
+	public Virus(int vie, int atq, int vitesse, String nom, int x, int y, int tpsSpawn,
 			Environnement env) { /* Constructeur Virus */
-		this.ID = "v" + compteurDeplacement;
+
+		this.ID = "v" + compteurIdViruses;/**
+											 * L'ID des viruses est la lettre v et un nombre qui augmente à chaque virus
+											 * créé
+											 */
 		this.vie = vie;
 		this.pvMax = vie;
 		this.atq = atq;
-		this.setVitesse(vitesse);
+		this.setVitesse(vitesse); /**/
 		this.nom = nom;
 		this.setX(x);
 		this.setY(y);
-		compteurDeplacement++;
+		compteurIdViruses++;
 		this.env = env;
 		this.tpsPerso = tpsSuivant + tpsSpawn;
-		System.out.println("v" + compteurDeplacement);
+		System.out.println("v" + compteurIdViruses);
 		tpsSuivant += 400;
 		// System.out.println(this.toString());
 	}
 
-
-
 	@Override
-	public String toString() {
+	public String toString() { /* La méthode toString des viruses */
 		return "Virus [xProperty=" + xProperty + ", yProperty=" + yProperty + ", dx=" + dx + ", dy=" + dy + ", atq="
 				+ atq + ", vie=" + vie + ", vitesse=" + vitesse + ", nom=" + nom + ", ID=" + ID + ", tpsPerso="
 				+ tpsPerso + "]";
@@ -102,48 +109,59 @@ public abstract class Virus {
 		return this.pvMax;
 	}
 
+	/** cette méthode retourne vrai tant que le virus a plus d'un point de vie */
 	public boolean estVivant() {
 		return this.vie > 0;
 	}
 
 	public void agit() {
-	        if (compteur < 37) {
-	            try {
-	            if(Graph.getSommetDansLordre().get(compteur+1).getX() > Graph.getSommetDansLordre().get(compteur).getX()) {
-	                this.dy = 1;
-	                this.setY((this.getY()+ (int)vitesse)*dy);
-	                if (this.getY() == Graph.getSommetDansLordre().get(compteur+1).getX()*32) {
-	                    compteur++;
-	                }
-	            } if(Graph.getSommetDansLordre().get(compteur+1).getY() > Graph.getSommetDansLordre().get(compteur).getY()) {
-	                this.dx = 1;
-	                this.setX((this.getX()+ (int)vitesse*dx));
-	                if (this.getX() == Graph.getSommetDansLordre().get(compteur+1).getY()*32) {
-	                    compteur++;
-	                }
-	            }
-	            if(Graph.getSommetDansLordre().get(compteur+1).getX() < Graph.getSommetDansLordre().get(compteur).getX()) {
-	                this.dy = -1;
-	                this.setY((this.getY()+ (int)vitesse*dy));
-	                if (this.getY() == Graph.getSommetDansLordre().get(compteur+1).getX()*32) {
-	                    compteur++;
-	                }
-	            }
-	            this.appliquerEffets();
-	        } catch (Exception e) {
-	            if ( compteur == 37) {
-	                infligerDegats(this.atq);
-	                System.out.println("Le virus à infligé ses dégats ! ");
-	                this.meurt();
-	                this.appliquerEffets();
-	            }
-	        }
-	        }
-	        
-	    }
-	
+		if (compteur < 37) {
+			try { /** Cette partie de la méthode modifie la position du virus dans le modèle */
+				if (Graph.getSommetDansLordre().get(compteur + 1).getX() > Graph.getSommetDansLordre().get(compteur)
+						.getX()) {
+					this.dy = 1;
+					this.setY((this.getY() + (int) vitesse) * dy);
+					if (this.getY() == Graph.getSommetDansLordre().get(compteur + 1).getX() * 32
+					/** On multiplie par la taille d'une tuile pour obtenir la vue */) {
+						compteur++;
+					}
+				}
+				if (Graph.getSommetDansLordre().get(compteur + 1).getY() > Graph.getSommetDansLordre().get(compteur)
+						.getY()) {
+					this.dx = 1;
+					this.setX((this.getX() + (int) vitesse * dx));
+					if (this.getX() == Graph.getSommetDansLordre().get(compteur + 1).getY() * 32) {
+						compteur++;
+					}
+				}
+				if (Graph.getSommetDansLordre().get(compteur + 1).getX() < Graph.getSommetDansLordre().get(compteur)
+						.getX()) {
+					this.dy = -1;
+					this.setY((this.getY() + (int) vitesse * dy));
+					if (this.getY() == Graph.getSommetDansLordre().get(compteur + 1).getX() * 32) {
+						compteur++;
+					}
+				} /**
+					 * une fois que le virus déplacé, on vérifie si il a un effet à appliquer et
+					 * l'applique si besoin
+					 */
+				this.appliquerEffets();
+			} catch (Exception e) {
+				/**
+				 * on "attrape" le cas ou le compteur dépasse la taille maximale des sommets du
+				 * BFS, et on inflige les dégats équivalents à son attaque
+				 */
+				if (compteur == 37) {
+					infligerDegats(this.atq);
+					System.out.println("Le virus à infligé ses dégats ! ");
+					this.meurt();
+					this.appliquerEffets();
+					/** on rappelle la méthode pour les viruses qui ont un effet à leurs morts */
+				}
+			}
+		}
 
-	
+	}
 
 	protected abstract void appliquerEffets();
 
@@ -163,22 +181,22 @@ public abstract class Virus {
 	/**
 	 * @return the vitesse
 	 */
-	public double getVitesse() {
+	public int getVitesse() {
 		return vitesse;
 	}
 
 	public void slowVirus(double slow) {
 
-		this.setVitesse(this.vitesse / slow);
+		this.setVitesse((int) (this.vitesse / slow));
 
 	}
 
 	/**
 	 * @param vitesse the vitesse to set
 	 */
-	public void setVitesse(double vitesse) {
+	public void setVitesse(int vitesse) {
 		if (vitesse < 1) {
-			this.vitesse = 1.0;
+			this.vitesse = 1;
 		} else {
 			this.vitesse = vitesse;
 		}

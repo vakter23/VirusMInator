@@ -7,7 +7,7 @@ import application.modele.virus.Virus;
 
 public class TourelleSavonneuse extends TourellesAvecDegats {
 
-	// cette tourelle (tourelle de base) inflige dégât basique
+	// cette tourelle (tourelle de base) ne posséde aucune specificité
 
 	public TourelleSavonneuse(int x, int y, Environnement env) {
 		super(75, 50, "TourelleSavonneuse", x, y, env);
@@ -36,9 +36,7 @@ public class TourelleSavonneuse extends TourellesAvecDegats {
 		System.out.println("nouveau tir : " +t1);
 		this.env.ajouterListeTirs(t1);
 		System.out.println("Liste : " + this.env.getTirs());
-		// VirusAPorteeDeTir().setVie(VirusAPorteeDeTir().getVie()-this.getAtq());
-		// code pour tirer / apelle de la méthode tir
-
+		
 	}
 
 	

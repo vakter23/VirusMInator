@@ -9,9 +9,7 @@ public class TourelleSilliteBang extends TourellesAvecDegats {
 
 	
 
-	// puissante tourelle qui balance des rockets de super loin mais prend du temps
-	// à recharger.
-	
+	// Tourelle ayant une grande portee de Tir
 	
 	
 	public TourelleSilliteBang(int x, int y, Environnement env) {
@@ -38,8 +36,7 @@ public class TourelleSilliteBang extends TourellesAvecDegats {
 		Virus v = VirusAPorteeDeTir();
 		Tir t1 = new TirAvecDegats(this.getX(), this.getY(), v, this.env,this.getAtq(), this.getPortee());
 		this.env.ajouterListeTirs(t1);
-		//VirusAPorteeDeTir().setVie(VirusAPorteeDeTir().getVie()-this.getAtq());
-		//code pour tirer / apelle de la méthode tir
+		
 			}
 
 

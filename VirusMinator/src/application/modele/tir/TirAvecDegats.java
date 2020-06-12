@@ -2,12 +2,10 @@ package application.modele.tir;
 
 import application.modele.Environnement;
 import application.modele.virus.Virus;
-import javafx.beans.property.IntegerProperty;
-
 public class TirAvecDegats extends Tir {
 
 	private double atq;
-	private Virus v;
+	private Virus v; //Cible du Tir
 
 	public TirAvecDegats(int x, int y, Virus v, Environnement env, double atq, int portee) {
 		super(x, y, env, portee);
@@ -15,22 +13,18 @@ public class TirAvecDegats extends Tir {
 		this.atq = atq;
 	}
 
-	/**
-	 * @return the atq
-	 */
+	
 	public double getAtq() {
 		return atq;
 	}
 
-	/**
-	 * @param atq the atq to set
-	 */
+	
 	public void setAtq(double atq) {
 		this.atq = atq;
 	}
 
 	public void seDeplace() {
-		/* verifPortee(); */
+		
 
 		if (v.getX() < this.getX()) {
 			this.setX((int) (this.getX() - this.getVitesse()));
@@ -38,7 +32,7 @@ public class TirAvecDegats extends Tir {
 			this.setX((int) (this.getX() + this.getVitesse()));
 		}
 		if (v.getY() < this.getY()) {
-			this.setY((int) (this.getY() - this.getVitesse()));
+			this.setY((int) (this.getY() - this.getVitesse()));	//Déplacement du Tir Vers le virus ciblé
 		} else {
 			this.setY((int) (this.getY() + this.getVitesse()));
 		}
@@ -67,16 +61,7 @@ public class TirAvecDegats extends Tir {
 		System.out.println("La vie du virus est maintenant de : " + newVie);
 	}
 
-//	
-//	
-//	double distanceX = (v.getX() - this.getX());
-//	double distanceY = (v.getY() - this.getY());
-//	int nposX = this.getX() + ((int) distanceX/4);
-//	int nposY = this.getY() + ((int) distanceY/4);
-//    this.setX(nposX);
-//    this.setY(nposY);
-//    
-//}
+
 	public String toString() {
 		return ("Le tir : " + this.getId() + " à la position x = " + this.getX() + " et y = " + this.getY()
 				+ " d'une origine de base X = " + this.getBaseX() + " et baseY : " + this.getBaseY()

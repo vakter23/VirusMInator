@@ -2,7 +2,8 @@ package application.modele.tourelles;
 
 import application.modele.Environnement;
 
-public abstract class TourellesAvecDegats extends Tourelles {
+public abstract class TourellesAvecDegats extends Tourelles { //Classe qui regroupe toute les tourelles infligeant des dégats
+
 	private double attaque;
 
 	public TourellesAvecDegats(int portee, double atqSpeed, String nom, int x, int y, Environnement env) {

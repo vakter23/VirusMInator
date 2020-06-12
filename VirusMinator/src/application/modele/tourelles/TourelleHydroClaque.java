@@ -9,7 +9,7 @@ import application.modele.virus.Virus;
 
 public class TourelleHydroClaque extends TourellesAvecDegats {
 
-	// cette tourelle dispose d’un petit champs de tir mais asperge les ennemis
+	// cette tourelle dispose d’un petit champs de tir mais tir sur tous les ennemis a portée
 	// non-stop
 
 	public TourelleHydroClaque(int x, int y, Environnement env) {

@@ -27,8 +27,10 @@ public class MonObservateurTirs implements ListChangeListener<Tir>{
 			
 		}
 	}
-/*TOUJOURS VERIFIER L'ID*/ 
-	/*Supprimer la duplication de code*/
+	/**
+	 * Cette méthode crée les sprite de chaque tirs lorsqu'ils sont ajoutés à la
+	 * liste "listeTirs"
+	 */
 	private void creerSpriteTir(Tir t) {
 		if (t instanceof TirAvecDegats) {
 		Circle r = new Circle(3);
@@ -51,7 +53,10 @@ public class MonObservateurTirs implements ListChangeListener<Tir>{
 			pane.getChildren().add(r);
 		}
 	}
-
+	/**
+	 * Cette méthode appelle "supprimerSpriteTir" pour les tirs morts et appelle
+	 * "creerSpriteTir"
+	 */
 	private void supprimerSpriteTir(Tir t) {
 		this.pane.getChildren().remove(this.pane.lookup("#"+t.getId()));
 		System.out.println("tir supprimé");
