@@ -31,7 +31,7 @@ public class TourelleDocteurPingoLimbo extends Tourelles {
 	public void tirer() {
 		ArrayList<Tourelles> liste = TourelleAPorteeDeTir();
 		for (int i = 0; i < liste.size(); i++) {
-			System.out.println("Les viruses buffés : " + liste);
+			System.out.println("Les tourelles buffées : " + liste);
 			//Tir t1 = new TirSansDegats(this.getXProperty(), this.getYProperty(), this.env, this.getPortee());
 			//this.env.ajouterListeTirs(t1);
 			if (TourelleAPorteeDeTir().get(i).getAtqSpeed() != 1) {

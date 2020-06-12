@@ -29,7 +29,7 @@ public abstract class Virus {
 
 	public Virus(int vie, int atq, double vitesse, String nom, int x, int y, int tpsSpawn,
 			Environnement env) { /* Constructeur Virus */
-		this.ID = "v" + compteur;
+		this.ID = "v" + compteurDeplacement;
 		this.vie = vie;
 		this.pvMax = vie;
 		this.atq = atq;

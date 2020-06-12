@@ -126,10 +126,10 @@ public abstract class Tourelles {
 							&& env.getTourelles().get(i).getX() <= this.getX() + this.portee)) {
 					listeTourelle.add(env.getTourelles().get(i));
 			}
-			return listeTourelle;
-			// }
+			
+		
 		}
-		return null;
+		return listeTourelle;
 
 	}
 
@@ -154,9 +154,9 @@ public abstract class Tourelles {
 	}
 
 	public void boostAttaqueSpeed(double boost) {
-
+		if(!this.buff) {
 		this.setAtqSpeed(this.atqSpeed * boost);
-
+		}
 	}
 
 	public abstract void tirer();
