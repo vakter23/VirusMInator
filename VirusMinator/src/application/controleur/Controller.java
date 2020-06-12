@@ -163,7 +163,6 @@ public class Controller implements Initializable {
 					}
 
 				else if (temps % 50 == 0) {
-						System.out.println("tour" + temps);
 						unTour();
 					}
 

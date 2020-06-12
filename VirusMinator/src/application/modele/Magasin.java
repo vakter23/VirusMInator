@@ -4,7 +4,7 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 public class Magasin {
-	private int argentDuDebut = 20;
+	private int argentDuDebut = 70;
 	private IntegerProperty argent = new SimpleIntegerProperty();
 	public final static int prixSavonneuse = 7;
 	public final static int avastirus = 5;

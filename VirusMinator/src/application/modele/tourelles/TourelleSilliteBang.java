@@ -15,7 +15,7 @@ public class TourelleSilliteBang extends TourellesAvecDegats {
 	
 	
 	public TourelleSilliteBang(int x, int y, Environnement env) {
-		super(250, 500, "TourelleSilliteBang", x, y, env);		
+		super(250, 2000, "TourelleSilliteBang", x, y, env);		
 		this.setAtq(1000);
 
 	}
@@ -27,7 +27,7 @@ public class TourelleSilliteBang extends TourellesAvecDegats {
 
 		this.setAtq(this.getAtq() * 1.2);
 		this.setPortee(this.getPortee() + 5);
-		this.setAtqSpeed(this.getAtqSpeed() + 1);
+		this.setAtqSpeed(this.getAtqSpeed() - 10);
 		niveau++;
     	}
 	}
@@ -36,8 +36,6 @@ public class TourelleSilliteBang extends TourellesAvecDegats {
 	public void tirer() {
 
 		Virus v = VirusAPorteeDeTir();
-		double newVie = (v.getVie() - this.getAtq());
-		v.setVie(newVie);
 		Tir t1 = new TirAvecDegats(this.getX(), this.getY(), v, this.env,this.getAtq(), this.getPortee());
 		this.env.ajouterListeTirs(t1);
 		//VirusAPorteeDeTir().setVie(VirusAPorteeDeTir().getVie()-this.getAtq());
