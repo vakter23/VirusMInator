@@ -12,8 +12,6 @@ public class VirusVhealrus extends Virus {
 
 	@Override
 	protected void appliquerEffets() {
-		// return tout les virus a portee de tir pour les tourelles aoe
-				// (hydroclaque/mousseuse
 				ArrayList<Virus> virusesMultiples = new ArrayList<Virus>();
 				for (int i = 0; i < env.getViruses().size(); i++) {
 		// System.out.println(env.getViruses());

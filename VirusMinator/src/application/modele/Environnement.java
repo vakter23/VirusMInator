@@ -233,13 +233,6 @@ public class Environnement {
 		}
 	}
 
-	private void gameOver() {
-		if (this.getHopital().getVie() == 0) {
-			Controller.getGameLoop().stop();
-			System.out.println("D.É.F.A.I.T.E");
-			
-		}
-	}
 
 	
 

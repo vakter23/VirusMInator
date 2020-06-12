@@ -28,7 +28,7 @@ public class VirusViboomrus extends Virus {
 				}
 			}
 			System.out.println("atqSpeed avant " + this.env.getTourelle(idTourellesProche).getAtqSpeed());
-			this.env.getTourelle(idTourellesProche).setAtqSpeed(this.env.getTourelle(idTourellesProche).getAtqSpeed()*1.3);
+			this.env.getTourelle(idTourellesProche).setAtqSpeed(this.env.getTourelle(idTourellesProche).getAtqSpeed()*2);
 			System.out.println("L'attaque speed est sensée être réduite");
 			System.out.println(this.env.getTourelle(idTourellesProche).getAtqSpeed());
 		} catch (Exception e) {
