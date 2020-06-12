@@ -15,8 +15,8 @@ public class TourelleMousseuse extends Tourelles { // == TourelleAvastiVirus
 
 	public TourelleMousseuse(int x, int y,Environnement env) {
 		super(50, 1, "TourelleMousseuse", x, y,env);
-		
 		this.slow=2;
+		this.slow=1.2;
 	}
 	
 	public void setSlow(double slow) {

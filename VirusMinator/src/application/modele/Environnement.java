@@ -182,6 +182,8 @@ public class Environnement {
 		for (int i = 0; i < virusesSurTerrain.size(); i++) {
 			Virus v = virusesSurTerrain.get(i);
 			v.agit();
+//			v.agit(v);
+			v.seDeplacer();
 		}
 	}
 
@@ -284,8 +286,6 @@ public class Environnement {
 		return 0;
 
 	}
-
-
 
 	public ObservableList<Tir> getTirs() {
 		return this.listeTirs;
@@ -428,5 +428,92 @@ public class Environnement {
         }
         return false;
     }
+//	/**
+//	 * @return the magasin
+//	 */
+//	public Magasin getMagasin() {
+//		return magasin;
+//	}
+//
+//	/**
+//	 * @param magasin the magasin to set
+//	 */
+//	public void setMagasin(Magasin magasin) {
+//		this.magasin = magasin;
+//	}
+//
+//	/**
+//	 * @return the hopital
+//	 */
+//	public Hopital getHopital() {
+//		return hopital;
+//	}
+//
+//	/**
+//	 * @param hopital the hopital to set
+//	 */
+//	public void setHopital(Hopital hopital) {
+//		this.hopital = hopital;
+//	}
+//
+//	public static int[][] getTerrainInt() {
+//		int[][] terrainInt = new int[18][40];
+//		List<Integer> listeMap = Config.listeMap;
+//		int x = 0;
+//		/* Graph(36); */
+//		for (int i = 0; i < terrainInt.length; i++) {
+//
+//			for (int j = 0; j < terrainInt[i].length; j++) {
+//
+//				if (listeMap.get(x) == Config.Herbe) {
+//					terrainInt[i][j] = 1;
+//
+//				}
+//
+//				else if (listeMap.get(x) == Config.Sable) {
+//					terrainInt[i][j] = 1;
+//
+//				}
+//
+//				else if (listeMap.get(x) == Config.SpawnViolet) {
+//					terrainInt[i][j] = 1;
+//
+//				}
+//
+//				else if (listeMap.get(x) == Config.Vert) {
+//					terrainInt[i][j] = 1;
+//
+//				}
+//
+//				else if (listeMap.get(x) == Config.sableChemin) {
+//					terrainInt[i][j] = 0;
+//
+//				}
+//
+//				else if (listeMap.get(x) == Config.SPAWNTOURELLES) {
+//					terrainInt[i][j] = 1;
+//				}
+//
+//				else if (listeMap.get(x) == Config.Hosto) {
+//					terrainInt[i][j] = 1;
+//
+//				} else if (listeMap.get(x) == Config.RougeHospital) {
+//					terrainInt[i][j] = 1;
+//
+//				}
+//
+//				x++;
+//			}
+//		}
+//
+//		return terrainInt;
+//	}
+//
+//	public static boolean estUnChemin(int i, int j) {
+//		if (terrain[i][j] == "0") {
+//			return true;
+//		}
+//		return false;
+//	}
 
 }

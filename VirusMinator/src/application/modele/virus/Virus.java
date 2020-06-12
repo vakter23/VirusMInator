@@ -6,6 +6,7 @@ import java.util.List;
 import application.modele.Environnement;
 import application.modele.Graph;
 import application.modele.Hopital;
+import application.modele.Sommet;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -21,15 +22,16 @@ public abstract class Virus {
 	private static int tpsSuivant = 200;
 	protected Environnement env;
 	public static int compteurDeplacement = 0;
+
 	/*
 	 * 1 = basirus 2 = divirus 3 = healrus 4 = boomirus 5 = viterus
 	 */
-	public static List<Integer> listeVirusAttente = Arrays.asList(1,2,3,4,5,1);/* liste des viruses a ajouter */
+	public static List<Integer> listeVirusAttente = Arrays.asList(1, 2, 3, 4, 5, 1);/* liste des viruses a ajouter */
 	public static List<Integer> listeVirusAttente2 = Arrays.asList(2, 2, 3, 4, 5);
 
 	public Virus(int vie, int atq, double vitesse, String nom, int x, int y, int tpsSpawn,
 			Environnement env) { /* Constructeur Virus */
-		this.ID = "v" + compteurDeplacement;
+		this.ID = "v" + compteur;
 		this.vie = vie;
 		this.pvMax = vie;
 		this.atq = atq;
@@ -42,23 +44,27 @@ public abstract class Virus {
 		this.tpsPerso = tpsSuivant + tpsSpawn;
 		System.out.println("v" + compteurDeplacement);
 		tpsSuivant += 400;
-
+		System.out.println("v" + compteur);
+		tpsSuivant += 140;
+		// System.out.println(this.toString());
 	}
-public Virus (int vie, int x, int y) {
-	this.ID = "v" + compteurDeplacement;
-	this.vie = vie;
-	this.pvMax = vie;
-	this.atq = 10;
-	this.setVitesse(vitesse);
-	this.nom = "Virus";
-	this.setX(x);
-	this.setY(y);
-	compteurDeplacement++;
-	this.env = env;
-	this.tpsPerso = tpsSuivant;
-	System.out.println("v" + compteurDeplacement);
-	tpsSuivant += 400;
-}
+
+	public Virus(int vie, int x, int y) {
+		this.ID = "v" + compteurDeplacement;
+		this.vie = vie;
+		this.pvMax = vie;
+		this.atq = 10;
+		this.setVitesse(vitesse);
+		this.nom = "Virus";
+		this.setX(x);
+		this.setY(y);
+		compteurDeplacement++;
+		this.env = env;
+		this.tpsPerso = tpsSuivant;
+		System.out.println("v" + compteurDeplacement);
+		tpsSuivant += 400;
+	}
+
 	@Override
 	public String toString() {
 		return "Virus [xProperty=" + xProperty + ", yProperty=" + yProperty + ", dx=" + dx + ", dy=" + dy + ", atq="
@@ -119,39 +125,177 @@ public Virus (int vie, int x, int y) {
 	}
 
 	public void agit() {
+	        if (compteur < 37) {
+	            try {
+	            if(Graph.getSommetDansLordre().get(compteur+1).getX() > Graph.getSommetDansLordre().get(compteur).getX()) {
+	                this.dy = 1;
+	                this.setY((this.getY()+ (int)vitesse)*dy);
+	                if (this.getY() == Graph.getSommetDansLordre().get(compteur+1).getX()*32) {
+	                    compteur++;
+	                }
+	            } if(Graph.getSommetDansLordre().get(compteur+1).getY() > Graph.getSommetDansLordre().get(compteur).getY()) {
+	                this.dx = 1;
+	                this.setX((this.getX()+ (int)vitesse*dx));
+	                if (this.getX() == Graph.getSommetDansLordre().get(compteur+1).getY()*32) {
+	                    compteur++;
+	                }
+	            }
+	            if(Graph.getSommetDansLordre().get(compteur+1).getX() < Graph.getSommetDansLordre().get(compteur).getX()) {
+	                this.dy = -1;
+	                this.setY((this.getY()+ (int)vitesse*dy));
+	                if (this.getY() == Graph.getSommetDansLordre().get(compteur+1).getX()*32) {
+	                    compteur++;
+	                }
+	            }
+	            this.appliquerEffets();
+	        } catch (Exception e) {
+	            if ( compteur == 37) {
+	                infligerDegats(this.atq);
+	                System.out.println("Le virus à infligé ses dégats ! ");
+	                this.meurt();
+	                this.appliquerEffets();
+	            }
+	        }
+	        }
+	        
+	    }
+	
+
+	public void seDeplacer() {
 		if (compteur < 37) {
-			try {
-			if(Graph.getSommetDansLordre().get(compteur+1).getX() > Graph.getSommetDansLordre().get(compteur).getX()) {
-				this.dy = 1;
-				this.setY((this.getY()+ (int)vitesse)*dy);
-				if (this.getY() == Graph.getSommetDansLordre().get(compteur+1).getX()*32) {
-					compteur++;
-				}
-			} if(Graph.getSommetDansLordre().get(compteur+1).getY() > Graph.getSommetDansLordre().get(compteur).getY()) {
-				this.dx = 1;
-				this.setX((this.getX()+ (int)vitesse*dx));
-				if (this.getX() == Graph.getSommetDansLordre().get(compteur+1).getY()*32) {
-					compteur++;
-				}
+			this.setY(Graph.getSommetDansLordre().get(compteur).getX() * 32);
+			this.setX(Graph.getSommetDansLordre().get(compteur).getY() * 32);
+			System.out.println(this.toString());
+			compteur++;
+		}
+
+	}
+
+	/* Changer les 1, 2, et 0 en vitesse des virus */
+	public void agit(Virus v) {
+		if (v instanceof VirusViterus) {
+			if (this.getXproperty().getValue() < 520 && this.getYproperty().getValue() < 289) {
+				int nposX = this.getX() + (int) (v.getVitesse());
+				int nposY = this.getY() + (0);
+				this.setX(nposX);
+				this.setY(nposY);
+			} else if (this.getXproperty().getValue() >= 520 && this.getXproperty().getValue() < 808
+					&& this.getYproperty().getValue() < 449) {
+				int nposX = this.getX() + (0);
+				int nposY = this.getY() + ((int) (v.getVitesse()));
+				this.setX(nposX);
+				this.setY(nposY);
+			} else if (this.getXproperty().getValue() >= 809 && this.getYproperty().getValue() <= 450
+					&& this.getYproperty().getValue() > 288 && this.getXproperty().getValue() <= 1234) {
+				int nposX = this.getX() + (0);
+				int nposY = this.getY() + ((int) (-v.getVitesse()));
+				this.setX(nposX);
+				this.setY(nposY);
+			} else if (this.getXproperty().getValue() == 1235 && this.getYproperty().getValue() == 288) {
+				int nposX = this.getX() + (0);
+				int nposY = this.getY() + (0);
+				this.setX(nposX);
+				this.setY(nposY);
+			} else {
+				int nposX = this.getX() + ((int) (v.getVitesse()));
+				int nposY = this.getY() + (0);
+				this.setX(nposX);
+				this.setY(nposY);
 			}
-			if(Graph.getSommetDansLordre().get(compteur+1).getX() < Graph.getSommetDansLordre().get(compteur).getX()) {
-				this.dy = -1;
-				this.setY((this.getY()+ (int)vitesse*dy));
-				if (this.getY() == Graph.getSommetDansLordre().get(compteur+1).getX()*32) {
-					compteur++;
-				}
+			if (this.getYproperty().getValue() == 288 && this.getXproperty().getValue() == 1235) {
+				this.setX(1235);
+				this.setY(288);
+
 			}
-			this.appliquerEffets();
-		} catch (Exception e) {
-			if ( compteur == 37) {
-				infligerDegats(this.atq);
-				System.out.println("Le virus à infligé ses dégats ! ");
-				this.meurt();
-				this.appliquerEffets();
+
+			if (this.getYproperty().getValue() >= 288 && this.getXproperty().getValue() >= 1104) {
+				v.meurt();
+				v.infligerDegats(v.getAtq());
+
+			}
+			System.out.println(this.getId() + "x : " + this.getX());
+			System.out.println(this.getId() + "y : " + this.getY() + "\n");
+		} else if (v instanceof VirusViboomrus) {
+			if (this.getXproperty().getValue() < 520 && this.getYproperty().getValue() < 289) {
+				int nposX = this.getX() + ((int) (v.getVitesse()));
+				int nposY = this.getY() + (0);
+				this.setX(nposX);
+				this.setY(nposY);
+			} else if (this.getXproperty().getValue() >= 520 && this.getXproperty().getValue() < 808
+					&& this.getYproperty().getValue() < 449) {
+				int nposX = this.getX() + (0);
+				int nposY = this.getY() + ((int) (v.getVitesse()));
+				this.setX(nposX);
+				this.setY(nposY);
+			} else if (this.getXproperty().getValue() >= 809 && this.getYproperty().getValue() <= 450
+					&& this.getYproperty().getValue() > 288 && this.getXproperty().getValue() <= 1234) {
+				int nposX = this.getX() + (0);
+				int nposY = this.getY() + ((int) (-v.getVitesse()));
+				this.setX(nposX);
+				this.setY(nposY);
+			} else if (this.getXproperty().getValue() == 1235 && this.getYproperty().getValue() == 288) {
+				int nposX = this.getX() + (0);
+				int nposY = this.getY() + (0);
+				this.setX(nposX);
+				this.setY(nposY);
+			} else {
+				int nposX = this.getX() + ((int) (v.getVitesse()));
+				int nposY = this.getY() + (0);
+				this.setX(nposX);
+				this.setY(nposY);
+			}
+			if (this.getYproperty().getValue() == 288 && this.getXproperty().getValue() == 1235) {
+				this.setX(1235);
+				this.setY(288);
+
+			}
+
+			if (this.getYproperty().getValue() >= 288 && this.getXproperty().getValue() >= 1104) {
+				v.meurt();
+				v.infligerDegats(v.getAtq());
+
+			}
+			System.out.println(this.getId() + "x : " + this.getX());
+			System.out.println(this.getId() + "y : " + this.getY() + "\n");
+		} else {
+			if (this.getXproperty().getValue() < 520 && this.getYproperty().getValue() < 289) {
+				int nposX = this.getX() + ((int) (v.getVitesse()));
+				int nposY = this.getY() + (0);
+				this.setX(nposX);
+				this.setY(nposY);
+			} else if (this.getXproperty().getValue() >= 520 && this.getXproperty().getValue() < 838
+					&& this.getYproperty().getValue() < 449) {
+				int nposX = this.getX() + (0);
+				int nposY = this.getY() + ((int) (v.getVitesse()));
+				this.setX(nposX);
+				this.setY(nposY);
+			} else if (this.getXproperty().getValue() >= 838 && this.getYproperty().getValue() <= 450
+					&& this.getYproperty().getValue() > 288 && this.getXproperty().getValue() <= 1234) {
+				int nposX = this.getX() + (0);
+				int nposY = this.getY() + ((int) (-v.getVitesse()));
+				this.setX(nposX);
+				this.setY(nposY);
+			} else if (this.getXproperty().getValue() == 1235
+					&& (this.getYproperty().getValue() == 288 || this.getYproperty().getValue() < 290)) {
+				int nposX = this.getX() + (0);
+				int nposY = this.getY() + (0);
+				this.setX(nposX);
+				this.setY(nposY);
+			} else {
+				int nposX = this.getX() + ((int) (v.getVitesse()));
+				int nposY = this.getY() + (0);
+				this.setX(nposX);
+				this.setY(nposY);
+			}
+			if (this.getYproperty().getValue() >= 288 && this.getXproperty().getValue() >= 1104) {
+				v.meurt();
+				v.infligerDegats(v.getAtq());
+
 			}
 		}
-		}
-		
+		System.out.println(this.getId() + "x : " + this.getX());
+		System.out.println(this.getId() + "y : " + this.getY() + "\n");
+		v.appliquerEffets();
 	}
 
 	/* Changer les 1, 2, et 0 en vitesse des virus */
@@ -263,12 +407,16 @@ public Virus (int vie, int x, int y) {
 	public double getVitesse() {
 		return vitesse;
 	}
-//	public void slowVirus(double slow) {
-//		
-//		this.setVitesse(this.vitesse/slow);
-//		
-//	}
 
+	public void slowVirus(double slow) {
+
+		this.setVitesse(this.vitesse / slow);
+
+	}
+
+	/**
+	 * @param vitesse the vitesse to set
+	 */
 	public void setVitesse(double vitesse) {
 		if (vitesse < 1) {
 			this.vitesse = 1.0;

@@ -8,6 +8,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
@@ -108,6 +110,16 @@ public class Controller implements Initializable {
 	private ImageView gelHydro;
 
 	private Magasin m1;
+    @FXML
+    private ImageView coronaCoin;
+    @FXML
+    private ProgressBar healthBar;
+
+    @FXML
+    private Label vie;
+
+    @FXML
+    private Label finDeJeu;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -115,7 +127,10 @@ public class Controller implements Initializable {
 		this.e1 = new Environnement(1600, 800, new Magasin());
 		this.panneauEnnemis.setMaxWidth(1632);
 		this.panneauEnnemis.setMaxHeight(832);
-
+		this.e1.getHopital().getVie();
+		this.vie.textProperty().bind(this.e1.getHopital().getVieProperty().asString());
+		this.healthBar.progressProperty().bind(this.e1.getHopital().getVieProperty().divide(100));
+		System.out.println("Le progress bar de base" + this.healthBar.getProgress());
 		creerTerrainVue();
 		this.m1 = this.e1.getMagasin();
 		System.out.println(this.e1.getViruses().size());
@@ -123,14 +138,20 @@ public class Controller implements Initializable {
 		g.addEdge();
 		g.BFS(Graph.getSommet().get(21));
 		ajouter();
+        g.addEdge();
+        g.BFS(Graph.getSommet().get(20));
+		ajouter();// cahnger le nom
 		System.out.println("Viruses initialisés");
 		initAnimation();
 		this.labelArgent.textProperty().bind(this.m1.getArgentProperty().asString());
+		this.labelArgent.textProperty().bind(this.e1.getMagasin().getArgentProperty().asString());
 		this.e1.getViruses().addListener(new MonObservateurViruses(panneauEnnemis));
 		this.e1.getTirs().addListener(new MonObservateurTirs(panneauEnnemis));
 		this.e1.getTourelles().addListener(new ecouteurTourelle(panneauEnnemis));
 		System.out.println("Liste dans le désordre : " + g.getSommet().toString());
 		System.out.println("Liste dans l'ordre  : " + g.getSommetDansLordre().toString());
+		System.out.println(g.getSommet().toString());
+		System.out.println(g.getSommetDansLordre().toString());
 	}
 
 	private void initAnimation() {
@@ -139,7 +160,7 @@ public class Controller implements Initializable {
 		getGameLoop().setCycleCount(Timeline.INDEFINITE);
 		KeyFrame kf = new KeyFrame(
 				// on définit le FPS (nbre de frame par seconde)
-				Duration.seconds(0.0005),
+				Duration.seconds(0.0225),
 
 				// on définit ce qui se passe à chaque frame
 				// c'est un eventHandler d'ou le lambda
@@ -147,6 +168,14 @@ public class Controller implements Initializable {
 					if (temps == 200000) {
 						System.out.println("fini");
 						getGameLoop().stop();
+					}
+
+				else if (temps % 20 == 0) {
+						System.out.println("tour" + temps);
+						unTour();
+					}
+					if (temps % 5 == 0 && temps < 8000) {
+						this.e1.unTourTir();
 					}
 
 				else if (temps % 50 == 0) {
@@ -158,6 +187,7 @@ public class Controller implements Initializable {
 
 					if (temps % 800 == 0) {
 						this.m1.incrementerArgent();
+						this.e1.getMagasin().incrementerArgent();
 					}
 					if (this.e1.getViruses().isEmpty() && temps > 400) {
 						gameLoop.stop();
@@ -177,6 +207,10 @@ public class Controller implements Initializable {
 //		
 	}
 
+	void unTour() {
+		this.e1.unTour();
+
+	}
 	public void creerTerrainVue() {
 		System.out.println(Config.listeMap.size());
 		savonneuse.setImage((Image) (getImgg("/src/ressources/magasin/gelHydro.png")));
@@ -184,6 +218,12 @@ public class Controller implements Initializable {
 		gelHydroClaque.setImage((Image) (getImgg("/src/ressources/magasin/gel-hydoralcoolique.png")));
 		siliteBang.setImage((Image) (getImgg("/src/ressources/magasin/javel.png")));
 		drPingoLimbo.setImage((Image) (getImgg("/src/ressources/magasin/drPingoLimbo.png")));
+		savonneuse.setImage((Image) (getImgg("/src/ressources/magasin/shopSavonneuse.png")));
+		avastirus.setImage((Image) (getImgg("/src/ressources/magasin/shopAvastirus.png")));
+		gelHydroClaque.setImage((Image) (getImgg("/src/ressources/magasin/shopHydroClaque.png")));
+		siliteBang.setImage((Image) (getImgg("/src/ressources/magasin/shopSiliteBang.png")));
+		drPingoLimbo.setImage((Image) (getImgg("/src/ressources/magasin/shopDrPingoLimbo.png")));
+		coronaCoin.setImage((Image) (getImgg("/src/ressources/magasin/coronacoin.jpg")));
 
 		for (int i = 0; i < Config.listeMap.size(); i++) {
 			ImageView blancHopital = Config.getImg("/src/ressources/tiles/blancHopital");
@@ -245,46 +285,46 @@ public class Controller implements Initializable {
 	}
 
 	void clicTourelle(MouseEvent event) {
-//		ImageView sourc = (ImageView) event.getSource();
-//		Image spawnTourellesR = getImgg("/src/ressources/tiles/spawnTourelleRouge.png");
-//		sourc.setImage(spawnTourellesR);
 		event.getTarget();
 		Node tuile = (Node) event.getSource();
 		System.out.println("x=" + tuile.getLayoutX() + "y = " + tuile.getLayoutY());
-//		System.out.println("clic tourelle" + event.getSceneX()() + event.getSceneY() + event.getSource().);
 		if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) == true) {
 			savonneuse.setOnMouseClicked((e) -> {
-				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) && this.m1.getArgent() > 7) {
+				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) && this.e1.getMagasin().getArgent() > 7) {
 					Tourelles t1 = new TourelleSavonneuse((int) tuile.getLayoutX(), (int) tuile.getLayoutY(), e1);
-					this.m1.enleverArgent(7);
+					this.e1.getMagasin().enleverArgent(Magasin.prixSavonneuse);
 					System.out.println(t1);
 					this.e1.ajouterTourelles(t1);
 				}
 			});
 			avastirus.setOnMouseClicked((e) -> {
-				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) == true && this.m1.getArgent() > 5) {
-					this.m1.enleverArgent(5);
+				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) == true
+						&& this.e1.getMagasin().getArgent() > 5) {
+					this.e1.getMagasin().enleverArgent(Magasin.avastirus);
 					this.e1.ajouterTourelles(
 							new TourelleMousseuse((int) tuile.getLayoutX(), (int) tuile.getLayoutY(), e1));
 				}
 			});
 			gelHydroClaque.setOnMouseClicked((e) -> {
-				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) == true && this.m1.getArgent() > 9) {
-					this.m1.enleverArgent(9);
+				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) == true
+						&& this.e1.getMagasin().getArgent() > 9) {
+					this.e1.getMagasin().enleverArgent(Magasin.gelHydroClaque);
 					this.e1.ajouterTourelles(
 							new TourelleHydroClaque((int) tuile.getLayoutX(), (int) tuile.getLayoutY(), e1));
 				}
 			});
 			siliteBang.setOnMouseClicked((e) -> {
-				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) == true && this.m1.getArgent() > 12) {
-					this.m1.enleverArgent(12);
+				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) == true
+						&& this.e1.getMagasin().getArgent() > 12) {
+					this.e1.getMagasin().enleverArgent(Magasin.siliteBang);
 					this.e1.ajouterTourelles(
 							new TourelleSilliteBang((int) tuile.getLayoutX(), (int) tuile.getLayoutY(), e1));
 				}
 			});
 			drPingoLimbo.setOnMouseClicked((e) -> {
-				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) == true && this.m1.getArgent() > 12) {
-					this.m1.enleverArgent(12);
+				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) == true
+						&& this.e1.getMagasin().getArgent() > 12) {
+					this.e1.getMagasin().enleverArgent(Magasin.drPingoLimbo);
 					this.e1.ajouterTourelles(
 							new TourelleDocteurPingoLimbo((int) tuile.getLayoutX(), (int) tuile.getLayoutY(), e1));
 				}
@@ -295,8 +335,15 @@ public class Controller implements Initializable {
 
 			bouttonVendre.setOnMouseClicked((e) -> {
 				System.out.println("taille avant vente : " + this.e1.getTourelles().size());
+				System.out.println("vie avant le set =" + this.e1.getHopital().getVie());
+				this.e1.getHopital().setVie(this.e1.getHopital().getVie()-93.0);
+				System.out.println("vie apres le set =" + this.e1.getHopital().getVie());
+				System.out.println("Le progress bar apres" + this.healthBar.getProgress());
+
+				
 				for (int i = 0; i < this.e1.getTourelles().size(); i++) {
 					this.m1.ajouterArgent(-4);
+					this.e1.getMagasin().enleverArgent(-4);
 					if (this.e1.getTourelles().get(i).getX() == tuile.getLayoutX()
 							&& this.e1.getTourelles().get(i).getY() == tuile.getLayoutY()) {
 						try {
@@ -308,7 +355,6 @@ public class Controller implements Initializable {
 							System.out.println("La tourelle à été vendue, la liste des tourelles est maintenant vide");
 
 						}
-
 					}
 				}
 			});
@@ -353,6 +399,13 @@ public class Controller implements Initializable {
 			}
 		}
 
+		System.out.println(this.e1.getViruses().size());
+		// for (Virus v : this.e1.getViruses()) {
+		// this.e1.getViruses().clear();
+		// }
+//		for (int j = 0; j < this.e1.getTourelles().size(); j++) {
+//			this.e1.getTourelles().remove(j);
+//		}
 		for (int i = 0; i < this.e1.getViruses().size(); i++) {
 			System.out.println(this.e1.getViruses().get(i).getId());
 		}

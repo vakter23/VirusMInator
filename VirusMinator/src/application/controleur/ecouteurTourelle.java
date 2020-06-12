@@ -77,7 +77,7 @@ public class ecouteurTourelle implements ListChangeListener<Tourelles> {
 
 			}
 			else if (t instanceof TourelleDocteurPingoLimbo){
-				ImageView tourelle = getImgg("/src/ressources/tourelles/drPingoLimbo.png");
+				ImageView tourelle = getImgg("/src/ressources/tourelles/DrPingoLimbo.gif");
 				tourelle.setId(t.getId());
 				tourelle.setLayoutX(t.getX());
 				tourelle.setLayoutY(t.getY());

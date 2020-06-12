@@ -10,7 +10,6 @@ public class TourelleDocteurPingoLimbo extends Tourelles {
 
 	public TourelleDocteurPingoLimbo(int x, int y, Environnement env) {
 		super(100, 1, "TourelleDocteurPingoLimbo", x, y, env);
-
 		this.boostAtqSpeed = 1.2;
 	}
 

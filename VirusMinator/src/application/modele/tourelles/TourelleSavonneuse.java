@@ -11,7 +11,6 @@ public class TourelleSavonneuse extends TourellesAvecDegats {
 
 	public TourelleSavonneuse(int x, int y, Environnement env) {
 		super(75, 50, "TourelleSavonneuse", x, y, env);
-
 		this.setAtq(25);
 
 	}

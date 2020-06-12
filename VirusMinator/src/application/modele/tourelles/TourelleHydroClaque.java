@@ -16,7 +16,6 @@ public class TourelleHydroClaque extends TourellesAvecDegats {
 		super(50, 1, "TourelleHydroClaque", x, y, env);
 		this.setAtq(10);
 	}
-
 	public void amelioration() {
 
 		this.setAtq(this.getAtq() * 1.2);
