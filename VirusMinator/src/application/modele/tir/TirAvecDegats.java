@@ -49,25 +49,14 @@ public class TirAvecDegats extends Tir {
 			System.out.println("Ce tir meurt : " + this);
 			v.getVie();
 		}
+		if (!this.v.estVivant()) {
+			this.meurt();
+		}
 
-	}
-
-	public void verifPortee() {
-		/*
-		 * gérer les cas X>;Y<, check X>;Y>, check X<;Y>, check X<;Y<, check X>;Y<
-		 */
-		if (v.getX() < this.getBaseX() - getPortee()) {
-			if (v.getY() < this.getBaseY() - getPortee()) {
-				this.meurt();
-			} else if (v.getY() > this.getBaseY() + getPortee()) {
-				this.meurt();
-			}
-		} else if (v.getX() > this.getBaseX() + getPortee()) {
-			if (v.getY() < this.getBaseY() - getPortee()) {
-				this.meurt();
-			} else if (v.getY() > this.getBaseY() + getPortee()) {
-				this.meurt();
-			}
+		if (!this.v.estVivant()
+				|| (v.getX() > this.getBaseX() + this.getPortee() 
+				||  v.getY() > this.getBaseY() + this.getPortee())) {
+			this.meurt();
 		}
 
 	}

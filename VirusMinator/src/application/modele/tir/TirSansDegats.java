@@ -32,13 +32,19 @@ private Virus v;
 			System.out.println("Ce tir meurt : " + this);
 			this.meurt();
 			this.appliquerSlow(v);
-			System.out.println(v.getVie());
+			System.out.println(v.getVitesse());
 
 		}
+	
+	if (!this.v.estVivant() ||( v.getX()> this.getBaseX()+this.getPortee() 
+	|| v.getY()>this.getBaseY()+this.getPortee())) {
+		this.meurt();
+	}
+		
 	}
 
 	private void appliquerSlow(Virus virusVise) {
-		virusVise.setVitesse(getVitesse() / 2);
+		virusVise.setVitesse(virusVise.getVitesse()/2);
 
 	}
 }

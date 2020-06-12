@@ -31,6 +31,12 @@ public class Environnement {
 	private Magasin magasin;
 	private Hopital hopital;
 
+	public Environnement(int width, int height) {/*Le constructeur pour les Tests JUnit*/
+		super();
+		this.width = width;
+		this.height = height;
+		initTerrain();
+	}
 	public Environnement(int width, int height, Magasin magasin) {
 		super();
 		this.width = width;

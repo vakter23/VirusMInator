@@ -41,10 +41,24 @@ public abstract class Virus {
 		this.env = env;
 		this.tpsPerso = tpsSuivant + tpsSpawn;
 		System.out.println("v" + compteurDeplacement);
-		tpsSuivant += 100;
+		tpsSuivant += 400;
 
 	}
-
+public Virus (int vie, int x, int y) {
+	this.ID = "v" + compteurDeplacement;
+	this.vie = vie;
+	this.pvMax = vie;
+	this.atq = 10;
+	this.setVitesse(vitesse);
+	this.nom = "Virus";
+	this.setX(x);
+	this.setY(y);
+	compteurDeplacement++;
+	this.env = env;
+	this.tpsPerso = tpsSuivant;
+	System.out.println("v" + compteurDeplacement);
+	tpsSuivant += 400;
+}
 	@Override
 	public String toString() {
 		return "Virus [xProperty=" + xProperty + ", yProperty=" + yProperty + ", dx=" + dx + ", dy=" + dy + ", atq="

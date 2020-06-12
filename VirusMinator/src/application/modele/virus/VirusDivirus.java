@@ -18,9 +18,7 @@ public class VirusDivirus extends Virus {
 				System.out.println("Le virus : " + this.getId() + "s'est divisé en deux Virus !");
 				this.env.virusesSurTerrain.add(div1);
 				this.env.virusesSurTerrain.add(div2);
-			}
-			
-		
+			}		
 	}
 	}
 }
