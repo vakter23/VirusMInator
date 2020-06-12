@@ -139,7 +139,7 @@ public class Controller implements Initializable {
 		getGameLoop().setCycleCount(Timeline.INDEFINITE);
 		KeyFrame kf = new KeyFrame(
 				// on définit le FPS (nbre de frame par seconde)
-				Duration.seconds(0.0025),
+				Duration.seconds(0.005),
 
 				// on définit ce qui se passe à chaque frame
 				// c'est un eventHandler d'ou le lambda
@@ -149,7 +149,7 @@ public class Controller implements Initializable {
 						getGameLoop().stop();
 					}
 
-				else if (temps % 10 == 0) {
+				else if (temps % 50 == 0) {
 						//System.out.println("tour" + temps);
 						this.e1.unTour();
 					}

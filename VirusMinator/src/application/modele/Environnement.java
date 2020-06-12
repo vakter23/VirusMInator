@@ -75,7 +75,7 @@ public class Environnement {
 		for (int i = 0; i < Virus.listeVirusAttente.size(); i++) {
 			switch (Virus.listeVirusAttente.get(i)) {
 			case 1:
-				Virus vb = new VirusBasirus(70, 10, 2.0, "VirusBasirus", 0, 288, 200, this);
+				Virus vb = new VirusBasirus(70, 10, 2.0, "VirusBasirus", 0, 288, 10, this);
 				this.virusesSuivants.add(vb);
 				break;
 			case 2:
