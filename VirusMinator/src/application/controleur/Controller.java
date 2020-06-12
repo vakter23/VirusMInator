@@ -270,7 +270,7 @@ public class Controller implements Initializable {
 		System.out.println("x=" + tuile.getLayoutX() + "y = " + tuile.getLayoutY());
 		if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) == true) {
 			savonneuse.setOnMouseClicked((e) -> {
-				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) && this.e1.getMagasin().getArgent() > 7) {
+				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) && this.e1.getMagasin().getArgent() >= 7) {
 					Tourelles t1 = new TourelleSavonneuse((int) tuile.getLayoutX(), (int) tuile.getLayoutY(), e1);
 					this.e1.getMagasin().enleverArgent(Magasin.prixSavonneuse);
 					System.out.println(t1);
@@ -279,7 +279,7 @@ public class Controller implements Initializable {
 			});
 			avastirus.setOnMouseClicked((e) -> {
 				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) == true
-						&& this.e1.getMagasin().getArgent() > 5) {
+						&& this.e1.getMagasin().getArgent() >= 5) {
 					this.e1.getMagasin().enleverArgent(Magasin.avastirus);
 					this.e1.ajouterTourelles(
 							new TourelleMousseuse((int) tuile.getLayoutX(), (int) tuile.getLayoutY(), e1));

@@ -69,7 +69,7 @@ public class MonObservateurViruses implements ListChangeListener<Virus> {
 			panneauEnnemis.getChildren().add(VirusActuel);
 
 		}
-System.out.println("Le virus a un sprite");
+		System.out.println("Le virus a un sprite");
 	}
 	private void enleverSprite(Virus mort) {
 		this.panneauEnnemis.getChildren().remove(this.panneauEnnemis.lookup("#"+mort.getId()));
