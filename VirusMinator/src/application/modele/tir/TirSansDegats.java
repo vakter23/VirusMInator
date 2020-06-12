@@ -33,7 +33,8 @@ private Virus v;
         System.out.println("Le tir est hors de portée");
         this.enleverSlow(v);
     }
-        
+    if (!this.estVivant())
+        this.meurt();
     }
     private void enleverSlow(Virus virusVise) { //QUand le virus sort de la portee de la tourelleAvastivirus le virus recupere sa vitesse initiale
         virusVise.setVitesse(virusVise.getVitesse()*2);

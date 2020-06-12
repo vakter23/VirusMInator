@@ -326,7 +326,7 @@ public class Controller implements Initializable {
 		} else {
 			
 			bouttonAmeliorer.setOnMouseClicked((e) -> {
-
+				if (this.e1.getMagasin().getArgent()>10) {
 				for (int i = 0; i < this.e1.getTourelles().size(); i++) {
 					/*L'amélioration d'une tourelle coute 10 pieces*/
 					this.e1.getMagasin().enleverArgent(10);
@@ -335,6 +335,7 @@ public class Controller implements Initializable {
 						/*On fait le changement dans la liste*/
 						this.e1.getTourelles().get(i).amelioration();
 					}
+				}
 				}
 			});
 			

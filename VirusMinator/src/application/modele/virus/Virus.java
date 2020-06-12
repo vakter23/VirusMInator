@@ -179,7 +179,7 @@ public abstract class Virus {
 	}
 
 	/**
-	 * @return the vitesse
+	 * @return retourne l'argent
 	 */
 	public int getVitesse() {
 		return vitesse;
@@ -192,7 +192,7 @@ public abstract class Virus {
 	}
 
 	/**
-	 * @param vitesse the vitesse to set
+	 * @param Prend en paramètre un int et change la vitesse 
 	 */
 	public void setVitesse(int vitesse) {
 		if (vitesse < 1) {
