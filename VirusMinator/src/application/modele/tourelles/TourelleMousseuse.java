@@ -33,7 +33,6 @@ public class TourelleMousseuse extends Tourelles { // == TourelleAvastiVirus
 		
 		this.setSlow(slow+2);
 		this.setPortee(this.getPortee()+5);
-		this.setAtqSpeed(this.getAtqSpeed()+1);		
 		
 		niveau++;
 		

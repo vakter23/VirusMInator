@@ -15,7 +15,7 @@ public class TourelleDocteurPingoLimbo extends Tourelles {
 
 	
 	public TourelleDocteurPingoLimbo(int portee, double atqSpeed, String nom, int x, int y, Environnement env) {
-		super(portee, atqSpeed, nom, x, y, env);
+		super(2000, 20, nom, x, y, env);
 
 		this.boostAtqSpeed = 1.2;
 	}
@@ -31,7 +31,6 @@ public class TourelleDocteurPingoLimbo extends Tourelles {
 		
 		this.setBoostatqSpeed(boostAtqSpeed + 2);
 		this.setPortee(this.getPortee() + 5);
-		this.setAtqSpeed(this.getAtqSpeed() + 1);
 		
 		niveau++;
 		}
