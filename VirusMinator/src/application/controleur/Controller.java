@@ -1,5 +1,6 @@
 package application.controleur;
 
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -110,48 +111,39 @@ public class Controller implements Initializable {
 	private ImageView gelHydro;
 
 	private Magasin m1;
-    @FXML
-    private ImageView coronaCoin;
-    @FXML
-    private ProgressBar healthBar;
+	@FXML
+	private ImageView coronaCoin;
+	@FXML
+	private ProgressBar healthBar;
 
+	@FXML
+	private Label vie;
+    
+	@FXML
+	private Label finDeJeu;
     @FXML
-    private Label vie;
-
-    @FXML
-    private Label finDeJeu;
-
+    private Button bouttonAmeliorer;
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
 		this.e1 = new Environnement(1600, 800, new Magasin());
 		this.panneauEnnemis.setMaxWidth(1632);
 		this.panneauEnnemis.setMaxHeight(832);
-		this.e1.getHopital().getVie();
-		this.vie.textProperty().bind(this.e1.getHopital().getVieProperty().asString());
 		this.healthBar.progressProperty().bind(this.e1.getHopital().getVieProperty().divide(100));
-		System.out.println("Le progress bar de base" + this.healthBar.getProgress());
+		this.finDeJeu.setText("ALLEZ VOUS ALLEZ GAGNEZ ");
 		creerTerrainVue();
-		this.m1 = this.e1.getMagasin();
-		System.out.println(this.e1.getViruses().size());
 		Graph g = new Graph();
 		g.addEdge();
 		g.BFS(Graph.getSommet().get(21));
 		ajouter();
-        g.addEdge();
-        g.BFS(Graph.getSommet().get(20));
-		ajouter();// cahnger le nom
 		System.out.println("Viruses initialisés");
 		initAnimation();
-		this.labelArgent.textProperty().bind(this.m1.getArgentProperty().asString());
 		this.labelArgent.textProperty().bind(this.e1.getMagasin().getArgentProperty().asString());
 		this.e1.getViruses().addListener(new MonObservateurViruses(panneauEnnemis));
 		this.e1.getTirs().addListener(new MonObservateurTirs(panneauEnnemis));
 		this.e1.getTourelles().addListener(new ecouteurTourelle(panneauEnnemis));
 		System.out.println("Liste dans le désordre : " + g.getSommet().toString());
 		System.out.println("Liste dans l'ordre  : " + g.getSommetDansLordre().toString());
-		System.out.println(g.getSommet().toString());
-		System.out.println(g.getSommetDansLordre().toString());
 	}
 
 	private void initAnimation() {
@@ -160,7 +152,7 @@ public class Controller implements Initializable {
 		getGameLoop().setCycleCount(Timeline.INDEFINITE);
 		KeyFrame kf = new KeyFrame(
 				// on définit le FPS (nbre de frame par seconde)
-				Duration.seconds(0.0225),
+				Duration.seconds(0.0005),
 
 				// on définit ce qui se passe à chaque frame
 				// c'est un eventHandler d'ou le lambda
@@ -170,47 +162,35 @@ public class Controller implements Initializable {
 						getGameLoop().stop();
 					}
 
-				else if (temps % 20 == 0) {
+				else if (temps % 50 == 0) {
 						System.out.println("tour" + temps);
 						unTour();
 					}
-					if (temps % 5 == 0 && temps < 8000) {
-						this.e1.unTourTir();
-					}
-
-				else if (temps % 50 == 0) {
-						// System.out.println("tour" + temps);
-						this.e1.unTour();
-					}
 
 					this.e1.unTourTir();
-
 					if (temps % 800 == 0) {
-						this.m1.incrementerArgent();
 						this.e1.getMagasin().incrementerArgent();
 					}
 					if (this.e1.getViruses().isEmpty() && temps > 400) {
 						gameLoop.stop();
 						System.out.println("V.I.C.T.O.I.R.E");
-						//this.afficherResultat("w");
+						this.afficherResultat("w");
 					}
 					if (this.e1.getHopital().getVie() == 0) {
 						Controller.getGameLoop().stop();
 						System.out.println("D.É.F.A.I.T.E");
-						//this.afficherResultat("l");
+						this.afficherResultat("l");
 					}
 
 					temps++;
 				}));
 		getGameLoop().getKeyFrames().add(kf);
-
-//		
 	}
 
 	void unTour() {
 		this.e1.unTour();
-
 	}
+
 	public void creerTerrainVue() {
 		System.out.println(Config.listeMap.size());
 		savonneuse.setImage((Image) (getImgg("/src/ressources/magasin/gelHydro.png")));
@@ -332,17 +312,27 @@ public class Controller implements Initializable {
 		} else {
 			System.out.println("taille avant boucle" + e1.getTourelles().size());
 			System.out.println("l id de la tuile " + tuile.getId());
+			bouttonAmeliorer.setOnMouseClicked((e) -> {
 
-			bouttonVendre.setOnMouseClicked((e) -> {
-				System.out.println("taille avant vente : " + this.e1.getTourelles().size());
-				System.out.println("vie avant le set =" + this.e1.getHopital().getVie());
-				this.e1.getHopital().setVie(this.e1.getHopital().getVie()-93.0);
-				System.out.println("vie apres le set =" + this.e1.getHopital().getVie());
-				System.out.println("Le progress bar apres" + this.healthBar.getProgress());
-
-				
 				for (int i = 0; i < this.e1.getTourelles().size(); i++) {
-					this.m1.ajouterArgent(-4);
+					this.e1.getMagasin().enleverArgent(10);;
+					if (this.e1.getTourelles().get(i).getX() == tuile.getLayoutX()
+							&& this.e1.getTourelles().get(i).getY() == tuile.getLayoutY()) {
+						System.out.println("avant amelio" + e1.getTourelles().get(i).getAtqSpeed());
+
+						this.e1.getTourelles().get(i).amelioration();
+						System.out.println("xx = " + e1.getTourelles().get(0).getX());
+						System.out.println("yy = " + e1.getTourelles().get(0).getY());
+						System.out.println("taille apres boucle " + e1.getTourelles().size());
+						
+						System.out.println("apres amelio" + e1.getTourelles().get(i).getAtqSpeed());
+
+					}
+				}
+			});
+			bouttonVendre.setOnMouseClicked((e) -> {
+
+				for (int i = 0; i < this.e1.getTourelles().size(); i++) {
 					this.e1.getMagasin().enleverArgent(-4);
 					if (this.e1.getTourelles().get(i).getX() == tuile.getLayoutX()
 							&& this.e1.getTourelles().get(i).getY() == tuile.getLayoutY()) {
@@ -377,9 +367,9 @@ public class Controller implements Initializable {
 
 	public void afficherResultat(String resultat) {
 		if (resultat == "w") {
-			this.labelArgent.setText("Victoire");
-		} else if (resultat == "l"){
-			this.labelArgent.setText("Défaite");
+			this.finDeJeu.setText("Victoire");
+		} else if (resultat == "l") {
+			this.finDeJeu.setText("Défaite");
 
 		}
 
@@ -387,31 +377,11 @@ public class Controller implements Initializable {
 
 	@FXML
 	void reinit(ActionEvent event) {
-		getGameLoop().stop();
-		if (this.e1.getViruses().size() != 0) {
-			for (Virus v : this.e1.getViruses()) {
-				this.e1.getViruses().remove(v);
-			}
+		if (getGameLoop().getStatus().equals(Animation.Status.PAUSED)) {
+			getGameLoop().play();
+		} else {
+			getGameLoop().pause();
 		}
-		if (this.e1.getTourelles().size() != 0) {
-			for (int j = 0; j < this.e1.getTourelles().size(); j++) {
-				this.e1.getTourelles().remove(j);
-			}
-		}
-
-		System.out.println(this.e1.getViruses().size());
-		// for (Virus v : this.e1.getViruses()) {
-		// this.e1.getViruses().clear();
-		// }
-//		for (int j = 0; j < this.e1.getTourelles().size(); j++) {
-//			this.e1.getTourelles().remove(j);
-//		}
-		for (int i = 0; i < this.e1.getViruses().size(); i++) {
-			System.out.println(this.e1.getViruses().get(i).getId());
-		}
-
-		this.temps = 0;
-		System.out.println(this.e1.getViruses().size());
 
 	}
 

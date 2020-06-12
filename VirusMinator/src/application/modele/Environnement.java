@@ -183,7 +183,7 @@ public class Environnement {
 			Virus v = virusesSurTerrain.get(i);
 			v.agit();
 //			v.agit(v);
-			v.seDeplacer();
+//			v.seDeplacer();
 		}
 	}
 

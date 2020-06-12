@@ -26,7 +26,7 @@ public abstract class Virus {
 	/*
 	 * 1 = basirus 2 = divirus 3 = healrus 4 = boomirus 5 = viterus
 	 */
-	public static List<Integer> listeVirusAttente = Arrays.asList(1, 2, 3, 4, 5, 1);/* liste des viruses a ajouter */
+	public static List<Integer> listeVirusAttente = Arrays.asList(1, 1,1,1,1,1,1,1,1,1);/* liste des viruses a ajouter */
 	public static List<Integer> listeVirusAttente2 = Arrays.asList(2, 2, 3, 4, 5);
 
 	public Virus(int vie, int atq, double vitesse, String nom, int x, int y, int tpsSpawn,
@@ -44,8 +44,6 @@ public abstract class Virus {
 		this.tpsPerso = tpsSuivant + tpsSpawn;
 		System.out.println("v" + compteurDeplacement);
 		tpsSuivant += 400;
-		System.out.println("v" + compteur);
-		tpsSuivant += 140;
 		// System.out.println(this.toString());
 	}
 

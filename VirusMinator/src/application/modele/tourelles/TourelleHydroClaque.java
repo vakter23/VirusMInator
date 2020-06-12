@@ -12,16 +12,19 @@ public class TourelleHydroClaque extends TourellesAvecDegats {
 	// cette tourelle dispose d’un petit champs de tir mais asperge les ennemis
 	// non-stop
 
-	public TourelleHydroClaque( int x, int y, Environnement env) {
+	public TourelleHydroClaque(int x, int y, Environnement env) {
 		super(50, 1, "TourelleHydroClaque", x, y, env);
 		this.setAtq(10);
 	}
+
 	public void amelioration() {
+		if (this.niveau < 3) {
 
-		this.setAtq(this.getAtq() * 1.2);
-		this.setPortee(this.getPortee() + 5);
-		this.setAtqSpeed(this.getAtqSpeed() + 1);
-
+			this.setAtq(this.getAtq() * 1.2);
+			this.setPortee(this.getPortee() + 5);
+			this.setAtqSpeed(this.getAtqSpeed() + 1);
+			niveau++;
+		}
 	}
 
 	@Override
@@ -37,6 +40,5 @@ public class TourelleHydroClaque extends TourellesAvecDegats {
 		// code pour tirer / apelle de la méthode tir
 
 	}
-
 
 }

@@ -33,22 +33,22 @@ class TourellesTest {
 		TourelleMousseuse t3 = new TourelleMousseuse(40, 40, env);
 		TourelleMousseuse t4 = new TourelleMousseuse(400, 400, env);
 	}
-	@Test
-	public void listeDe2Tourelles(){
-		t1.TourelleAPorteeDeTir();
-		ArrayList<Tourelles> listeT= new ArrayList<Tourelles>();
-		listeT.add(t2);
-		listeT.add(t3);
-		assertArrayEquals(t1.TourelleAPorteeDeTir(), listeT);
-	}
-	@Test
-	public void listeDe2Viruses(){
-		t1.TourelleAPorteeDeTir();
-		ArrayList<Tourelles> listeT= new ArrayList<Tourelles>();
-		listeT.add(t2);
-		listeT.add(t3);
-		assertArrayEquals(t1.TourelleAPorteeDeTir(), listeT);
-	}
+//	@Test
+//	public void listeDe2Tourelles(){
+//		t1.TourelleAPorteeDeTir();
+//		ArrayList<Tourelles> listeT= new ArrayList<Tourelles>();
+//		listeT.add(t2);
+//		listeT.add(t3);
+//		assertArrayEquals(t1.TourelleAPorteeDeTir(), listeT);
+//	}
+//	@Test
+//	public void listeDe2Viruses(){
+//		t1.TourelleAPorteeDeTir();
+//		ArrayList<Tourelles> listeT= new ArrayList<Tourelles>();
+//		listeT.add(t2);
+//		listeT.add(t3);
+//		assertArrayEquals(t1.TourelleAPorteeDeTir(), listeT);
+//	}
 //	void test() {
 //		fail("Not yet implemented");
 //		

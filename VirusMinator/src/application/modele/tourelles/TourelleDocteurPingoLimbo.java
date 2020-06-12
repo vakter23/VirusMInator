@@ -19,10 +19,12 @@ public class TourelleDocteurPingoLimbo extends Tourelles {
 
 	@Override
 	public void amelioration() {
-
+    	if(this.niveau < 3) {
 		this.setBoostatqSpeed(boostAtqSpeed + 2);
 		this.setPortee(this.getPortee() + 5);
 		this.setAtqSpeed(this.getAtqSpeed() + 1);
+		niveau++;
+    	}
 	}
 
 	@Override

@@ -17,11 +17,13 @@ public class TourelleSavonneuse extends TourellesAvecDegats {
 
 	@Override
 	public void amelioration() {
+    	if(this.niveau < 3) {
 
 		this.setAtq(this.getAtq() * 1.2);
 		this.setPortee(this.getPortee() + 5);
 		this.setAtqSpeed(this.getAtqSpeed() + 1);
-
+		niveau++;
+    	}
 	}
 
 	@Override

@@ -19,6 +19,7 @@ public abstract class Tourelles {
 	//private int temps;// Variable pour gerer temps entre le tir des tourelles (1 unité de temps = 1
 						// tour) <- variable crée dans environnement
 	private static int compteur = 1;
+	public int niveau;
 
 	public Tourelles(int portee, double atqSpeed, String nom, int x, int y, Environnement env) { /* Constructeur tourelles */
 		this.setPortee(portee);
@@ -28,6 +29,7 @@ public abstract class Tourelles {
 		this.setX(x);
 		this.setY(y);
 		this.env = env;
+		this.niveau = 1;
 		
 		compteur++;
 	}
@@ -145,9 +147,8 @@ public abstract class Tourelles {
 					
 				}
 			}
-		return virusesMultiples;
 		}
-		return null;
+		return virusesMultiples;
 
 	}
 
@@ -182,6 +183,20 @@ public abstract class Tourelles {
 
 		return false;
 
+	}
+
+	/**
+	 * @return the niveau
+	 */
+	public int getNiveau() {
+		return niveau;
+	}
+
+	/**
+	 * @param niveau the niveau to set
+	 */
+	public void setNiveau(int niveau) {
+		this.niveau = niveau;
 	}
 
 }
