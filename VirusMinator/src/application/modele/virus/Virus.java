@@ -5,8 +5,6 @@ import java.util.List;
 
 import application.modele.Environnement;
 import application.modele.Graph;
-import application.modele.Hopital;
-import application.modele.Sommet;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -26,7 +24,7 @@ public abstract class Virus {
 	/*
 	 * 1 = basirus 2 = divirus 3 = healrus 4 = boomirus 5 = viterus
 	 */
-	public static List<Integer> listeVirusAttente = Arrays.asList(3,4,1,1,1,1,1,1,1,1,1);/* liste des viruses a ajouter */
+	public static List<Integer> listeVirusAttente = Arrays.asList(3,4);/* liste des viruses a ajouter */
 	public static List<Integer> listeVirusAttente2 = Arrays.asList(2, 2, 3, 4, 5);
 
 	public Virus(int vie, int atq, double vitesse, String nom, int x, int y, int tpsSpawn,
@@ -47,21 +45,7 @@ public abstract class Virus {
 		// System.out.println(this.toString());
 	}
 
-	public Virus(int vie, int x, int y) {
-		this.ID = "v" + compteurDeplacement;
-		this.vie = vie;
-		this.pvMax = vie;
-		this.atq = 10;
-		this.setVitesse(vitesse);
-		this.nom = "Virus";
-		this.setX(x);
-		this.setY(y);
-		compteurDeplacement++;
-		this.env = env;
-		this.tpsPerso = tpsSuivant;
-		System.out.println("v" + compteurDeplacement);
-		tpsSuivant += 400;
-	}
+
 
 	@Override
 	public String toString() {
