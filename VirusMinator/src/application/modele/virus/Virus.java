@@ -111,9 +111,9 @@ public abstract class Virus {
 
 	public void agit() {
 		if (compteur == 37) {
+			this.meurt();
 			infligerDegats(this.atq);
 			System.out.println("Le virus à infligé ses dégats ! ");
-			this.meurt();
 			this.appliquerEffets();
 			/** on rappelle la méthode pour les viruses qui ont un effet à leurs morts */
 		}
@@ -156,14 +156,6 @@ public abstract class Virus {
 				 * on "attrape" le cas ou le compteur dépasse la taille maximale des sommets du
 				 * BFS, et on inflige les dégats équivalents à son attaque
 				 */
-				if (compteur == 37) {
-					this.meurt();
-					infligerDegats(this.atq);
-					System.out.println("Le virus à infligé ses dégats ! ");
-					
-					this.appliquerEffets();
-					/** on rappelle la méthode pour les viruses qui ont un effet à leurs morts */
-				}
 			}
 		}
 
