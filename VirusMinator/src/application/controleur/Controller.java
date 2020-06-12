@@ -43,7 +43,7 @@ public class Controller implements Initializable {
 	@FXML
 	private Button placerEnnemis;
 	@FXML
-	private Button restart;
+	private Button pause;
 	@FXML
 	private Button Start;
 	@FXML
@@ -113,6 +113,10 @@ public class Controller implements Initializable {
 	@FXML
 	private ProgressBar healthBar;
 
+    @FXML
+    private Button nvVague;
+    
+    private boolean finDeLaGameLoop = false;
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		this.e1 = new Environnement(1600, 800, new Magasin());
@@ -161,7 +165,7 @@ public class Controller implements Initializable {
 					/* Tous les tours le tir agit */
 					this.e1.unTourTir();
 
-					if (temps == 200000) {
+					if (finDeLaGameLoop) {
 						getGameLoop().stop();
 					}
 					/* Lorsque le temps est modulo 50 on fait un tour */
@@ -169,18 +173,20 @@ public class Controller implements Initializable {
 						unTour();
 					}
 					/* On gagne de l'argent tous les 800 tours */
-					if (temps % 800 == 0) {
+					if (temps % 2000 == 0) {
 						this.e1.getMagasin().incrementerArgent();
 					}
 					/* Conditions de Victoire, la gameloop s'arrete */
-					if (this.e1.getViruses().isEmpty() && temps > 400) {
+					if (this.e1.getViruses().isEmpty() && temps > 4000) {
 						gameLoop.stop();
 						this.afficherResultat("w");
+						
 					}
 					/* Conditions de Defaite, la gameloop s'arrete */
 					if (this.e1.getHopital().getVie() == 0) {
 						Controller.getGameLoop().stop();
 						this.afficherResultat("l");
+						
 					}
 					/* On avance à  l'étape d'après */
 					temps++;
@@ -193,7 +199,7 @@ public class Controller implements Initializable {
 	}
 
 	public void initiateurDeVirus() {
-		this.e1.initVirus();
+		this.e1.nouvelleVague();
 	}
 
 	/* Méthode qui créer dynamiquement la vue */
@@ -264,7 +270,16 @@ public class Controller implements Initializable {
 		}
 
 	}
+	@FXML
+    void lancerVague(ActionEvent event) {
+		this.finDeLaGameLoop = false;
+		this.finDeJeu.setText("C'EST PARTI");
+		this.temps = 0;
+		initAnimation();
+		this.e1.nouvelleVague();
+		gameLoop.play();
 
+    }
 	/*
 	 * Methode qui s'occupe de la gestion des tourelles (placements,ventes et
 	 * amélioration)
@@ -301,7 +316,7 @@ public class Controller implements Initializable {
 			});
 			gelHydroClaque.setOnMouseClicked((e) -> {
 				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) == true
-						&& this.e1.getMagasin().getArgent() > 9) {
+						&& this.e1.getMagasin().getArgent() >= 9) {
 					this.e1.getMagasin().enleverArgent(Magasin.gelHydroClaque);
 					this.e1.ajouterTourelles(
 							new TourelleHydroClaque((int) tuile.getLayoutX(), (int) tuile.getLayoutY(), e1));
@@ -309,7 +324,7 @@ public class Controller implements Initializable {
 			});
 			siliteBang.setOnMouseClicked((e) -> {
 				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) == true
-						&& this.e1.getMagasin().getArgent() > 12) {
+						&& this.e1.getMagasin().getArgent() >= 12) {
 					this.e1.getMagasin().enleverArgent(Magasin.siliteBang);
 					this.e1.ajouterTourelles(
 							new TourelleSilliteBang((int) tuile.getLayoutX(), (int) tuile.getLayoutY(), e1));
@@ -317,7 +332,7 @@ public class Controller implements Initializable {
 			});
 			drPingoLimbo.setOnMouseClicked((e) -> {
 				if (verifiePlaceLibre(tuile.getLayoutX(), tuile.getLayoutY()) == true
-						&& this.e1.getMagasin().getArgent() > 12) {
+						&& this.e1.getMagasin().getArgent() >= 12) {
 					this.e1.getMagasin().enleverArgent(Magasin.drPingoLimbo);
 					this.e1.ajouterTourelles(
 							new TourelleDocteurPingoLimbo((int) tuile.getLayoutX(), (int) tuile.getLayoutY(), e1));
@@ -376,15 +391,15 @@ public class Controller implements Initializable {
 		if (resultat == "w") {
 			this.finDeJeu.setText("Victoire");
 		} else if (resultat == "l") {
-			this.finDeJeu.setText("DÃ©faite");
+			this.finDeJeu.setText("Défaite");
 
 		}
-
+		finDeLaGameLoop = true;
 	}
 
 	/*C'est le bouton reinitialiser*/
 	@FXML
-	void reinit(ActionEvent event) {
+	void pause(ActionEvent event) {
 		if (getGameLoop().getStatus().equals(Animation.Status.PAUSED)) {
 			getGameLoop().play();
 		} else {

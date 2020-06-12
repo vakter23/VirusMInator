@@ -40,7 +40,6 @@ public class TirAvecDegats extends Tir {
 		if (this.getX() <= v.getX() && this.getY() <= v.getY()) {
 			this.appliquerDégats();
 			this.meurt();
-			System.out.println("Ce tir meurt : " + this);
 			v.getVie();
 		}
 		if (!this.v.estVivant()) {
@@ -58,7 +57,6 @@ public class TirAvecDegats extends Tir {
 	public void appliquerDégats() {
 		double newVie = this.v.getVie() - this.getAtq();
 		this.v.setVie(newVie);
-		System.out.println("La vie du virus est maintenant de : " + newVie);
 	}
 
 

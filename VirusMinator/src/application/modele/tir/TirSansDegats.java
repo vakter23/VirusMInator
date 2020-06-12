@@ -30,13 +30,12 @@ private Virus v;
     if (this.v.estVivant() &&( v.getX()> this.getBaseX()+this.getPortee() 
     || v.getY()>this.getBaseY()+this.getPortee())) {
         this.meurt();
-        System.out.println("Le tir est hors de portée");
         this.enleverSlow(v);
     }
     if (!this.estVivant())
         this.meurt();
     }
-    private void enleverSlow(Virus virusVise) { //QUand le virus sort de la portee de la tourelleAvastivirus le virus recupere sa vitesse initiale
+    private void enleverSlow(Virus virusVise) { //Quand le virus sort de la portee de la tourelleAvastivirus le virus recupere sa vitesse initiale
         virusVise.setVitesse(virusVise.getVitesse()*2);
     }
     private void appliquerSlow(Virus virusVise) {

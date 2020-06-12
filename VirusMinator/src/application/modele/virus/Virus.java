@@ -21,21 +21,16 @@ public abstract class Virus {
 	protected Environnement env;
 	public static int compteurIdViruses = 0;
 
-	/*
-	 * 1 = basirus 2 = divirus 3 = healrus 4 = boomirus 5 = viterus
-	 */
-	public static List<Integer> listeVirusAttente = Arrays.asList(1, 1, 1, 3, 4);
+	
+
 	/**
 	 * liste des viruses a ajouter dans la liste "virusesSuivants" de la classe
 	 * "Environnement"
 	 */
-	public static List<Integer> listeVirusAttente2 = Arrays.asList(2, 2, 3, 4, 5);
-
-	/* cette liste représente la deuxième vague de viruses */
 	public Virus(int vie, int atq, int vitesse, String nom, int x, int y, int tpsSpawn,
 			Environnement env) { /* Constructeur Virus */
 
-		this.ID = "v" + compteurIdViruses;/**
+		this.ID = "v" + compteurIdViruses;	/**
 											 * L'ID des viruses est la lettre v et un nombre qui augmente à chaque virus
 											 * créé
 											 */
@@ -115,13 +110,21 @@ public abstract class Virus {
 	}
 
 	public void agit() {
+		if (compteur == 37) {
+			infligerDegats(this.atq);
+			System.out.println("Le virus à infligé ses dégats ! ");
+			this.meurt();
+			this.appliquerEffets();
+			/** on rappelle la méthode pour les viruses qui ont un effet à leurs morts */
+		}
 		if (compteur < 37) {
 			try { /** Cette partie de la méthode modifie la position du virus dans le modèle */
 				if (Graph.getSommetDansLordre().get(compteur + 1).getX() > Graph.getSommetDansLordre().get(compteur)
 						.getX()) {
 					this.dy = 1;
 					this.setY((this.getY() + (int) vitesse) * dy);
-					if (this.getY() == Graph.getSommetDansLordre().get(compteur + 1).getX() * 32
+					if (this.getY() == Graph.getSommetDansLordre().get(compteur + 1).getX() * 32 ||
+							this.getY()+1 == Graph.getSommetDansLordre().get(compteur + 1).getX() * 32 
 					/** On multiplie par la taille d'une tuile pour obtenir la vue */) {
 						compteur++;
 					}
@@ -130,7 +133,8 @@ public abstract class Virus {
 						.getY()) {
 					this.dx = 1;
 					this.setX((this.getX() + (int) vitesse * dx));
-					if (this.getX() == Graph.getSommetDansLordre().get(compteur + 1).getY() * 32) {
+					if (this.getX() == Graph.getSommetDansLordre().get(compteur + 1).getY() * 32 ||
+							this.getX() +1 == Graph.getSommetDansLordre().get(compteur + 1).getY() * 32	) {
 						compteur++;
 					}
 				}
@@ -138,7 +142,8 @@ public abstract class Virus {
 						.getX()) {
 					this.dy = -1;
 					this.setY((this.getY() + (int) vitesse * dy));
-					if (this.getY() == Graph.getSommetDansLordre().get(compteur + 1).getX() * 32) {
+					if (this.getY() == Graph.getSommetDansLordre().get(compteur + 1).getX() * 32 || 
+						this.getY()+1 == Graph.getSommetDansLordre().get(compteur + 1).getX() * 32) {
 						compteur++;
 					}
 				} /**
@@ -152,9 +157,10 @@ public abstract class Virus {
 				 * BFS, et on inflige les dégats équivalents à son attaque
 				 */
 				if (compteur == 37) {
+					this.meurt();
 					infligerDegats(this.atq);
 					System.out.println("Le virus à infligé ses dégats ! ");
-					this.meurt();
+					
 					this.appliquerEffets();
 					/** on rappelle la méthode pour les viruses qui ont un effet à leurs morts */
 				}
@@ -174,7 +180,7 @@ public abstract class Virus {
 	}
 
 	private void meurt() {
-		this.vie = 0;
+		this.setVie(0);
 
 	}
 

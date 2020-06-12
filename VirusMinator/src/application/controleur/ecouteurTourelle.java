@@ -41,21 +41,21 @@ public class ecouteurTourelle implements ListChangeListener<Tourelles> {
 	private void creerSpriteTourelle(Tourelles t) {
 
 			if(t instanceof TourelleSavonneuse){
-				ImageView tourelle =  getImgg("/src/ressources/tourelles/gelHydro.png");
+				ImageView tourelle =  getImgage("/src/ressources/tourelles/gelHydro.png");
 				tourelle.setId(t.getId());
 				tourelle.setLayoutX(t.getX());
 				tourelle.setLayoutY(t.getY());
 				panneauEnnemi.getChildren().add(tourelle);
 			}
 			else if (t instanceof TourelleMousseuse){
-				ImageView tourelle = getImgg("/src/ressources/tourelles/Avast.png");
+				ImageView tourelle = getImgage("/src/ressources/tourelles/Avast.png");
 				tourelle.setId(t.getId());
 				tourelle.setLayoutX(t.getX());
 				tourelle.setLayoutY(t.getY());
 				panneauEnnemi.getChildren().add(tourelle);
 			}
 			else if (t instanceof TourelleHydroClaque){
-				ImageView tourelle = getImgg("/src/ressources/tourelles/gel-hydoralcoolique.png");
+				ImageView tourelle = getImgage("/src/ressources/tourelles/gel-hydoralcoolique.png");
 				tourelle.setId(t.getId());
 				tourelle.setLayoutX(t.getX());
 				tourelle.setLayoutY(t.getY());
@@ -63,7 +63,7 @@ public class ecouteurTourelle implements ListChangeListener<Tourelles> {
 
 			}
 			else if (t instanceof TourelleSilliteBang){
-				ImageView tourelle = getImgg("/src/ressources/tourelles/javel.png");
+				ImageView tourelle = getImgage("/src/ressources/tourelles/javel.png");
 				tourelle.setId(t.getId());
 				tourelle.setLayoutX(t.getX());
 				tourelle.setLayoutY(t.getY());
@@ -71,7 +71,7 @@ public class ecouteurTourelle implements ListChangeListener<Tourelles> {
 
 			}
 			else if (t instanceof TourelleDocteurPingoLimbo){
-				ImageView tourelle = getImgg("/src/ressources/tourelles/DrPingoLimbo.gif");
+				ImageView tourelle = getImgage("/src/ressources/tourelles/DrPingoLimbo.gif");
 				tourelle.setId(t.getId());
 				tourelle.setLayoutX(t.getX());
 				tourelle.setLayoutY(t.getY());
@@ -90,7 +90,6 @@ public class ecouteurTourelle implements ListChangeListener<Tourelles> {
 
 	private void onDeath(Tourelles t) {
 		t.boostAttaqueSpeed(0.8);
-		System.out.println("La méthode on death s'est appliquée");
 		
 	}
 
@@ -102,7 +101,7 @@ public class ecouteurTourelle implements ListChangeListener<Tourelles> {
 		return (int) e.getSceneY();
 	}
 
-	private static ImageView getImgg(String... paths) {
+	private static ImageView getImgage(String... paths) {
 		return new ImageView(Paths.get(System.getProperty("user.dir"), paths).toUri().toString());
 	}
 

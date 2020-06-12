@@ -1,5 +1,6 @@
 package application.modele;
 
+import java.util.ArrayList;
 import java.util.List;
 import application.Config;
 import application.controleur.Controller;
@@ -14,6 +15,7 @@ import application.modele.virus.VirusViterus;
 import application.modele.Magasin;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
 public class Environnement {
 	private int width, height;
 	public ObservableList<Virus> virusesSurTerrain = FXCollections
@@ -30,13 +32,15 @@ public class Environnement {
 	private static String[][] terrain;
 	private Magasin magasin;
 	private Hopital hopital;
+	private static int nbVirusesVague = 10;
 
-	public Environnement(int width, int height) {/*Le constructeur pour les Tests JUnit*/
+	public Environnement(int width, int height) {/* Le constructeur pour les Tests JUnit */
 		super();
 		this.width = width;
 		this.height = height;
 		initTerrain();
 	}
+
 	public Environnement(int width, int height, Magasin magasin) {
 		super();
 		this.width = width;
@@ -49,24 +53,20 @@ public class Environnement {
 
 	}
 
-//	public void incrementerArgent() {
-//		this.argent.setValue(argent.getValue() + 1);
-//	}
-//
-//	public IntegerProperty getArgentProperty() {
-//		return this.argent;
-//	}
-//
-//	public int getArgent() {
-//		return this.argent.getValue();
-//	}
-//
-//	public void enleverArgent(int somme) {
-//		this.argent.setValue(argent.getValue() - somme);
-//	}
-//	public void ajouterArgent(int somme){
-//		this.argent.setValue(argent.getValue() + somme);
-//	}
+	public void nouvelleVague() {
+		/*
+		 * 1 = basirus 2 = divirus 3 = healrus 4 = boomirus 5 = viterus
+		 */
+		ArrayList<Integer> listeVirusesAjout = new ArrayList<Integer>();
+		for (int i = 0; i < nbVirusesVague; i++) {
+			int virusAleatoire = (int) (Math.random()*5+1);
+			System.out.println(virusAleatoire);
+			listeVirusesAjout.add(virusAleatoire);
+		}
+		initVirus(listeVirusesAjout);
+		nbVirusesVague += 10;
+	}
+
 
 	public int getWidth() {
 		return width;
@@ -76,10 +76,10 @@ public class Environnement {
 		return height;
 	}
 
-	public void initVirus() {
+	public void initVirus(ArrayList<Integer> listeVirusAttente) {
 		this.virusesSurTerrain.clear();
-		for (int i = 0; i < Virus.listeVirusAttente.size(); i++) {
-			switch (Virus.listeVirusAttente.get(i)) {
+		for (int i = 0; i < listeVirusAttente.size(); i++) {
+			switch (listeVirusAttente.get(i)) {
 			case 1:
 				Virus vb = new VirusBasirus(0, 288, 200, this);
 				this.virusesSuivants.add(vb);
@@ -103,9 +103,6 @@ public class Environnement {
 			default:
 				break;
 			}
-			
-
-			// Virus.listeVirusAttente.remove(i);
 		}
 	}
 
@@ -121,7 +118,7 @@ public class Environnement {
 		return tourelles;
 	}
 
-	public void resetPos(Virus v) { /*à détruire une fois que le BFS est la*/
+	public void resetPos(Virus v) { /* à détruire une fois que le BFS est la */
 		v.setX(0);
 		v.setY(288);
 	}
@@ -146,7 +143,7 @@ public class Environnement {
 
 	public void ajouterVirus(Virus v) {
 		virusesSurTerrain.add(v);
-		/*System.out.println(virusesSurTerrain.get(0).getNom());*/
+		/* System.out.println(virusesSurTerrain.get(0).getNom()); */
 	}
 
 	public void ajouterTourelles(Tourelles a) {
@@ -157,13 +154,12 @@ public class Environnement {
 		return (0 <= x && x < this.width && 0 <= y && y < this.height);
 	}
 
-	
 	public void unTour() {
 		entreeVirusTerrain();
 		deplacerLesViruses();
 		faireAgirTourelles();
 		ramasserLesViruses();
-		
+
 	}
 
 	public void entreeVirusTerrain() {
@@ -173,8 +169,6 @@ public class Environnement {
 				System.out.println(" Virus ajouté : " + virusesSuivants.get(i));
 				System.out.println("Création Virus");
 			}
-
-			// Virus.listeVirusAttente.remove(i);
 		}
 	}
 
@@ -182,8 +176,6 @@ public class Environnement {
 		for (int i = 0; i < virusesSurTerrain.size(); i++) {
 			Virus v = virusesSurTerrain.get(i);
 			v.agit();
-//			v.agit(v);
-//			v.seDeplacer();
 		}
 	}
 
@@ -193,6 +185,7 @@ public class Environnement {
 			t.agit();
 		}
 	}
+
 	/**
 	 * @return the magasin
 	 */
@@ -220,10 +213,10 @@ public class Environnement {
 	public void setHopital(Hopital hopital) {
 		this.hopital = hopital;
 	}
+
 	public void ramasserLesViruses() {
 		for (int i = virusesSurTerrain.size() - 1; i >= 0; i--) {
 			Virus v = virusesSurTerrain.get(i);
-
 			if (!v.estVivant()) {
 				System.out.println("mort de : " + v.getId());
 				v.agit();
@@ -232,9 +225,6 @@ public class Environnement {
 			}
 		}
 	}
-
-
-	
 
 	public void unTourTir() {
 		for (int i = 0; i < listeTirs.size(); i++) {
@@ -292,60 +282,60 @@ public class Environnement {
 		}
 		return null;
 	}
-	public static int [][] getTerrainInt(){
-        int [][] terrainInt = new int[18][40];
-       List<Integer> listeMap = Config.listeMap;
-       int x = 0;
-       /*Graph(36);*/
-       for (int i = 0; i < terrainInt.length; i++) {
 
-           for (int j = 0; j < terrainInt[i].length; j++) {
+	public static int[][] getTerrainInt() {
+		int[][] terrainInt = new int[18][40];
+		List<Integer> listeMap = Config.listeMap;
+		int x = 0;
+		/* Graph(36); */
+		for (int i = 0; i < terrainInt.length; i++) {
 
-               if (listeMap.get(x) == Config.Herbe) {
-                   terrainInt[i][j] = 1;
+			for (int j = 0; j < terrainInt[i].length; j++) {
 
-               }
+				if (listeMap.get(x) == Config.Herbe) {
+					terrainInt[i][j] = 1;
 
-               else if (listeMap.get(x) == Config.Sable) {
-                   terrainInt[i][j] = 1;
+				}
 
-               }
+				else if (listeMap.get(x) == Config.Sable) {
+					terrainInt[i][j] = 1;
 
-               else if (listeMap.get(x) == Config.SpawnViolet) {
-                   terrainInt[i][j] = 1;
+				}
 
-               }
+				else if (listeMap.get(x) == Config.SpawnViolet) {
+					terrainInt[i][j] = 1;
 
-               else if (listeMap.get(x) == Config.Vert) {
-                   terrainInt[i][j] = 1;
+				}
 
-               }
+				else if (listeMap.get(x) == Config.Vert) {
+					terrainInt[i][j] = 1;
 
-               else if (listeMap.get(x) == Config.sableChemin) {
-                   terrainInt[i][j] = 0;
+				}
 
-               }
+				else if (listeMap.get(x) == Config.sableChemin) {
+					terrainInt[i][j] = 0;
 
-               else if (listeMap.get(x) == Config.SPAWNTOURELLES) {
-                   terrainInt[i][j] = 1;
-               }
+				}
 
-               else if (listeMap.get(x) == Config.Hosto) {
-                   terrainInt[i][j] = 1;
+				else if (listeMap.get(x) == Config.SPAWNTOURELLES) {
+					terrainInt[i][j] = 1;
+				}
 
-               }
-               else if (listeMap.get(x) == Config.RougeHospital) {
-                   terrainInt[i][j] = 1;
+				else if (listeMap.get(x) == Config.Hosto) {
+					terrainInt[i][j] = 1;
 
-               }
+				} else if (listeMap.get(x) == Config.RougeHospital) {
+					terrainInt[i][j] = 1;
 
+				}
 
-               x++;
-           }
-       }
+				x++;
+			}
+		}
 
-       return terrainInt;
-   }
+		return terrainInt;
+	}
+
 	public void initTerrain() {
 		List<Integer> listeMap = Config.listeMap;
 		int x = 0;
@@ -383,9 +373,8 @@ public class Environnement {
 				}
 
 				else if (listeMap.get(x) == Config.Hosto) {
-					
-						this.terrain[i][j] = "1";
-					
+
+					this.terrain[i][j] = "1";
 
 				} else if (listeMap.get(x) == Config.RougeHospital) {
 					this.terrain[i][j] = "1";
@@ -416,97 +405,10 @@ public class Environnement {
 	}
 
 	public static boolean estUnChemin(int i, int j) {
-        if(terrain[i][j] == "0") {
-            return true;
-        }
-        return false;
-    }
-//	/**
-//	 * @return the magasin
-//	 */
-//	public Magasin getMagasin() {
-//		return magasin;
-//	}
-//
-//	/**
-//	 * @param magasin the magasin to set
-//	 */
-//	public void setMagasin(Magasin magasin) {
-//		this.magasin = magasin;
-//	}
-//
-//	/**
-//	 * @return the hopital
-//	 */
-//	public Hopital getHopital() {
-//		return hopital;
-//	}
-//
-//	/**
-//	 * @param hopital the hopital to set
-//	 */
-//	public void setHopital(Hopital hopital) {
-//		this.hopital = hopital;
-//	}
-//
-//	public static int[][] getTerrainInt() {
-//		int[][] terrainInt = new int[18][40];
-//		List<Integer> listeMap = Config.listeMap;
-//		int x = 0;
-//		/* Graph(36); */
-//		for (int i = 0; i < terrainInt.length; i++) {
-//
-//			for (int j = 0; j < terrainInt[i].length; j++) {
-//
-//				if (listeMap.get(x) == Config.Herbe) {
-//					terrainInt[i][j] = 1;
-//
-//				}
-//
-//				else if (listeMap.get(x) == Config.Sable) {
-//					terrainInt[i][j] = 1;
-//
-//				}
-//
-//				else if (listeMap.get(x) == Config.SpawnViolet) {
-//					terrainInt[i][j] = 1;
-//
-//				}
-//
-//				else if (listeMap.get(x) == Config.Vert) {
-//					terrainInt[i][j] = 1;
-//
-//				}
-//
-//				else if (listeMap.get(x) == Config.sableChemin) {
-//					terrainInt[i][j] = 0;
-//
-//				}
-//
-//				else if (listeMap.get(x) == Config.SPAWNTOURELLES) {
-//					terrainInt[i][j] = 1;
-//				}
-//
-//				else if (listeMap.get(x) == Config.Hosto) {
-//					terrainInt[i][j] = 1;
-//
-//				} else if (listeMap.get(x) == Config.RougeHospital) {
-//					terrainInt[i][j] = 1;
-//
-//				}
-//
-//				x++;
-//			}
-//		}
-//
-//		return terrainInt;
-//	}
-//
-//	public static boolean estUnChemin(int i, int j) {
-//		if (terrain[i][j] == "0") {
-//			return true;
-//		}
-//		return false;
-//	}
+		if (terrain[i][j] == "0") {
+			return true;
+		}
+		return false;
+	}
 
 }
