@@ -43,6 +43,7 @@ public class Sommet {
 		return false;
 	}
 	
+	
 	public int getX() {
 		return this.x;
 	}
@@ -56,6 +57,11 @@ public class Sommet {
 		parent = s;
 		
 	}
+
+//	@Override
+//	public String toString() {
+//		return "Sommet [x=" + x + ", y=" + y + ", adjacent=" + adjacent + "]";
+//	}
 	
 	public String toString() {
 		return "x" + this.getX()+ "y" + this.getY();

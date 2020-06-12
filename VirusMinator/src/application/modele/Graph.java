@@ -46,11 +46,12 @@ public class Graph {
 				s.getAdj().add(sommet.get(i));
 
 			}
+			//System.out.println("Les sommets adjacents de s : " +s + " sont " + s.getAdj());
 		}
+		
 	}
 
 	public static ArrayList<Sommet> getSommetDansLordre() {
-		Collections.reverse(sommetDansLordre);
 		return sommetDansLordre;
 	}
 
@@ -85,7 +86,7 @@ public class Graph {
 			}
 
 		}
-
+		Collections.reverse(sommetDansLordre);
 	}
 
 }

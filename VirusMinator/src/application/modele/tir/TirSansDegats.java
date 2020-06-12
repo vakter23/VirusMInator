@@ -31,13 +31,13 @@ private Virus v;
 		if (this.getX() == v.getX() && this.getY() == v.getY()) {
 			System.out.println("Ce tir meurt : " + this);
 			this.meurt();
-			this.appliquerEffet(v);
+			this.appliquerSlow(v);
 			System.out.println(v.getVie());
 
 		}
 	}
 
-	private void appliquerEffet(Virus virusVise) {
+	private void appliquerSlow(Virus virusVise) {
 		virusVise.setVitesse(getVitesse() / 2);
 
 	}

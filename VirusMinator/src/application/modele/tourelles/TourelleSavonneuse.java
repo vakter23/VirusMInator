@@ -9,10 +9,10 @@ public class TourelleSavonneuse extends TourellesAvecDegats {
 
 	// cette tourelle (tourelle de base) inflige dégât basique
 
-	public TourelleSavonneuse(int portee, double atqSpeed, String nom, int x, int y, Environnement env) {
-		super(portee, atqSpeed, nom, x, y, env);
+	public TourelleSavonneuse(int x, int y, Environnement env) {
+		super(75, 50, "TourelleSavonneuse", x, y, env);
 
-		this.setAtq(0);
+		this.setAtq(25);
 
 	}
 

@@ -8,8 +8,8 @@ import application.modele.tir.TirSansDegats;
 public class TourelleDocteurPingoLimbo extends Tourelles {
 	private double boostAtqSpeed;
 
-	public TourelleDocteurPingoLimbo(int portee, double atqSpeed, String nom, int x, int y, Environnement env) {
-		super(portee, atqSpeed, nom, x, y, env);
+	public TourelleDocteurPingoLimbo(int x, int y, Environnement env) {
+		super(100, 1, "TourelleDocteurPingoLimbo", x, y, env);
 
 		this.boostAtqSpeed = 1.2;
 	}

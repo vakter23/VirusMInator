@@ -7,8 +7,8 @@ import application.modele.tourelles.Tourelles;
 
 public class VirusViboomrus extends Virus {
 
-	public VirusViboomrus(int vie, int atq, double vitesse, String nom, int x, int y, int tps, Environnement env) {
-		super(vie, atq, vitesse, nom, x, y, tps, env);
+	public VirusViboomrus(int x, int y, int tps, Environnement env) {
+		super(120, 10, 1.0, "VirusViboomrus", x, y, tps, env);
 	}
 
 	@Override
@@ -18,6 +18,7 @@ public class VirusViboomrus extends Virus {
 			String idTourellesProche = this.env.getTourelles().get(1).getId(); 
 			for(int i = 0; i<this.env.getTourelles().size(); i++) {
 				/*On cherche la tourelle la plus proche de nous */
+				System.out.println("L'attaque speed est sensée être réduite");
 				if (this.env.getTourelles().get(i).getX() < this.env.getTourelle(idTourellesProche).getX() && 
 					this.env.getTourelles().get(i).getY() < this.env.getTourelle(idTourellesProche).getY() &&
 					this.env.getTourelles().get(i).getX() <= this.getX() &&

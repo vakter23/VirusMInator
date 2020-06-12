@@ -6,8 +6,8 @@ import application.modele.Environnement;
 
 public class VirusVhealrus extends Virus {
 
-	public VirusVhealrus(int vie, int atq, double vitesse, String nom, int x, int y, int tps,Environnement env) {
-		super(vie, atq, vitesse, nom, x, y, tps, env);
+	public VirusVhealrus(int x, int y, int tps,Environnement env) {
+		super(30, 5, 2.0, "VirusVhealrus", x, y, tps, env);
 	}
 
 	@Override

@@ -75,19 +75,19 @@ public class Environnement {
 		for (int i = 0; i < Virus.listeVirusAttente.size(); i++) {
 			switch (Virus.listeVirusAttente.get(i)) {
 			case 1:
-				Virus vb = new VirusBasirus(70, 10, 2.0, "VirusBasirus", 0, 288, 10, this);
+				Virus vb = new VirusBasirus(0, 288, 10, this);
 				this.virusesSuivants.add(vb);
 				break;
 			case 2:
-				Virus vd = new VirusDivirus(40, 10, 2.0, "VirusDivirus", 0, 288, 200, this);
+				Virus vd = new VirusDivirus(0, 288, 200, this);
 				this.virusesSuivants.add(vd);
 				break;
 			case 3:
-				Virus vh = new VirusVhealrus(30, 10, 2.0, "VirusVhealrus", 0, 288, 200, this);
+				Virus vh = new VirusVhealrus(0, 288, 200, this);
 				this.virusesSuivants.add(vh);
 				break;
 			case 4:
-				Virus vbi = new VirusViboomrus(170, 10, 1.0, "VirusViboomrus", 0, 288, 200, this);
+				Virus vbi = new VirusViboomrus(0, 288, 200, this);
 				this.virusesSuivants.add(vbi);
 				break;
 			case 5:
@@ -383,7 +383,9 @@ public class Environnement {
 				}
 
 				else if (listeMap.get(x) == Config.Hosto) {
-					this.terrain[i][j] = "1";
+					
+						this.terrain[i][j] = "1";
+					
 
 				} else if (listeMap.get(x) == Config.RougeHospital) {
 					this.terrain[i][j] = "1";
@@ -392,6 +394,7 @@ public class Environnement {
 
 				x++;
 			}
+			this.terrain[9][35] = "0";
 		}
 
 		for (int i = 0; i < this.terrain.length; i++) {
