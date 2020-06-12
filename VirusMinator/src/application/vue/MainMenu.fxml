@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="865.0" prefWidth="1300.0" style="-fx-background-color: BLACK;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleur.MenuController">
+    <center>
+        <Pane prefHeight="865.0" prefWidth="1300.0" BorderPane.alignment="CENTER">
+           <children>
+               <Button layoutX="488.0" layoutY="400.0" mnemonicParsing="false" onAction="#playButton" prefHeight="50.0" prefWidth="350.0" style="-fx-background-color: BLACK; -fx-background-radius: 100; -fx-border-color: GREEN; -fx-border-width: 5;" text="Play" textFill="#48c361">
+                   <font>
+                       <Font name="Bitstream Vera Serif Bold" size="35.0" />
+                   </font>
+               </Button>
+            <Label alignment="CENTER" layoutX="255.0" layoutY="119.0" prefHeight="197.0" prefWidth="798.0" text="VIRUSMINATOR" textFill="#2feb54">
+               <font>
+                  <Font size="84.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="489.0" layoutY="712.0" prefHeight="17.0" prefWidth="349.0" text="LAMA Maxine" textFill="#0cdd33">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="499.0" layoutY="682.0" prefHeight="17.0" prefWidth="349.0" text="QUENUM-SANFO Djibril" textFill="#0cdd33">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="499.0" layoutY="646.0" prefHeight="17.0" prefWidth="349.0" text="Ce jeu a été crée par " textFill="#0cdd33">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="489.0" layoutY="777.0" prefHeight="17.0" prefWidth="349.0" text="AKTER Volkan" textFill="#0cdd33">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="489.0" layoutY="747.0" prefHeight="17.0" prefWidth="349.0" text="RENARDET Martin" textFill="#0cdd33">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="475.0" layoutY="316.0" prefHeight="81.0" prefWidth="377.0" text="Voulez-vous sauvez le monde ?" textFill="#00ff26">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+
+           </children>
+        </Pane>
+    </center>
+</BorderPane>

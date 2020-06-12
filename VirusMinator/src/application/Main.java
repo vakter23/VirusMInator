@@ -15,13 +15,13 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			URL url = new File("src/application/vue/tilemap.fxml").toURI().toURL();
+			URL url = new File("src/application/vue/MainMenu.fxml").toURI().toURL();
 			loader.setLocation(url);
 			BorderPane root = new BorderPane();
 			root = loader.load();
-			Scene scene = new Scene(root, 1600, 800);
+			Scene scene = new Scene(root, 1400, 700);
 			primaryStage.setResizable(true);
-			primaryStage.setFullScreen(false);
+			primaryStage.setFullScreen(true);
 			primaryStage.setTitle("VirusMinator");
 			primaryStage.setScene(scene);
 			primaryStage.show();
