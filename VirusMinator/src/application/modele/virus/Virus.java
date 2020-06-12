@@ -5,7 +5,6 @@ import java.util.List;
 
 import application.modele.Environnement;
 import application.modele.Graph;
-import application.modele.Hopital;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -24,8 +23,8 @@ public abstract class Virus {
 	/*
 	 * 1 = basirus 2 = divirus 3 = healrus 4 = boomirus 5 = viterus
 	 */
-	public static List<Integer> listeVirusAttente = Arrays.asList(1,2,3,4,5,1);/* liste des viruses a ajouter */
-	public static List<Integer> listeVirusAttente2 = Arrays.asList(2, 2, 3, 4, 5);
+	public static List<Integer> listeVirusAttente = Arrays.asList(1,2,3,4,5);/* liste des viruses a ajouter */
+//	public static List<Integer> listeVirusAttente2 = Arrays.asList(2, 2, 3, 4, 5);
 
 	public Virus(int vie, int atq, double vitesse, String nom, int x, int y, int tpsSpawn,
 			Environnement env) { /* Constructeur Virus */
@@ -41,24 +40,10 @@ public abstract class Virus {
 		this.env = env;
 		this.tpsPerso = tpsSuivant + tpsSpawn;
 		System.out.println("v" + compteurDeplacement);
-		tpsSuivant += 400;
+		tpsSuivant += 2000;
 
 	}
-public Virus (int vie, int x, int y) {
-	this.ID = "v" + compteurDeplacement;
-	this.vie = vie;
-	this.pvMax = vie;
-	this.atq = 10;
-	this.setVitesse(vitesse);
-	this.nom = "Virus";
-	this.setX(x);
-	this.setY(y);
-	compteurDeplacement++;
-	this.env = env;
-	this.tpsPerso = tpsSuivant;
-	System.out.println("v" + compteurDeplacement);
-	tpsSuivant += 400;
-}
+
 	@Override
 	public String toString() {
 		return "Virus [xProperty=" + xProperty + ", yProperty=" + yProperty + ", dx=" + dx + ", dy=" + dy + ", atq="
@@ -124,7 +109,7 @@ public Virus (int vie, int x, int y) {
 			if(Graph.getSommetDansLordre().get(compteur+1).getX() > Graph.getSommetDansLordre().get(compteur).getX()) {
 				this.dy = 1;
 				this.setY((this.getY()+ (int)vitesse)*dy);
-				if (this.getY() == Graph.getSommetDansLordre().get(compteur+1).getX()*32) {
+				if (this.getY() >= Graph.getSommetDansLordre().get(compteur+1).getX()*32) {
 					compteur++;
 				}
 			} if(Graph.getSommetDansLordre().get(compteur+1).getY() > Graph.getSommetDansLordre().get(compteur).getY()) {

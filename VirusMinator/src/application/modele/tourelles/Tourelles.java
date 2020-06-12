@@ -16,6 +16,7 @@ public abstract class Tourelles {
 	private double atqSpeed; // atq, slow
 	private String nom, ID;
 	protected Environnement env;
+	private boolean buff;
 	//private int temps;// Variable pour gerer temps entre le tir des tourelles (1 unité de temps = 1
 						// tour) <- variable crée dans environnement
 	private static int compteur = 1;
@@ -28,7 +29,7 @@ public abstract class Tourelles {
 		this.setX(x);
 		this.setY(y);
 		this.env = env;
-		
+		this.buff = false;
 		compteur++;
 	}
 
@@ -61,7 +62,9 @@ public abstract class Tourelles {
 	public final IntegerProperty getYProperty() {
 		return y;
 	}
-
+	public final void setBuff(boolean t) {
+		this.buff = t;
+	}
 	public final void setX(int n) {
 		x.setValue(n);
 	}
@@ -117,13 +120,18 @@ public abstract class Tourelles {
 			// System.out.println(env.getTourelles());
 			// if (env.getTourelles().get(i).estVivant()) { (Pas besoin de check ca
 			// normalement
+
 			if ((this.getY() - this.portee <= env.getTourelles().get(i).getY()
 					&& env.getTourelles().get(i).getY() <= this.getY() + this.portee)
 					&& (this.getX() - this.portee <= env.getTourelles().get(i).getX()
 							&& env.getTourelles().get(i).getX() <= this.getX() + this.portee)) {
+				if (env.getTourelles().get(i).getNom() != "TourelleDocteurPingoLimbo") {
 					listeTourelle.add(env.getTourelles().get(i));
+					System.out.println("La tourelle a portée : " + listeTourelle.get(0));
+					return listeTourelle;
+				}
 			}
-			return listeTourelle;
+
 			// }
 		}
 		return null;
@@ -134,7 +142,7 @@ public abstract class Tourelles {
 		// (hydroclaque/mousseuse
 		ArrayList<Virus> virusesMultiples = new ArrayList<Virus>();
 		for (int i = 0; i < env.getViruses().size(); i++) {
-// System.out.println(env.getViruses());
+ System.out.println(env.getViruses());
 			if (env.getViruses().get(i).estVivant()) {
 				if ((this.getY() - this.portee <= env.getViruses().get(i).getY()
 						&& env.getViruses().get(i).getY() <= this.getY() + this.portee)
@@ -145,23 +153,24 @@ public abstract class Tourelles {
 					
 				}
 			}
-		return virusesMultiples;
+		
 		}
-		return null;
+		return virusesMultiples;
+		
 
 	}
 
 	public void boostAttaqueSpeed(double boost) {
-
+		if(!this.buff) {
 		this.setAtqSpeed(this.atqSpeed * boost);
-
+		}
 	}
 
 	public abstract void tirer();
 
 	public void agit() {
 
-		if (this.env.getTemps() % this.atqSpeed == 0 && this.VirusAPorteeDeTir() != null) // tentative d'evittement du null pointer
+		if ((int)this.env.getTemps() % (int)this.atqSpeed == 0 && this.VirusAPorteeDeTir() != null) // tentative d'evittement du null pointer
 																			// exception ( car virusaporteedetir
 																			// retourne null si pas de virus
 		{

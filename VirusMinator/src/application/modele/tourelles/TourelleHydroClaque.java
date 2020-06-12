@@ -21,7 +21,6 @@ public class TourelleHydroClaque extends TourellesAvecDegats {
 
 		this.setAtq(this.getAtq() * 1.2);
 		this.setPortee(this.getPortee() + 5);
-		this.setAtqSpeed(this.getAtqSpeed() + 1);
 
 	}
 
@@ -31,8 +30,7 @@ public class TourelleHydroClaque extends TourellesAvecDegats {
 		for (int i = 0; i < v.size(); i++) {
 			Tir t1 = new TirAvecDegats(this.getX(), this.getY(), v.get(i), this.env, this.getAtq(), this.getPortee());
 			this.env.ajouterListeTirs(t1);
-			double newVie = (v.get(i).getVie() - this.getAtq());
-			v.get(i).setVie(newVie);
+			
 		}
 		// VirusAPorteeDeTir().setVie(VirusAPorteeDeTir().getVie()-this.getAtq());
 		// code pour tirer / apelle de la méthode tir

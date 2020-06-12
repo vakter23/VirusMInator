@@ -21,7 +21,7 @@ public class TourelleSavonneuse extends TourellesAvecDegats {
 
 		this.setAtq(this.getAtq() * 1.2);
 		this.setPortee(this.getPortee() + 5);
-		this.setAtqSpeed(this.getAtqSpeed() + 1);
+		this.setAtqSpeed(this.getAtqSpeed() -10);
 
 	}
 

@@ -140,7 +140,6 @@ public class Controller implements Initializable {
 		KeyFrame kf = new KeyFrame(
 				// on définit le FPS (nbre de frame par seconde)
 				Duration.seconds(0.0005),
-
 				// on définit ce qui se passe à chaque frame
 				// c'est un eventHandler d'ou le lambda
 				(ev -> {
@@ -156,7 +155,7 @@ public class Controller implements Initializable {
 
 					this.e1.unTourTir();
 
-					if (temps % 800 == 0) {
+					if (temps % 2000 == 0) {
 						this.m1.incrementerArgent();
 					}
 					if (this.e1.getViruses().isEmpty() && temps > 400) {

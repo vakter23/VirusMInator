@@ -27,22 +27,19 @@ private Virus v;
 		} else {
 			this.setY((int) (this.getY() + this.getVitesse()));
 		}
-
-		if (this.getX() == v.getX() && this.getY() == v.getY()) {
-			System.out.println("Ce tir meurt : " + this);
-			this.meurt();
 			this.appliquerSlow(v);
-			System.out.println(v.getVitesse());
-
-		}
-	
-	if (!this.v.estVivant() ||( v.getX()> this.getBaseX()+this.getPortee() 
+			
+	if (this.v.estVivant() &&( v.getX()> this.getBaseX()+this.getPortee() 
 	|| v.getY()>this.getBaseY()+this.getPortee())) {
 		this.meurt();
+		System.out.println("Le tir est hors de portée");
+		this.enleverSlow(v);
 	}
 		
 	}
-
+	private void enleverSlow(Virus virusVise) {
+		virusVise.setVitesse(virusVise.getVitesse()*2);
+	}
 	private void appliquerSlow(Virus virusVise) {
 		virusVise.setVitesse(virusVise.getVitesse()/2);
 

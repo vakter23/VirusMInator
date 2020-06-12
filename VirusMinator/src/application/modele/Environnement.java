@@ -242,10 +242,11 @@ public class Environnement {
 	
 
 	public void unTourTir() {
+		ramasserLesTirs();
 		for (int i = 0; i < listeTirs.size(); i++) {
 			listeTirs.get(i).seDeplace();
 		}
-		ramasserLesTirs();
+
 	}
 
 	public void ramasserLesTirs() {

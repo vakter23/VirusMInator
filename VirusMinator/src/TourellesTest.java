@@ -28,26 +28,30 @@ class TourellesTest {
 		Virus v1 = new VirusBasirus(50, 50, 0, env);
 		Virus v2 = new VirusBasirus(50, 50, 0, env);
 		Virus v3 = new VirusBasirus(0, 0, 0, env);
-		TourelleMousseuse t1 = new TourelleMousseuse(100, 100, env);
-		TourelleMousseuse t2 = new TourelleMousseuse(10, 10, env);
+		TourelleMousseuse t1 = new TourelleMousseuse(70, 70, env);
+		TourelleMousseuse t2 = new TourelleMousseuse(70, 70, env);
 		TourelleMousseuse t3 = new TourelleMousseuse(40, 40, env);
 		TourelleMousseuse t4 = new TourelleMousseuse(400, 400, env);
 	}
 	@Test
 	public void listeDe2Tourelles(){
-		t1.TourelleAPorteeDeTir();
-		ArrayList<Tourelles> listeT= new ArrayList<Tourelles>();
-		listeT.add(t2);
-		listeT.add(t3);
-		assertArrayEquals(t1.TourelleAPorteeDeTir(), listeT);
+//		ArrayList<Tourelles> listeT= new ArrayList<Tourelles>();
+//		listeT.add(t2);
+//		listeT.add(t3);
+		this.env.ajouterTourelles(t1);
+		this.env.ajouterTourelles(t2);
+		this.env.ajouterTourelles(t3);
+		this.env.ajouterTourelles(t4);
+		assertEquals(t1.TourelleAPorteeDeTir().get(1).getId(), t2.getId());
 	}
 	@Test
 	public void listeDe2Viruses(){
 		t1.TourelleAPorteeDeTir();
 		ArrayList<Tourelles> listeT= new ArrayList<Tourelles>();
+
 		listeT.add(t2);
 		listeT.add(t3);
-		assertArrayEquals(t1.TourelleAPorteeDeTir(), listeT);
+		assertEquals(t1.TourelleAPorteeDeTir(), listeT);
 	}
 //	void test() {
 //		fail("Not yet implemented");
