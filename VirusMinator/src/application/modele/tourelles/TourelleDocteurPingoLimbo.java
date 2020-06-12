@@ -1,20 +1,19 @@
 package application.modele.tourelles;
 
 import java.util.ArrayList;
-
 import application.modele.Environnement;
-import application.modele.tir.Tir;
-import application.modele.tir.TirAvecDegats;
-import application.modele.tir.TirSansDegats;
-import application.modele.virus.Virus;
-
 public class TourelleDocteurPingoLimbo extends Tourelles {
-	private double boostAtqSpeed;
 
-	public TourelleDocteurPingoLimbo(int portee, double atqSpeed, String nom, int x, int y, Environnement env) {
-		super(portee, atqSpeed, nom, x, y, env);
+	private double boostAtqSpeed; //Variable indiquant la quantité d'augmentation de 
+				     //l'attaque des tourelles a proximité
 
-		this.boostAtqSpeed = 1.2;
+	//Cette Tourelle augmente la vitesse d'attaque des Tourelles a sa porté
+
+	public TourelleDocteurPingoLimbo(int x, int y, Environnement env) {
+		super(500, 1, "TourelleDocteurPingoLimbo", x, y, env);
+
+		this.boostAtqSpeed = 0.8; /*l'attaque speed doit diminuer pour que la tourelle
+		frappe plus vite*/
 	}
 
 	public void setBoostatqSpeed(double boostAtqSpeed2) {
@@ -23,22 +22,26 @@ public class TourelleDocteurPingoLimbo extends Tourelles {
 
 	@Override
 	public void amelioration() {
-
-		this.setBoostatqSpeed(boostAtqSpeed + 2);
+		
+		this.setBoostatqSpeed(boostAtqSpeed - 0.1);
 		this.setPortee(this.getPortee() + 5);
-		this.setAtqSpeed(this.getAtqSpeed() + 1);
+		
 	}
 
 	@Override
 	public void tirer() {
 		ArrayList<Tourelles> liste = TourelleAPorteeDeTir();
 		for (int i = 0; i < liste.size(); i++) {
-			Tir t1 = new TirSansDegats(this.getXProperty(), this.getYProperty(), this.env);
-			this.env.ajouterListeTirs(t1);
+			System.out.println("Les tourelles buffées : " + liste);
+			//Tir t1 = new TirSansDegats(this.getXProperty(), this.getYProperty(), this.env, this.getPortee());
+			//this.env.ajouterListeTirs(t1);
+			if (TourelleAPorteeDeTir().get(i).getAtqSpeed() != 1) { //La vitesse d'attaque ne peut descendre en dessous de 1
 			TourelleAPorteeDeTir().get(i).boostAttaqueSpeed(boostAtqSpeed);
-
+			TourelleAPorteeDeTir().get(i).setBuff(true); //Boolean verifiant si la tourelle a deja recu un buff pour ne pas les cumuelrs a l'infinie
+			}
 		}
 
 	}
 
+	
 }

@@ -1,8 +1,19 @@
 package application.modele.virus;
 
-public class VirusViterus extends Virus {
+import application.modele.Environnement;
 
-	public VirusViterus(int vie, int atq, double vitesse, String nom, int x, int y, int tps) {
-		super(vie, atq, vitesse, nom, x, y, tps);
-}
+public class VirusViterus extends Virus {
+	/**
+	 * Ce virus n'a pas d'effet, mais a bien moins de point de vie et va beaucoup
+	 * plus vite qu'une tourelle de base
+	 */
+	public VirusViterus(int x, int y, int tps, Environnement env) {
+		super(25, 10, 4, "VirusViterus", x, y, tps, env);
+	}
+
+	@Override
+	protected void appliquerEffets() {
+
+	}
+
 }

@@ -4,55 +4,49 @@ import java.util.ArrayList;
 
 import application.modele.Environnement;
 import application.modele.tir.Tir;
-import application.modele.tir.TirAvecDegats;
 import application.modele.tir.TirSansDegats;
 import application.modele.virus.Virus;
-public class TourelleMousseuse extends Tourelles { // == TourelleAvastiVirus
+public class TourelleMousseuse extends Tourelles { 
 
-	// cette tourelle ralentit les ennemis mais inflige peu/pas de dégâts
-	
-	private double slow;
-	
+    // cette tourelle ralentit les ennemis mais n'inflige pas de dégâts
+    
+    private double slow; // Variable mesurant la puissance du ralentissement que cette tourelle inflige aux virus
+    
 
-	public TourelleMousseuse( int portee, double atqSpeed, String nom, int x, int y,Environnement env) {
-		super(portee, atqSpeed,  nom, x, y,env);
-		
-		this.slow=1.2;
-	}
-	
-	public void setSlow(double slow) {
-	this.slow = slow;
-	}
-	
+    public TourelleMousseuse(int x, int y,Environnement env) {
+        super(75, 1, "TourelleMousseuse", x, y,env);
+        this.slow=2;
+    }
+    
+    public void setSlow(double slow) {
+    this.slow = slow;
+    }
+    
 
-	@Override
-	public void amelioration() {
+    @Override
+    public void amelioration() {
+    	if(this.niveau < 3) {
+        this.setSlow(slow+1);
+        this.setPortee(this.getPortee()+10); 
+        niveau++;
+    	}
+    }
 
 
-		this.setSlow(slow+2);
-		this.setPortee(this.getPortee()+5);
-		this.setAtqSpeed(this.getAtqSpeed()+1);		
-	}
+    @Override
+    public void tirer() {
 
+        ArrayList<Virus> listeV = PlusieursVirusAPorteeDeTir();
+        for (int i = 0; i < listeV.size(); i++) {
+            Tir t1 = new TirSansDegats(this.getX(), this.getY(), this.env, this.getPortee(),listeV.get(i));
+            this.env.ajouterListeTirs(t1);
+        }
+        
 
-	@Override
-	public void tirer() {
-
-		ArrayList<Virus> listeV = PlusieursVirusAPorteeDeTir();
-		for (int i = 0; i < listeV.size(); i++) {
-			listeV.get(i).setVie(this.slow);
-			Tir t1 = new TirSansDegats(this.getXProperty(), this.getYProperty(), this.env);
-			this.env.ajouterListeTirs(t1);
-		}
-		
-//		  Tourelles qui slow (Mousseuse/AvastiVirus)
-		
-//		double newVitesse = (VirusAPorteeDeTir().getVitesse()-this.getSlow());
-//		VirusAPorteeDeTir().setVitesse(newVitesse);
-		for (int i = 0; i < listeV.size(); i++) {
-			PlusieursVirusAPorteeDeTir().get(i).slowVirus(this.slow);
-			
-		}
-	}
+        
+//        double newVitesse = (VirusAPorteeDeTir().getVitesse()-this.getSlow());
+//        VirusAPorteeDeTir().setVitesse(newVitesse);
+        
+    }
 
 }
