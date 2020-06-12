@@ -144,7 +144,6 @@ public class Controller implements Initializable {
 				// c'est un eventHandler d'ou le lambda
 				(ev -> {
 					if (temps == 200000) {
-						System.out.println("fini");
 						getGameLoop().stop();
 					}
 

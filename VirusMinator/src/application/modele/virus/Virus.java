@@ -126,6 +126,7 @@ public abstract class Virus {
 					compteur++;
 				}
 			}
+			System.out.println(this.getId());
 			this.appliquerEffets();
 		} catch (Exception e) {
 			if ( compteur == 37) {
