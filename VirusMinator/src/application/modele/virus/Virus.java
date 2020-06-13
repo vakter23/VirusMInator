@@ -1,8 +1,5 @@
 package application.modele.virus;
 
-import java.util.Arrays;
-import java.util.List;
-
 import application.modele.Environnement;
 import application.modele.Graph;
 import javafx.beans.property.IntegerProperty;
@@ -44,9 +41,7 @@ public abstract class Virus {
 		compteurIdViruses++;
 		this.env = env;
 		this.tpsPerso = tpsSuivant + tpsSpawn;
-		System.out.println("v" + compteurIdViruses);
 		tpsSuivant += 400;
-		// System.out.println(this.toString());
 	}
 
 	@Override
@@ -112,7 +107,6 @@ public abstract class Virus {
 	public void agit() {
 		if (compteur == 37) {
 			infligerDegats(this.atq);
-			System.out.println("Le virus à infligé ses dégats ! ");
 			this.meurt();
 			this.appliquerEffets();
 			/** on rappelle la méthode pour les viruses qui ont un effet à leurs morts */
@@ -150,7 +144,6 @@ public abstract class Virus {
 					 * une fois que le virus déplacé, on vérifie si il a un effet à appliquer et
 					 * l'applique si besoin
 					 */
-				this.appliquerEffets();
 			} catch (Exception e) {
 				/**
 				 * on "attrape" le cas ou le compteur dépasse la taille maximale des sommets du
@@ -159,7 +152,6 @@ public abstract class Virus {
 				if (compteur == 37) {
 					this.meurt();
 					infligerDegats(this.atq);
-					System.out.println("Le virus à infligé ses dégats ! ");
 					
 					this.appliquerEffets();
 					/** on rappelle la méthode pour les viruses qui ont un effet à leurs morts */
@@ -175,9 +167,6 @@ public abstract class Virus {
 		this.env.getHopital().setVie(this.env.getHopital().getVie() - atq2);
 	}
 
-	private int getAtq() {
-		return this.atq;
-	}
 
 	private void meurt() {
 		this.setVie(0);

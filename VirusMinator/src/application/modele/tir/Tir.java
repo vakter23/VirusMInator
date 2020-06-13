@@ -38,7 +38,6 @@ public abstract class Tir {
 		}
 	}
 	public void meurt() {
-		System.out.println("Methode meurt appliquée");
 		this.env.getListeTirs().remove(this);
 	}
 	public String getId() {

@@ -1,7 +1,5 @@
 package application.modele.virus;
 
-import java.util.ArrayList;
-
 import application.modele.Environnement;
 
 public class VirusVhealrus extends Virus {
