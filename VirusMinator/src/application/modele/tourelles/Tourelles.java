@@ -112,7 +112,7 @@ public abstract class Tourelles {
 
 	}
 
-	public ArrayList<Tourelles> TourelleAPorteeDeTir() { // Utilise pour la tourelle Pingolimbo qui boost la vitesse d'attaque des
+	public ArrayList<Tourelles> tourelleAPorteeDeTir() { // Utilise pour la tourelle Pingolimbo qui boost la vitesse d'attaque des
 												// tourelles dans un certain rayon et pour le Virus Viboomrus qui ralentit la vitesse 
 		ArrayList<Tourelles> listeTourelle = new ArrayList<Tourelles>();		//d'attaque de la tourelle la plus proche de son lieu de decés
 		for (int i = 0; i < env.getTourelles().size(); i++) {

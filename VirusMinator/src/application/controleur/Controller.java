@@ -146,7 +146,7 @@ public class Controller implements Initializable {
 		/* On ajoute les listeners sur le panneau */
 		this.e1.getViruses().addListener(new MonObservateurViruses(panneauEnnemis));
 		this.e1.getTirs().addListener(new MonObservateurTirs(panneauEnnemis));
-		this.e1.getTourelles().addListener(new ecouteurTourelle(panneauEnnemis));
+		this.e1.getTourelles().addListener(new EcouteurTourelle(panneauEnnemis));
 	}
 
 	/* Cette fonction s'occupe de la Game Loop et de la condtions de victoire */
@@ -166,24 +166,24 @@ public class Controller implements Initializable {
 					this.e1.unTourTir();
 
 					if (finDeLaGameLoop) {
-						getGameLoop().stop();
+//						getGameLoop().stop();
 					}
 					/* Lorsque le temps est modulo 50 on fait un tour */
 					else if (temps % 50 == 0) {
 						unTour();
 					}
 					/* On gagne de l'argent tous les 800 tours */
-					if (temps % 2000 == 0) {
+					if (temps % 2000 == 0 && !this.e1.getViruses().isEmpty()) {
 						this.e1.getMagasin().incrementerArgent();
 					}
 					/* Conditions de Victoire, la gameloop s'arrete */
-					if (this.e1.getViruses().isEmpty() && temps > 4000) {
-						gameLoop.stop();
+					if (this.e1.getViruses().isEmpty() && this.e1.getNextViruses().isEmpty()) {
+//						gameLoop.stop();
 						this.afficherResultat("w");
 						
 					}
 					/* Conditions de Defaite, la gameloop s'arrete */
-					if (this.e1.getHopital().getVie() == 0) {
+					if (this.e1.getHopital().getVie() <= 0) {
 						Controller.getGameLoop().stop();
 						this.afficherResultat("l");
 						
@@ -274,10 +274,10 @@ public class Controller implements Initializable {
     void lancerVague(ActionEvent event) {
 		this.finDeLaGameLoop = false;
 		this.finDeJeu.setText("C'EST PARTI");
-		this.temps = 0;
-		initAnimation();
+		temps = 0;
+//		initAnimation();
 		this.e1.nouvelleVague();
-		gameLoop.play();
+//		gameLoop.play();
 
     }
 	/*
@@ -388,13 +388,13 @@ public class Controller implements Initializable {
 
 	/*Affiche le resultat du match dans le label*/
 	public void afficherResultat(String resultat) {
-		if (resultat == "w") {
+		if (resultat.equals("w")) {
 			this.finDeJeu.setText("Victoire");
-		} else if (resultat == "l") {
+		} else if (resultat.equals("l")) {
 			this.finDeJeu.setText("Défaite");
 
 		}
-		finDeLaGameLoop = true;
+//		finDeLaGameLoop = true;
 	}
 
 	/*C'est le bouton reinitialiser*/
@@ -428,6 +428,6 @@ public class Controller implements Initializable {
 	}
 
 	public void setGameLoop(Timeline gameLoop) {
-		this.gameLoop = gameLoop;
+		Controller.gameLoop = gameLoop;
 	}
 }

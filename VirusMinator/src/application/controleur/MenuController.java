@@ -1,54 +1,42 @@
 package application.controleur;
 
-import javafx.application.Application;
+import java.io.File;
+import java.net.URL;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.net.URL;
-import java.nio.file.Paths;
-import java.util.ResourceBundle;
+public class MenuController {
 
-import application.modele.Environnement;
-import application.modele.Graph;
-import application.modele.Magasin;
-import application.modele.virus.MonObservateurViruses;
-
-public class MenuController{
-
-
-    @FXML
-    void playButton(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            URL url;
-            url = new File("src/application/vue/tilemap.fxml").toURI().toURL();
-            loader.setLocation(url);
-            BorderPane root = new BorderPane();
-            root = loader.load();
-            Stage primaryStage = new Stage();
-            Scene scene = new Scene(root);
-            primaryStage.setResizable(false);
+	@FXML
+	void playButton(ActionEvent event) {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			URL url;
+			url = new File("src/application/vue/tilemap.fxml").toURI().toURL();
+			loader.setLocation(url);
+			BorderPane root = new BorderPane();
+			root = loader.load();
+			Stage primaryStage = new Stage();
+			Scene scene = new Scene(root);
+			primaryStage.setResizable(false);
 			primaryStage.setResizable(true);
 			primaryStage.setFullScreen(true);
-            primaryStage.setTitle("VirusMinator");
-            primaryStage.setScene(scene);
-            primaryStage.show();
-            root.requestFocus();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        Button b = (Button) event.getSource();
-        Scene menuScene = b.getScene();
-        menuScene.getWindow().hide();
-        
-    }
+			primaryStage.setTitle("VirusMinator");
+			primaryStage.setScene(scene);
+			primaryStage.show();
+			root.requestFocus();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		Button b = (Button) event.getSource();
+		Scene menuScene = b.getScene();
+		menuScene.getWindow().hide();
+
+	}
 }

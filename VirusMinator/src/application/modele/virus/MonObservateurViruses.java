@@ -26,9 +26,6 @@ public class MonObservateurViruses implements ListChangeListener<Virus> {
 			VirusActuel.setId(v.getId());
 			VirusActuel.translateXProperty().bind(v.getXproperty());
 			VirusActuel.translateYProperty().bind(v.getYproperty());
-			System.out.println(VirusActuel.getId());
-			System.out.println(VirusActuel.getTranslateX());
-			System.out.println(VirusActuel.getTranslateY());
 			panneauEnnemis.getChildren().add(VirusActuel);
 
 		} else if (v instanceof VirusDivirus) {
@@ -36,9 +33,6 @@ public class MonObservateurViruses implements ListChangeListener<Virus> {
 			VirusActuel.setId(v.getId());
 			VirusActuel.translateXProperty().bind(v.getXproperty());
 			VirusActuel.translateYProperty().bind(v.getYproperty());
-			System.out.println(VirusActuel.getId());
-			System.out.println(VirusActuel.getTranslateX());
-			System.out.println(VirusActuel.getTranslateY());
 			panneauEnnemis.getChildren().add(VirusActuel);
 		}
 
@@ -47,9 +41,6 @@ public class MonObservateurViruses implements ListChangeListener<Virus> {
 			VirusActuel.setId(v.getId());
 			VirusActuel.translateXProperty().bind(v.getXproperty());
 			VirusActuel.translateYProperty().bind(v.getYproperty());
-			System.out.println(VirusActuel.getId());
-			System.out.println(VirusActuel.getTranslateX());
-			System.out.println(VirusActuel.getTranslateY());
 			panneauEnnemis.getChildren().add(VirusActuel);
 
 		} else if (v instanceof VirusViboomrus) {
@@ -57,9 +48,6 @@ public class MonObservateurViruses implements ListChangeListener<Virus> {
 			VirusActuel.setId(v.getId());
 			VirusActuel.translateXProperty().bind(v.getXproperty());
 			VirusActuel.translateYProperty().bind(v.getYproperty());
-			System.out.println(VirusActuel.getId());
-			System.out.println(VirusActuel.getTranslateX());
-			System.out.println(VirusActuel.getTranslateY());
 			panneauEnnemis.getChildren().add(VirusActuel);
 
 		} else if (v instanceof VirusViterus) {
@@ -67,13 +55,9 @@ public class MonObservateurViruses implements ListChangeListener<Virus> {
 			VirusActuel.setId(v.getId());
 			VirusActuel.translateXProperty().bind(v.getXproperty());
 			VirusActuel.translateYProperty().bind(v.getYproperty());
-			System.out.println(VirusActuel.getId());
-			System.out.println(VirusActuel.getTranslateX());
-			System.out.println(VirusActuel.getTranslateY());
 			panneauEnnemis.getChildren().add(VirusActuel);
 
 		}
-		System.out.println("Le virus a un sprite");
 	}
 
 	private void enleverSprite(Virus mort) {
@@ -88,7 +72,6 @@ public class MonObservateurViruses implements ListChangeListener<Virus> {
 	public void onChanged(Change<? extends Virus> c) {
 		while (c.next()) {
 			for (Virus mort : c.getRemoved()) {
-				System.out.println(mort.getId());
 				enleverSprite(mort);
 			}
 			for (Virus nouveau : c.getAddedSubList()) {

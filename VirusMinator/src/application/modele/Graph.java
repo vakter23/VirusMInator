@@ -1,39 +1,43 @@
 package application.modele;
 
-import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
 
 public class Graph {
 
-
-	/*création de la liste de sommet de notre graphe
-	*/
+	/*
+	 * création de la liste de sommet de notre graphe
+	 */
 	private static ArrayList<Sommet> sommet;
 
-
-	/*création de la liste de sommet dans l'ordre de notre parcours
-	*/
+	/*
+	 * création de la liste de sommet dans l'ordre de notre parcours
+	 */
 	private static ArrayList<Sommet> sommetDansLordre;
 
-	/*constructeur du graphe
-	*/
+	/*
+	 * constructeur du graphe
+	 */
 
 	public Graph() {
-		this.sommetDansLordre = new ArrayList<Sommet>();
-		this.sommet = new ArrayList<Sommet>();
+		sommetDansLordre = new ArrayList<Sommet>();
+		sommet = new ArrayList<Sommet>();
 	}
 
 	/**
-	* accesseur de la liste sommet
-	* @return la liste sommet 
-	*/
+	 * accesseur de la liste sommet
+	 * 
+	 * @return la liste sommet
+	 */
 	public static ArrayList<Sommet> getSommet() {
 		return sommet;
 	}
 
-	 /* méthode permettant d'ajouter tous les Sommets de notre graphe
-	 * les sommet sont les 0 de notre matrice de terrain
-	*/
+	/*
+	 * méthode permettant d'ajouter tous les Sommets de notre graphe les sommet sont
+	 * les 0 de notre matrice de terrain
+	 */
 	public void addEdge() {
 		for (int i = 0; i < Environnement.getTerrainInt().length; i++) {
 			for (int j = 0; j < Environnement.getTerrainInt()[i].length; j++) {
@@ -47,8 +51,8 @@ public class Graph {
 	}
 
 	/**
-	* méthode ajouter les sommets voisin du Sommet en paramètre
-	*/
+	 * méthode ajouter les sommets voisin du Sommet en paramètre
+	 */
 	public void ajouterAdj(Sommet s) {
 
 		for (int i = 0; i < sommet.size(); i++) {
@@ -67,7 +71,7 @@ public class Graph {
 
 			}
 		}
-		
+
 	}
 
 	public static ArrayList<Sommet> getSommetDansLordre() {
@@ -75,9 +79,9 @@ public class Graph {
 	}
 
 	/**
-	* méthode Breadth-first iterator
-	* permet faire un parcours en largeur du graphe Ã  partir du sommet en paramètre
-	*/
+	 * méthode Breadth-first iterator permet faire un parcours en largeur du graphe
+	 * Ã  partir du sommet en paramètre
+	 */
 
 	public void BFS(Sommet s) {
 
@@ -86,14 +90,11 @@ public class Graph {
 		s.setVisited(true);
 		queue.add(s);
 		this.ajouterAdj(s);
-		int y = 0;
 		while (queue.size() != 0) {
 
 			s = queue.poll();
 
-			this.sommetDansLordre.add(s);
-			System.out.print("[" + this.sommetDansLordre.get(y) + "] ");
-			y++;
+			sommetDansLordre.add(s);
 
 			ArrayList<Sommet> i = s.getAdj();
 			for (Sommet n : i) {

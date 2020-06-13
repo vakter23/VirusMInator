@@ -1,7 +1,6 @@
 package application.modele;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class Sommet {
 	

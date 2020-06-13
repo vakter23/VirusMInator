@@ -13,10 +13,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
-public class ecouteurTourelle implements ListChangeListener<Tourelles> {
+public class EcouteurTourelle implements ListChangeListener<Tourelles> {
 
 	private Pane panneauEnnemi;
-	public ecouteurTourelle(Pane pane) {
+	public EcouteurTourelle(Pane pane) {
 		super();
 		this.panneauEnnemi = pane;
 	}
@@ -41,21 +41,21 @@ public class ecouteurTourelle implements ListChangeListener<Tourelles> {
 	private void creerSpriteTourelle(Tourelles t) {
 
 			if(t instanceof TourelleSavonneuse){
-				ImageView tourelle =  getImgage("/src/ressources/tourelles/gelHydro.png");
+				ImageView tourelle =  getImage("/src/ressources/tourelles/gelHydro.png");
 				tourelle.setId(t.getId());
 				tourelle.setLayoutX(t.getX());
 				tourelle.setLayoutY(t.getY());
 				panneauEnnemi.getChildren().add(tourelle);
 			}
 			else if (t instanceof TourelleMousseuse){
-				ImageView tourelle = getImgage("/src/ressources/tourelles/Avast.png");
+				ImageView tourelle = getImage("/src/ressources/tourelles/Avast.png");
 				tourelle.setId(t.getId());
 				tourelle.setLayoutX(t.getX());
 				tourelle.setLayoutY(t.getY());
 				panneauEnnemi.getChildren().add(tourelle);
 			}
 			else if (t instanceof TourelleHydroClaque){
-				ImageView tourelle = getImgage("/src/ressources/tourelles/gel-hydoralcoolique.png");
+				ImageView tourelle = getImage("/src/ressources/tourelles/gel-hydoralcoolique.png");
 				tourelle.setId(t.getId());
 				tourelle.setLayoutX(t.getX());
 				tourelle.setLayoutY(t.getY());
@@ -63,7 +63,7 @@ public class ecouteurTourelle implements ListChangeListener<Tourelles> {
 
 			}
 			else if (t instanceof TourelleSilliteBang){
-				ImageView tourelle = getImgage("/src/ressources/tourelles/javel.png");
+				ImageView tourelle = getImage("/src/ressources/tourelles/javel.png");
 				tourelle.setId(t.getId());
 				tourelle.setLayoutX(t.getX());
 				tourelle.setLayoutY(t.getY());
@@ -71,7 +71,7 @@ public class ecouteurTourelle implements ListChangeListener<Tourelles> {
 
 			}
 			else if (t instanceof TourelleDocteurPingoLimbo){
-				ImageView tourelle = getImgage("/src/ressources/tourelles/DrPingoLimbo.gif");
+				ImageView tourelle = getImage("/src/ressources/tourelles/DrPingoLimbo.gif");
 				tourelle.setId(t.getId());
 				tourelle.setLayoutX(t.getX());
 				tourelle.setLayoutY(t.getY());
@@ -101,7 +101,7 @@ public class ecouteurTourelle implements ListChangeListener<Tourelles> {
 		return (int) e.getSceneY();
 	}
 
-	private static ImageView getImgage(String... paths) {
+	private static ImageView getImage(String... paths) {
 		return new ImageView(Paths.get(System.getProperty("user.dir"), paths).toUri().toString());
 	}
 
