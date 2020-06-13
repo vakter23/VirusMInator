@@ -13,10 +13,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
-public class ecouteurTourelle implements ListChangeListener<Tourelles> {
+public class EcouteurTourelle implements ListChangeListener<Tourelles> {
 
 	private Pane panneauEnnemi;
-	public ecouteurTourelle(Pane pane) {
+	public EcouteurTourelle(Pane pane) {
 		super();
 		this.panneauEnnemi = pane;
 	}

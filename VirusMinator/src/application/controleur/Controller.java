@@ -146,7 +146,7 @@ public class Controller implements Initializable {
 		/* On ajoute les listeners sur le panneau */
 		this.e1.getViruses().addListener(new MonObservateurViruses(panneauEnnemis));
 		this.e1.getTirs().addListener(new MonObservateurTirs(panneauEnnemis));
-		this.e1.getTourelles().addListener(new ecouteurTourelle(panneauEnnemis));
+		this.e1.getTourelles().addListener(new EcouteurTourelle(panneauEnnemis));
 	}
 
 	/* Cette fonction s'occupe de la Game Loop et de la condtions de victoire */
