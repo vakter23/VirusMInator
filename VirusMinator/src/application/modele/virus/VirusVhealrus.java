@@ -15,6 +15,8 @@ public class VirusVhealrus extends Virus {
 			virus.setVie(virus.getVie() + 5);
 			if (virus.getVie() > virus.getPvMax()) {
 				virus.setVie(virus.getPvMax());
+				System.out.println(virus.getVie());
+				System.out.println("heal");
 
 			}
 		}
