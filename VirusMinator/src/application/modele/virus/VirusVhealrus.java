@@ -11,7 +11,7 @@ public class VirusVhealrus extends Virus {
 	@Override
 	protected void appliquerEffets() {
 		for (Virus virus : this.env.getViruses()) {
-			/** On rend 5 point de vie à chaque Viruses */
+			/** On rend 5 point de vie Ã  chaque Viruses */
 			virus.setVie(virus.getVie() + 5);
 			if (virus.getVie() > virus.getPvMax()) {
 				virus.setVie(virus.getPvMax());

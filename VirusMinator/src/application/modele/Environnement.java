@@ -58,7 +58,6 @@ public class Environnement {
 		initVirus(listeVirusesAjout);
 		nbVirusesVague += 10;
 	}
-
 	public int getWidth() {
 		return width;
 	}
